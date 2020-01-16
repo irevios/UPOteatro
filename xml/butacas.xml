@@ -1,0 +1,198 @@
+<!-- Base de datos de ejemplo de butacas -->
+<?xml version="1.0" encoding="UTF-8"?>
+<listaButacas>
+	<butacas teatro="T001">
+		<zona nomZona="palco" cofPrecio="2">
+			<fila num="1">
+				<butaca num="1"/>
+				<butaca num="2"/>
+				<butaca num="3"/>
+				<butaca num="4"/>
+				<butaca num="5"/>
+			</fila>
+		</zona>
+		<zona nomZona="paraiso" cofPrecio="1.7">
+			<fila num="1">
+				<butaca num="1"/>
+				<butaca num="2"/>
+				<butaca num="3"/>
+				<butaca num="4"/>
+				<butaca num="5"/>
+				<butaca num="6"/>
+				<butaca num="7"/>
+			</fila>
+		</zona>
+		<zona nomZona="anfiteatro" cofPrecio="1.3">
+			<fila num="1">
+				<butaca num="1"/>
+				<butaca num="2"/>
+				<butaca num="3"/>
+				<butaca num="4"/>
+				<butaca num="5"/>
+			</fila>
+			<fila num="2">
+				<butaca num="1"/>
+				<butaca num="2"/>
+				<butaca num="3"/>
+				<butaca num="4"/>
+				<butaca num="5"/>
+			</fila>
+		</zona>
+		<zona nomZona="platea" cofPrecio="1">
+			<fila num="1">
+				<butaca num="1"/>
+				<butaca num="2"/>
+				<butaca num="3"/>
+				<butaca num="4"/>
+				<butaca num="5"/>
+				<butaca num="6"/>
+			</fila>
+			<fila num="2">
+				<butaca num="1"/>
+				<butaca num="2"/>
+				<butaca num="3"/>
+				<butaca num="4"/>
+				<butaca num="5"/>
+				<butaca num="6"/>
+			</fila>
+			<fila num="3">
+				<butaca num="1"/>
+				<butaca num="2"/>
+				<butaca num="3"/>
+				<butaca num="4"/>
+				<butaca num="5"/>
+				<butaca num="6"/>
+			</fila>
+		</zona>
+	</butacas>
+	<butacas teatro="T002">
+		<zona nomZona="palco" cofPrecio="2.2">
+			<fila num="1">
+				<butaca num="1"/>
+				<butaca num="2"/>
+				<butaca num="3"/>
+				<butaca num="4"/>
+				<butaca num="5"/>
+				<butaca num="6"/>
+				<butaca num="7"/>
+			</fila>
+		</zona>
+		<zona nomZona="paraiso" cofPrecio="1.8">
+			<fila num="1">
+				<butaca num="1"/>
+				<butaca num="2"/>
+				<butaca num="3"/>
+				<butaca num="4"/>
+				<butaca num="5"/>
+			</fila>
+		</zona>
+		<zona nomZona="anfiteatro" cofPrecio="1.4">
+			<fila num="1">
+				<butaca num="1"/>
+				<butaca num="2"/>
+				<butaca num="3"/>
+				<butaca num="4"/>
+				<butaca num="5"/>
+			</fila>
+		</zona>
+		<zona nomZona="platea" cofPrecio="1">
+			<fila num="1">
+				<butaca num="1"/>
+				<butaca num="2"/>
+				<butaca num="3"/>
+				<butaca num="4"/>
+				<butaca num="5"/>
+				<butaca num="6"/>
+			</fila>
+			<fila num="2">
+				<butaca num="1"/>
+				<butaca num="2"/>
+				<butaca num="3"/>
+				<butaca num="4"/>
+				<butaca num="5"/>
+				<butaca num="6"/>
+			</fila>
+		</zona>
+	</butacas>
+	<butacas teatro="T003">
+		<zona nomZona="palco" cofPrecio="1.8">
+			<fila num="1">
+				<butaca num="1"/>
+				<butaca num="2"/>
+				<butaca num="3"/>
+				<butaca num="4"/>
+				<butaca num="5"/>
+				<butaca num="6"/>
+				<butaca num="7"/>
+			</fila>
+		</zona>
+		<zona nomZona="paraiso" cofPrecio="1.6">
+			<fila num="1">
+				<butaca num="1"/>
+				<butaca num="2"/>
+				<butaca num="3"/>
+				<butaca num="4"/>
+				<butaca num="5"/>
+				<butaca num="6"/>
+				<butaca num="7"/>
+			</fila>
+			<fila num="2">
+				<butaca num="1"/>
+				<butaca num="2"/>
+				<butaca num="3"/>
+				<butaca num="4"/>
+				<butaca num="5"/>
+			</fila>
+		</zona>
+		<zona nomZona="anfiteatro" cofPrecio="1.2">
+			<fila num="1">
+				<butaca num="1"/>
+				<butaca num="2"/>
+				<butaca num="3"/>
+				<butaca num="4"/>
+				<butaca num="5"/>
+			</fila>
+			<fila num="2">
+				<butaca num="1"/>
+				<butaca num="2"/>
+				<butaca num="3"/>
+				<butaca num="4"/>
+				<butaca num="5"/>
+			</fila>
+		</zona>
+		<zona nomZona="platea" cofPrecio="1">
+			<fila num="1">
+				<butaca num="1"/>
+				<butaca num="2"/>
+				<butaca num="3"/>
+				<butaca num="4"/>
+				<butaca num="5"/>
+				<butaca num="6"/>
+			</fila>
+			<fila num="2">
+				<butaca num="1"/>
+				<butaca num="2"/>
+				<butaca num="3"/>
+				<butaca num="4"/>
+				<butaca num="5"/>
+				<butaca num="6"/>
+			</fila>
+			<fila num="3">
+				<butaca num="1"/>
+				<butaca num="2"/>
+				<butaca num="3"/>
+				<butaca num="4"/>
+				<butaca num="5"/>
+				<butaca num="6"/>
+			</fila>
+			<fila num="4">
+				<butaca num="1"/>
+				<butaca num="2"/>
+				<butaca num="3"/>
+				<butaca num="4"/>
+				<butaca num="5"/>
+				<butaca num="6"/>
+			</fila>
+		</zona>
+	</butacas>
+</listaButacas>
