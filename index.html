@@ -1,19 +1,68 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-	<title>UpoTeatro</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
-	<link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
-	<link rel="stylesheet" href="css/style.css">
-</head>
-<body>
 
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-	<script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js" integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous"></script>
-	<script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous"></script>
-	<script src="js/principal.js"></script>
-	<script src="js/clases.js"></script>
-	<script src="js/claseUpoTeatro.js"></script>
+<head>
+    <title>UpoTeatro</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" href="img/favicon.ico">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navBar">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <a class="navbar-brand" href="">UpoTeatro</a>
+                    <div class="collapse navbar-collapse" id="navBar">
+                        <ul class="navbar-nav">
+                            <li class="nav-item active">
+                                <a id="navInicio" class="nav-link" href="">Inicio</a>
+                            </li>
+                            <li class="nav-item">
+                                <a id="navComprarEntrada" class="nav-link" href="#">Comprar Entradas</a>
+                            </li>
+                            <li class="nav-item">
+                                <a id="navListaRepresentaciones" class="nav-link" href="#">Ver Representaciones</a>
+                            </li>
+                            <li  class="nav-item">
+                                <a id="navListaEspectaculos" class="nav-link" href="#">Ver Espectáculos</a>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav ml-md-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="#" id="accederAdmin">Acceder como Administrador </a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                <div class="jumbotron grande">
+                    <h2><strong>UpoTeatro</strong></h2>
+                    <p>Gestión de espacios teatrales.</p>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <!-- Aquí aparece cada apartado -->
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js" integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous"></script>
+    <script src="js/clases.js"></script>
+    <script src="js/claseUpoTeatro.js"></script>
+    <script src="js/multiusos.js"></script>
+    <script src="js/sesion.js"></script>
+    <script src="js/modificarVista.js"></script>
+    <script src="js/principal.js"></script>
 </body>
+
 </html>

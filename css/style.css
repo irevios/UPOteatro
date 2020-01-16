@@ -1,1 +1,38 @@
-body{}
+body{
+	overflow: hidden;
+	max-height: 100vh;
+}
+.container-fluid{
+	padding: 0 !important;
+}
+.col-md-12{
+	padding: 0 !important;
+}
+.navbar-brand{
+	color: #dd2030 !important;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+.active>.nav-link{
+	color: #dd2030 !important;
+}
+.jumbotron{
+	background: url("../img/asientos.jpg");
+	background-size: cover;
+	background-position: center 30%;
+	color: white;
+	border-radius: 0;
+	text-align: center;
+}
+.jumbotron h2{
+	font-size: 3rem;
+	text-shadow: 0 0 17px #333;
+}
+.jumbotron.grande{
+	height: 100vh;
+}
+.jumbotron.grande h2{
+	margin-top: calc((100vh - 2rem) / 3);
+	font-size: 5rem;
+	text-shadow: 0 0 17px #333;
+}
