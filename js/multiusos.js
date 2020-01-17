@@ -1,7 +1,6 @@
 // En este documento se define las funcione que se usan varias veces con diferentes usos.
 
 // Leer XML/HTML
-
 function leeDocumento(filename) {
 	let xhttp;
 	if (window.XMLHttpRequest) {
@@ -14,6 +13,9 @@ function leeDocumento(filename) {
 			if(filename.includes('navAdmin')){
 				nav = new DOMParser().parseFromString(xhttp.responseText, "text/html");
 			}
+			else if(filename.includes('formularios')){
+				form = new DOMParser().parseFromString(xhttp.responseText, "text/html");	
+			}
 		}
 	});
 	xhttp.open("GET", filename, true);
@@ -21,7 +23,6 @@ function leeDocumento(filename) {
 }
 
 // Funciones de cookies
-
 function setCookie(clave, valor, diasExpira) {
 	let d = new Date();
 	d.setTime(d.getTime() + (diasExpira*24*60*60*1000));
@@ -47,7 +48,6 @@ function borraCookie(cname) {
 }
 
 // Otros
-
 function elementoExiste(elemento){
 	if(document.querySelector(elemento)!=undefined){
 		return true;

@@ -1,0 +1,55 @@
+<form id="formularioEntrada">
+  <div class="form-group">
+    <label for="representacionSeleccionada">Representación</label> 
+    <div>
+      <select id="representacionSeleccionada" name="representacionSeleccionada" required="required" class="custom-select">
+        <!-- Representaciones de la base de datos -->
+      </select>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="butacaSeleccionada">Butaca</label> 
+    <div>
+      <select multiple="multiple" id="butacaSeleccionada" name="butacaSeleccionada" aria-describedby="butacaSeleccionadaHelpBlock" required="required" class="custom-select">
+        <!-- Butacas de la base de datos -->
+      </select> 
+      <span id="butacaSeleccionadaHelpBlock" class="form-text text-muted">Selecciona una o más butacas</span>
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Adaptada</label> 
+    <div>
+      <div class="custom-control custom-checkbox custom-control-inline">
+        <input name="entradaAdaptada" id="entradaAdaptada_0" type="checkbox" class="custom-control-input" value="Si"> 
+        <label for="entradaAdaptada_0" class="custom-control-label">Adaptada</label>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Tipo de entrada</label> 
+    <div>
+      <div class="custom-control custom-radio custom-control-inline">
+        <input name="tipoEntrada" id="tipoEntrada_0" type="radio" required="required" class="custom-control-input" value="individual"> 
+        <label for="tipoEntrada_0" class="custom-control-label">Individual</label>
+      </div>
+      <div class="custom-control custom-radio custom-control-inline">
+        <input name="tipoEntrada" id="tipoEntrada_1" type="radio" required="required" class="custom-control-input" value="grupal"> 
+        <label for="tipoEntrada_1" class="custom-control-label">Grupal</label>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="personasGrupal">Personas</label> 
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <div class="input-group-text">
+          <i class="fa fa-users"></i>
+        </div>
+      </div> 
+      <input id="personasGrupal" name="personasGrupal" type="text" class="form-control">
+    </div>
+  </div>
+  <div class="form-group">
+    <button name="submit" type="submit" class="btn btn-primary">Comprar entrada</button>
+  </div>
+</form>

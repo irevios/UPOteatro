@@ -33,9 +33,15 @@ setTimeout(()=>{
 	},100);
 }
 
+var form;
 function muestraEnPantalla(a){
-	console.log(a);
-	if(elementoExiste(".col-md-8 > form")){
-	 	document.querySelector(".col-md-8 > form").remove();
-	 }
+	leeDocumento("./html/formularios.html");
+	setTimeout(()=>agregaForm(a),100);
+}
+function agregaForm(elem){
+	if(elementoExiste("#formularios > form")){
+	 	document.querySelector("#formularios > form").remove();
+	}
+	document.querySelector("#formularios").append(form.querySelector("#"+elem));
+	document.querySelector(".jumbotron").classList.remove("grande");
 }

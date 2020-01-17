@@ -25,6 +25,7 @@ body{
 	text-align: center;
 }
 .jumbotron h2{
+	margin-top: 2em;
 	font-size: 3rem;
 	text-shadow: 0 0 17px #333;
 }
