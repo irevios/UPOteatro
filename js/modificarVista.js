@@ -34,9 +34,14 @@ setTimeout(()=>{
 }
 
 var form;
-function muestraEnPantalla(a){
-	leeDocumento("./html/formularios.html");
-	setTimeout(()=>agregaForm(a),100);
+function muestraEnPantalla(elem){
+	if(elem.includes("formulario")){
+		leeDocumento("./html/formularios.html");
+		setTimeout(()=>agregaForm(elem),100);
+	}
+	else{
+		// agregaListado(elem);
+	}
 }
 function agregaForm(elem){
 	if(elementoExiste("#formularios > form")){
