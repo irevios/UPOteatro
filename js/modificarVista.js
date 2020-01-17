@@ -19,15 +19,23 @@
 
 */
 
-document.addEventListener("load",cargarEventos);
+document.addEventListener("load",cargarEventos());
 function cargarEventos(){
+setTimeout(()=>{
 	document.querySelector("#navComprarEntrada").addEventListener("click", ()=>muestraEnPantalla("formularioEntrada"));
-	document.querySelector("#navAgregarRepresentacion").addEventListener("click", ()=>muestraEnPantalla("formularioRepresentacion"));
 	document.querySelector("#navListaRepresentaciones").addEventListener("click", ()=>muestraEnPantalla("listaRepresentacion"));
-	document.querySelector("#navAgregarEspectaculo").addEventListener("click", ()=>muestraEnPantalla("formularioEspectaculo"));
+	if(elementoExiste("#navAgregarRepresentacion")){
+		document.querySelector("#navAgregarRepresentacion").addEventListener("click", ()=>muestraEnPantalla("formularioRepresentacion"));
+		document.querySelector("#navListaEntradas").addEventListener("click", ()=>muestraEnPantalla("listaEntrada"));
+		document.querySelector("#navAgregarEspectaculo").addEventListener("click", ()=>muestraEnPantalla("formularioEspectaculo"));
+	}
 	document.querySelector("#navListaEspectaculos").addEventListener("click", ()=>muestraEnPantalla("listaEspectaculo"));
+	},100);
 }
 
-// function muestraEnPantalla(a){
-// 	console.log(a);
-// }
+function muestraEnPantalla(a){
+	console.log(a);
+	if(elementoExiste(".col-md-8 > form")){
+	 	document.querySelector(".col-md-8 > form").remove();
+	 }
+}

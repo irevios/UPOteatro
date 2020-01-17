@@ -6,8 +6,8 @@ document.addEventListener("ready",compruebaSesion());
 var nav;
 function compruebaSesion(){
 	if(esAdmin()){
-		leeDocumento("./acceso/navAdmin.html","navBar");
-		setTimeout(agregaNav,0);
+		leeDocumento("./html/navAdmin.html");
+		setTimeout(agregaNav,100);
 	}
 }
 function esAdmin(){

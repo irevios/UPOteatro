@@ -2,7 +2,7 @@
 
 // Leer XML/HTML
 
-function leeDocumento(filename,type) {
+function leeDocumento(filename) {
 	let xhttp;
 	if (window.XMLHttpRequest) {
 		xhttp = new XMLHttpRequest();
@@ -11,7 +11,7 @@ function leeDocumento(filename,type) {
 	}
 	xhttp.addEventListener("readystatechange", () => {
 		if (xhttp.readyState == xhttp.DONE) {
-			if(type=="navBar"){
+			if(filename.includes('navAdmin')){
 				nav = new DOMParser().parseFromString(xhttp.responseText, "text/html");
 			}
 		}
@@ -44,4 +44,15 @@ function getCookie(clave) {
 }
 function borraCookie(cname) {
     document.cookie = cname + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+}
+
+// Otros
+
+function elementoExiste(elemento){
+	if(document.querySelector(elemento)!=undefined){
+		return true;
+	}
+	else{
+		return false;
+	}
 }
