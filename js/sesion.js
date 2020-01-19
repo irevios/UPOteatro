@@ -6,8 +6,7 @@ document.addEventListener("ready",compruebaSesion());
 var nav;
 function compruebaSesion(){
 	if(esAdmin()){
-		leeDocumento("./html/navAdmin.html");
-		setTimeout(agregaNav,100);
+		nav = cargarFicheroAFuncion("./html/navAdmin.html",agregaNav);
 	}
 }
 function esAdmin(){
@@ -19,6 +18,7 @@ function agregaNav(){
 	document.querySelector("nav").remove();
 	document.querySelector(".container-fluid .col-md-12").insertBefore(nav.querySelector("nav"),document.querySelector(".jumbotron"));
 	document.querySelector("#cerrarSesion").addEventListener("click",cierraSesion);
+	cargarEventosAdmin();
 }
 
 // Click en Acceder como Administrador
@@ -32,5 +32,4 @@ function adminAccede(){
 function cierraSesion(){
 	borraCookie("Admin");
 	location.reload();
-
 }

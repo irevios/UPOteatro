@@ -1,5 +1,4 @@
 <!-- Base de datos de ejemplo de compañías -->
-<?xml version="1.0" encoding="UTF-8"?>
 <compañias>
 	<compañia cif="B32212532">
 		<nombre>Producciones Altozano</nombre>

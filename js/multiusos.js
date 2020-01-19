@@ -1,6 +1,7 @@
 // En este documento se define las funcione que se usan varias veces con diferentes usos.
 
-// Leer XML/HTML
+// Leer XML/HTML y lo guarda en variables para usarlas después
+var xml;
 function leeDocumento(filename) {
 	let xhttp;
 	if (window.XMLHttpRequest) {
@@ -16,10 +17,19 @@ function leeDocumento(filename) {
 			else if(filename.includes('formularios')){
 				form = new DOMParser().parseFromString(xhttp.responseText, "text/html");	
 			}
+			else if(filename.includes('xml')){
+				xml = xhttp.responseXML;
+			}
 		}
 	});
 	xhttp.open("GET", filename, true);
 	xhttp.send();
+}
+
+// Lee un documento y envia los datos a una función de forma asíncrona.
+function cargarFicheroAFuncion(fichero,funcion){
+	leeDocumento(fichero);
+	setTimeout(funcion,100);
 }
 
 // Funciones de cookies
@@ -48,6 +58,8 @@ function borraCookie(cname) {
 }
 
 // Otros
+
+// Comprueba si existe un elemento en el DOM
 function elementoExiste(elemento){
 	if(document.querySelector(elemento)!=undefined){
 		return true;

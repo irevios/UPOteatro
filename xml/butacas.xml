@@ -1,5 +1,4 @@
 <!-- Base de datos de ejemplo de butacas -->
-<?xml version="1.0" encoding="UTF-8"?>
 <listaButacas>
 	<butacas teatro="T001">
 		<zona nomZona="palco" cofPrecio="2">

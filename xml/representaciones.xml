@@ -1,5 +1,4 @@
 <!-- Base de datos de ejemplo de representaciones -->
-<?xml version="1.0" encoding="UTF-8"?>
 <representaciones>
 	<representacion cod="R01" espectaculo="E001" adaptada="N">
 		<fecha>2020-03-02</fecha>
@@ -44,7 +43,7 @@
 	<representacion cod="R11" espectaculo="E003" adaptada="S">
 		<fecha>2020-04-13</fecha>
 		<precioBase>38</precioBase>
-	</representacion>
+	</representacion>y
 	<representacion cod="R12" espectaculo="E003" adaptada="S">
 		<fecha>2020-04-14</fecha>
 		<precioBase>38</precioBase>

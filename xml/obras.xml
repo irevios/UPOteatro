@@ -1,5 +1,4 @@
 <!-- Base de datos de ejemplo de obras -->
-<?xml version="1.0" encoding="UTF-8"?>
 <obras>
 	<obra cod="Ob01">
 		<nombre>Hamlet</nombre>

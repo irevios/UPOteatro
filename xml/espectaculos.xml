@@ -1,5 +1,4 @@
 <!-- Base de datos de ejemplo de espectáculos -->
-<?xml version="1.0" encoding="UTF-8"?>
 <espectaculos>
 	<espectaculo cod="E001" obra="Ob03" compañia="B32212532">
 		<nombre>La llamada El Musical</nombre>

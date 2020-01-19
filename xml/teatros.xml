@@ -1,5 +1,4 @@
 <!-- Base de datos de ejemplo de teatros -->
-<?xml version="1.0" encoding="UTF-8"?>
 <teatros>
 	<teatro cod="T001">
 		<nombre>Lope de Vega</nombre>
@@ -12,8 +11,6 @@
 			<representacion cod="R05"/>
 			<representacion cod="R06"/>
 			<representacion cod="R07"/>
-			<representacion cod="R18"/>
-			<representacion cod="R19"/>
 			<representacion cod="R20"/>
 		</representaciones>
 	</teatro>
@@ -27,8 +24,6 @@
 			<representacion cod="R15"/>
 			<representacion cod="R16"/>
 			<representacion cod="R17"/>
-			<representacion cod="R18"/>
-			<representacion cod="R19"/>
 		</representaciones>
 	</teatro>
 	<teatro cod="T003">
@@ -39,9 +34,6 @@
 			<representacion cod="R18"/>
 			<representacion cod="R19"/>
 			<representacion cod="R20"/>
-			<representacion cod="R04"/>
-			<representacion cod="R05"/>
-			<representacion cod="R06"/>
 		</representaciones>
 	</teatro>
 </teatros>
