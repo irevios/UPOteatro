@@ -3,10 +3,9 @@
 
 // En la carga de la página
 document.addEventListener("ready",compruebaSesion());
-var nav;
 function compruebaSesion(){
 	if(esAdmin()){
-		nav = cargarFicheroAFuncion("./html/navAdmin.html",agregaNav);
+		leeArchivoXMLHTML("./html/navAdmin.html",agregaNav);
 	}
 }
 function esAdmin(){
@@ -14,7 +13,7 @@ function esAdmin(){
 	else{ return false; }
 }
 
-function agregaNav(){
+function agregaNav(nav){
 	document.querySelector("nav").remove();
 	document.querySelector(".container-fluid .col-md-12").insertBefore(nav.querySelector("nav"),document.querySelector(".jumbotron"));
 	document.querySelector("#cerrarSesion").addEventListener("click",cierraSesion);

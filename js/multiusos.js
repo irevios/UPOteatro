@@ -1,8 +1,7 @@
 // En este documento se define las funcione que se usan varias veces con diferentes usos.
 
 // Leer XML/HTML y lo guarda en variables para usarlas después
-var xml;
-function leeDocumento(filename) {
+function leeArchivoXMLHTML(filename,funcion) {
 	let xhttp;
 	if (window.XMLHttpRequest) {
 		xhttp = new XMLHttpRequest();
@@ -11,25 +10,16 @@ function leeDocumento(filename) {
 	}
 	xhttp.addEventListener("readystatechange", () => {
 		if (xhttp.readyState == xhttp.DONE) {
-			if(filename.includes('navAdmin')){
-				nav = new DOMParser().parseFromString(xhttp.responseText, "text/html");
-			}
-			else if(filename.includes('formularios')){
-				form = new DOMParser().parseFromString(xhttp.responseText, "text/html");	
+			if(filename.includes('html')){
+				funcion(new DOMParser().parseFromString(xhttp.responseText, "text/html"));
 			}
 			else if(filename.includes('xml')){
-				xml = xhttp.responseXML;
+				funcion(xhttp.responseXML);
 			}
 		}
 	});
 	xhttp.open("GET", filename, true);
 	xhttp.send();
-}
-
-// Lee un documento y envia los datos a una función de forma asíncrona.
-function cargarFicheroAFuncion(fichero,funcion){
-	leeDocumento(fichero);
-	setTimeout(funcion,100);
 }
 
 // Funciones de cookies

@@ -34,17 +34,16 @@ function cargarEventosAdmin() {
     document.querySelector("#navAgregarEspectaculo").addEventListener("click", () => muestraEnPantalla("formularioEspectaculo"));
 }
 
-var form;
 function muestraEnPantalla(elem) {
     if (elem.includes("formulario")) { // Si se pide un formulario, busca en el archivo formularios y lo añade a la web
-        form = cargarFicheroAFuncion("./html/formularios.html", () => agregaForm(elem));
+        leeArchivoXMLHTML("./html/formularios.html", (formulario) => agregaForm(elem,formulario));
     } else { 
         // Añade la tabla con el listado correspondiente
     }
 }
 
 // Añade un formulario a la vista
-function agregaForm(elem) {
+function agregaForm(elem,form) {
     if (elementoExiste("#formularios > form")) {
         document.querySelector("#formularios > form").remove();
     }
