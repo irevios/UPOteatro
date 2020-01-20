@@ -29,12 +29,12 @@
     <label>Tipo de entrada</label> 
     <div>
       <div class="custom-control custom-radio custom-control-inline">
-        <input name="tipoEntrada" id="tipoEntrada_0" type="radio" required="required" class="custom-control-input" value="individual"> 
-        <label for="tipoEntrada_0" class="custom-control-label">Individual</label>
+        <input name="tipoEntrada" type="radio" id="tipoEntrada0" required="required" class="custom-control-input" value="individual"> 
+        <label for="tipoEntrada0" class="custom-control-label">Individual</label>
       </div>
       <div class="custom-control custom-radio custom-control-inline">
-        <input name="tipoEntrada" id="tipoEntrada_1" type="radio" required="required" class="custom-control-input" value="grupal"> 
-        <label for="tipoEntrada_1" class="custom-control-label">Grupal</label>
+        <input name="tipoEntrada" type="radio" id="tipoEntrada1" required="required" class="custom-control-input" value="grupal"> 
+        <label for="tipoEntrada1" class="custom-control-label">Grupal</label>
       </div>
     </div>
   </div>
@@ -52,4 +52,50 @@
   <div class="form-group">
     <button name="submit" type="submit" class="btn btn-primary">Comprar entrada</button>
   </div>
+</form>
+
+<!-- Formulario crear representacion -->
+<form id="formularioRepresentacion">
+  <div class="form-group row">
+    <label for="fechaRepresentacion" class="col-2 col-form-label">Fecha (Inicio/Fin)</label> 
+    <div class="col-5">
+      <input id="fechaRepresentacion" name="fechaInicioRepresentacion" type="date" class="form-control">
+    </div>
+    <div class="col-5">
+      <input id="fechaRepresentacion" name="fechaFinalRepresentacion" type="date" class="form-control">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-2"></label> 
+    <div class="col-10">
+      <div class="custom-control custom-checkbox custom-control-inline">
+        <input name="representacionAdaptada" id="representacionAdaptada" type="checkbox" class="custom-control-input" value="S"> 
+        <label for="representacionAdaptada" class="custom-control-label">Adaptada</label>
+      </div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="precioBaseRepresentacion" class="col-2 col-form-label">Precio base</label> 
+    <div class="col-10">
+      <input id="precioBaseRepresentacion" name="precioBaseRepresentacion" type="number" class="form-control">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="espectaculoRepresentacion" class="col-2 col-form-label">Espectáculo</label> 
+    <div class="col-10">
+      <select id="espectaculoRepresentacion" name="espectaculoRepresentacion" class="custom-select">
+        <!-- Espectáculos de la base de datos -->
+      </select>
+    </div>
+  </div> 
+  <div class="form-group row">
+    <div class="offset-2 col-10">
+      <button name="submit" type="submit" class="btn btn-primary">Añadir</button>
+    </div>
+  </div>
+</form>
+
+<!-- Formulario crear espectáculo -->
+<form id="formularioEspectaculo">
+ 
 </form>
