@@ -1,45 +1,45 @@
 <!-- Base de datos de ejemplo de entradas -->
 <entradas>
-	<individual>
+	<entrada tipo='individual'>
 		<representacion>R04</representacion>
-		<butaca fila="1" num="5">
+		<butaca fila="1" num="5"/>
 		<adaptada>N</adaptada>
 		<tipo>palco</tipo>
-	</individual>
-	<individual>
+	</entrada>
+	<entrada tipo='individual'>
 		<representacion>R04</representacion>
-		<butaca fila="2" num="2">
+		<butaca fila="2" num="2"/>
 		<adaptada>N</adaptada>
 		<tipo>anfiteatro</tipo>
-	</individual>
-	<grupal numPersonas="5">
+	</entrada>
+	<entrada tipo='grupal' numPersonas="5">
 		<representacion>R16</representacion>
 		<adaptada>N</adaptada>
 		<butacas>
-			<butaca fila="1" num="1">
-			<butaca fila="1" num="2">
-			<butaca fila="1" num="3">
-			<butaca fila="1" num="4">
-			<butaca fila="1" num="5">
+			<butaca fila="1" num="1"/>
+			<butaca fila="1" num="2"/>
+			<butaca fila="1" num="3"/>
+			<butaca fila="1" num="4"/>
+			<butaca fila="1" num="5"/>
 		</butacas>
-	</grupal>
-	<grupal numPersonas="7">
+	</entrada>
+	<entrada tipo='grupal' numPersonas="7">
 		<representacion>R19</representacion>
 		<adaptada>N</adaptada>
 		<butacas>
-			<butaca fila="1" num="1">
-			<butaca fila="1" num="2">
-			<butaca fila="1" num="3">
-			<butaca fila="2" num="1">
-			<butaca fila="2" num="2">
-			<butaca fila="2" num="3">
-			<butaca fila="2" num="4">
+			<butaca fila="1" num="1"/>
+			<butaca fila="1" num="2"/>
+			<butaca fila="1" num="3"/>
+			<butaca fila="2" num="1"/>
+			<butaca fila="2" num="2"/>
+			<butaca fila="2" num="3"/>
+			<butaca fila="2" num="4"/>
 		</butacas>
-	</grupal>
-	<individual>
+	</entrada>
+	<entrada tipo='individual'>
 		<representacion>R15</representacion>
-		<butaca fila="1" num="6">
+		<butaca fila="1" num="3"/>
 		<adaptada>S</adaptada>
 		<tipo>paraiso</tipo>
-	</individual>
+	</entrada>
 </entradas>

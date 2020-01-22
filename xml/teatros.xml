@@ -11,7 +11,6 @@
 			<representacion cod="R05"/>
 			<representacion cod="R06"/>
 			<representacion cod="R07"/>
-			<representacion cod="R20"/>
 		</representaciones>
 	</teatro>
 	<teatro cod="T002">
@@ -30,7 +29,6 @@
 		<nombre>Quintero</nombre>
 		<direccion>Calle Cuna, 15, 41004 Sevilla</direccion>
 		<representaciones>
-			<representacion cod="R15"/>
 			<representacion cod="R18"/>
 			<representacion cod="R19"/>
 			<representacion cod="R20"/>
