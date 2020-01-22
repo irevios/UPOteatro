@@ -49,6 +49,23 @@ function agregaForm(elem,form) {
     }
     document.querySelector("#formularios").append(form.querySelector("#" + elem));
     document.querySelector("body").classList.remove("grande");
-    // Luego completa los select con sus datos
-    // ...
+    switch(elem){
+    	case "formularioEntrada":
+    		// Select representacion
+    		upoTeatro.teatros.forEach( teatro => {
+    			teatro.representaciones.forEach(representacion =>{
+    				let opcion = document.createElement("option");
+    				opcion.value = representacion.codigo;
+    				opcion.textContent = teatro.nombre + " | " + representacion.toString();
+    				document.querySelector("#formularioEntrada #representacionSeleccionada").append(opcion);
+    			});
+    		});
+    		// Select multiple butacas
+    		let seleccionButaca= document.querySelector("#formularioEntrada #butacaSeleccionada");
+    		
+    		// Tipo de entrada
+    		document.querySelector("#tipoEntrada0 ~ label").addEventListener("click",(e)=>{seleccionButaca.removeAttribute('multiple');});
+    		document.querySelector("#tipoEntrada1 ~ label").addEventListener("click",(e)=>{seleccionButaca.setAttribute('multiple',true);});
+    	break;
+    }
 }

@@ -81,6 +81,12 @@ class Representacion {
             return true;
         } else { return false; }
     }
+    toHTMLrow(){
+
+    }
+    toString(){
+    	return this.fecha + " | " + this.espectaculo.nombre;
+    }
 }
 
 class Espectaculo {
