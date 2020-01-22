@@ -11,7 +11,7 @@ function cargaInicialDatos() {
     leeArchivoXMLHTML("./xml/representaciones.xml", cargaInicialRepresentaciones);
     leeArchivoXMLHTML("./xml/teatros.xml", cargaInicialTeatros);
     leeArchivoXMLHTML("./xml/butacas.xml", cargaInicialButacas);
-    // leeArchivoXMLHTML("./xml/entradas.xml",cargaInicialEntradas);
+    leeArchivoXMLHTML("./xml/entradas.xml", cargaInicialEntradas);
 }
 
 function cargaInicialObras(xml) {
@@ -56,7 +56,7 @@ function cargaInicialRepresentaciones(xml) {
     xml.querySelectorAll("representacion").forEach(representacion => {
         let codigo = representacion.getAttribute("cod");
         let fecha = representacion.querySelector("fecha").textContent;
-        let adaptada = representacion.getAttribute("adaptada");
+        let adaptada = representacion.getAttribute("adaptada") == "N" ? false : true;
         let precioBase = representacion.querySelector("precioBase").textContent;
         let espectaculo = upoTeatro.buscaEspectaculo(representacion.getAttribute("espectaculo"));
 
@@ -91,9 +91,36 @@ function cargaInicialButacas(xml) {
                 fila.querySelectorAll("butaca").forEach(butaca => {
                     let numero = butaca.getAttribute("num");
                     let nuevaButaca = new Butaca(numero, nFila, nombreZona, coefPrecio);
-        			teatro.agregaButaca(nuevaButaca);
+                    teatro.agregaButaca(nuevaButaca);
                 });
             });
         });
+    });
+}
+
+function cargaInicialEntradas(xml) {
+    xml.querySelectorAll("entrada").forEach(entrada => {
+        let representacion = upoTeatro.buscaRepresentacion(entrada.querySelector("representacion").textContent);
+        let teatro = upoTeatro.buscaTeatroPorRepresentacion(entrada.querySelector("representacion").textContent);
+        let adaptada = entrada.querySelector("adaptada").textContent == "N" ? false : true;
+        let butaca;
+        let nuevaEntrada;
+        if (entrada.getAttribute("tipo") == "individual") {
+            let zona = entrada.querySelector("tipo").textContent;
+            let fila = entrada.querySelector("butaca").getAttribute("fila");
+            let num = entrada.querySelector("butaca").getAttribute("num");
+            butaca = teatro.buscaButaca(zona, fila, num);
+            nuevaEntrada = new EntradaIndividual(adaptada, butaca, representacion, zona);
+        } else {
+            butaca = [];
+            let butacas = entrada.querySelectorAll("butaca");
+            butacas.forEach(cadaButaca => {
+                let fila = cadaButaca.getAttribute("fila");
+                let num = cadaButaca.getAttribute("num");
+                butaca.push(teatro.buscaButaca("platea", fila, num));
+            });
+            nuevaEntrada = new EntradaGrupal(adaptada, butaca, representacion, entrada.getAttribute("numPersonas"));
+        }
+        representacion.compraEntrada(nuevaEntrada);
     });
 }

@@ -8,7 +8,6 @@ class Teatro {
         this.aforo = 0;
         this.representaciones = [];
         this.butacas = [];
-        this.entradas = [];
     }
     agregaRepresentacion(representacion) {
         this.representaciones.push(representacion);
@@ -19,12 +18,6 @@ class Teatro {
             return true;
         } else { return false; }
     }
-    compraEntrada(entrada) {
-        if (this.entradas.filter(entradaNuevo => entradaNuevo.butaca == entrada.butaca && entradaNuevo.representacion == entrada.representacion).length == 0) {
-            this.entradas.push(entrada);
-            return true;
-        } else { return false; }
-    }
     calculaAforo() {
         this.aforo = this.butacas.length;
     }
@@ -32,6 +25,9 @@ class Teatro {
         if (this.entradas.filter(entrada => entrada.butaca == butaca).length == 0) {
             return false;
         } else { return true; }
+    }
+    buscaButaca(zona,fila,num){
+    	return this.butacas.filter(butaca => butaca.numero == num && butaca.fila == fila && butaca.zona == zona)[0];
     }
 }
 
@@ -77,6 +73,13 @@ class Representacion {
         this.adaptada = adaptada;
         this.precioBase = precioBase;
         this.espectaculo = espectaculo;
+        this.entradas = [];
+    }
+    compraEntrada(entrada) {
+        if (this.entradas.filter(entradaNuevo => entradaNuevo.butaca == entrada.butaca && entradaNuevo.representacion == entrada.representacion).length == 0) {
+            this.entradas.push(entrada);
+            return true;
+        } else { return false; }
     }
 }
 
