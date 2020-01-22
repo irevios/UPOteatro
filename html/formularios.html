@@ -46,7 +46,7 @@
           <i class="fa fa-users"></i>
         </div>
       </div> 
-      <input id="personasGrupal" name="personasGrupal" type="number" class="form-control">
+      <input id="personasGrupal" name="personasGrupal" type="number" step="any" class="form-control">
     </div>
   </div>
   <div class="form-group">
@@ -97,5 +97,59 @@
 
 <!-- Formulario crear espectáculo -->
 <form id="formularioEspectaculo">
- 
+<div class="form-group row">
+    <label for="nombreEspectaculo" class="col-4 col-form-label">Nombre</label> 
+    <div class="col-8">
+      <input id="nombreEspectaculo" name="nombreEspectaculo" type="text" class="form-control">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="nombreProductorEspectaculo" class="col-4 col-form-label">Productor</label> 
+    <div class="col-8">
+      <input id="nombreProductorEspectaculo" name="nombreProductorEspectaculo" type="text" class="form-control">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="categoriaEspectaculo" class="col-4 col-form-label">Categoría</label> 
+    <div class="col-8">
+      <select id="categoriaEspectaculo" name="categoriaEspectaculo" class="custom-select">
+        <option value="Comedia">Comedia</option>
+        <option value="Musical">Musical</option>
+        <option value="Pantomima">Pantomima</option>
+        <option value="Marionetas">Marionetas</option>
+        <option value="Absurdo">Absurdo</option>
+        <option value="Tragicomedia">Tragicomedia</option>
+        <option value="Tragedia">Tragedia</option>
+        <option value="Independiente">Independiente</option>
+        <option value="Poetico">Poético</option>
+      </select>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="gastosEspectaculo" class="col-4 col-form-label">Gastos</label> 
+    <div class="col-8">
+      <input id="gastosEspectaculo" name="gastosEspectaculo" type="number" step="any" class="form-control">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="companiaEspectaculo" class="col-4 col-form-label">Compañía</label> 
+    <div class="col-8">
+      <select id="companiaEspectaculo" name="companiaEspectaculo" class="custom-select">
+        <!-- Compañias de la base de datos -->
+      </select>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="obraEspectaculo" class="col-4 col-form-label">Obra</label> 
+    <div class="col-8">
+      <select id="obraEspectaculo" name="obraEspectaculo" class="custom-select">
+        <!-- Obras de la base de datos -->
+      </select>
+    </div>
+  </div> 
+  <div class="form-group row">
+    <div class="offset-4 col-8">
+      <button name="submit" type="submit" class="btn btn-primary">Submit</button>
+    </div>
+  </div>
 </form>
