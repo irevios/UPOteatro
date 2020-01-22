@@ -39,18 +39,18 @@ class UpoTeatro {
         } else { return false; }
     }
     buscaTeatro(codigo){
-    	return this.teatros.filter(teatro=> teatro.codigo == codigo);
+    	return this.teatros.filter(teatro=> teatro.codigo == codigo)[0];
     }
     buscaRepresentacion(codigo){
-    	return this.representaciones.filter(representacion=> representacion.codigo == codigo);
+    	return this.representaciones.filter(representacion=> representacion.codigo == codigo)[0];
     }
     buscaEspectaculo(codigo){
-    	return this.espectaculos.filter(espectaculo=> espectaculo.codigo == codigo);
+    	return this.espectaculos.filter(espectaculo=> espectaculo.codigo == codigo)[0];
     }
     buscaCompania(cif){
-    	return this.companias.filter(compania=> compania.cif == cif);
+    	return this.companias.filter(compania=> compania.cif == cif)[0];
     }
     buscaObra(codigo){
-    	return this.obras.filter(obra=> obra.codigo == codigo);
+    	return this.obras.filter(obra=> obra.codigo == codigo)[0];
     }
 }

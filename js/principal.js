@@ -83,7 +83,6 @@ function cargaInicialTeatros(xml) {
 function cargaInicialButacas(xml) {
     xml.querySelectorAll("butacas").forEach(butacas => {
         let teatro = upoTeatro.buscaTeatro(butacas.getAttribute("teatro"));
-        let listaButacas = [];
         butacas.querySelectorAll("zona").forEach(zona => {
             let nombreZona = zona.getAttribute("nomZona");
             let coefPrecio = zona.getAttribute("coefPrecio");
@@ -92,10 +91,9 @@ function cargaInicialButacas(xml) {
                 fila.querySelectorAll("butaca").forEach(butaca => {
                     let numero = butaca.getAttribute("num");
                     let nuevaButaca = new Butaca(numero, nFila, nombreZona, coefPrecio);
-                    listaButacas.push(nuevaButaca); 
+        			teatro.agregaButaca(nuevaButaca);
                 });
             });
         });
-        teatro.agregaButacas(listaButacas);
     });
 }

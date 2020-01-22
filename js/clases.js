@@ -19,9 +19,6 @@ class Teatro {
             return true;
         } else { return false; }
     }
-    agregaButacas(butacas){
-        this.butacas = butacas;
-    }
     compraEntrada(entrada) {
         if (this.entradas.filter(entradaNuevo => entradaNuevo.butaca == entrada.butaca && entradaNuevo.representacion == entrada.representacion).length == 0) {
             this.entradas.push(entrada);
