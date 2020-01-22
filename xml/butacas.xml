@@ -1,7 +1,7 @@
 <!-- Base de datos de ejemplo de butacas -->
 <listaButacas>
 	<butacas teatro="T001">
-		<zona nomZona="palco" cofPrecio="2">
+		<zona nomZona="palco" coefPrecio="2">
 			<fila num="1">
 				<butaca num="1"/>
 				<butaca num="2"/>
@@ -10,7 +10,7 @@
 				<butaca num="5"/>
 			</fila>
 		</zona>
-		<zona nomZona="paraiso" cofPrecio="1.7">
+		<zona nomZona="paraiso" coefPrecio="1.7">
 			<fila num="1">
 				<butaca num="1"/>
 				<butaca num="2"/>
@@ -21,7 +21,7 @@
 				<butaca num="7"/>
 			</fila>
 		</zona>
-		<zona nomZona="anfiteatro" cofPrecio="1.3">
+		<zona nomZona="anfiteatro" coefPrecio="1.3">
 			<fila num="1">
 				<butaca num="1"/>
 				<butaca num="2"/>
@@ -37,7 +37,7 @@
 				<butaca num="5"/>
 			</fila>
 		</zona>
-		<zona nomZona="platea" cofPrecio="1">
+		<zona nomZona="platea" coefPrecio="1">
 			<fila num="1">
 				<butaca num="1"/>
 				<butaca num="2"/>
@@ -65,7 +65,7 @@
 		</zona>
 	</butacas>
 	<butacas teatro="T002">
-		<zona nomZona="palco" cofPrecio="2.2">
+		<zona nomZona="palco" coefPrecio="2.2">
 			<fila num="1">
 				<butaca num="1"/>
 				<butaca num="2"/>
@@ -76,7 +76,7 @@
 				<butaca num="7"/>
 			</fila>
 		</zona>
-		<zona nomZona="paraiso" cofPrecio="1.8">
+		<zona nomZona="paraiso" coefPrecio="1.8">
 			<fila num="1">
 				<butaca num="1"/>
 				<butaca num="2"/>
@@ -85,7 +85,7 @@
 				<butaca num="5"/>
 			</fila>
 		</zona>
-		<zona nomZona="anfiteatro" cofPrecio="1.4">
+		<zona nomZona="anfiteatro" coefPrecio="1.4">
 			<fila num="1">
 				<butaca num="1"/>
 				<butaca num="2"/>
@@ -94,7 +94,7 @@
 				<butaca num="5"/>
 			</fila>
 		</zona>
-		<zona nomZona="platea" cofPrecio="1">
+		<zona nomZona="platea" coefPrecio="1">
 			<fila num="1">
 				<butaca num="1"/>
 				<butaca num="2"/>
@@ -114,7 +114,7 @@
 		</zona>
 	</butacas>
 	<butacas teatro="T003">
-		<zona nomZona="palco" cofPrecio="1.8">
+		<zona nomZona="palco" coefPrecio="1.8">
 			<fila num="1">
 				<butaca num="1"/>
 				<butaca num="2"/>
@@ -125,7 +125,7 @@
 				<butaca num="7"/>
 			</fila>
 		</zona>
-		<zona nomZona="paraiso" cofPrecio="1.6">
+		<zona nomZona="paraiso" coefPrecio="1.6">
 			<fila num="1">
 				<butaca num="1"/>
 				<butaca num="2"/>
@@ -143,7 +143,7 @@
 				<butaca num="5"/>
 			</fila>
 		</zona>
-		<zona nomZona="anfiteatro" cofPrecio="1.2">
+		<zona nomZona="anfiteatro" coefPrecio="1.2">
 			<fila num="1">
 				<butaca num="1"/>
 				<butaca num="2"/>
@@ -159,7 +159,7 @@
 				<butaca num="5"/>
 			</fila>
 		</zona>
-		<zona nomZona="platea" cofPrecio="1">
+		<zona nomZona="platea" coefPrecio="1">
 			<fila num="1">
 				<butaca num="1"/>
 				<butaca num="2"/>

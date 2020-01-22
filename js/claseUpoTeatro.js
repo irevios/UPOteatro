@@ -1,6 +1,56 @@
 // En este documento se define la clase UpoTeatro junto a sus métodos.
-
 "use strict";
-class Upoteatro{
-
+class UpoTeatro {
+    constructor() {
+        this.teatros = [];
+        this.representaciones = [];
+        this.espectaculos = [];
+        this.companias = [];
+        this.obras = [];
+    }
+    agregaTeatro(teatro) {
+        if (this.teatros.filter(teatroNuevo => teatroNuevo.nombre == teatro.nombre).length == 0) {
+            this.teatros.push(teatro);
+            return true;
+        } else { return false; }
+    }
+    agregaRepresentacion(representacion) {
+        if (this.representaciones.filter(representacionNuevo => representacionNuevo.codigo == representacion.codigo).length == 0) {
+            this.representaciones.push(representacion);
+            return true;
+        } else { return false; }
+    }
+    agregaEspectaculo(espectaculo) {
+        if (this.espectaculos.filter(espectaculoNuevo => espectaculoNuevo.codigo == espectaculo.codigo).length == 0) {
+            this.espectaculos.push(espectaculo);
+            return true;
+        } else { return false; }
+    }
+    agregaCompania(compania) {
+        if (this.companias.filter(companiaNuevo => companiaNuevo.cif == compania.cif).length == 0) {
+            this.companias.push(compania);
+            return true;
+        } else { return false; }
+    }
+    agregaObra(obra) {
+        if (this.obras.filter(obraNuevo => obraNuevo.codigo == obra.codigo).length == 0) {
+            this.obras.push(obra);
+            return true;
+        } else { return false; }
+    }
+    buscaTeatro(codigo){
+    	return this.teatros.filter(teatro=> teatro.codigo == codigo);
+    }
+    buscaRepresentacion(codigo){
+    	return this.representaciones.filter(representacion=> representacion.codigo == codigo);
+    }
+    buscaEspectaculo(codigo){
+    	return this.espectaculos.filter(espectaculo=> espectaculo.codigo == codigo);
+    }
+    buscaCompania(cif){
+    	return this.companias.filter(compania=> compania.cif == cif);
+    }
+    buscaObra(codigo){
+    	return this.obras.filter(obra=> obra.codigo == codigo);
+    }
 }

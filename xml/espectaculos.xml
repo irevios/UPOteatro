@@ -1,30 +1,30 @@
 <!-- Base de datos de ejemplo de espectáculos -->
 <espectaculos>
-	<espectaculo cod="E001" obra="Ob03" compañia="B32212532">
+	<espectaculo cod="E001" obra="Ob03" compania="B32212532">
 		<nombre>La llamada El Musical</nombre>
 		<productor>Mariano Blanes Arguelles</productor>
 		<categoria>Musical</categoria>
 		<gastos>15600</gastos>
 	</espectaculo>
-	<espectaculo cod="E002" obra="Ob02" compañia="K64801160">
+	<espectaculo cod="E002" obra="Ob02" compania="K64801160">
 		<nombre>La Celestina</nombre>
 		<productor>Guillermo Casanova Cruces</productor>
 		<categoria>Tragicomedia</categoria>
 		<gastos>24100</gastos>
 	</espectaculo>
-	<espectaculo cod="E003" obra="Ob01" compañia="P61657821">
+	<espectaculo cod="E003" obra="Ob01" compania="P61657821">
 		<nombre>Hamlet</nombre>
 		<productor>Paula Blanco Almansa</productor>
 		<categoria>Tragedia</categoria>
 		<gastos>47400</gastos>
 	</espectaculo>
-	<espectaculo cod="E004" obra="Ob04" compañia="B32212532">
+	<espectaculo cod="E004" obra="Ob04" compania="B32212532">
 		<nombre>Billy Elliot</nombre>
 		<productor>Jose Ignacio Ulloa Bautista</productor>
 		<categoria>Musical</categoria>
 		<gastos>32300</gastos>
 	</espectaculo>
-	<espectaculo cod="E005" obra="Ob04" compañia="G44106268">
+	<espectaculo cod="E005" obra="Ob04" compania="G44106268">
 		<nombre>Billy Elliot La Parodia</nombre>
 		<productor>Rafael Fabregat Folch</productor>
 		<categoria>Comedia</categoria>
