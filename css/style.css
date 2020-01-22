@@ -1,6 +1,8 @@
 body{
-	/*overflow: hidden;*/
 	max-height: 100vh;
+}
+body.grande{
+	overflow: hidden;
 }
 .jumbotron > *{
 	transition: 1s;
@@ -32,10 +34,10 @@ body{
 	font-size: 3rem;
 	text-shadow: 0 0 17px #333;
 }
-.jumbotron.grande{
+body.grande .jumbotron{
 	height: 100vh;
 }
-.jumbotron.grande h2{
+body.grande .jumbotron h2{
 	margin-top: calc((100vh - 2rem) / 3);
 	font-size: 5rem;
 	text-shadow: 0 0 17px #333;
@@ -68,4 +70,10 @@ input[type="checkbox"] ~ .custom-control-label, input[type="radio"] ~ .custom-co
     color: #dd2232;
     background-color: transparent;
     border: solid 1px #dd2030;
+}
+#formularios{
+	padding: 15px 2em !important;
+}
+body.grande .row.justify-content-center{
+	display: none;
 }

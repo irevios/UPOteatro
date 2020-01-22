@@ -48,7 +48,7 @@ function agregaForm(elem,form) {
         document.querySelector("#formularios > form").remove();
     }
     document.querySelector("#formularios").append(form.querySelector("#" + elem));
-    document.querySelector(".jumbotron").classList.remove("grande");
+    document.querySelector("body").classList.remove("grande");
     // Luego completa los select con sus datos
     // ...
 }
