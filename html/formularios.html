@@ -51,16 +51,15 @@
             </div>
         </div>
         <div class="col">
-        <label for="totalEntrada">Precio Total</label>
-        <div class="input-group">
-            <input id="totalEntrada" name="totalEntrada" type="number" step="any" class="form-control" readonly="readonly">
-            <div class="input-group-append">
-                <div class="input-group-text">
-                    <i class="fa fa-euro"></i>
+            <label for="totalEntrada">Precio Total</label>
+            <div class="input-group">
+                <input id="totalEntrada" name="totalEntrada" type="number" step="any" class="form-control" readonly="readonly">
+                <div class="input-group-append">
+                    <div class="input-group-text">
+                        <i class="fa fa-euro"></i>
+                    </div>
                 </div>
             </div>
-        </div>
-            
         </div>
     </div>
     <div class="form-group">
@@ -90,13 +89,22 @@
     <div class="form-group row">
         <label for="precioBaseRepresentacion" class="col-2 col-form-label">Precio base</label>
         <div class="col-10">
-            <input id="precioBaseRepresentacion" name="precioBaseRepresentacion" type="number" class="form-control">
+            <div class="input-group">
+                <input id="precioBaseRepresentacion" name="precioBaseRepresentacion" type="number" class="form-control">
+                <div class="input-group-append">
+                    <div class="input-group-text">
+                        <i class="fa fa-euro"></i>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+    </div>
+    </div>
     <div class="form-group row">
-        <label for="espectaculoRepresentacion" class="col-2 col-form-label">Espectáculo</label>
+        <label for="espectaculoSeleccionado" class="col-2 col-form-label">Espectáculo</label>
         <div class="col-10">
-            <select id="espectaculoRepresentacion" name="espectaculoRepresentacion" class="custom-select">
+            <select id="espectaculoSeleccionado" name="espectaculoSeleccionado" class="custom-select">
                 <!-- Espectáculos de la base de datos -->
             </select>
         </div>
@@ -140,21 +148,28 @@
     <div class="form-group row">
         <label for="gastosEspectaculo" class="col-4 col-form-label">Gastos</label>
         <div class="col-8">
-            <input id="gastosEspectaculo" name="gastosEspectaculo" type="number" step="any" class="form-control">
+            <div class="input-group">
+                <input id="gastosEspectaculo" name="gastosEspectaculo" type="number" step="any" class="form-control">
+                <div class="input-group-append">
+                    <div class="input-group-text">
+                        <i class="fa fa-euro"></i>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="form-group row">
-        <label for="companiaEspectaculo" class="col-4 col-form-label">Compañía</label>
+        <label for="companiaSeleccionada" class="col-4 col-form-label">Compañía</label>
         <div class="col-8">
-            <select id="companiaEspectaculo" name="companiaEspectaculo" class="custom-select">
+            <select id="companiaSeleccionada" name="companiaSeleccionada" class="custom-select">
                 <!-- Compañias de la base de datos -->
             </select>
         </div>
     </div>
     <div class="form-group row">
-        <label for="obraEspectaculo" class="col-4 col-form-label">Obra</label>
+        <label for="obraSeleccionada" class="col-4 col-form-label">Obra</label>
         <div class="col-8">
-            <select id="obraEspectaculo" name="obraEspectaculo" class="custom-select">
+            <select id="obraSeleccionada" name="obraSeleccionada" class="custom-select">
                 <!-- Obras de la base de datos -->
             </select>
         </div>

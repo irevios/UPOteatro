@@ -53,9 +53,15 @@ function agregaForm(elem, form) {
         case "formularioEntrada":
             rellenaFormEntrada();
             break;
+        case "formularioRepresentacion":
+            rellenaFormRepresentacion();
+            break;
+        case "formularioEspectaculo":
+        	rellenaFormEspectaculo();
     }
 }
 
+/// Rellena todos los campos de la base de datos en el formulario de entrada
 function rellenaFormEntrada() {
     // Select representacion
     upoTeatro.teatros.forEach(teatro => {
@@ -109,21 +115,50 @@ function actualizaFormularioEntrada(bool) {
         document.querySelector("#personasGrupal").parentNode.parentNode.style.display = "none";
     }
     cambiaButacasFormEntrada();
-   	document.querySelector("#totalEntrada").value = 0; // Reinicia a 0 el precio si el usuario no ha selccionado ninguna butaca.
+    document.querySelector("#totalEntrada").value = 0; // Reinicia a 0 el precio si el usuario no ha selccionado ninguna butaca.
 }
 
 function cambiaPrecioEntrada() {
     let representacion = upoTeatro.buscaRepresentacion(document.querySelector("#formularioEntrada #representacionSeleccionada").value);
     let teatro = upoTeatro.buscaTeatroPorRepresentacion(document.querySelector("#formularioEntrada #representacionSeleccionada").value);
     let coefButaca;
-    if(document.querySelector("input[name='tipoEntrada']:checked").value == "grupal"){
-    	let personas = document.querySelector("#butacaSeleccionada").selectedOptions.length;
-    	document.querySelector("#personasGrupal").value = personas;
-    	coefButaca = personas;
-    }
-    else{
-    	let butacaSeleccionada = document.querySelector("#butacaSeleccionada").value.split("-");
-    	coefButaca = teatro.buscaButaca(butacaSeleccionada[0], butacaSeleccionada[1], butacaSeleccionada[2]).coefPrecio;
+    if (document.querySelector("input[name='tipoEntrada']:checked").value == "grupal") {
+        let personas = document.querySelector("#butacaSeleccionada").selectedOptions.length;
+        document.querySelector("#personasGrupal").value = personas;
+        coefButaca = personas;
+    } else {
+        let butacaSeleccionada = document.querySelector("#butacaSeleccionada").value.split("-");
+        coefButaca = teatro.buscaButaca(butacaSeleccionada[0], butacaSeleccionada[1], butacaSeleccionada[2]).coefPrecio;
     }
     document.querySelector("#totalEntrada").value = parseFloat(representacion.precioBase) * parseFloat(coefButaca);
+}
+
+/// Rellena todos los campos de la base de datos en el formulario de representación
+function rellenaFormRepresentacion() {
+    // select espectaculos
+    upoTeatro.espectaculos.forEach(espectaculo => {
+        let opcion = document.createElement("option");
+        opcion.value = espectaculo.codigo;
+        opcion.textContent = espectaculo.nombre;
+        document.querySelector("#espectaculoSeleccionado").append(opcion);
+    });
+}
+
+/// Rellena todos los campos de la base de datos en el formulario de espectaculo
+function rellenaFormEspectaculo() {
+    // select compañias
+    upoTeatro.companias.forEach(compania => {
+        let opcion = document.createElement("option");
+        opcion.value = compania.codigo;
+        opcion.textContent = compania.nombre;
+        document.querySelector("#companiaSeleccionada").append(opcion);
+    });
+
+    // select obras
+    upoTeatro.obras.forEach(obra => {
+        let opcion = document.createElement("option");
+        opcion.value = obra.codigo;
+        opcion.textContent = obra.nombre;
+        document.querySelector("#obraSeleccionada").append(opcion);
+    });
 }
