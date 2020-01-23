@@ -109,7 +109,7 @@ function cargaInicialEntradas(xml) {
             let zona = entrada.querySelector("tipo").textContent;
             let fila = entrada.querySelector("butaca").getAttribute("fila");
             let num = entrada.querySelector("butaca").getAttribute("num");
-            butaca = teatro.buscaButaca(zona, fila, num);
+            butaca = [teatro.buscaButaca(zona, fila, num)];
             nuevaEntrada = new EntradaIndividual(adaptada, butaca, representacion, zona);
         } else {
             butaca = [];

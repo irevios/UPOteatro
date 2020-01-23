@@ -1,4 +1,4 @@
-﻿// En este documento se define todas las clases, menos UpoTeatro, junto a sus métodos.
+// En este documento se define todas las clases, menos UpoTeatro, junto a sus métodos.
 "use strict";
 class Teatro {
     constructor(codigo, nombre, direccion, representaciones) {
@@ -12,7 +12,7 @@ class Teatro {
     agregaRepresentacion(representacion) {
         this.representaciones.push(representacion);
     }
-   	agregaButaca(butaca){
+    agregaButaca(butaca) {
         if (this.butacas.filter(butacaNuevo => butacaNuevo.numero == butaca.numero && butacaNuevo.fila == butaca.fila && butacaNuevo.zona == butaca.zona).length == 0) {
             this.butacas.push(butaca);
             return true;
@@ -21,13 +21,8 @@ class Teatro {
     calculaAforo() {
         this.aforo = this.butacas.length;
     }
-    butacaOcupada(butaca) {
-        if (this.entradas.filter(entrada => entrada.butaca == butaca).length == 0) {
-            return false;
-        } else { return true; }
-    }
-    buscaButaca(zona,fila,num){
-    	return this.butacas.filter(butaca => butaca.numero == num && butaca.fila == fila && butaca.zona == zona)[0];
+    buscaButaca(zona, fila, num) {
+        return this.butacas.filter(butaca => butaca.numero == num && butaca.fila == fila && butaca.zona == zona)[0];
     }
 }
 
@@ -37,6 +32,14 @@ class Butaca {
         this.fila = fila;
         this.zona = zona;
         this.coefPrecio = coefPrecio;
+    }
+    toString() {
+        let zona = this.zona[0].toUpperCase() + this.zona.substring(1);
+
+        return zona + " | " + "Fila: " + this.fila + " | Número: " + this.numero;
+    }
+    textoButaca() {
+        return this.zona + "-" + this.fila + "-" + this.numero;
     }
 }
 
@@ -81,11 +84,37 @@ class Representacion {
             return true;
         } else { return false; }
     }
-    toHTMLrow(){
+    buscaButaca(butaca) {
+        let butacaEncontrada;
+        this.entradas.forEach(entrada => {
+            if (entrada.butaca != undefined) {
+                let butacas = entrada.butaca.filter(otraButaca =>
+                    otraButaca.numero == butaca.numero &&
+                    otraButaca.fila == butaca.fila &&
+                    otraButaca.zona == butaca.zona);
+                console.log(butacas);
+                if (butacas.length > 0) {
+                    butacaEncontrada = butacas[0];
+                }
+            }
+
+        });
+        return butacaEncontrada;
+    }
+    butacaOcupada(butaca) {
+        let ocupada = false;
+        let entradas;
+       if(this.buscaButaca(butaca)!=undefined){
+            ocupada = true;
+       }
+       return ocupada;
+       
+    }
+    toHTMLrow() {
 
     }
-    toString(){
-    	return this.fecha + " | " + this.espectaculo.nombre;
+    toString() {
+        return this.fecha + " | " + this.espectaculo.nombre;
     }
 }
 

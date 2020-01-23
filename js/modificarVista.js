@@ -61,11 +61,33 @@ function agregaForm(elem,form) {
     			});
     		});
     		// Select multiple butacas
-    		let seleccionButaca= document.querySelector("#formularioEntrada #butacaSeleccionada");
-    		
-    		// Tipo de entrada
-    		document.querySelector("#tipoEntrada0 ~ label").addEventListener("click",(e)=>{seleccionButaca.removeAttribute('multiple');});
-    		document.querySelector("#tipoEntrada1 ~ label").addEventListener("click",(e)=>{seleccionButaca.setAttribute('multiple',true);});
+    		let seleccionButaca = document.querySelector("#formularioEntrada #butacaSeleccionada");
+            let representacionSeleccionada = document.querySelector("#formularioEntrada #representacionSeleccionada");
+            cambiaButacas();
+            representacionSeleccionada.addEventListener("change",cambiaButacas);
+
+    		// Tipo de entrada cambia el select multiple
+    		document.querySelector("#tipoEntrada0 ~ label").addEventListener("click",(e)=>{seleccionButaca.removeAttribute('multiple'); cambiaButacas();});
+    		document.querySelector("#tipoEntrada1 ~ label").addEventListener("click",(e)=>{seleccionButaca.setAttribute('multiple',true); cambiaButacas();});
     	break;
     }
+}
+function cambiaButacas(){
+    let representacion = upoTeatro.buscaRepresentacion(document.querySelector("#formularioEntrada #representacionSeleccionada").value); 
+    let butacas  = upoTeatro.buscaTeatroPorRepresentacion(document.querySelector("#formularioEntrada #representacionSeleccionada").value).butacas;
+    document.querySelector("#formularioEntrada #butacaSeleccionada").querySelectorAll("option").forEach(but=>but.remove());
+    butacas.forEach(butaca => {
+        let select = document.querySelector("#formularioEntrada #butacaSeleccionada");
+        if(!select.multiple || butaca.zona == 'platea'){
+            let opcion = document.createElement("option");
+            opcion.value = butaca.textoButaca();
+            opcion.textContent = butaca.toString();
+            if(representacion.butacaOcupada(butaca)){
+                console.log("ocupada!");
+                opcion.setAttribute("disabled", true);
+            }
+            select.append(opcion);
+
+        }
+    });
 }

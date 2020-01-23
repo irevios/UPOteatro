@@ -20,6 +20,7 @@
 			<representacion cod="R08"/>
 			<representacion cod="R09"/>
 			<representacion cod="R12"/>
+			<representacion cod="R14"/>
 			<representacion cod="R15"/>
 			<representacion cod="R16"/>
 			<representacion cod="R17"/>
@@ -29,6 +30,9 @@
 		<nombre>Quintero</nombre>
 		<direccion>Calle Cuna, 15, 41004 Sevilla</direccion>
 		<representaciones>
+			<representacion cod="R10"/>
+			<representacion cod="R11"/>
+			<representacion cod="R13"/>
 			<representacion cod="R18"/>
 			<representacion cod="R19"/>
 			<representacion cod="R20"/>
