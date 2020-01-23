@@ -83,7 +83,6 @@ function cambiaButacas(){
             opcion.value = butaca.textoButaca();
             opcion.textContent = butaca.toString();
             if(representacion.butacaOcupada(butaca)){
-                console.log("ocupada!");
                 opcion.setAttribute("disabled", true);
             }
             select.append(opcion);

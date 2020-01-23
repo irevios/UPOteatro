@@ -92,7 +92,6 @@ class Representacion {
                     otraButaca.numero == butaca.numero &&
                     otraButaca.fila == butaca.fila &&
                     otraButaca.zona == butaca.zona);
-                console.log(butacas);
                 if (butacas.length > 0) {
                     butacaEncontrada = butacas[0];
                 }
