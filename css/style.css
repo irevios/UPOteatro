@@ -121,3 +121,6 @@ option:disabled {
 i.fa {
     padding: 0 0.5em;
 }
+input{
+	-webkit-appearance: push-button !important;
+}
