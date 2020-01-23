@@ -55,7 +55,7 @@ function cargaInicialEspectaculos(xml) {
 function cargaInicialRepresentaciones(xml) {
     xml.querySelectorAll("representacion").forEach(representacion => {
         let codigo = representacion.getAttribute("cod");
-        let fecha = representacion.querySelector("fecha").textContent;
+        let fecha = new Date(representacion.querySelector("fecha").textContent);
         let adaptada = representacion.getAttribute("adaptada") == "N" ? false : true;
         let precioBase = representacion.querySelector("precioBase").textContent;
         let espectaculo = upoTeatro.buscaEspectaculo(representacion.getAttribute("espectaculo"));

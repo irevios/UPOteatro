@@ -18,36 +18,70 @@ class Teatro {
             return true;
         } else { return false; }
     }
-    calculaAforo() {
-        this.aforo = this.butacas.length;
-    }
     buscaButaca(zona, fila, num) {
         return this.butacas.filter(butaca => butaca.numero == num && butaca.fila == fila && butaca.zona == zona)[0];
     }
+    calculaAforo() {
+        this.aforo = this.butacas.length;
+    }
 }
 
-class Butaca {
-    constructor(numero, fila, zona, coefPrecio) {
-        this.numero = numero;
-        this.fila = fila;
-        this.zona = zona;
-        this.coefPrecio = coefPrecio;
+class Representacion {
+    constructor(codigo, fecha, adaptada, precioBase, espectaculo) {
+        this.codigo = codigo;
+        this.fecha = fecha;
+        this.adaptada = adaptada;
+        this.precioBase = precioBase;
+        this.espectaculo = espectaculo;
+        this.entradas = [];
+    }
+    compraEntrada(entrada) {
+        if (this.entradas.filter(entradaNuevo => entradaNuevo.butaca == entrada.butaca && entradaNuevo.representacion == entrada.representacion).length == 0) {
+            this.entradas.push(entrada);
+            return true;
+        } else { return false; }
+    }
+    butacaOcupada(butaca) {
+        let ocupada = false;
+        this.entradas.forEach(entrada => {
+            if (entrada.butacas != undefined) {
+                let butacas = entrada.butacas.filter(otraButaca => otraButaca.numero == butaca.numero && otraButaca.fila == butaca.fila && otraButaca.zona == butaca.zona);
+                if (butacas.length > 0) {
+                    ocupada = true;
+                }
+            }
+
+        });
+        return ocupada;
+    }
+    toHTMLrow() {
+
     }
     toString() {
-        let zona = this.zona[0].toUpperCase() + this.zona.substring(1);
-
-        return zona + " | " + "Fila: " + this.fila + " | Número: " + this.numero;
+        let dia = this.fecha.getDate();
+        let mes = this.fecha.getMonth();
+        let año = this.fecha.getYear();
+        return dia + "/" + mes + "/" + año + " | " + this.espectaculo.nombre;
     }
-    textoButaca() {
-        return this.zona + "-" + this.fila + "-" + this.numero;
+}
+
+class Espectaculo {
+    constructor(codigo, nombre, productor, categoria, gastos, obra, compania) {
+        this.codigo = codigo;
+        this.nombre = nombre;
+        this.productor = productor;
+        this.categoria = categoria;
+        this.gastos = gastos;
+        this.obra = obra;
+        this.compania = compania;
     }
 }
 
 class Entrada {
-    constructor(adaptada, butaca, representacion) {
+    constructor(adaptada, butacas, representacion) {
         this.adaptada = adaptada;
         this.precio = 0;
-        this.butaca = butaca;
+        this.butacas = butacas;
         this.representacion = representacion;
     }
     calculaPrecio() {
@@ -69,65 +103,24 @@ class EntradaGrupal extends Entrada {
     }
 }
 
-class Representacion {
-    constructor(codigo, fecha, adaptada, precioBase, espectaculo) {
-        this.codigo = codigo;
-        this.fecha = fecha;
-        this.adaptada = adaptada;
-        this.precioBase = precioBase;
-        this.espectaculo = espectaculo;
-        this.entradas = [];
-    }
-    compraEntrada(entrada) {
-        if (this.entradas.filter(entradaNuevo => entradaNuevo.butaca == entrada.butaca && entradaNuevo.representacion == entrada.representacion).length == 0) {
-            this.entradas.push(entrada);
-            return true;
-        } else { return false; }
-    }
-    buscaButaca(butaca) {
-        let butacaEncontrada;
-        this.entradas.forEach(entrada => {
-            if (entrada.butaca != undefined) {
-                let butacas = entrada.butaca.filter(otraButaca =>
-                    otraButaca.numero == butaca.numero &&
-                    otraButaca.fila == butaca.fila &&
-                    otraButaca.zona == butaca.zona);
-                if (butacas.length > 0) {
-                    butacaEncontrada = butacas[0];
-                }
-            }
-
-        });
-        return butacaEncontrada;
-    }
-    butacaOcupada(butaca) {
-        let ocupada = false;
-        let entradas;
-       if(this.buscaButaca(butaca)!=undefined){
-            ocupada = true;
-       }
-       return ocupada;
-       
-    }
-    toHTMLrow() {
-
+class Butaca {
+    constructor(numero, fila, zona, coefPrecio) {
+        this.numero = numero;
+        this.fila = fila;
+        this.zona = zona;
+        this.coefPrecio = coefPrecio;
     }
     toString() {
-        return this.fecha + " | " + this.espectaculo.nombre;
+        let zona = this.zona[0].toUpperCase() + this.zona.substring(1);
+
+        return zona + " | " + "Fila: " + this.fila + " | Número: " + this.numero;
+    }
+    idButaca() {
+        return this.zona + "-" + this.fila + "-" + this.numero;
     }
 }
 
-class Espectaculo {
-    constructor(codigo, nombre, productor, categoria, gastos, obra, compania) {
-        this.codigo = codigo;
-        this.nombre = nombre;
-        this.productor = productor;
-        this.categoria = categoria;
-        this.gastos = gastos;
-        this.obra = obra;
-        this.compania = compania;
-    }
-}
+
 
 class Compania {
     constructor(cif, nombre, director) {

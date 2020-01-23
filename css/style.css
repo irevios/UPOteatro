@@ -113,6 +113,11 @@ input[type="radio"]~.custom-control-label {
 body.grande .row.justify-content-center {
     display: none;
 }
-option:disabled{
+
+option:disabled {
     color: #CF312FA6;
+}
+
+i.fa.fa-users {
+    padding: 0 0.5em;
 }
