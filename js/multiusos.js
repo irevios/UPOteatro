@@ -58,3 +58,24 @@ function elementoExiste(elemento){
 		return false;
 	}
 }
+
+// Crea una tabla con los headers dados como parametros
+function creaTabla(headers){
+	let div = document.createElement("div");
+	div.classList.add("table-responsive");	
+	let tabla = document.createElement("table");
+	tabla.classList.add("table");
+	tabla.classList.add("table-striped");
+	tabla.classList.add("table-hover");
+    let header = tabla.createTHead();
+	let encabezados = header.insertRow(-1);
+	headers.forEach( encabezado => {
+		let celda = document.createElement("th");
+		celda.textContent = encabezado;
+		encabezados.append(celda);
+	});
+	let cuerpo = document.createElement("tbody");
+	tabla.append(cuerpo);
+	div.append(tabla);
+	return div;
+}

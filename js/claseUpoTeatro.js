@@ -62,4 +62,25 @@ class UpoTeatro {
     buscaObra(codigo) {
         return this.obras.filter(obra => obra.codigo == codigo)[0];
     }
+    listadoEntradas(){
+        // let tabla = creaTabla(["Espectaculo","Productor","Categoría","Gastos", "Obra", "Compañía"]);
+        // this.espectaculos.forEach( espectaculo => {
+        //     tabla.querySelector("table").tBodies[0].append(espectaculo.toHTMLrow());
+        // });
+        // return tabla;
+    }
+    listadoRepresentaciones(){
+        /*let tabla = creaTabla(["Espectaculo","Productor","Categoría","Gastos", "Obra", "Compañía"]);
+        this.espectaculos.forEach( espectaculo => {
+            tabla.querySelector("table").tBodies[0].append(espectaculo.toHTMLrow());
+        });
+        return tabla;*/
+    }
+    listadoEspectaculos(){
+        let tabla = creaTabla(["Espectaculo","Productor","Categoría","Gastos", "Obra", "Compañía"]);
+        this.espectaculos.forEach( espectaculo => {
+            tabla.querySelector("table").tBodies[0].append(espectaculo.toHTMLrow());
+        });
+        return tabla;
+    }
 }

@@ -75,6 +75,22 @@ class Espectaculo {
         this.obra = obra;
         this.compania = compania;
     }
+    toHTMLrow(){
+        let fila = document.createElement("tr");
+        let celda = fila.insertCell(-1);
+        celda.textContent = this.nombre;
+        celda = fila.insertCell(-1);
+        celda.textContent = this.productor;
+        celda = fila.insertCell(-1);
+        celda.textContent = this.categoria;
+        celda = fila.insertCell(-1);
+        celda.textContent = this.gastos + "€";
+        celda = fila.insertCell(-1);
+        celda.textContent = this.obra.nombre;
+        celda = fila.insertCell(-1);
+        celda.textContent = this.compania.nombre;
+        return fila;
+    }
 }
 
 class Entrada {
