@@ -55,13 +55,19 @@ class Representacion {
         return ocupada;
     }
     toHTMLrow() {
-
+        let fila = document.createElement("tr");
+        let celda = fila.insertCell(-1);
+        celda.textContent = fechaToString(this.fecha);
+        celda = fila.insertCell(-1);
+        celda.textContent = this.adaptada ? "Sí":"No";
+        celda = fila.insertCell(-1);
+        celda.textContent = this.precioBase;
+        celda = fila.insertCell(-1);
+        celda.textContent = this.espectaculo.nombre;
+        return fila;
     }
     toString() {
-        let dia = this.fecha.getDate();
-        let mes = this.fecha.getMonth();
-        let año = this.fecha.getYear();
-        return dia + "/" + mes + "/" + año + " | " + this.espectaculo.nombre;
+        return  fechaToString(this.fecha) + " | " + this.espectaculo.nombre;
     }
 }
 

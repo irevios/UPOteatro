@@ -62,23 +62,28 @@ class UpoTeatro {
     buscaObra(codigo) {
         return this.obras.filter(obra => obra.codigo == codigo)[0];
     }
-    listadoEntradas(){
+    listadoEntradas() {
         // let tabla = creaTabla(["Espectaculo","Productor","Categoría","Gastos", "Obra", "Compañía"]);
         // this.espectaculos.forEach( espectaculo => {
         //     tabla.querySelector("table").tBodies[0].append(espectaculo.toHTMLrow());
         // });
         // return tabla;
     }
-    listadoRepresentaciones(){
-        /*let tabla = creaTabla(["Espectaculo","Productor","Categoría","Gastos", "Obra", "Compañía"]);
-        this.espectaculos.forEach( espectaculo => {
-            tabla.querySelector("table").tBodies[0].append(espectaculo.toHTMLrow());
+    listadoRepresentaciones() {
+        let tabla = creaTabla(["Teatro", "Fecha", "Adaptada", "Precio Base", "Espectáculo"]);
+        this.teatros.forEach(teatro => {
+            teatro.representaciones.forEach(representaciones => {
+                let linea = representaciones.toHTMLrow();
+                let celdaTeatro = linea.insertCell(0);
+                celdaTeatro.textContent = teatro.nombre;
+                tabla.querySelector("table").tBodies[0].append(linea);
+            });
         });
-        return tabla;*/
+        return tabla;
     }
-    listadoEspectaculos(){
-        let tabla = creaTabla(["Espectaculo","Productor","Categoría","Gastos", "Obra", "Compañía"]);
-        this.espectaculos.forEach( espectaculo => {
+    listadoEspectaculos() {
+        let tabla = creaTabla(["Espectaculo", "Productor", "Categoría", "Gastos", "Obra", "Compañía"]);
+        this.espectaculos.forEach(espectaculo => {
             tabla.querySelector("table").tBodies[0].append(espectaculo.toHTMLrow());
         });
         return tabla;

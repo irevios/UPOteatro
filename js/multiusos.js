@@ -79,3 +79,11 @@ function creaTabla(headers){
 	div.append(tabla);
 	return div;
 }
+
+// Convierte fecha Date a DD/MM/AA
+function fechaToString(fecha){
+	let dia = fecha.getDate();
+    let mes = fecha.getMonth();
+    let año = fecha.getYear();
+    return dia + "/" + mes + "/" + año;
+}
