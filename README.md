@@ -46,4 +46,4 @@ El código de esta aplicación se divide en diferentes ficheros para mejorar la 
 * **principal.js**: En este fichero se realiza la validación de formularios así como la integración de nuevos datos.
 * **multiusos.js**: En este fichero se definen diferentes funciones que pueden servir para cualquier proyecto.
 
-I.E.S. Hermanos Machado | Programación | Isabel Fernández e Irene Viñas | Enero 2020
+I.E.S. Hermanos Machado | Entorno Cliente | Isabel Fernández e Irene Viñas | Enero 2020
