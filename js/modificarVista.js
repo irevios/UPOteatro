@@ -46,7 +46,23 @@ function muestraEnPantalla(elem) {
     if (elem.includes("formulario")) { // Si se pide un formulario, busca en el archivo formularios y lo añade a la web
         leeArchivoXMLHTML("./html/formularios.html", (formulario) => agregaForm(elem, formulario));
     } else {
-        document.querySelector("#formularios").append(agregaTabla(elem));
+        let tabla = agregaTabla(elem);
+        if (esAdmin()) {
+            let celda = document.createElement("th");
+            celda.textContent = "Editar";
+            tabla.querySelector("table").tHead.rows[0].append(celda);
+            celda = document.createElement("th");
+            celda.textContent = "Borrar";
+            tabla.querySelector("table").tHead.rows[0].append(celda);
+            let filas = tabla.querySelector("table").tBodies[0].rows
+            for (let i = 0; i < filas.length; i++) {
+                celda = filas[i].insertCell(-1);
+                celda.textContent = "Boton Editar";
+                celda = filas[i].insertCell(-1);
+                celda.textContent = "Boton Borrar";
+            };
+        }
+        document.querySelector("#formularios").append(tabla);
     }
 }
 

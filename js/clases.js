@@ -123,7 +123,6 @@ class EntradaIndividual extends Entrada {
         this.tipo = tipo;
     }
     calculaPrecio() {
-        console.log(this.butacas[0].coefPrecio);
         this.precio = parseFloat(this.precioBase) * parseFloat(this.butacas[0].coefPrecio);
         return this.precio.toFixed(2);
     }
