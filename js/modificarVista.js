@@ -35,20 +35,24 @@ function cargarEventosAdmin() {
 }
 
 function muestraEnPantalla(elem) {
+    if (elementoExiste("#formularios > form")) {
+        document.querySelector("#formularios > form").remove();
+    }
+    if (elementoExiste("#formularios > table")) {
+        document.querySelector("#formularios > table").remove();
+    }
+    document.querySelector("body").classList.remove("grande");
+
     if (elem.includes("formulario")) { // Si se pide un formulario, busca en el archivo formularios y lo añade a la web
         leeArchivoXMLHTML("./html/formularios.html", (formulario) => agregaForm(elem, formulario));
     } else {
-        // Añade la tabla con el listado correspondiente
+        document.querySelector("#formularios").append( agregaTabla(elem));
     }
 }
 
 // Añade un formulario a la vista
 function agregaForm(elem, form) {
-    if (elementoExiste("#formularios > form")) {
-        document.querySelector("#formularios > form").remove();
-    }
     document.querySelector("#formularios").append(form.querySelector("#" + elem));
-    document.querySelector("body").classList.remove("grande");
     switch (elem) {
         case "formularioEntrada":
             rellenaFormEntrada();
@@ -135,6 +139,13 @@ function cambiaPrecioEntrada() {
 
 /// Rellena todos los campos de la base de datos en el formulario de representación
 function rellenaFormRepresentacion() {
+    // select teatros
+     upoTeatro.teatros.forEach(teatro => {
+        let opcion = document.createElement("option");
+        opcion.value = teatro.codigo;
+        opcion.textContent = teatro.nombre;
+        document.querySelector("#teatroSeleccionado").append(opcion);
+    });
     // select espectaculos
     upoTeatro.espectaculos.forEach(espectaculo => {
         let opcion = document.createElement("option");
@@ -161,4 +172,14 @@ function rellenaFormEspectaculo() {
         opcion.textContent = obra.nombre;
         document.querySelector("#obraSeleccionada").append(opcion);
     });
+}
+function agregaTabla(elem){
+   switch (elem) {
+        case "listaEntrada":
+           return upoTeatro.listadoEntradas();
+        case "listaRepresentacion":
+            return upoTeatro.listadoRepresentaciones();
+        case "listaEspectaculo":
+            return upoTeatro.listadoEspectaculos();
+    }
 }
