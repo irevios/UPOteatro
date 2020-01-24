@@ -59,7 +59,7 @@ class Representacion {
         let celda = fila.insertCell(-1);
         celda.textContent = fechaToString(this.fecha);
         celda = fila.insertCell(-1);
-        celda.textContent = this.adaptada ? "Sí":"No";
+        celda.textContent = this.adaptada ? "Sí" : "No";
         celda = fila.insertCell(-1);
         celda.textContent = this.precioBase;
         celda = fila.insertCell(-1);
@@ -67,7 +67,7 @@ class Representacion {
         return fila;
     }
     toString() {
-        return  fechaToString(this.fecha) + " | " + this.espectaculo.nombre;
+        return fechaToString(this.fecha) + " | " + this.espectaculo.nombre;
     }
 }
 
@@ -81,7 +81,7 @@ class Espectaculo {
         this.obra = obra;
         this.compania = compania;
     }
-    toHTMLrow(){
+    toHTMLrow() {
         let fila = document.createElement("tr");
         let celda = fila.insertCell(-1);
         celda.textContent = this.nombre;
@@ -100,28 +100,67 @@ class Espectaculo {
 }
 
 class Entrada {
-    constructor(adaptada, butacas, representacion) {
+    constructor(adaptada, butacas, precioBase) {
         this.adaptada = adaptada;
+        this.precioBase = precioBase;
         this.precio = 0;
         this.butacas = butacas;
-        this.representacion = representacion;
     }
-    calculaPrecio() {
-        //precio base representacion * coeficiente butaca
+    butacasToHTML() {
+        let butacas = document.createElement("div");
+        this.butacas.forEach(butaca => {
+            let butacaString = document.createElement("div");
+            butacaString.textContent = "F: " + butaca.fila + " | N: " + butaca.numero;
+            butacas.append(butacaString);
+        });
+        return butacas;
     }
 }
 
 class EntradaIndividual extends Entrada {
-    constructor(adaptada, butaca, representacion, tipo) {
-        super(adaptada, butaca, representacion, tipo);
+    constructor(adaptada, butacas, precioBase, tipo) {
+        super(adaptada, butacas, precioBase);
         this.tipo = tipo;
+    }
+    calculaPrecio() {
+        console.log(this.butacas[0].coefPrecio);
+        this.precio = parseFloat(this.precioBase) * parseFloat(this.butacas[0].coefPrecio);
+        return this.precio.toFixed(2);
+    }
+    toHTMLrow() {
+        let fila = document.createElement("tr");
+        let celda = fila.insertCell(-1);
+        celda.textContent = this.adaptada ? "Sí" : "No";
+        celda = fila.insertCell(-1);
+        celda.textContent = this.calculaPrecio() + "€";
+        celda = fila.insertCell(-1);
+        celda.append(super.butacasToHTML());
+        celda = fila.insertCell(-1);
+        celda.textContent = toTitleCase(this.tipo);
+        return fila;
     }
 }
 
 class EntradaGrupal extends Entrada {
-    constructor(adaptada, butaca, representacion, numPersonas) {
-        super(adaptada, butaca, representacion, numPersonas);
+    constructor(adaptada, butacas, precioBase, numPersonas) {
+        super(adaptada, butacas, precioBase);
         this.numPersonas = numPersonas;
+    }
+    calculaPrecio() {
+        this.precio = parseFloat(this.precioBase) * parseFloat(this.butacas.length);
+        return this.precio.toFixed(2);
+    }
+    toHTMLrow() {
+        let fila = document.createElement("tr");
+        let celda = fila.insertCell(-1);
+        celda.textContent = this.adaptada ? "Sí" : "No";
+        celda = fila.insertCell(-1);
+        celda.textContent = this.calculaPrecio() + "€";
+        celda = fila.insertCell(-1);
+        celda.append(super.butacasToHTML());
+        celda = fila.insertCell(-1);
+        celda.textContent = this.butacas.length;
+        return fila;
     }
 }
 
@@ -133,16 +172,12 @@ class Butaca {
         this.coefPrecio = coefPrecio;
     }
     toString() {
-        let zona = this.zona[0].toUpperCase() + this.zona.substring(1);
-
-        return zona + " | " + "Fila: " + this.fila + " | Número: " + this.numero;
+        return toTitleCase(this.zona) + " | " + "Fila: " + this.fila + " | Número: " + this.numero;
     }
     idButaca() {
         return this.zona + "-" + this.fila + "-" + this.numero;
     }
 }
-
-
 
 class Compania {
     constructor(cif, nombre, director) {

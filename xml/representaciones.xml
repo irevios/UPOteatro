@@ -2,82 +2,82 @@
 <representaciones>
 	<representacion cod="R01" espectaculo="E001" adaptada="N">
 		<fecha>2020-03-02</fecha>
-		<precioBase>35</precioBase>
+		<precioBase>35.5</precioBase>
 	</representacion>
 	<representacion cod="R02" espectaculo="E001" adaptada="N">
 		<fecha>2020-03-03</fecha>
-		<precioBase>35</precioBase>
+		<precioBase>35.5</precioBase>
 	</representacion>
 	<representacion cod="R03" espectaculo="E001" adaptada="N">
 		<fecha>2020-03-04</fecha>
-		<precioBase>35</precioBase>
+		<precioBase>35.5</precioBase>
 	</representacion>
 	<representacion cod="R04" espectaculo="E001" adaptada="N">
 		<fecha>2020-03-05</fecha>
-		<precioBase>35</precioBase>
+		<precioBase>35.5</precioBase>
 	</representacion>
 	<representacion cod="R05" espectaculo="E001" adaptada="N">
 		<fecha>2020-03-06</fecha>
-		<precioBase>35</precioBase>
+		<precioBase>35.5</precioBase>
 	</representacion>
 	<representacion cod="R06" espectaculo="E001" adaptada="N">
 		<fecha>2020-03-07</fecha>
-		<precioBase>35</precioBase>
+		<precioBase>35.5</precioBase>
 	</representacion>
 	<representacion cod="R07" espectaculo="E001" adaptada="N">
 		<fecha>2020-03-08</fecha>
-		<precioBase>35</precioBase>
+		<precioBase>35.5</precioBase>
 	</representacion>
 	<representacion cod="R08" espectaculo="E002" adaptada="N">
 		<fecha>2020-08-29</fecha>
-		<precioBase>55</precioBase>
+		<precioBase>55.5</precioBase>
 	</representacion>
 	<representacion cod="R09" espectaculo="E002" adaptada="N">
 		<fecha>2020-08-30</fecha>
-		<precioBase>55</precioBase>
+		<precioBase>55.5</precioBase>
 	</representacion>
 	<representacion cod="R10" espectaculo="E003" adaptada="S">
 		<fecha>2020-04-12</fecha>
-		<precioBase>38</precioBase>
+		<precioBase>38.8</precioBase>
 	</representacion>
 	<representacion cod="R11" espectaculo="E003" adaptada="S">
 		<fecha>2020-04-13</fecha>
-		<precioBase>38</precioBase>
+		<precioBase>38.8</precioBase>
 	</representacion>y
 	<representacion cod="R12" espectaculo="E003" adaptada="S">
 		<fecha>2020-04-14</fecha>
-		<precioBase>38</precioBase>
+		<precioBase>38.8</precioBase>
 	</representacion>
 	<representacion cod="R13" espectaculo="E003" adaptada="S">
 		<fecha>2020-04-15</fecha>
-		<precioBase>38</precioBase>
+		<precioBase>38.8</precioBase>
 	</representacion>
 	<representacion cod="R14" espectaculo="E004" adaptada="N">
 		<fecha>2020-11-09</fecha>
-		<precioBase>45</precioBase>
+		<precioBase>45.5</precioBase>
 	</representacion>
 	<representacion cod="R15" espectaculo="E005" adaptada="S">
 		<fecha>2020-02-05</fecha>
-		<precioBase>20</precioBase>
+		<precioBase>20.6</precioBase>
 	</representacion>
 	<representacion cod="R16" espectaculo="E005" adaptada="S">
 		<fecha>2020-02-06</fecha>
-		<precioBase>20</precioBase>
+		<precioBase>20.6</precioBase>
 	</representacion>
 	<representacion cod="R17" espectaculo="E005" adaptada="S">
 		<fecha>2020-02-07</fecha>
-		<precioBase>20</precioBase>
+		<precioBase>20.6</precioBase>
 	</representacion>
 	<representacion cod="R18" espectaculo="E005" adaptada="S">
 		<fecha>2020-02-08</fecha>
-		<precioBase>20</precioBase>
+		<precioBase>20.6</precioBase>
 	</representacion>
 	<representacion cod="R19" espectaculo="E005" adaptada="S">
 		<fecha>2020-02-09</fecha>
-		<precioBase>20</precioBase>
+		<precioBase>20.6</precioBase>
 	</representacion>
 	<representacion cod="R20" espectaculo="E005" adaptada="S">
 		<fecha>2020-02-10</fecha>
-		<precioBase>20</precioBase>
+		<precioBase>20.6</precioBase>
 	</representacion>
 </representaciones>

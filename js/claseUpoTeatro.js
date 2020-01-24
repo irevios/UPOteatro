@@ -63,17 +63,24 @@ class UpoTeatro {
         return this.obras.filter(obra => obra.codigo == codigo)[0];
     }
     listadoEntradas() {
-        // let tabla = creaTabla(["Espectaculo","Productor","Categoría","Gastos", "Obra", "Compañía"]);
-        // this.espectaculos.forEach( espectaculo => {
-        //     tabla.querySelector("table").tBodies[0].append(espectaculo.toHTMLrow());
-        // });
-        // return tabla;
+        let tabla = creaTabla(["Representación", "Adaptada", "Precio", "Butacas", "Tipo de entrada / Nº Personas"]);
+        this.teatros.forEach(teatro => {
+            teatro.representaciones.forEach(representacion => {
+                representacion.entradas.forEach(entrada => {
+                    let linea = entrada.toHTMLrow();
+                    let celdaRepresentacion = linea.insertCell(0);
+                    celdaRepresentacion.textContent = representacion.toString();
+                    tabla.querySelector("table").tBodies[0].append(linea);
+                });
+            });
+        });
+        return tabla;
     }
     listadoRepresentaciones() {
         let tabla = creaTabla(["Teatro", "Fecha", "Adaptada", "Precio Base", "Espectáculo"]);
         this.teatros.forEach(teatro => {
-            teatro.representaciones.forEach(representaciones => {
-                let linea = representaciones.toHTMLrow();
+            teatro.representaciones.forEach(representacion => {
+                let linea = representacion.toHTMLrow();
                 let celdaTeatro = linea.insertCell(0);
                 celdaTeatro.textContent = teatro.nombre;
                 tabla.querySelector("table").tBodies[0].append(linea);

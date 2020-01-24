@@ -38,15 +38,15 @@ function muestraEnPantalla(elem) {
     if (elementoExiste("#formularios > form")) {
         document.querySelector("#formularios > form").remove();
     }
-    if (elementoExiste("#formularios > table")) {
-        document.querySelector("#formularios > table").remove();
+    if (elementoExiste("#formularios > .table-responsive")) {
+        document.querySelector("#formularios > .table-responsive").remove();
     }
     document.querySelector("body").classList.remove("grande");
 
     if (elem.includes("formulario")) { // Si se pide un formulario, busca en el archivo formularios y lo añade a la web
         leeArchivoXMLHTML("./html/formularios.html", (formulario) => agregaForm(elem, formulario));
     } else {
-        document.querySelector("#formularios").append( agregaTabla(elem));
+        document.querySelector("#formularios").append(agregaTabla(elem));
     }
 }
 
@@ -61,7 +61,7 @@ function agregaForm(elem, form) {
             rellenaFormRepresentacion();
             break;
         case "formularioEspectaculo":
-        	rellenaFormEspectaculo();
+            rellenaFormEspectaculo();
     }
 }
 
@@ -140,7 +140,7 @@ function cambiaPrecioEntrada() {
 /// Rellena todos los campos de la base de datos en el formulario de representación
 function rellenaFormRepresentacion() {
     // select teatros
-     upoTeatro.teatros.forEach(teatro => {
+    upoTeatro.teatros.forEach(teatro => {
         let opcion = document.createElement("option");
         opcion.value = teatro.codigo;
         opcion.textContent = teatro.nombre;
@@ -173,10 +173,11 @@ function rellenaFormEspectaculo() {
         document.querySelector("#obraSeleccionada").append(opcion);
     });
 }
-function agregaTabla(elem){
-   switch (elem) {
+
+function agregaTabla(elem) {
+    switch (elem) {
         case "listaEntrada":
-           return upoTeatro.listadoEntradas();
+            return upoTeatro.listadoEntradas();
         case "listaRepresentacion":
             return upoTeatro.listadoRepresentaciones();
         case "listaEspectaculo":

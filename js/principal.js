@@ -110,7 +110,7 @@ function cargaInicialEntradas(xml) {
             let fila = entrada.querySelector("butaca").getAttribute("fila");
             let num = entrada.querySelector("butaca").getAttribute("num");
             butaca = [teatro.buscaButaca(zona, fila, num)];
-            nuevaEntrada = new EntradaIndividual(adaptada, butaca, representacion, zona);
+            nuevaEntrada = new EntradaIndividual(adaptada, butaca, representacion.precioBase, zona);
         } else {
             butaca = [];
             let butacas = entrada.querySelectorAll("butaca");
@@ -119,7 +119,8 @@ function cargaInicialEntradas(xml) {
                 let num = cadaButaca.getAttribute("num");
                 butaca.push(teatro.buscaButaca("platea", fila, num));
             });
-            nuevaEntrada = new EntradaGrupal(adaptada, butaca, representacion, entrada.getAttribute("numPersonas"));
+            let numPersonas = entrada.getAttribute("numPersonas");
+            nuevaEntrada = new EntradaGrupal(adaptada, butaca, representacion.precioBase, numPersonas);
         }
         representacion.compraEntrada(nuevaEntrada);
     });
