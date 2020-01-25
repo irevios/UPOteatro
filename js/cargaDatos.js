@@ -1,5 +1,5 @@
 // En este documento se define las funciones que cargan los datos del XML a la clase upoTeatro
-var upoTeatro = new UpoTeatro();
+
 
 function cargaInicialDatos() {
     leeArchivoXMLHTML("./xml/allDatos.xml", cargaDatos);
@@ -7,7 +7,7 @@ function cargaInicialDatos() {
 
 function cargaDatos(xml){
 	cargaInicialObras(xml.querySelectorAll("obra"));
-	cargaInicialCompanias(xml.querySelectorAll("compañia"));
+	cargaInicialCompanias(xml.querySelectorAll("compania"));
 	cargaInicialEspectaculos(xml.querySelectorAll("espectaculo"));
 	cargaInicialRepresentaciones(xml.querySelectorAll("datos> representaciones > representacion"));
 	cargaInicialTeatros(xml.querySelectorAll("teatro"));
@@ -20,7 +20,6 @@ function cargaInicialObras(obras) {
         let cod = obra.getAttribute("cod");
         let nombre = obra.querySelector("nombre").textContent;
         let autor = obra.querySelector("autor").textContent;
-
         let nuevaObra = new Obra(cod, nombre, autor);
         upoTeatro.agregaObra(nuevaObra);
     });

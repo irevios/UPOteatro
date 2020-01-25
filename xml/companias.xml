@@ -1,23 +1,23 @@
 <!-- Base de datos de ejemplo de compañías -->
-<compañias>
-	<compañia cif="B32212532">
+<companias>
+	<compania cif="B32212532">
 		<nombre>Producciones Altozano</nombre>
 		<director>Aitor Pino Mate</director>
-	</compañia>
-	<compañia cif="S23875537">
+	</compania>
+	<compania cif="S23875537">
 		<nombre>Pelca</nombre>
-		<director>Francisco Ballesta Fariñas</director>
-	</compañia>
-	<compañia cif="K64801160">
+		<director>Francisco Ballesta Farinas</director>
+	</compania>
+	<compania cif="K64801160">
 		<nombre>Sepaner</nombre>
 		<director>carla Pacheco Escalante</director>
-	</compañia>
-	<compañia cif="G44106268">
+	</compania>
+	<compania cif="G44106268">
 		<nombre>Entre Nubes</nombre>
 		<director>Roberto Tamarit Rocamora</director>
-	</compañia>
-	<compañia cif="P61657821">
+	</compania>
+	<compania cif="P61657821">
 		<nombre>Zamora Y Maqueda</nombre>
 		<director>Maria Rosa Serra Aguiar</director>
-	</compañia>
-</compañias>
+	</compania>
+</companias>
