@@ -19,8 +19,6 @@
 
 */
 
-document.addEventListener("load", cargarEventos());
-
 function cargarEventos() {
     document.querySelector("#navComprarEntrada").addEventListener("click", () => muestraEnPantalla("formularioEntrada"));
     document.querySelector("#navListaRepresentaciones").addEventListener("click", () => muestraEnPantalla("listaRepresentacion"));
@@ -198,9 +196,21 @@ function agregaBotones(tabla) {
         let filas = tabla.querySelector("table").tBodies[0].rows
         for (let i = 0; i < filas.length; i++) {
             celda = filas[i].insertCell(-1);
-            celda.textContent = "Boton Editar";
+            let boton = document.createElement("button");
+            boton.type = "button";
+            boton.classList = "btn";
+            let icono = document.createElement("i");
+            icono.classList = "fa fa-pencil";
+            boton.append(icono);
+            celda.append(boton);
             celda = filas[i].insertCell(-1);
-            celda.textContent = "Boton Borrar";
+            boton = document.createElement("button");
+            boton.type = "button";
+            boton.classList = "btn";
+            icono = document.createElement("i");
+            icono.classList = "fa fa-times";
+            boton.append(icono);
+            celda.append(boton);
         };
     }
     return tabla;

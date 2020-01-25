@@ -158,7 +158,7 @@ class EntradaGrupal extends Entrada {
         celda = fila.insertCell(-1);
         celda.append(super.butacasToHTML());
         celda = fila.insertCell(-1);
-        celda.textContent = this.butacas.length;
+        celda.textContent = this.butacas.length + " personas";
         return fila;
     }
 }

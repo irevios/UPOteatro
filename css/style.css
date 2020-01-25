@@ -125,3 +125,14 @@ i.fa {
 input {
     -webkit-appearance: push-button !important;
 }
+
+.fa-times, .fa-pencil {
+    font-size: 1.5em;
+    padding: 0 !important;
+}
+.fa-times{
+    color:#dd2030;
+}
+.fa-pencil {
+    color:#208749;
+}
