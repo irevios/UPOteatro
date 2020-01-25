@@ -1,18 +1,22 @@
 // En este documento se define las funciones que cargan los datos del XML a la clase upoTeatro
-document.addEventListener("load", cargaInicialDatos());
+var upoTeatro = new UpoTeatro();
 
 function cargaInicialDatos() {
-    leeArchivoXMLHTML("./xml/obras.xml", cargaInicialObras);
-    leeArchivoXMLHTML("./xml/compañias.xml", cargaInicialCompanias);
-    leeArchivoXMLHTML("./xml/espectaculos.xml", cargaInicialEspectaculos);
-    leeArchivoXMLHTML("./xml/representaciones.xml", cargaInicialRepresentaciones);
-    leeArchivoXMLHTML("./xml/teatros.xml", cargaInicialTeatros);
-    leeArchivoXMLHTML("./xml/butacas.xml", cargaInicialButacas);
-    leeArchivoXMLHTML("./xml/entradas.xml", cargaInicialEntradas);
+    leeArchivoXMLHTML("./xml/allDatos.xml", cargaDatos);
 }
 
-function cargaInicialObras(xml) {
-    xml.querySelectorAll("obra").forEach(obra => {
+function cargaDatos(xml){
+	cargaInicialObras(xml.querySelectorAll("obra"));
+	cargaInicialCompanias(xml.querySelectorAll("compañia"));
+	cargaInicialEspectaculos(xml.querySelectorAll("espectaculo"));
+	cargaInicialRepresentaciones(xml.querySelectorAll("datos> representaciones > representacion"));
+	cargaInicialTeatros(xml.querySelectorAll("teatro"));
+	cargaInicialButacas(xml.querySelectorAll("butacas"));
+	cargaInicialEntradas(xml.querySelectorAll("entrada"));
+}
+
+function cargaInicialObras(obras) {
+   obras.forEach(obra => {
         let cod = obra.getAttribute("cod");
         let nombre = obra.querySelector("nombre").textContent;
         let autor = obra.querySelector("autor").textContent;
@@ -22,8 +26,8 @@ function cargaInicialObras(xml) {
     });
 }
 
-function cargaInicialCompanias(xml) {
-    xml.querySelectorAll("compañia").forEach(compania => {
+function cargaInicialCompanias(companias) {
+   companias.forEach(compania => {
         let cif = compania.getAttribute("cif");
         let nombre = compania.querySelector("nombre").textContent;
         let director = compania.querySelector("director").textContent;
@@ -33,8 +37,8 @@ function cargaInicialCompanias(xml) {
     });
 }
 
-function cargaInicialEspectaculos(xml) {
-    xml.querySelectorAll("espectaculo").forEach(espectaculo => {
+function cargaInicialEspectaculos(espectaculos) {
+   espectaculos.forEach(espectaculo => {
         let codigo = espectaculo.getAttribute("cod");
         let nombre = espectaculo.querySelector("nombre").textContent;
         let productor = espectaculo.querySelector("productor").textContent;
@@ -49,8 +53,8 @@ function cargaInicialEspectaculos(xml) {
 }
 
 
-function cargaInicialRepresentaciones(xml) {
-    xml.querySelectorAll("representacion").forEach(representacion => {
+function cargaInicialRepresentaciones(representaciones) {
+   representaciones.forEach(representacion => {
         let codigo = representacion.getAttribute("cod");
         let fecha = new Date(representacion.querySelector("fecha").textContent);
         let adaptada = representacion.getAttribute("adaptada") == "N" ? false : true;
@@ -62,8 +66,8 @@ function cargaInicialRepresentaciones(xml) {
     });
 }
 
-function cargaInicialTeatros(xml) {
-    xml.querySelectorAll("teatro").forEach(teatro => {
+function cargaInicialTeatros(teatros) {
+   teatros.forEach(teatro => {
         let codigo = teatro.getAttribute("cod");
         let nombre = teatro.querySelector("nombre").textContent;
         let direccion = teatro.querySelector("direccion").textContent;
@@ -77,10 +81,10 @@ function cargaInicialTeatros(xml) {
     });
 }
 
-function cargaInicialButacas(xml) {
-    xml.querySelectorAll("butacas").forEach(butacas => {
-        let teatro = upoTeatro.buscaTeatro(butacas.getAttribute("teatro"));
-        butacas.querySelectorAll("zona").forEach(zona => {
+function cargaInicialButacas(butacas) {
+   butacas.forEach(butaca => {
+        let teatro = upoTeatro.buscaTeatro(butaca.getAttribute("teatro"));
+        butaca.querySelectorAll("zona").forEach(zona => {
             let nombreZona = zona.getAttribute("nomZona");
             let coefPrecio = zona.getAttribute("coefPrecio");
             zona.querySelectorAll("fila").forEach(fila => {
@@ -96,7 +100,7 @@ function cargaInicialButacas(xml) {
 }
 
 function cargaInicialEntradas(xml) {
-    xml.querySelectorAll("entrada").forEach(entrada => {
+   xml.forEach(entrada => {
         let representacion = upoTeatro.buscaRepresentacion(entrada.querySelector("representacion").textContent);
         let teatro = upoTeatro.buscaTeatroPorRepresentacion(entrada.querySelector("representacion").textContent);
         let adaptada = entrada.querySelector("adaptada").textContent == "N" ? false : true;

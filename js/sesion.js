@@ -2,10 +2,12 @@
 "use strict";
 
 // En la carga de la página
-document.addEventListener("ready",compruebaSesion());
 function compruebaSesion(){
 	if(esAdmin()){
 		leeArchivoXMLHTML("./html/navAdmin.html",agregaNav);
+	}
+	else{
+		cargaEventos();
 	}
 }
 function esAdmin(){

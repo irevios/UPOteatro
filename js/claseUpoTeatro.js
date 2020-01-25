@@ -42,11 +42,12 @@ class UpoTeatro {
         return this.teatros.filter(teatro => teatro.codigo == codigo)[0];
     }
     buscaTeatroPorRepresentacion(codigo) {
-        let teatroConRepresentacion;
+        let teatroConRepresentacion = null;
         this.teatros.forEach(teatro => {
-            if (teatro.representaciones.filter(representacion => representacion.codigo == codigo).length > 0) {
+            if (teatro.representaciones.filter(representacion => representacion.codigo == codigo).length != 0) {
                 teatroConRepresentacion = teatro;
             }
+
         });
         return teatroConRepresentacion;
     }
