@@ -20,12 +20,26 @@ class UpoTeatro {
             return true;
         } else { return false; }
     }
-    eliminaRepresentacion(codigo) {
-
+    borrarRepresentacion(codigo) {
+        if (this.buscaRepresentacion(codigo) != undefined) {
+            this.representaciones = this.representaciones.filter(representacion => representacion.codigo != codigo);
+            this.teatros.forEach(teatro=>{
+                if(teatro.buscaRepresentacion(codigo)!=undefined){
+                    teatro.representaciones = teatro.representaciones.filter(representacion=>representacion.codigo !=codigo);  
+                }
+            });
+            return true;
+        } else { return false; }
     }
     agregaEspectaculo(espectaculo) {
         if (this.espectaculos.filter(espectaculoNuevo => espectaculoNuevo.codigo == espectaculo.codigo).length == 0) {
             this.espectaculos.push(espectaculo);
+            return true;
+        } else { return false; }
+    }
+    borrarEspectaculo(codigo){
+        if (this.buscaEspectaculo(codigo) != undefined) {
+            this.espectaculos = this.espectaculos.filter(espectaculo => espectaculo.codigo != codigo);
             return true;
         } else { return false; }
     }

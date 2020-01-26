@@ -24,15 +24,15 @@ function editaElimina(e) {
         switch (e.currentTarget.querySelector("div").id) {
             case "listadoEntradas":
                 upoTeatro.buscaRepresentacionPorEntrada(e.target.dataset.id).borrarEntrada(e.target.dataset.id);
-                e.target.parentElement.parentElement.remove();
                 break;
             case "listadoRepresentaciones":
-                //borrarRepresentaciones(e.target.dataset.id);
+                upoTeatro.borrarRepresentacion(e.target.dataset.id);
                 break;
             case "listadoEspectaculos":
-                //borrarEspectaculos(e.target.dataset.id);
+                upoTeatro.borrarEspectaculo(e.target.dataset.id);
                 break;
         }
+        e.target.parentElement.parentElement.remove();
     } else if (e.target.tagName == "BUTTON" && e.target.dataset.tipo == "editar") {
         console.log("pulsas editar");
     }

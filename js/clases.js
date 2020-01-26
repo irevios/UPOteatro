@@ -21,6 +21,9 @@ class Teatro {
     buscaButaca(zona, fila, num) {
         return this.butacas.filter(butaca => butaca.numero == num && butaca.fila == fila && butaca.zona == zona)[0];
     }
+    buscaRepresentacion(codigo) {
+        return this.representaciones.filter(representacion => representacion.codigo == codigo)[0];
+    }
     calculaAforo() {
         this.aforo = this.butacas.length;
     }
@@ -61,6 +64,7 @@ class Representacion {
     borrarEntrada(codigo) {
         if (this.buscaEntrada(codigo) != undefined) {
             this.entradas = this.entradas.filter(entrada => entrada.codigo != codigo);
+            return true;
         } else { return false; }
     }
     toHTMLrow() {
