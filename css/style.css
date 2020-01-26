@@ -126,13 +126,21 @@ input {
     -webkit-appearance: push-button !important;
 }
 
-.fa-times, .fa-pencil {
+.fa-times,
+.fa-pencil {
     font-size: 1.5em;
     padding: 0 !important;
+    pointer-events: none;
 }
-.fa-times{
-    color:#dd2030;
+
+.fa-times {
+    color: #dd2030;
 }
+
 .fa-pencil {
-    color:#208749;
+    color: #208749;
+}
+
+li>a {
+    cursor: pointer;
 }

@@ -20,6 +20,9 @@ class UpoTeatro {
             return true;
         } else { return false; }
     }
+    eliminaRepresentacion(codigo) {
+
+    }
     agregaEspectaculo(espectaculo) {
         if (this.espectaculos.filter(espectaculoNuevo => espectaculoNuevo.codigo == espectaculo.codigo).length == 0) {
             this.espectaculos.push(espectaculo);
@@ -51,6 +54,15 @@ class UpoTeatro {
         });
         return teatroConRepresentacion;
     }
+    buscaRepresentacionPorEntrada(codigo){
+        let representacionConEntrada = null;
+        this.representaciones.forEach(representacion=>{
+            if(representacion.entradas.filter(entrada=> entrada.codigo == codigo).length!=0){
+                representacionConEntrada = representacion;
+            }
+         });
+        return representacionConEntrada;
+    }
     buscaRepresentacion(codigo) {
         return this.representaciones.filter(representacion => representacion.codigo == codigo)[0];
     }
@@ -64,7 +76,7 @@ class UpoTeatro {
         return this.obras.filter(obra => obra.codigo == codigo)[0];
     }
     listadoEntradas() {
-        let tabla = creaTabla(["Representación", "Adaptada", "Precio", "Butacas", "Tipo de entrada / Nº Personas"]);
+        let tabla = creaTabla(["Representación", "Adaptada", "Precio", "Butacas", "Tipo de entrada / Nº Personas", "Editar", "Borrar"],"listadoEntradas");
         this.teatros.forEach(teatro => {
             teatro.representaciones.forEach(representacion => {
                 representacion.entradas.forEach(entrada => {
@@ -78,7 +90,7 @@ class UpoTeatro {
         return tabla;
     }
     listadoRepresentaciones() {
-        let tabla = creaTabla(["Teatro", "Fecha", "Adaptada", "Precio Base", "Espectáculo"]);
+        let tabla = creaTabla(["Teatro", "Fecha", "Adaptada", "Precio Base", "Espectáculo", "Editar", "Borrar"],"listadoRepresentaciones");
         this.teatros.forEach(teatro => {
             teatro.representaciones.forEach(representacion => {
                 let linea = representacion.toHTMLrow();
@@ -90,7 +102,7 @@ class UpoTeatro {
         return tabla;
     }
     listadoEspectaculos() {
-        let tabla = creaTabla(["Espectaculo", "Productor", "Categoría", "Gastos", "Obra", "Compañía"]);
+        let tabla = creaTabla(["Espectaculo", "Productor", "Categoría", "Gastos", "Obra", "Compañía", "Editar", "Borrar"],"listadoEspectaculos");
         this.espectaculos.forEach(espectaculo => {
             tabla.querySelector("table").tBodies[0].append(espectaculo.toHTMLrow());
         });

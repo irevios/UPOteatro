@@ -123,7 +123,7 @@
 		<representacion adaptada="S" cod="R11" espectaculo="E003">
 			<fecha>2020-04-13</fecha>
 			<precioBase>38.8</precioBase>
-		</representacion>	
+		</representacion>
 		<representacion adaptada="S" cod="R12" espectaculo="E003">
 			<fecha>2020-04-14</fecha>
 			<precioBase>38.8</precioBase>
@@ -401,19 +401,19 @@
 	</listaButacas>
 	<!-- Base de datos de ejemplo de entradas -->
 	<entradas>
-		<entrada tipo="individual">
+		<entrada cod="EN001" tipo="individual">
 			<representacion>R04</representacion>
 			<butaca fila="1" num="5"/>
 			<adaptada>N</adaptada>
 			<tipo>palco</tipo>
 		</entrada>
-		<entrada tipo="individual">
+		<entrada cod="EN002" tipo="individual">
 			<representacion>R04</representacion>
 			<butaca fila="2" num="2"/>
 			<adaptada>N</adaptada>
 			<tipo>anfiteatro</tipo>
 		</entrada>
-		<entrada numPersonas="5" tipo="grupal">
+		<entrada cod="EN003" numPersonas="5" tipo="grupal">
 			<representacion>R16</representacion>
 			<adaptada>N</adaptada>
 			<butacas>
@@ -424,7 +424,7 @@
 				<butaca fila="1" num="5"/>
 			</butacas>
 		</entrada>
-		<entrada numPersonas="7" tipo="grupal">
+		<entrada cod="EN004" numPersonas="7" tipo="grupal">
 			<representacion>R19</representacion>
 			<adaptada>N</adaptada>
 			<butacas>
@@ -437,7 +437,7 @@
 				<butaca fila="2" num="4"/>
 			</butacas>
 		</entrada>
-		<entrada tipo="individual">
+		<entrada cod="EN005" tipo="individual">
 			<representacion>R15</representacion>
 			<butaca fila="1" num="3"/>
 			<adaptada>S</adaptada>

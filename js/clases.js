@@ -36,7 +36,8 @@ class Representacion {
         this.entradas = [];
     }
     compraEntrada(entrada) {
-        if (this.entradas.filter(entradaNuevo => entradaNuevo.butaca == entrada.butaca && entradaNuevo.representacion == entrada.representacion).length == 0) {
+        if (this.entradas.filter(entradaNuevo => entradaNuevo.butaca == entrada.butaca && this == 
+            entrada.representacion).length == 0) {
             this.entradas.push(entrada);
             return true;
         } else { return false; }
@@ -54,6 +55,14 @@ class Representacion {
         });
         return ocupada;
     }
+    buscaEntrada(codigo) {
+        return this.entradas.filter(entrada => entrada.codigo == codigo)[0];
+    }
+    borrarEntrada(codigo) {
+        if (this.buscaEntrada(codigo) != undefined) {
+            this.entradas = this.entradas.filter(entrada => entrada.codigo != codigo);
+        } else { return false; }
+    }
     toHTMLrow() {
         let fila = document.createElement("tr");
         let celda = fila.insertCell(-1);
@@ -64,6 +73,10 @@ class Representacion {
         celda.textContent = this.precioBase;
         celda = fila.insertCell(-1);
         celda.textContent = this.espectaculo.nombre;
+        if (esAdmin()) {
+            agregaBoton("editar", fila, this.codigo);
+            agregaBoton("borrar", fila, this.codigo);
+        }
         return fila;
     }
     toString() {
@@ -95,12 +108,17 @@ class Espectaculo {
         celda.textContent = this.obra.nombre;
         celda = fila.insertCell(-1);
         celda.textContent = this.compania.nombre;
+        if (esAdmin()) {
+            agregaBoton("editar", fila, this.codigo);
+            agregaBoton("borrar", fila, this.codigo);
+        }
         return fila;
     }
 }
 
 class Entrada {
-    constructor(adaptada, butacas, precioBase) {
+    constructor(codigo, adaptada, butacas, precioBase) {
+        this.codigo = codigo;
         this.adaptada = adaptada;
         this.precioBase = precioBase;
         this.precio = 0;
@@ -118,8 +136,8 @@ class Entrada {
 }
 
 class EntradaIndividual extends Entrada {
-    constructor(adaptada, butacas, precioBase, tipo) {
-        super(adaptada, butacas, precioBase);
+    constructor(codigo, adaptada, butacas, precioBase, tipo) {
+        super(codigo, adaptada, butacas, precioBase);
         this.tipo = tipo;
     }
     calculaPrecio() {
@@ -136,13 +154,17 @@ class EntradaIndividual extends Entrada {
         celda.append(super.butacasToHTML());
         celda = fila.insertCell(-1);
         celda.textContent = toTitleCase(this.tipo);
+        if (esAdmin()) {
+            agregaBoton("editar", fila, this.codigo);
+            agregaBoton("borrar", fila, this.codigo);
+        }
         return fila;
     }
 }
 
 class EntradaGrupal extends Entrada {
-    constructor(adaptada, butacas, precioBase, numPersonas) {
-        super(adaptada, butacas, precioBase);
+    constructor(codigo, adaptada, butacas, precioBase, numPersonas) {
+        super(codigo, adaptada, butacas, precioBase);
         this.numPersonas = numPersonas;
     }
     calculaPrecio() {
@@ -159,6 +181,10 @@ class EntradaGrupal extends Entrada {
         celda.append(super.butacasToHTML());
         celda = fila.insertCell(-1);
         celda.textContent = this.butacas.length + " personas";
+        if (esAdmin()) {
+            agregaBoton("editar", fila, this.codigo);
+            agregaBoton("borrar", fila, this.codigo);
+        }
         return fila;
     }
 }

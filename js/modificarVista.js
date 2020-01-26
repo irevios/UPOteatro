@@ -19,6 +19,8 @@
 
 */
 
+
+// Eventos del menú
 function cargarEventos() {
     document.querySelector("#navComprarEntrada").addEventListener("click", () => muestraEnPantalla("formularioEntrada"));
     document.querySelector("#navListaRepresentaciones").addEventListener("click", () => muestraEnPantalla("listaRepresentacion"));
@@ -44,10 +46,14 @@ function muestraEnPantalla(elem) {
     if (elem.includes("formulario")) { // Si se pide un formulario, busca en el archivo formularios y lo añade a la web
         leeArchivoXMLHTML("./html/formularios.html", (formulario) => agregaForm(elem, formulario));
     } else {
-        let tabla = agregaBotones(agregaTabla(elem));
+        let tabla = agregaTabla(elem);
 
         document.querySelector("#formularios").append(tabla);
     }
+    if (getComputedStyle(document.querySelector(".navbar-toggler")).display != "none") {
+        document.querySelector(".navbar-toggler").click();
+    }
+
 }
 
 // Añade un formulario a la vista
@@ -183,35 +189,4 @@ function agregaTabla(elem) {
         case "listaEspectaculo":
             return upoTeatro.listadoEspectaculos();
     }
-}
-
-function agregaBotones(tabla) {
-    if (esAdmin()) {
-        let celda = document.createElement("th");
-        celda.textContent = "Editar";
-        tabla.querySelector("table").tHead.rows[0].append(celda);
-        celda = document.createElement("th");
-        celda.textContent = "Borrar";
-        tabla.querySelector("table").tHead.rows[0].append(celda);
-        let filas = tabla.querySelector("table").tBodies[0].rows
-        for (let i = 0; i < filas.length; i++) {
-            celda = filas[i].insertCell(-1);
-            let boton = document.createElement("button");
-            boton.type = "button";
-            boton.classList = "btn";
-            let icono = document.createElement("i");
-            icono.classList = "fa fa-pencil";
-            boton.append(icono);
-            celda.append(boton);
-            celda = filas[i].insertCell(-1);
-            boton = document.createElement("button");
-            boton.type = "button";
-            boton.classList = "btn";
-            icono = document.createElement("i");
-            icono.classList = "fa fa-times";
-            boton.append(icono);
-            celda.append(boton);
-        };
-    }
-    return tabla;
 }

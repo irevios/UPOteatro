@@ -7,7 +7,7 @@ function compruebaSesion(){
 		leeArchivoXMLHTML("./html/navAdmin.html",agregaNav);
 	}
 	else{
-		cargaEventos();
+		cargarEventos();
 	}
 }
 function esAdmin(){

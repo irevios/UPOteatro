@@ -102,6 +102,7 @@ function cargaInicialEntradas(xml) {
    xml.forEach(entrada => {
         let representacion = upoTeatro.buscaRepresentacion(entrada.querySelector("representacion").textContent);
         let teatro = upoTeatro.buscaTeatroPorRepresentacion(entrada.querySelector("representacion").textContent);
+        let codigo = entrada.getAttribute("cod");
         let adaptada = entrada.querySelector("adaptada").textContent == "N" ? false : true;
         let butaca;
         let nuevaEntrada;
@@ -110,7 +111,7 @@ function cargaInicialEntradas(xml) {
             let fila = entrada.querySelector("butaca").getAttribute("fila");
             let num = entrada.querySelector("butaca").getAttribute("num");
             butaca = [teatro.buscaButaca(zona, fila, num)];
-            nuevaEntrada = new EntradaIndividual(adaptada, butaca, representacion.precioBase, zona);
+            nuevaEntrada = new EntradaIndividual(codigo,adaptada, butaca, representacion.precioBase, zona);
         } else {
             butaca = [];
             let butacas = entrada.querySelectorAll("butaca");
@@ -120,7 +121,7 @@ function cargaInicialEntradas(xml) {
                 butaca.push(teatro.buscaButaca("platea", fila, num));
             });
             let numPersonas = entrada.getAttribute("numPersonas");
-            nuevaEntrada = new EntradaGrupal(adaptada, butaca, representacion.precioBase, numPersonas);
+            nuevaEntrada = new EntradaGrupal(codigo,adaptada, butaca, representacion.precioBase, numPersonas);
         }
         representacion.compraEntrada(nuevaEntrada);
     });

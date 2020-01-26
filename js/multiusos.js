@@ -59,9 +59,10 @@ function elementoExiste(elemento) {
 }
 
 // Crea una tabla con los headers dados como parametros
-function creaTabla(headers) {
+function creaTabla(headers,id) {
     let div = document.createElement("div");
     div.classList.add("table-responsive");
+    div.id=id;
     let tabla = document.createElement("table");
     tabla.classList.add("table");
     tabla.classList.add("table-striped");
@@ -95,4 +96,22 @@ function toTitleCase(palabra) {
         convertido += p[0].toUpperCase() + p.substring(1).toLowerCase() + " ";
     });
     return convertido.substring(0, convertido.length - 1);
+}
+
+// Añade un botón borrar o editar
+function agregaBoton(tipo, fila, codigo) {
+    celda = fila.insertCell(-1);
+    let boton = document.createElement("button");
+    boton.type = "button";
+    boton.dataset.id = codigo;
+    boton.dataset.tipo = tipo;
+    boton.classList = "btn";
+    let icono = document.createElement("i");
+    if (tipo == "borrar") {
+        icono.classList = "fa fa-times";
+    } else {
+        icono.classList = "fa fa-pencil";
+    }
+    boton.append(icono);
+    celda.append(boton);
 }
