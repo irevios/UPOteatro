@@ -121,13 +121,27 @@ function validar(apartado){  // Llamo validar con el apartado que quiero validar
     document.querySelector(apartado).classList.remove("was-validated"); // Limpia de errores antes que se ejecute
     let error = false; 
     let elemento;
+    
     // Valida si los datos no están vacíos y son correctos
     for(let i=0; i < document.querySelector(apartado).getElementsByTagName('input').length;i++){
         elemento = document.querySelector(apartado).getElementsByTagName('input')[i];
+
         if(elemento.value == "" || document.querySelector(apartado).querySelectorAll(":invalid").length!=0){ // Cuando algo es invalido y sale el .invalid-feedback ese input tiene :invalid
             error = true;
             document.querySelector(apartado).classList.add("was-validated"); // agrego was-validated para que el usuario vea los errores
         }
+        else if (apartado=="#formularioRepresentacion")
+        {
+            let fechaInicio = document.querySelector("#formularioRepresentacion").fechaInicioRepresentacion;
+            let fechaFin = document.querySelector("#formularioRepresentacion").fechaFinalRepresentacion;
+            if(elemento == fechaInicio)
+                if(fechaInicio.value > fechaFin.value)
+                    {
+                        error = true;
+                        document.querySelector(apartado).classList.add("was-validated"); 
+                    }
+        }
+
     }
     if(error){
         console.log("ops un error en el formulario :O"); // Aqui si hay error no añado nada a la base de datos, puedo mostrar un mensaje o simplemente dejarlo para que el usuario intente de nuevo
