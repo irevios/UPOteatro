@@ -167,7 +167,7 @@ function rellenaFormRepresentacion() {
 
     document.querySelector("#formularioRepresentacion button[name='submit']").addEventListener("click", () => validar("#formularioRepresentacion"), false);
 
-
+    document.querySelector("#formularioRepresentacion #fechaInicioRepresentacion").addEventListener("change", ()=>compruebaFinFecha(document.querySelector("#formularioRepresentacion #fechaInicioRepresentacion"),document.querySelector("#formularioRepresentacion #fechaFinalRepresentacion")));
 
     // select teatros
     upoTeatro.teatros.forEach(teatro => {
@@ -213,7 +213,7 @@ function agregaTabla(elem, filtros) {
     switch (elem) {
         case "listaEntrada":
             cambiaCabecera("Entradas", "Lista de entradas compradas");
-            document.querySelector("#formularios").append(filtros.querySelector("#filtrosEntrada"));
+            
             tabla = upoTeatro.listadoEntradas();
             break;
         case "listaRepresentacion":
@@ -228,4 +228,11 @@ function agregaTabla(elem, filtros) {
             break;
     }
     document.querySelector("#formularios").append(tabla);
+}
+
+function agregaFiltros(filtros,id){
+    document.querySelector("#formularios").append(filtros.querySelector(id));
+    if(id!="filtrosEspectaculo"){
+
+    }
 }
