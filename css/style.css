@@ -115,7 +115,7 @@ body.grande .row.justify-content-center {
 }
 
 option:disabled {
-    color: #52556a;
+    background-color: lightgrey;
 }
 
 i.fa {
