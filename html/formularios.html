@@ -132,13 +132,15 @@
     <div class="form-group row">
         <label for="nombreEspectaculo" class="col-4 col-form-label">Nombre</label>
         <div class="col-8">
-            <input id="nombreEspectaculo" name="nombreEspectaculo" type="text" class="form-control">
+            <input id="nombreEspectaculo" name="nombreEspectaculo" type="text" class="form-control" pattern="^[a-zA-Z][a-zA-Z0-9-_\. ]{1,100}$" required="required">
+            <div class="invalid-feedback">Debe introducir un nombre válido.</div>
         </div>
     </div>
     <div class="form-group row">
         <label for="nombreProductorEspectaculo" class="col-4 col-form-label">Productor</label>
         <div class="col-8">
-            <input id="nombreProductorEspectaculo" name="nombreProductorEspectaculo" type="text" class="form-control">
+            <input id="nombreProductorEspectaculo" name="nombreProductorEspectaculo" type="text" class="form-control" pattern="^[a-zA-Z][a-zA-Z0-9-_\. ]{1,100}$" required="required">
+            <div class="invalid-feedback">Debe introducir un productor válido.</div>
         </div>
     </div>
     <div class="form-group row">
@@ -161,12 +163,13 @@
         <label for="gastosEspectaculo" class="col-4 col-form-label">Gastos</label>
         <div class="col-8">
             <div class="input-group">
-                <input id="gastosEspectaculo" name="gastosEspectaculo" type="number" step="any" class="form-control">
+                <input id="gastosEspectaculo" name="gastosEspectaculo" type="number" step="any" class="form-control" min="0" max="300000" required="required">
                 <div class="input-group-append">
                     <div class="input-group-text">
                         <i class="fa fa-euro"></i>
                     </div>
                 </div>
+                <div class="invalid-feedback">Debe introducir un numero entre 0 y 300000</div>
             </div>
         </div>
     </div>

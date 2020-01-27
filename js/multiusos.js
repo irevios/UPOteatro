@@ -117,68 +117,23 @@ function agregaBoton(tipo, fila, codigo) {
 }
 
 
-//Validaciones
-// Basicamente no se cogía bien el elemento formularioRepresentacion. Si lo prefieres puedes poner formularioRepresentacion = document.querySelector("#formularioRepresentacion");
-function validar(oEvento) {
-    let oE = oEvento || window.event;
-    limpiarErrores();
-
-    let precioBase = document.querySelector("#formularioRepresentacion").precioBaseRepresentacion.value;
-    expReg = /\d+(\.\d{4})?/;
-
-    if(!expReg.test(precioBase.value.trim())){ // Hay que comprobar si el precio esta vacío o no
-            error(precioBase);
-        }
-        else{
-            valido(precioBase);
-        }
-}
-
-function valido(elem){
-    elem.classList.remove("error");
-    elem.classList.add("valido");
-    elem.parentElement.querySelector(".invalid-feedback")[0].style.display= "none";
-}
-
-function error(elem){
-    elem.parentElement.querySelector(".invalid-feedback")[0].style.display= "inline-block";
-    elem.classList.remove("valido");
-    elem.classList.add("error");
-    if(bValido){
-        elem.focus()
-        bValido = false;
-    }
-}
-
-function limpiarErrores() {
-    for(var i = 0;i < document.querySelector("#formularioRepresentacion").elements.length; i++){
-        document.querySelector("#formularioRepresentacion").elements[i].classList.remove("error");
-        document.querySelector("#formularioRepresentacion").elements[i].classList.remove("valido");
-    }
-    bValido = true;
-    mensajeError = "";
-    document.querySelector("#formularioRepresentacion").classList.remove("was-validated");
-}
-
-// Validaciones version Irene
-
-function validar2(apartado){  // Llamo validar con el apartado que quiero validar
-    document.querySelector("#formularioRepresentacion").classList.remove("was-validated"); // Limpia de errores antes que se ejecute
+function validar(apartado){  // Llamo validar con el apartado que quiero validar
+    document.querySelector(apartado).classList.remove("was-validated"); // Limpia de errores antes que se ejecute
     let error = false; 
     let elemento;
     // Valida si los datos no están vacíos y son correctos
     for(let i=0; i < document.querySelector(apartado).getElementsByTagName('input').length;i++){
         elemento = document.querySelector(apartado).getElementsByTagName('input')[i];
-        if(elemento.value == "" || document.querySelector("#formularioRepresentacion").querySelectorAll(":invalid").length!=0){ // Cuando algo es invalido y sale el .invalid-feedback ese input tiene :invalid
+        if(elemento.value == "" || document.querySelector(apartado).querySelectorAll(":invalid").length!=0){ // Cuando algo es invalido y sale el .invalid-feedback ese input tiene :invalid
             error = true;
-            document.querySelector("#formularioRepresentacion").classList.add("was-validated"); // agrego was-validated para que el usuario vea los errores
+            document.querySelector(apartado).classList.add("was-validated"); // agrego was-validated para que el usuario vea los errores
         }
     }
     if(error){
         console.log("ops un error en el formulario :O"); // Aqui si hay error no añado nada a la base de datos, puedo mostrar un mensaje o simplemente dejarlo para que el usuario intente de nuevo
     }
     else{// Si todo esta relleno y correcto borra los errores 
-        document.querySelector("#formularioRepresentacion").classList.remove("was-validated");
+        document.querySelector(apartado).classList.remove("was-validated");
 
        // ---- e inserta datos a donde sea necesario ----
     }

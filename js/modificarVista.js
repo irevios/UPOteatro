@@ -156,10 +156,10 @@ function cambiaPrecioEntrada() {
 /// Rellena todos los campos de la base de datos en el formulario de representación
 function rellenaFormRepresentacion() {
 
-    // Los eventos de los formularios se deben cargar despues de cargar el formulario, si no no lo encuentra
-    //document.querySelector("#formularioRepresentacion button[type='submit']").addEventListener("click", validar, false);
-    document.querySelector("#formularioRepresentacion button[name='submit']").addEventListener("click", () => validar2("#formularioRepresentacion"), false);
-    //acostumbrate a usar .querySelector usando selectores css (# -> id, . -> clase etc) porque asi no hay errores al seleccionar un elemento
+
+    document.querySelector("#formularioRepresentacion button[name='submit']").addEventListener("click", () => validar("#formularioRepresentacion"), false);
+
+
 
     // select teatros
     upoTeatro.teatros.forEach(teatro => {
@@ -178,7 +178,11 @@ function rellenaFormRepresentacion() {
 }
 
 /// Rellena todos los campos de la base de datos en el formulario de espectaculo
+
 function rellenaFormEspectaculo() {
+
+    document.querySelector("#formularioEspectaculo button[name='submit']").addEventListener("click", () => validar("#formularioEspectaculo"), false);
+    
     // select compañias
     upoTeatro.companias.forEach(compania => {
         let opcion = document.createElement("option");
