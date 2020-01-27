@@ -213,26 +213,16 @@ function agregaTabla(elem, filtros) {
     switch (elem) {
         case "listaEntrada":
             cambiaCabecera("Entradas", "Lista de entradas compradas");
-            
             tabla = upoTeatro.listadoEntradas();
             break;
         case "listaRepresentacion":
             cambiaCabecera("Representaciones", "Lista de representaciones");
-            document.querySelector("#formularios").append(filtros.querySelector("#filtrosRepresentacion"));
             tabla = upoTeatro.listadoRepresentaciones();
             break;
         case "listaEspectaculo":
             cambiaCabecera("Espectáculos", "Lista de espectáculos");
-            document.querySelector("#formularios").append(filtros.querySelector("#filtrosEspectaculo"));
             tabla = upoTeatro.listadoEspectaculos();
             break;
     }
     document.querySelector("#formularios").append(tabla);
-}
-
-function agregaFiltros(filtros,id){
-    document.querySelector("#formularios").append(filtros.querySelector(id));
-    if(id!="filtrosEspectaculo"){
-
-    }
 }

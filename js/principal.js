@@ -62,3 +62,24 @@ function editaElimina(e) {
         console.log("pulsas editar");
     }
 }
+
+// Filtros
+function agregaFiltros(filtros,id){
+    document.querySelector("#formularios").append(filtros.querySelector(id));
+    if(id!="filtrosEspectaculo"){
+        document.addEventListener("#filtroFechaFinal").addEventListener("change",()=>compruebaFinFecha(document.addEventListener("#filtroFechaInicial"),document.addEventListener("#filtroFechaFinal")))
+    }
+    //document.querySelector("#filtroTexto").addEventListener("keydown",buscaTexto);
+}
+
+/*function buscaTexto(){
+    let texto = document.querySelector("#filtroTexto").value;
+    document.querySelector("table tbody").remove();
+    document.querySelector("table tr").filter(linea=>{
+        linea.cells.forEach(dato =>{
+            if(dato == texto){
+                return true;
+            }
+        })
+    })
+}*/
