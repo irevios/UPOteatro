@@ -19,13 +19,13 @@ body.grande {
 }
 
 .navbar-brand {
-    color: #dd2030 !important;
+    color: #2c3569 !important;
     font-weight: 600;
     text-transform: uppercase;
 }
 
 .active>.nav-link {
-    color: #dd2030 !important;
+    color: #2c3569 !important;
 }
 
 .jumbotron {
@@ -60,7 +60,7 @@ input[type="radio"]~.custom-control-label {
 
 .custom-checkbox .custom-control-input:checked~.custom-control-label:before,
 .custom-radio .custom-control-input:checked~.custom-control-label:before {
-    background-color: #dd2030;
+    background-color: #2c3569;
 }
 
 .custom-control-input:focus~.custom-control-label:before {
@@ -68,7 +68,7 @@ input[type="radio"]~.custom-control-label {
 }
 
 .custom-control-input:active~.custom-control-label:before {
-    background-color: #ff4a4a;
+    background-color: #2c3569;
 }
 
 .custom-file-control,
@@ -91,19 +91,19 @@ input[type="radio"]~.custom-control-label {
 .open>.btn-primary.dropdown-toggle.custom-file-control:before,
 .open>.btn.btn-primary.dropdown-toggle {
     color: #fff;
-    background-color: #ff4a4a;
-    border-color: #ff4a4a;
+    background-color: #2c3569;
+    border-color: #2c3569;
 }
 
 .custom-select:focus {
-    border-color: #ff4a4a;
+    border-color: #2c3569;
 }
 
 .btn-primary.custom-file-control:before,
 .btn.btn-primary {
-    color: #dd2232;
+    color: #2c3569;
     background-color: transparent;
-    border: solid 1px #dd2030;
+    border: solid 1px #2c3569;
 }
 
 #formularios {
@@ -115,7 +115,7 @@ body.grande .row.justify-content-center {
 }
 
 option:disabled {
-    color: #CF312FA6;
+    color: #52556a;
 }
 
 i.fa {
@@ -134,7 +134,7 @@ input {
 }
 
 .fa-times {
-    color: #dd2030;
+    color: #2c3569;
 }
 
 .fa-pencil {
