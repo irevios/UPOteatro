@@ -132,18 +132,18 @@ function cambiaButacasFormEntrada() {
 
 // Actualiza los datos que se muestra de entrada grupal o individual
 function actualizaFormularioEntrada(bool) {
-    if (representacionSeleccionada.value != "00") {
-        let seleccionButaca = document.querySelector("#formularioEntrada #butacaSeleccionada");
-        if (bool) {
-            seleccionButaca.setAttribute('multiple', true);
-            document.querySelector("#personasGrupal").parentNode.parentNode.style.display = "block";
-        } else {
-            seleccionButaca.removeAttribute('multiple');
-            document.querySelector("#personasGrupal").parentNode.parentNode.style.display = "none";
-        }
-        cambiaButacasFormEntrada();
-        document.querySelector("#totalEntrada").value = 0; // Reinicia a 0 el precio si el usuario no ha selccionado ninguna butaca.
+    let seleccionButaca = document.querySelector("#formularioEntrada #butacaSeleccionada");
+    if (bool) {
+        seleccionButaca.setAttribute('multiple', true);
+        document.querySelector("#personasGrupal").parentNode.parentNode.style.display = "block";
+    } else {
+        seleccionButaca.removeAttribute('multiple');
+        document.querySelector("#personasGrupal").parentNode.parentNode.style.display = "none";
     }
+    if (representacionSeleccionada.value != "00") {
+        cambiaButacasFormEntrada();
+    }
+    document.querySelector("#totalEntrada").value = 0; // Reinicia a 0 el precio si el usuario no ha selccionado ninguna butaca.
 }
 
 function cambiaPrecioEntrada() {
@@ -167,7 +167,7 @@ function rellenaFormRepresentacion() {
 
     document.querySelector("#formularioRepresentacion button[name='submit']").addEventListener("click", () => validar("#formularioRepresentacion"), false);
 
-    document.querySelector("#formularioRepresentacion #fechaInicioRepresentacion").addEventListener("change", ()=>compruebaFinFecha(document.querySelector("#formularioRepresentacion #fechaInicioRepresentacion"),document.querySelector("#formularioRepresentacion #fechaFinalRepresentacion")));
+    document.querySelector("#formularioRepresentacion #fechaInicioRepresentacion").addEventListener("change", () => compruebaFinFecha(document.querySelector("#formularioRepresentacion #fechaInicioRepresentacion"), document.querySelector("#formularioRepresentacion #fechaFinalRepresentacion")));
 
     // select teatros
     upoTeatro.teatros.forEach(teatro => {
@@ -190,7 +190,7 @@ function rellenaFormRepresentacion() {
 function rellenaFormEspectaculo() {
 
     document.querySelector("#formularioEspectaculo button[name='submit']").addEventListener("click", () => validar("#formularioEspectaculo"), false);
-    
+
     // select compañias
     upoTeatro.companias.forEach(compania => {
         let opcion = document.createElement("option");
