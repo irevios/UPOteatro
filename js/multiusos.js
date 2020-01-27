@@ -116,9 +116,8 @@ function agregaBoton(tipo, fila, codigo) {
     celda.append(boton);
 }
 
-function fechaFin(){
-    let doc = document.querySelector("#formularioRepresentacion #fechaFinalRepresentacion");
-    doc.setAttribute("min",document.querySelector("#formularioRepresentacion #fechaInicioRepresentacion").value);
+function compruebaFinFecha(fechaInicio,fechaFin){
+    fechaFin.setAttribute("min",fechaInicio.value);
 }
 
 function validar(apartado){  // Llamo validar con el apartado que quiero validar
