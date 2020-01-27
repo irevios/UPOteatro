@@ -115,3 +115,48 @@ function agregaBoton(tipo, fila, codigo) {
     boton.append(icono);
     celda.append(boton);
 }
+
+
+//Validaciones
+formularioRepresentacion.submit.addEventListener("click", validar, false);
+
+function validar(oEvento) {
+    let oE = oEvento || window.event;
+    limpiarErrores();
+
+    let precioBase = formularioRepresentacion.precioBaseRepresentacion.value;
+    expReg = /\d+(\.\d{4})?/;
+
+    if(!expReg.test(precioBase.value.trim())){
+            error(precioBase);
+        }
+        else{
+            valido(precioBase);
+        }
+}
+
+function valido(elem){
+    elem.classList.remove("error");
+    elem.classList.add("valido");
+    elem.parentElement.getElementsByClassName("invalid-feedback")[0].style.display= "none";
+}
+
+function error(elem){
+    elem.parentElement.getElementsByClassName("invalid-feedback")[0].style.display= "inline-block";
+    elem.classList.remove("valido");
+    elem.classList.add("error");
+    if(bValido){
+        elem.focus()
+        bValido = false;
+    }
+}
+
+function limpiarErrores() {
+    for(var i = 0;i < formularioRepresentacion.elements.length; i++){
+        formularioRepresentacion.elements[i].classList.remove("error");
+        formularioRepresentacion.elements[i].classList.remove("valido");
+    }
+    bValido = true;
+    mensajeError = "";
+    formularioRepresentacion.classList.remove("was-validated");
+}
