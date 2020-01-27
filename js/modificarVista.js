@@ -74,9 +74,17 @@ function agregaForm(elem, form) {
 /// Rellena todos los campos de la base de datos en el formulario de entrada
 function rellenaFormEntrada() {
     // Select representacion
+    //Opcion por defecto
+    let opcion = document.createElement("option");
+    opcion.value = "00";
+    opcion.textContent = "Seleccione una representacion...";
+    opcion.selected = true;
+    opcion.disabled = true;
+    document.querySelector("#formularioEntrada #representacionSeleccionada").append(opcion);
+    //Opciones válidas
     upoTeatro.teatros.forEach(teatro => {
         teatro.representaciones.forEach(representacion => {
-            let opcion = document.createElement("option");
+            opcion = document.createElement("option");
             opcion.value = representacion.codigo;
             opcion.textContent = teatro.nombre + " | " + representacion.toString();
             document.querySelector("#formularioEntrada #representacionSeleccionada").append(opcion);
@@ -116,16 +124,18 @@ function cambiaButacasFormEntrada() {
 
 // Actualiza los datos que se muestra de entrada grupal o individual
 function actualizaFormularioEntrada(bool) {
-    let seleccionButaca = document.querySelector("#formularioEntrada #butacaSeleccionada");
-    if (bool) {
-        seleccionButaca.setAttribute('multiple', true);
-        document.querySelector("#personasGrupal").parentNode.parentNode.style.display = "block";
-    } else {
-        seleccionButaca.removeAttribute('multiple');
-        document.querySelector("#personasGrupal").parentNode.parentNode.style.display = "none";
+    if (representacionSeleccionada.value != "00") {
+        let seleccionButaca = document.querySelector("#formularioEntrada #butacaSeleccionada");
+        if (bool) {
+            seleccionButaca.setAttribute('multiple', true);
+            document.querySelector("#personasGrupal").parentNode.parentNode.style.display = "block";
+        } else {
+            seleccionButaca.removeAttribute('multiple');
+            document.querySelector("#personasGrupal").parentNode.parentNode.style.display = "none";
+        }
+        cambiaButacasFormEntrada();
+        document.querySelector("#totalEntrada").value = 0; // Reinicia a 0 el precio si el usuario no ha selccionado ninguna butaca.
     }
-    cambiaButacasFormEntrada();
-    document.querySelector("#totalEntrada").value = 0; // Reinicia a 0 el precio si el usuario no ha selccionado ninguna butaca.
 }
 
 function cambiaPrecioEntrada() {
@@ -148,7 +158,7 @@ function rellenaFormRepresentacion() {
 
     // Los eventos de los formularios se deben cargar despues de cargar el formulario, si no no lo encuentra
     //document.querySelector("#formularioRepresentacion button[type='submit']").addEventListener("click", validar, false);
-    document.querySelector("#formularioRepresentacion button[name='submit']").addEventListener("click", ()=>validar2("#formularioRepresentacion"), false);
+    document.querySelector("#formularioRepresentacion button[name='submit']").addEventListener("click", () => validar2("#formularioRepresentacion"), false);
     //acostumbrate a usar .querySelector usando selectores css (# -> id, . -> clase etc) porque asi no hay errores al seleccionar un elemento
 
     // select teatros
