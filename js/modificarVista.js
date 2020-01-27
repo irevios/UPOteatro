@@ -42,7 +42,9 @@ function muestraEnPantalla(elem) {
         document.querySelector("#formularios > .table-responsive").remove();
     }
     document.querySelector("body").classList.remove("grande");
-
+    if (document.querySelector("#formularios").querySelector(".filtro") != undefined) {
+        document.querySelector("#formularios").querySelector(".filtro").remove();
+    }
     if (elem.includes("formulario")) { // Si se pide un formulario, busca en el archivo formularios y lo añade a la web
         leeArchivoXMLHTML("./html/formularios.html", (formulario) => agregaForm(elem, formulario));
     } else {
@@ -207,9 +209,6 @@ function rellenaFormEspectaculo() {
 }
 
 function agregaTabla(elem, filtros) {
-    if (document.querySelector("#formularios").querySelector(".filtro") != undefined) {
-        document.querySelector("#formularios").querySelector(".filtro").remove();
-    }
     let tabla;
     switch (elem) {
         case "listaEntrada":
