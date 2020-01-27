@@ -12,11 +12,10 @@ function cargaInicial() {
     cargaInicialDatos();
 }
 
-// Agregar --
+// Poner aqui mejor el método de validar e insertar cosas
 
 
-
-// Eliminar entradas
+// Eliminar Entradas
 document.querySelector("#formularios").addEventListener("click", editaElimina);
 
 function editaElimina(e) {

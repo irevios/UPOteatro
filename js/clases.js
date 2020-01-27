@@ -10,7 +10,10 @@ class Teatro {
         this.butacas = [];
     }
     agregaRepresentacion(representacion) {
-        this.representaciones.push(representacion);
+        if (this.representaciones.filter(representacionNuevo => representacionNuevo.codigo == representacion.codigo).length == 0) {
+            this.representaciones.push(representacion);
+            return true;
+        } else { return false; }
     }
     agregaButaca(butaca) {
         if (this.butacas.filter(butacaNuevo => butacaNuevo.numero == butaca.numero && butacaNuevo.fila == butaca.fila && butacaNuevo.zona == butaca.zona).length == 0) {
@@ -39,8 +42,8 @@ class Representacion {
         this.entradas = [];
     }
     compraEntrada(entrada) {
-        if (this.entradas.filter(entradaNuevo => entradaNuevo.butaca == entrada.butaca && this == 
-            entrada.representacion).length == 0) {
+        if (this.entradas.filter(entradaNuevo => entradaNuevo.butaca == entrada.butaca && this ==
+                entrada.representacion).length == 0) {
             this.entradas.push(entrada);
             return true;
         } else { return false; }

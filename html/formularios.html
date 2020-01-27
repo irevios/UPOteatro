@@ -98,15 +98,15 @@
         <label for="precioBaseRepresentacion" class="col-2 col-form-label">Precio base</label>
         <div class="col-10">
             <div class="input-group">
-                <input id="precioBaseRepresentacion" name="precioBaseRepresentacion" type="text" step='any' class="form-control" pattern="^\d+(\.|\,\d{1,2})?$" required="required"> <!-- Debe tener required para que se tenga en cuenta en la validación. | Los type="number" no tienen pattern asi que seria ponerlo text o quitar pattern y usar step,min y max -->
+                <input id="precioBaseRepresentacion" name="precioBaseRepresentacion" type="text" class="form-control" pattern="^\d+(\.|\,\d{1,2})?$" required="required"> <!-- Debe tener required para que se tenga en cuenta en la validación. | Los type="number" no tienen pattern asi que seria ponerlo text o quitar pattern y usar step,min y max -->
                 <div class="input-group-append">
                     <div class="input-group-text">
                         <i class="fa fa-euro"></i>
                     </div>
                 </div>
                 <i class="fa fa-check"></i>
-                     <i class="fa fa-close"></i>
-                     <div class="invalid-feedback">Patata</div>
+                <i class="fa fa-close"></i>
+                <div class="invalid-feedback">Patata</div>
             </div>
         </div>
     </div>
