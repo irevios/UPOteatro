@@ -81,6 +81,7 @@ function agregaForm(elem, form) {
 
 /// Rellena todos los campos de la base de datos en el formulario de entrada
 function rellenaFormEntrada() {
+    document.querySelector("#formularioEntrada button[name='submit']").addEventListener("click", () => validar("#formularioEntrada"), false);
     // Select representacion
     //Opcion por defecto
     let opcion = document.createElement("option");
