@@ -118,16 +118,15 @@ function agregaBoton(tipo, fila, codigo) {
 
 
 //Validaciones
-formularioRepresentacion.submit.addEventListener("click", validar, false);
-
+// Basicamente no se cogía bien el elemento formularioRepresentacion. Si lo prefieres puedes poner formularioRepresentacion = document.querySelector("#formularioRepresentacion");
 function validar(oEvento) {
     let oE = oEvento || window.event;
     limpiarErrores();
 
-    let precioBase = formularioRepresentacion.precioBaseRepresentacion.value;
+    let precioBase = document.querySelector("#formularioRepresentacion").precioBaseRepresentacion.value;
     expReg = /\d+(\.\d{4})?/;
 
-    if(!expReg.test(precioBase.value.trim())){
+    if(!expReg.test(precioBase.value.trim())){ // Hay que comprobar si el precio esta vacío o no
             error(precioBase);
         }
         else{
@@ -138,11 +137,11 @@ function validar(oEvento) {
 function valido(elem){
     elem.classList.remove("error");
     elem.classList.add("valido");
-    elem.parentElement.getElementsByClassName("invalid-feedback")[0].style.display= "none";
+    elem.parentElement.querySelector(".invalid-feedback")[0].style.display= "none";
 }
 
 function error(elem){
-    elem.parentElement.getElementsByClassName("invalid-feedback")[0].style.display= "inline-block";
+    elem.parentElement.querySelector(".invalid-feedback")[0].style.display= "inline-block";
     elem.classList.remove("valido");
     elem.classList.add("error");
     if(bValido){
@@ -152,11 +151,11 @@ function error(elem){
 }
 
 function limpiarErrores() {
-    for(var i = 0;i < formularioRepresentacion.elements.length; i++){
-        formularioRepresentacion.elements[i].classList.remove("error");
-        formularioRepresentacion.elements[i].classList.remove("valido");
+    for(var i = 0;i < document.querySelector("#formularioRepresentacion").elements.length; i++){
+        document.querySelector("#formularioRepresentacion").elements[i].classList.remove("error");
+        document.querySelector("#formularioRepresentacion").elements[i].classList.remove("valido");
     }
     bValido = true;
     mensajeError = "";
-    formularioRepresentacion.classList.remove("was-validated");
+    document.querySelector("#formularioRepresentacion").classList.remove("was-validated");
 }

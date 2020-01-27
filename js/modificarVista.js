@@ -153,6 +153,11 @@ function cambiaPrecioEntrada() {
 
 /// Rellena todos los campos de la base de datos en el formulario de representación
 function rellenaFormRepresentacion() {
+
+    // Los eventos de los formularios se deben cargar despues de cargar el formulario, si no no lo encuentra
+    document.querySelector("#formularioRepresentacion button[type='submit']").addEventListener("click", validar, false);
+    //acostumbrate a usar .querySelector usando selectores css (# -> id, . -> clase etc) porque asi no hay errores al seleccionar un elemento
+
     // select teatros
     upoTeatro.teatros.forEach(teatro => {
         let opcion = document.createElement("option");
