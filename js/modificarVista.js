@@ -74,9 +74,17 @@ function agregaForm(elem, form) {
 /// Rellena todos los campos de la base de datos en el formulario de entrada
 function rellenaFormEntrada() {
     // Select representacion
+    //Opcion por defecto
+    let opcion = document.createElement("option");
+    opcion.value="00";
+    opcion.textContent = "Seleccione una representacion...";
+    opcion.selected = true;
+    opcion.disabled = true;
+    document.querySelector("#formularioEntrada #representacionSeleccionada").append(opcion);
+    //Opciones válidas
     upoTeatro.teatros.forEach(teatro => {
         teatro.representaciones.forEach(representacion => {
-            let opcion = document.createElement("option");
+            opcion = document.createElement("option");
             opcion.value = representacion.codigo;
             opcion.textContent = teatro.nombre + " | " + representacion.toString();
             document.querySelector("#formularioEntrada #representacionSeleccionada").append(opcion);
