@@ -59,10 +59,10 @@ function elementoExiste(elemento) {
 }
 
 // Crea una tabla con los headers dados como parametros
-function creaTabla(headers,id) {
+function creaTabla(headers, id) {
     let div = document.createElement("div");
     div.classList.add("table-responsive");
-    div.id=id;
+    div.id = id;
     let tabla = document.createElement("table");
     tabla.classList.add("table");
     tabla.classList.add("table-striped");
@@ -70,9 +70,12 @@ function creaTabla(headers,id) {
     let header = tabla.createTHead();
     let encabezados = header.insertRow(-1);
     headers.forEach(encabezado => {
-        let celda = document.createElement("th");
-        celda.textContent = encabezado;
-        encabezados.append(celda);
+        if ((encabezado == "Editar" || encabezado == "Borrar") && esAdmin() ||
+            !(encabezado == "Editar" || encabezado == "Borrar")) {
+            let celda = document.createElement("th");
+            celda.textContent = encabezado;
+            encabezados.append(celda);
+        }
     });
     let cuerpo = document.createElement("tbody");
     tabla.append(cuerpo);
