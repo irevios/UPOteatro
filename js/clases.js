@@ -14,7 +14,7 @@ class Teatro {
             this.representaciones.push(representacion);
             return true;
         } else { return false; }
-    }
+    }   
     agregaButaca(butaca) {
         if (this.butacas.filter(butacaNuevo => butacaNuevo.numero == butaca.numero && butacaNuevo.fila == butaca.fila && butacaNuevo.zona == butaca.zona).length == 0) {
             this.butacas.push(butaca);

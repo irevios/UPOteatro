@@ -46,9 +46,7 @@ function muestraEnPantalla(elem) {
     if (elem.includes("formulario")) { // Si se pide un formulario, busca en el archivo formularios y lo añade a la web
         leeArchivoXMLHTML("./html/formularios.html", (formulario) => agregaForm(elem, formulario));
     } else {
-        let tabla = agregaTabla(elem);
-
-        document.querySelector("#formularios").append(tabla);
+        leeArchivoXMLHTML("./html/filtros.html", (filtros) => agregaTabla(elem, filtros));
     }
     if (getComputedStyle(document.querySelector(".navbar-toggler")).display != "none") {
         document.querySelector(".navbar-toggler").click();
@@ -56,17 +54,25 @@ function muestraEnPantalla(elem) {
 
 }
 
+function cambiaCabecera(titulo, subtitulo) {
+    document.querySelector(".jumbotron strong").textContent = titulo;
+    document.querySelector(".jumbotron p").textContent = subtitulo;
+}
+
 // Añade un formulario a la vista
 function agregaForm(elem, form) {
     document.querySelector("#formularios").append(form.querySelector("#" + elem));
     switch (elem) {
         case "formularioEntrada":
+            cambiaCabecera("Entradas", "Comprar entrada");
             rellenaFormEntrada();
             break;
         case "formularioRepresentacion":
+            cambiaCabecera("Representaciones", "Añade representación");
             rellenaFormRepresentacion();
             break;
         case "formularioEspectaculo":
+            cambiaCabecera("Espectáculos", "Añade espectáculos");
             rellenaFormEspectaculo();
     }
 }
@@ -200,13 +206,27 @@ function rellenaFormEspectaculo() {
     });
 }
 
-function agregaTabla(elem) {
+function agregaTabla(elem, filtros) {
+    if (document.querySelector("#formularios").querySelector(".filtro") != undefined) {
+        document.querySelector("#formularios").querySelector(".filtro").remove();
+    }
+    let tabla;
     switch (elem) {
         case "listaEntrada":
-            return upoTeatro.listadoEntradas();
+            cambiaCabecera("Entradas", "Lista de entradas compradas");
+            document.querySelector("#formularios").append(filtros.querySelector("#filtrosEntrada"));
+            tabla = upoTeatro.listadoEntradas();
+            break;
         case "listaRepresentacion":
-            return upoTeatro.listadoRepresentaciones();
+            cambiaCabecera("Representaciones", "Lista de representaciones");
+            document.querySelector("#formularios").append(filtros.querySelector("#filtrosRepresentacion"));
+            tabla = upoTeatro.listadoRepresentaciones();
+            break;
         case "listaEspectaculo":
-            return upoTeatro.listadoEspectaculos();
+            cambiaCabecera("Espectáculos", "Lista de espectáculos");
+            document.querySelector("#formularios").append(filtros.querySelector("#filtrosEspectaculo"));
+            tabla = upoTeatro.listadoEspectaculos();
+            break;
     }
+    document.querySelector("#formularios").append(tabla);
 }
