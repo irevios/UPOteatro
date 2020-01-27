@@ -116,6 +116,10 @@ function agregaBoton(tipo, fila, codigo) {
     celda.append(boton);
 }
 
+function fechaFin(){
+    let doc = document.querySelector("#formularioRepresentacion #fechaFinalRepresentacion");
+    doc.setAttribute("min",document.querySelector("#formularioRepresentacion #fechaInicioRepresentacion").value);
+}
 
 function validar(apartado){  // Llamo validar con el apartado que quiero validar
     document.querySelector(apartado).classList.remove("was-validated"); // Limpia de errores antes que se ejecute
@@ -130,7 +134,7 @@ function validar(apartado){  // Llamo validar con el apartado que quiero validar
             error = true;
             document.querySelector(apartado).classList.add("was-validated"); // agrego was-validated para que el usuario vea los errores
         }
-        else if (apartado=="#formularioRepresentacion")
+        /*else if (apartado=="#formularioRepresentacion")
         {
             let fechaInicio = document.querySelector("#formularioRepresentacion").fechaInicioRepresentacion;
             let fechaFin = document.querySelector("#formularioRepresentacion").fechaFinalRepresentacion;
@@ -139,8 +143,9 @@ function validar(apartado){  // Llamo validar con el apartado que quiero validar
                     {
                         error = true;
                         document.querySelector(apartado).classList.add("was-validated"); 
+                        document.querySelector(elemento).className.add(":invalid");
                     }
-        }
+        }*/
 
     }
     if(error){
