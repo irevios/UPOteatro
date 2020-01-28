@@ -152,7 +152,7 @@ function cambiaButacasFormEntrada() {
 }
 
 // Actualiza los datos que se muestra de entrada grupal o individual
-function actualizaFormularioEntrada(bool) {
+function actualizaFormularioEntrada() {
     let seleccionButaca = document.querySelector("#formularioEntrada #butacaSeleccionada");
     if (document.querySelector("#tipoEntrada1").checked) {
         if (representacionSeleccionada.value != "00") {
