@@ -194,10 +194,19 @@ th > .row {
     margin: 0;
 }
 
-th > *{
+th > *, .modal{
     pointer-events: none;
 }
 th.ordenable{
     pointer-events: auto;
     cursor: pointer;
+}
+
+.modal{
+    display: block;
+}
+
+.modal.show{
+    pointer-events: auto;
+}
 }

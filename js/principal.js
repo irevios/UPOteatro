@@ -10,10 +10,13 @@ function cargaInicial() {
     upoTeatro = new UpoTeatro();
     compruebaSesion();
     cargaInicialDatos();
+
+    // Añade evento al modal
+    document.querySelector(".modal button.close").addEventListener("click", cierraModal);
+    document.querySelector(".modal button.btn-primary").addEventListener("click", cierraModal);
 }
 
 // Validar e insertar
-
 function validar(apartado) { // Llamo validar con el apartado que quiero validar
     document.querySelector(apartado).classList.remove("was-validated"); // Limpia de errores antes que se ejecute
     let error = false;
@@ -29,7 +32,7 @@ function validar(apartado) { // Llamo validar con el apartado que quiero validar
         }
     }
     if (error) {
-        console.log("ops un error en el formulario :O"); // Aqui si hay error no añado nada a la base de datos, puedo mostrar un mensaje o simplemente dejarlo para que el usuario intente de nuevo
+        mensajeModal("Hiciste algo mal, comprueba los errores");
     } else { // Si todo esta relleno y correcto borra los errores 
         document.querySelector(apartado).classList.remove("was-validated");
 
@@ -41,6 +44,7 @@ function compruebaFinFecha(fechaInicio, fechaFin) {
     fechaFin.value = "";
     fechaFin.setAttribute("min", fechaInicio.value);
 }
+
 // Eliminar Entradas
 document.querySelector("#formularios").addEventListener("click", editaElimina);
 
@@ -59,7 +63,7 @@ function editaElimina(e) {
         }
         e.target.parentElement.parentElement.remove();
     } else if (e.target.tagName == "BUTTON" && e.target.dataset.tipo == "editar") {
-        console.log("pulsas editar");
+        mensajeModal("¡Le has dado a editar!");
     }
 }
 
@@ -159,4 +163,14 @@ function ordenaTabla(e) {
         document.querySelectorAll("tbody tr").forEach(linea => linea.remove()); // Elimina las lineas desordenadas
         lineas.forEach(linea => document.querySelector("tbody").append(linea)); // Introduce las lineas ordenadas
     }
+}
+
+// Modal para mensajes
+function mensajeModal(texto) {
+    document.querySelector(".modal").classList.add("show");
+    document.querySelector(".modal #mensaje").textContent = texto;
+}
+
+function cierraModal() {
+    document.querySelector(".modal").classList.remove("show");
 }
