@@ -73,7 +73,23 @@ function creaTabla(headers, id) {
         if ((encabezado == "Editar" || encabezado == "Borrar") && esAdmin() ||
             !(encabezado == "Editar" || encabezado == "Borrar")) {
             let celda = document.createElement("th");
-            celda.textContent = encabezado;
+            if (!["Editar", "Borrar", "Tipo de entrada / Nº Personas", "Butacas"].includes(encabezado)) {
+                let head = document.createElement("div");
+                head.classList = "row align-items-center justify-content-between";
+                let texto = document.createElement("div");
+                texto.classList = "col";
+                texto.textContent = encabezado;
+                let ico = document.createElement("div");
+                ico.classList = "col-1";
+                let icono = document.createElement("i");
+                icono.classList = "fa fa-sort";
+                ico.append(icono);
+                head.append(texto);
+                head.append(ico);
+                celda.append(head);
+            } else {
+                celda.textContent = encabezado;
+            }
             encabezados.append(celda);
         }
     });

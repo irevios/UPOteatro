@@ -145,36 +145,51 @@ li>a {
     cursor: pointer;
 }
 
-.was-validated input:invalid{
+.was-validated input:invalid {
     border: 2px solid #E02A1EFF;
     border-radius: 4px;
 }
-.was-validated input:invalid ~ .invalid-feedback{
-   display: inline-block;
+
+.was-validated input:invalid~.invalid-feedback {
+    display: inline-block;
 }
-.invalid-feedback{
+
+.invalid-feedback {
     color: #E02A1EFF;
 }
-.was-validated input:invalid .invalid-feedback{
+
+.was-validated input:invalid .invalid-feedback {
     display: inline-block !important;
 }
-.fa-check,.fa-close{
+
+.fa-check,
+.fa-close {
     display: none;
 }
-.was-validated input:invalid ~ .fa-close,.was-validated .error ~ .fa-close,.was-validated .error ~ div .fa-close{
+
+.was-validated input:invalid~.fa-close,
+.was-validated .error~.fa-close,
+.was-validated .error~div .fa-close {
     color: #E02A1EFF;
     display: inline-block;
 }
-.was-validated .valido{
+
+.was-validated .valido {
     border: 2px solid #71BE40FF !important;
     border-radius: 4px !important;
 }
-.was-validated .error{
+
+.was-validated .error {
     border: 2px solid #E23636FF !important;
     border-radius: 4px !important;
 }
+
 .filtro {
     border: 2px solid #e0e0e0;
     border-radius: 4px;
     padding: 2em;
+}
+
+th>.row {
+    margin: 0;
 }
