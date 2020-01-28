@@ -38,4 +38,14 @@
 			<representacion cod="R20"/>
 		</representaciones>
 	</teatro>
+	<teatro cod="T004">
+		<nombre>El Teatro de Triana</nombre>
+		<direccion>Calle Condes de Bustillo, 17, 41010 Sevilla</direccion>
+		<representaciones>
+			<representacion cod="R21"/>
+			<representacion cod="R22"/>
+			<representacion cod="R23"/>
+			<representacion cod="R24"/>
+		</representaciones>
+	</teatro>
 </teatros>

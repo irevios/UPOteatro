@@ -80,4 +80,21 @@
 		<fecha>2020-02-10</fecha>
 		<precioBase>20.6</precioBase>
 	</representacion>
+	<representacion cod="R21" espectaculo="E006" adaptada="Si">
+		<fecha>2020-02-14</fecha>
+		<precioBase>6</precioBase>
+	</representacion>
+	<representacion cod="R22" espectaculo="E006" adaptada="No">
+		<fecha>2020-02-11</fecha>
+		<precioBase>12</precioBase>
+	</representacion>
+	<representacion cod="R23" espectaculo="E006" adaptada="Si">
+		<fecha>2020-02-12</fecha>
+		<precioBase>12</precioBase>
+	</representacion>
+	<representacion cod="R24" espectaculo="E006" adaptada="Si">
+		<fecha>2020-02-13</fecha>
+		<precioBase>6</precioBase>
+	</representacion>
+
 </representaciones>

@@ -20,4 +20,8 @@
 		<nombre>Zamora Y Maqueda</nombre>
 		<director>Maria Rosa Serra Aguiar</director>
 	</compania>
+	<compania cif="V0723490I">
+		<nombre>Pangea Artes Escénicas</nombre>
+		<director>Fernando Salvador</director>
+	</compania>
 </companias>

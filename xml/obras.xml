@@ -20,4 +20,13 @@
 		<nombre>Yerma</nombre>
 		<autor>Federico García Lorca</autor>
 	</obra>
+		<obra cod="Ob06">
+		<nombre>Lo invisible</nombre>
+		<autor>José Martínez Ruíz "Azorín"</autor>
+	</obra>
+	</obra>
+		<obra cod="Ob07">
+		<nombre>Riot Comedy</nombre>
+		<autor>Influencers</autor>
+	</obra>
 </obras>

@@ -30,4 +30,16 @@
 		<categoria>Comedia</categoria>
 		<gastos>12000</gastos>
 	</espectaculo>
+	<espectaculo cod="E006" obra="Ob06" compania="V0723490I">
+		<nombre>Lo invisible</nombre>
+		<productor>Fernando Salvador</productor>
+		<categoria>Suspense</categoria>
+		<gastos>3864</gastos>
+	</espectaculo>
+	<espectaculo cod="E006" obra="Ob07" compania="V0723490I">
+		<nombre>Riot Comedy - Show de comedia femenina.</nombre>
+		<productor>Penny JayG</productor>
+		<categoria>Comedia</categoria>
+		<gastos>5640</gastos>
+	</espectaculo>
 </espectaculos>
