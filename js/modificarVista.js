@@ -213,14 +213,17 @@ function agregaTabla(elem, filtros) {
     let tabla;
     switch (elem) {
         case "listaEntrada":
+            agregaFiltros(filtros, "filtrosEntrada");
             cambiaCabecera("Entradas", "Lista de entradas compradas");
             tabla = upoTeatro.listadoEntradas();
             break;
         case "listaRepresentacion":
+            agregaFiltros(filtros, "filtrosRepresentacion");
             cambiaCabecera("Representaciones", "Lista de representaciones");
             tabla = upoTeatro.listadoRepresentaciones();
             break;
         case "listaEspectaculo":
+            agregaFiltros(filtros, "filtrosEspectaculo");
             cambiaCabecera("Espectáculos", "Lista de espectáculos");
             tabla = upoTeatro.listadoEspectaculos();
             break;

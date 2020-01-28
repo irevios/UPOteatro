@@ -14,32 +14,31 @@ function cargaInicial() {
 
 // Validar e insertar
 
-function validar(apartado){  // Llamo validar con el apartado que quiero validar
+function validar(apartado) { // Llamo validar con el apartado que quiero validar
     document.querySelector(apartado).classList.remove("was-validated"); // Limpia de errores antes que se ejecute
-    let error = false; 
+    let error = false;
     let elemento;
-    
+
     // Valida si los datos no están vacíos y son correctos
-    for(let i=0; i < document.querySelector(apartado).getElementsByTagName('input').length;i++){
+    for (let i = 0; i < document.querySelector(apartado).getElementsByTagName('input').length; i++) {
         elemento = document.querySelector(apartado).getElementsByTagName('input')[i];
 
-        if(elemento.value == "" || document.querySelector(apartado).querySelectorAll(":invalid").length!=0){ // Cuando algo es invalido y sale el .invalid-feedback ese input tiene :invalid
+        if (elemento.value == "" || document.querySelector(apartado).querySelectorAll(":invalid").length != 0) { // Cuando algo es invalido y sale el .invalid-feedback ese input tiene :invalid
             error = true;
             document.querySelector(apartado).classList.add("was-validated"); // agrego was-validated para que el usuario vea los errores
         }
     }
-    if(error){
+    if (error) {
         console.log("ops un error en el formulario :O"); // Aqui si hay error no añado nada a la base de datos, puedo mostrar un mensaje o simplemente dejarlo para que el usuario intente de nuevo
-    }
-    else{// Si todo esta relleno y correcto borra los errores 
+    } else { // Si todo esta relleno y correcto borra los errores 
         document.querySelector(apartado).classList.remove("was-validated");
 
-       // ---- e inserta datos a donde sea necesario ----
+        // ---- e inserta datos a donde sea necesario ----
     }
 }
 
-function compruebaFinFecha(fechaInicio,fechaFin){
-    fechaFin.setAttribute("min",fechaInicio.value);
+function compruebaFinFecha(fechaInicio, fechaFin) {
+    fechaFin.setAttribute("min", fechaInicio.value);
 }
 // Eliminar Entradas
 document.querySelector("#formularios").addEventListener("click", editaElimina);
@@ -64,22 +63,26 @@ function editaElimina(e) {
 }
 
 // Filtros
-function agregaFiltros(filtros,id){
-    document.querySelector("#formularios").append(filtros.querySelector(id));
-    if(id!="filtrosEspectaculo"){
-        document.addEventListener("#filtroFechaFinal").addEventListener("change",()=>compruebaFinFecha(document.addEventListener("#filtroFechaInicial"),document.addEventListener("#filtroFechaFinal")))
+function agregaFiltros(filtros, id) {
+    document.querySelector("#formularios").append(filtros.querySelector("#" + id));
+    if (id != "filtrosEspectaculo") {
+        document.querySelector("#filtroFechaInicial").addEventListener("change", () => compruebaFinFecha(
+            document.querySelector("#filtroFechaInicial"), document.querySelector("#filtroFechaFinal")));
     }
-    //document.querySelector("#filtroTexto").addEventListener("keydown",buscaTexto);
+    document.querySelector("#filtroTexto").addEventListener("keyup", buscaTexto);
 }
 
-/*function buscaTexto(){
+function buscaTexto() {
     let texto = document.querySelector("#filtroTexto").value;
-    document.querySelector("table tbody").remove();
-    document.querySelector("table tr").filter(linea=>{
-        linea.cells.forEach(dato =>{
-            if(dato == texto){
-                return true;
+    let lineas = Array.from(document.querySelectorAll("table tbody tr")).filter(linea => {
+        let contiene = false;
+        Array.from(linea.cells).forEach(dato => {
+            if (dato.textContent.toLowerCase().includes(texto.toLowerCase())) {
+                contiene = true;
+                console.log(dato.textContent.toLowerCase() + " " + texto.toLowerCase() + "-" +
+                    dato.textContent.toLowerCase().includes(texto.toLowerCase()));
             }
-        })
-    })
-}*/
+        });
+        linea.style.display = !contiene ? "none" : linea.style.display = "table-row";
+    });
+}
