@@ -107,7 +107,7 @@ function buscaFecha() {
 function ocultaFila(fila) {
     let fecha = fila.dataset.fechaCoincide;
     let texto = fila.dataset.textoCoincide;
-    
+
     // Condiciones
     let coincideAmbas = fecha == "true" && texto == "true";
     let coincideTextoSolo = (fecha == undefined || fecha == "") && texto == "true";
@@ -118,5 +118,45 @@ function ocultaFila(fila) {
         fila.style.display = "table-row";
     } else {
         fila.style.display = "none";
+    }
+}
+
+function ordenaTabla(e) {
+    if (e.target.tagName == 'TH') {
+        let seleccionado = e.target.textContent;
+        let numCelda = e.target.cellIndex;
+        // Miramos si ordenamos de forma ascendente o descendente
+        let ascendente = e.target.dataset.ascendente == "true" ? true : false;
+        e.target.dataset.ascendente = !ascendente;
+
+        // Según el tipo del campo hacemos diferentes comparadores
+        let campoTexto = ["Representación", "Adaptada", "Teatro", "Espectáculo", "Productor", "Categoría", "Obra", "Compañía"]
+        let campoNumero = ["Precio", "Precio Base", "Gastos"];
+        let lineas = [];
+        document.querySelectorAll("tbody tr").forEach(linea => lineas.push(linea)); // Pasa los tr a un array
+
+        if (campoTexto.includes(seleccionado)) {
+            lineas.sort((lineaA, lineaB) => { // Ordena los tr del array
+                let textoA = lineaA.cells[numCelda].textContent;
+                let textoB = lineaB.cells[numCelda].textContent;
+                return ascendente ? textoA.localeCompare(textoB) : textoB.localeCompare(textoA);
+            });
+        }
+        if (campoNumero.includes(seleccionado)) {
+            lineas.sort((lineaA, lineaB) => { // Ordena los tr del array
+                let numA = parseFloat(lineaA.cells[numCelda].textContent);
+                let numB = parseFloat(lineaB.cells[numCelda].textContent);
+                return ascendente ? numA - numB : numB - numA;
+            });
+        }
+        if (seleccionado == "Fecha") {
+            lineas.sort((lineaA, lineaB) => { // Ordena los tr del array
+                let fechaA = fechaToDate(lineaA.cells[numCelda].textContent);
+                let fechaB = fechaToDate(lineaB.cells[numCelda].textContent);
+                return ascendente ? fechaA - fechaB : fechaB - fechaA;
+            });
+        }
+        document.querySelectorAll("tbody tr").forEach(linea => linea.remove()); // Elimina las lineas desordenadas
+        lineas.forEach(linea => document.querySelector("tbody").append(linea)); // Introduce las lineas ordenadas
     }
 }

@@ -90,7 +90,7 @@ class UpoTeatro {
         return this.obras.filter(obra => obra.codigo == codigo)[0];
     }
     listadoEntradas() {
-        let tabla = creaTabla(["Representación","Fecha", "Adaptada", "Precio", "Butacas", "Tipo de entrada / Nº Personas", "Editar", "Borrar"], "listadoEntradas");
+        let tabla = creaTabla(["Representación", "Fecha", "Adaptada", "Precio", "Butacas", "Tipo de entrada / Nº Personas", "Editar", "Borrar"], "listadoEntradas");
         this.teatros.forEach(teatro => {
             teatro.representaciones.forEach(representacion => {
                 representacion.entradas.forEach(entrada => {
@@ -118,7 +118,7 @@ class UpoTeatro {
         return tabla;
     }
     listadoEspectaculos() {
-        let tabla = creaTabla(["Espectaculo", "Productor", "Categoría", "Gastos", "Obra", "Compañía", "Editar", "Borrar"], "listadoEspectaculos");
+        let tabla = creaTabla(["Espectáculo", "Productor", "Categoría", "Gastos", "Obra", "Compañía", "Editar", "Borrar"], "listadoEspectaculos");
         this.espectaculos.forEach(espectaculo => {
             tabla.querySelector("table").tBodies[0].append(espectaculo.toHTMLrow());
         });

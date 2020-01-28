@@ -74,6 +74,8 @@ function creaTabla(headers, id) {
             !(encabezado == "Editar" || encabezado == "Borrar")) {
             let celda = document.createElement("th");
             if (!["Editar", "Borrar", "Tipo de entrada / Nº Personas", "Butacas"].includes(encabezado)) {
+                celda.classList = 'ordenable';
+                celda.dataset.ascendente = 'true';
                 let head = document.createElement("div");
                 head.classList = "row align-items-center justify-content-between";
                 let texto = document.createElement("div");

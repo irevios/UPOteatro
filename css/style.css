@@ -141,7 +141,7 @@ input {
     color: #208749;
 }
 
-li>a {
+li > a {
     cursor: pointer;
 }
 
@@ -190,6 +190,14 @@ li>a {
     padding: 2em;
 }
 
-th>.row {
+th > .row {
     margin: 0;
+}
+
+th > *{
+    pointer-events: none;
+}
+th.ordenable{
+    pointer-events: auto;
+    cursor: pointer;
 }

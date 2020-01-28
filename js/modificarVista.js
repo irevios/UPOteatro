@@ -60,15 +60,16 @@ function muestraEnPantalla(elem) {
     }
 
 }
-function seleccionaActivo(elem){
+
+function seleccionaActivo(elem) {
     document.querySelector("#navBar .active").classList.remove("active");
-    if(elem.includes("Entrada")){
+    if (elem.includes("Entrada")) {
         document.querySelector("#navBar .nav-item:nth-child(2)").classList.add("active");
     }
-    if(elem.includes("Representacion")){
+    if (elem.includes("Representacion")) {
         document.querySelector("#navBar .nav-item:nth-child(3)").classList.add("active");
     }
-    if(elem.includes("Espectaculo")){
+    if (elem.includes("Espectaculo")) {
         document.querySelector("#navBar .nav-item:nth-child(4)").classList.add("active");
     }
 }
@@ -245,4 +246,5 @@ function agregaTabla(elem, filtros) {
     }
     document.querySelector("#formularios").append(tabla);
     document.querySelector("#formularios").classList = "col-11";
+    document.querySelectorAll("th").forEach(header => header.addEventListener("click", ordenaTabla));
 }
