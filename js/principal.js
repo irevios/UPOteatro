@@ -38,6 +38,7 @@ function validar(apartado) { // Llamo validar con el apartado que quiero validar
 }
 
 function compruebaFinFecha(fechaInicio, fechaFin) {
+    fechaFin.value = "";
     fechaFin.setAttribute("min", fechaInicio.value);
 }
 // Eliminar Entradas
@@ -66,8 +67,11 @@ function editaElimina(e) {
 function agregaFiltros(filtros, id) {
     document.querySelector("#formularios").append(filtros.querySelector("#" + id));
     if (id != "filtrosEspectaculo") {
-        document.querySelector("#filtroFechaInicial").addEventListener("change", () => compruebaFinFecha(
-            document.querySelector("#filtroFechaInicial"), document.querySelector("#filtroFechaFinal")));
+        document.querySelector("#filtroFechaInicial").addEventListener("change", () => {
+            compruebaFinFecha(document.querySelector("#filtroFechaInicial"), document.querySelector("#filtroFechaFinal"));
+            buscaFecha();
+        });
+        document.querySelector("#filtroFechaFinal").addEventListener("change", buscaFecha);
     }
     document.querySelector("#filtroTexto").addEventListener("keyup", buscaTexto);
 }
@@ -79,10 +83,36 @@ function buscaTexto() {
         Array.from(linea.cells).forEach(dato => {
             if (dato.textContent.toLowerCase().includes(texto.toLowerCase())) {
                 contiene = true;
-                console.log(dato.textContent.toLowerCase() + " " + texto.toLowerCase() + "-" +
-                    dato.textContent.toLowerCase().includes(texto.toLowerCase()));
             }
         });
-        linea.style.display = !contiene ? "none" : linea.style.display = "table-row";
+        linea.dataset.textoCoincide = texto == "" ? "" : contiene;
+        ocultaFila(linea);
     });
+}
+
+function buscaFecha() {
+    let fechaInicial = document.querySelector("#filtroFechaInicial").value;
+    let fechaFinal = document.querySelector("#filtroFechaFinal").value;
+    let lineas = Array.from(document.querySelectorAll("table tbody tr")).filter(linea => {
+        let contiene = false;
+        let fechaBuscando = linea.cells[1].textContent;
+        if ((fechaInicial != undefined && fechaFinal != undefined) && fechaToDate(fechaBuscando) >= fechaToDate(fechaInicial) && fechaToDate(fechaBuscando) <= fechaToDate(fechaFinal)) {
+            contiene = true;
+        }
+        linea.dataset.fechaCoincide = fechaInicial == "" || fechaFinal == "" ? "" : contiene;
+        ocultaFila(linea);
+    });
+}
+
+function ocultaFila(fila) {
+    let fecha = fila.dataset.fechaCoincide;
+    let texto = fila.dataset.textoCoincide;
+    if ((fecha == "true" && texto == "true") ||
+        (fecha == "true" && (texto == undefined || texto == "")) ||
+        ((fecha == undefined || fecha == "") && texto == "true") ||
+        ((fecha == undefined || fecha == "") && (texto == undefined || texto == ""))) {
+        fila.style.display = "table-row";
+    } else {
+        fila.style.display = "none";
+    }
 }

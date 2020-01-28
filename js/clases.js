@@ -86,9 +86,6 @@ class Representacion {
         }
         return fila;
     }
-    toString() {
-        return fechaToString(this.fecha) + " | " + this.espectaculo.nombre;
-    }
 }
 
 class Espectaculo {

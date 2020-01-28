@@ -1,5 +1,5 @@
 // En este documento se define las funcione que se usan varias veces con diferentes usos.
-
+"use strict";
 // Leer XML/HTML y lo guarda en variables para usarlas después
 function leeArchivoXMLHTML(filename, funcion) {
     let xhttp;
@@ -87,8 +87,15 @@ function creaTabla(headers, id) {
 function fechaToString(fecha) {
     let dia = fecha.getDate();
     let mes = fecha.getMonth();
-    let año = fecha.getYear();
+    let año = fecha.getFullYear();
     return dia + "/" + mes + "/" + año;
+}
+
+function fechaToDate(fecha) {
+    let dia = fecha.split("/")[0];
+    let mes = fecha.split("/")[1];
+    let año = fecha.split("/")[2]
+    return new Date(año + "/" + mes + "/" + dia);
 }
 
 // Convierte un texto a formato titulo
@@ -103,7 +110,7 @@ function toTitleCase(palabra) {
 
 // Añade un botón borrar o editar
 function agregaBoton(tipo, fila, codigo) {
-    celda = fila.insertCell(-1);
+    let celda = fila.insertCell(-1);
     let boton = document.createElement("button");
     boton.type = "button";
     boton.dataset.id = codigo;
