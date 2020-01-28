@@ -96,7 +96,7 @@ function rellenaFormEntrada() {
         teatro.representaciones.forEach(representacion => {
             opcion = document.createElement("option");
             opcion.value = representacion.codigo;
-            opcion.textContent = teatro.nombre + " | " + representacion.toString();
+            opcion.textContent = teatro.nombre + " | " + fechaToString(representacion.fecha) + " | " + representacion.espectaculo.nombre;
             document.querySelector("#formularioEntrada #representacionSeleccionada").append(opcion);
         });
     });
