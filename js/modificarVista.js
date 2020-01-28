@@ -77,6 +77,7 @@ function agregaForm(elem, form) {
             cambiaCabecera("Espectáculos", "Añade espectáculos");
             rellenaFormEspectaculo();
     }
+    document.querySelector("#formularios").classList = "col-8";
 }
 
 /// Rellena todos los campos de la base de datos en el formulario de entrada
@@ -226,4 +227,5 @@ function agregaTabla(elem, filtros) {
             break;
     }
     document.querySelector("#formularios").append(tabla);
+    document.querySelector("#formularios").classList = "col-11";
 }
