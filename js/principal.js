@@ -107,10 +107,14 @@ function buscaFecha() {
 function ocultaFila(fila) {
     let fecha = fila.dataset.fechaCoincide;
     let texto = fila.dataset.textoCoincide;
-    if ((fecha == "true" && texto == "true") ||
-        (fecha == "true" && (texto == undefined || texto == "")) ||
-        ((fecha == undefined || fecha == "") && texto == "true") ||
-        ((fecha == undefined || fecha == "") && (texto == undefined || texto == ""))) {
+    
+    // Condiciones
+    let coincideAmbas = fecha == "true" && texto == "true";
+    let coincideTextoSolo = (fecha == undefined || fecha == "") && texto == "true";
+    let coincideFechaSolo = fecha == "true" && (texto == undefined || texto == "");
+    let todoVacio = (fecha == undefined || fecha == "") && (texto == undefined || texto == "");
+
+    if (coincideAmbas || coincideFechaSolo || coincideTextoSolo || todoVacio) {
         fila.style.display = "table-row";
     } else {
         fila.style.display = "none";
