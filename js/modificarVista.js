@@ -35,25 +35,42 @@ function cargarEventosAdmin() {
 }
 
 function muestraEnPantalla(elem) {
+    seleccionaActivo(elem);
+    // La cabecera se reduce
+    document.querySelector("body").classList.remove("grande");
+
+    // Si ya hay un formulario en pantalla, lo borra
     if (elementoExiste("#formularios > form")) {
         document.querySelector("#formularios > form").remove();
     }
+    // Si ya hay un listado en pantalla, lo borra
     if (elementoExiste("#formularios > .table-responsive")) {
         document.querySelector("#formularios > .table-responsive").remove();
-    }
-    document.querySelector("body").classList.remove("grande");
-    if (document.querySelector("#formularios").querySelector(".filtro") != undefined) {
         document.querySelector("#formularios").querySelector(".filtro").remove();
     }
-    if (elem.includes("formulario")) { // Si se pide un formulario, busca en el archivo formularios y lo añade a la web
+    // Si se pide un formulario, busca en el archivo formularios y lo añade a la web, si no añade un listado
+    if (elem.includes("formulario")) {
         leeArchivoXMLHTML("./html/formularios.html", (formulario) => agregaForm(elem, formulario));
     } else {
         leeArchivoXMLHTML("./html/filtros.html", (filtros) => agregaTabla(elem, filtros));
     }
+    // Cierra menú después de elegir
     if (getComputedStyle(document.querySelector(".navbar-toggler")).display != "none") {
         document.querySelector(".navbar-toggler").click();
     }
 
+}
+function seleccionaActivo(elem){
+    document.querySelector("#navBar .active").classList.remove("active");
+    if(elem.includes("Entrada")){
+        document.querySelector("#navBar .nav-item:nth-child(2)").classList.add("active");
+    }
+    if(elem.includes("Representacion")){
+        document.querySelector("#navBar .nav-item:nth-child(3)").classList.add("active");
+    }
+    if(elem.includes("Espectaculo")){
+        document.querySelector("#navBar .nav-item:nth-child(4)").classList.add("active");
+    }
 }
 
 function cambiaCabecera(titulo, subtitulo) {
