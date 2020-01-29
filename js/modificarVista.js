@@ -129,30 +129,29 @@ function rellenaFormEntrada() {
     document.querySelector("#tipoEntrada0").addEventListener("click", actualizaFormularioEntrada);
     document.querySelector("#tipoEntrada1").addEventListener("click", actualizaFormularioEntrada);
 }
-// Camboa las butacas a elegir según la representación elegida
+// Actualiza los datos que se muestra de entrada grupal o individual
+function actualizaFormularioEntrada() {
+    document.querySelectorAll(".seleccionada").forEach(sel => sel.classList.remove("seleccionada"));
+    document.querySelector("#personasGrupal").closest(".col-4").style.display = document.querySelector("#tipoEntrada1").checked ? "block" : "none";
+    document.querySelector("#totalEntrada").value = 0; // Reinicia a 0 el precio si el usuario no ha selccionado ninguna butaca.
+    document.querySelector("#personasGrupal").value = 0; // Reinicia a 0 el numero de personas si el usuario no ha selccionado ninguna butaca.
+
+    // Elimina las butacas o las muestra
+    document.querySelectorAll(".fila1, .fila2, .fila3, .fila4").forEach(ap => { ap.children.length == 0 ? ap.style.display = "none" : ap.style.display = "initial" });
+    document.querySelectorAll(".platea, .anfiteatro, .paraiso, .palco").forEach(ap => { representacionSeleccionada.value == "00" ? ap.style.display = "none" : ap.style.display = "grid" });
+}
+// Cambia las butacas a elegir según la representación elegida
 function cambiaButacasFormEntrada() {
     if (representacionSeleccionada.value != "00") {
         actualizaFormularioEntrada();
         let representacion = upoTeatro.buscaRepresentacion(document.querySelector("#formularioEntrada #representacionSeleccionada").value);
         let butacas = upoTeatro.buscaTeatroPorRepresentacion(document.querySelector("#formularioEntrada #representacionSeleccionada").value).butacas;
-        /*let butacaSeleccionada = document.querySelector("#butacaSeleccionada");
-        butacaSeleccionada.querySelectorAll("option").forEach(but => but.remove());
-        butacas.forEach(butaca => {
-            if (!butacaSeleccionada.multiple || butaca.zona == 'platea') {
-                let opcion = document.createElement("option");
-                opcion.value = butaca.idButaca();
-                opcion.textContent = butaca.toString();
-                if (representacion.butacaOcupada(butaca)) {
-                    opcion.setAttribute("disabled", true);
-                }
-                butacaSeleccionada.append(opcion);
-            }
-        });*/
         document.querySelectorAll(".platea > *, .anfiteatro > *, .paraiso > *, .palco").forEach(b => b.textContent = "");
         butacas.forEach(butaca => {
             let icoButaca = document.createElement("i");
             icoButaca.classList = "fa butaca-silla";
             icoButaca.dataset.butaca = butaca.idButaca();
+            icoButaca.addEventListener("click", seleccionaButaca);
             if (representacion.butacaOcupada(butaca)) {
                 icoButaca.classList.add("ocupada");
             }
@@ -175,37 +174,36 @@ function cambiaButacasFormEntrada() {
     document.querySelectorAll(".fila1, .fila2, .fila3, .fila4").forEach(ap => { ap.children.length == 0 ? ap.style.display = "none" : ap.style.display = "initial" });
 }
 
-// Actualiza los datos que se muestra de entrada grupal o individual
-function actualizaFormularioEntrada() {
-    let seleccionButaca = document.querySelector("#formularioEntrada #butacaSeleccionada");
-    if (document.querySelector("#tipoEntrada1").checked) {
-        if (representacionSeleccionada.value != "00") {
-            //seleccionButaca.setAttribute('multiple', true);
+function seleccionaButaca(e) {
+    if (e.target.classList.contains('butaca-silla') && !e.target.classList.contains("ocupada")) {
+        if (e.target.classList.contains('seleccionada')) {
+            e.target.classList.remove("seleccionada");
+        } else {
+            if (document.querySelector("#tipoEntrada0").checked && document.querySelectorAll("#butacasRepresentadas .seleccionada").length > 0) {
+                document.querySelector("#butacasRepresentadas .seleccionada").classList.remove("seleccionada");
+            }
+            if (document.querySelector("#tipoEntrada0").checked || (document.querySelector("#tipoEntrada1").checked && e.target.dataset.butaca.split("-")[0] == 'platea')) {
+                e.target.classList.add("seleccionada");
+            }
         }
-        document.querySelector("#personasGrupal").parentNode.parentNode.style.display = "block";
-    } else {
-        //seleccionButaca.removeAttribute('multiple');
-        document.querySelector("#personasGrupal").parentNode.parentNode.style.display = "none";
+        cambiaPrecioEntrada();
     }
-    document.querySelector("#totalEntrada").value = 0; // Reinicia a 0 el precio si el usuario no ha selccionado ninguna butaca.
-    document.querySelectorAll(".fila1, .fila2, .fila3, .fila4").forEach(ap => { ap.children.length == 0 ? ap.style.display = "none" : ap.style.display = "initial" });
-
-    document.querySelectorAll(".platea, .anfiteatro, .paraiso, .palco").forEach(ap => { representacionSeleccionada.value == "00" ? ap.style.display = "none" : ap.style.display = "grid" });
 }
+
 
 function cambiaPrecioEntrada() {
     let representacion = upoTeatro.buscaRepresentacion(document.querySelector("#formularioEntrada #representacionSeleccionada").value);
     let teatro = upoTeatro.buscaTeatroPorRepresentacion(document.querySelector("#formularioEntrada #representacionSeleccionada").value);
     let coefButaca;
-    if (document.querySelector("input[name='tipoEntrada']:checked").value == "grupal") {
-        let personas = document.querySelector("#butacaSeleccionada").selectedOptions.length;
+    if (document.querySelector("#tipoEntrada1").checked) {
+        let personas = document.querySelectorAll("#butacasRepresentadas .seleccionada").length;
         document.querySelector("#personasGrupal").value = personas;
         coefButaca = personas;
     } else {
-        let butacaSeleccionada = document.querySelector("#butacaSeleccionada").value.split("-");
+        let butacaSeleccionada = document.querySelector("#butacasRepresentadas .seleccionada").dataset.butaca.split("-");
         coefButaca = teatro.buscaButaca(butacaSeleccionada[0], butacaSeleccionada[1], butacaSeleccionada[2]).coefPrecio;
     }
-    document.querySelector("#totalEntrada").value = parseFloat(representacion.precioBase) * parseFloat(coefButaca);
+    document.querySelector("#totalEntrada").value = (parseFloat(representacion.precioBase) * parseFloat(coefButaca)).toFixed(2);
 }
 
 /// Rellena todos los campos de la base de datos en el formulario de representación
@@ -213,14 +211,14 @@ function rellenaFormRepresentacion() {
     document.querySelector("#formularioRepresentacion button[name='submit']").addEventListener("click", () => validar("#formularioRepresentacion"), false);
     document.querySelector("#formularioRepresentacion #fechaInicioRepresentacion").addEventListener("change", () => compruebaFinFecha(document.querySelector("#formularioRepresentacion #fechaInicioRepresentacion"), document.querySelector("#formularioRepresentacion #fechaFinalRepresentacion")));
 
-    // select teatros
+    // Select teatros
     upoTeatro.teatros.forEach(teatro => {
         let opcion = document.createElement("option");
         opcion.value = teatro.codigo;
         opcion.textContent = teatro.nombre;
         document.querySelector("#teatroSeleccionado").append(opcion);
     });
-    // select espectaculos
+    // Select espectaculos
     upoTeatro.espectaculos.forEach(espectaculo => {
         let opcion = document.createElement("option");
         opcion.value = espectaculo.codigo;
@@ -235,7 +233,7 @@ function rellenaFormEspectaculo() {
 
     document.querySelector("#formularioEspectaculo button[name='submit']").addEventListener("click", () => validar("#formularioEspectaculo"), false);
 
-    // select compañias
+    // Select compañias
     upoTeatro.companias.forEach(compania => {
         let opcion = document.createElement("option");
         opcion.value = compania.codigo;
@@ -243,7 +241,7 @@ function rellenaFormEspectaculo() {
         document.querySelector("#companiaSeleccionada").append(opcion);
     });
 
-    // select obras
+    // Select obras
     upoTeatro.obras.forEach(obra => {
         let opcion = document.createElement("option");
         opcion.value = obra.codigo;

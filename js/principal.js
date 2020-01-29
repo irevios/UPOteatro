@@ -26,9 +26,9 @@ function validar(apartado) { // Llamo validar con el apartado que quiero validar
     for (let i = 0; i < document.querySelector(apartado).getElementsByTagName('input').length; i++) {
         elemento = document.querySelector(apartado).getElementsByTagName('input')[i];
 
-        if (elemento.value == "" || document.querySelector(apartado).querySelectorAll(":invalid").length != 0) { // Cuando algo es invalido y sale el .invalid-feedback ese input tiene :invalid
+        if (elemento.value == "" || document.querySelector(apartado).querySelectorAll(":invalid").length != 0) {
             error = true;
-            document.querySelector(apartado).classList.add("was-validated"); // agrego was-validated para que el usuario vea los errores
+            document.querySelector(apartado).classList.add("was-validated");
         }
     }
     if (error) {
@@ -97,8 +97,8 @@ function editaEntrada(id) {
     let personas;
     document.querySelector("#representacionSeleccionada").value = representacion.codigo;
     cambiaButacasFormEntrada();
-    document.querySelector("#butacaSeleccionada").value=butaca[0].idButaca();
-    document.querySelector("#butacaSeleccionada option[value='"+butaca[0].idButaca()+"']").disabled = false;
+    document.querySelector("#butacaSeleccionada").value = butaca[0].idButaca();
+    document.querySelector("#butacaSeleccionada option[value='" + butaca[0].idButaca() + "']").disabled = false;
     if (entradaTipo == "individual") {
         let tipo = entrada.tipo;
         document.querySelector("#tipoEntrada0").checked = true;

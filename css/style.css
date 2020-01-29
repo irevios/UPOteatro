@@ -172,7 +172,9 @@ input {
 li>a {
     cursor: pointer;
 }
-
+select:required{
+    box-shadow: none;
+}
 .was-validated input:invalid {
     border: 2px solid var(--formInvalido);
     border-radius: 4px;
@@ -211,7 +213,7 @@ li>a {
     border: 2px solid var(--formInvalido) !important;
     border-radius: 4px !important;
 }
-
+/* Filtro */
 .filtro {
     border: 2px solid var(--formDeshabilitado);
     border-radius: 4px;
@@ -232,6 +234,7 @@ th.ordenable {
     cursor: pointer;
 }
 
+/* Modal */
 .modal {
     display: block;
 }
@@ -246,7 +249,6 @@ th.ordenable {
     grid-template-columns: 3em 16em;
     grid-template-rows: auto;
     margin: 0 auto;
-    overflow: scroll;
     max-width: fit-content;
 }
 
