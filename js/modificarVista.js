@@ -190,7 +190,7 @@ function actualizaFormularioEntrada() {
     document.querySelector("#totalEntrada").value = 0; // Reinicia a 0 el precio si el usuario no ha selccionado ninguna butaca.
     document.querySelectorAll(".fila1, .fila2, .fila3, .fila4").forEach(ap => { ap.children.length == 0 ? ap.style.display = "none" : ap.style.display = "initial" });
 
-    document.querySelectorAll(".platea, .anfiteatro, .paraiso, .palco").forEach(ap => { representacionSeleccionada.value == "00" ? ap.style.display = "none" : ap.style.display = "initial" });
+    document.querySelectorAll(".platea, .anfiteatro, .paraiso, .palco").forEach(ap => { representacionSeleccionada.value == "00" ? ap.style.display = "none" : ap.style.display = "grid" });
 }
 
 function cambiaPrecioEntrada() {
