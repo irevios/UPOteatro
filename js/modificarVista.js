@@ -122,7 +122,7 @@ function rellenaFormEntrada() {
     let representacionSeleccionada = document.querySelector("#representacionSeleccionada");
     representacionSeleccionada.addEventListener("change", cambiaButacasFormEntrada);
     let butacaSeleccionada = document.querySelector("#butacaSeleccionada");
-    butacaSeleccionada.addEventListener("change", cambiaPrecioEntrada);
+    //butacaSeleccionada.addEventListener("change", cambiaPrecioEntrada);
     actualizaFormularioEntrada();
 
     // Tipo de entrada cambia el select multiple
@@ -135,7 +135,7 @@ function cambiaButacasFormEntrada() {
         actualizaFormularioEntrada();
         let representacion = upoTeatro.buscaRepresentacion(document.querySelector("#formularioEntrada #representacionSeleccionada").value);
         let butacas = upoTeatro.buscaTeatroPorRepresentacion(document.querySelector("#formularioEntrada #representacionSeleccionada").value).butacas;
-        let butacaSeleccionada = document.querySelector("#butacaSeleccionada");
+        /*let butacaSeleccionada = document.querySelector("#butacaSeleccionada");
         butacaSeleccionada.querySelectorAll("option").forEach(but => but.remove());
         butacas.forEach(butaca => {
             if (!butacaSeleccionada.multiple || butaca.zona == 'platea') {
@@ -147,8 +147,32 @@ function cambiaButacasFormEntrada() {
                 }
                 butacaSeleccionada.append(opcion);
             }
+        });*/
+        document.querySelectorAll(".platea > *, .anfiteatro > *, .paraiso > *, .palco").forEach(b => b.textContent = "");
+        butacas.forEach(butaca => {
+            let icoButaca = document.createElement("i");
+            icoButaca.classList = "fa butaca-silla";
+            icoButaca.dataset.butaca = butaca.idButaca();
+            if (representacion.butacaOcupada(butaca)) {
+                icoButaca.classList.add("ocupada");
+            }
+            switch (butaca.zona) {
+                case 'platea':
+                    document.querySelector("#butacasRepresentadas .platea .fila" + butaca.fila).append(icoButaca);
+                    break;
+                case 'anfiteatro':
+                    document.querySelector("#butacasRepresentadas .anfiteatro .fila" + butaca.fila).append(icoButaca);
+                    break;
+                case 'paraiso':
+                    document.querySelector("#butacasRepresentadas .paraiso .fila" + butaca.fila).append(icoButaca);
+                    break;
+                case 'palco':
+                    document.querySelector("#butacasRepresentadas .palco").append(icoButaca);
+                    break;
+            }
         });
     }
+    document.querySelectorAll(".fila1, .fila2, .fila3, .fila4").forEach(ap => { ap.children.length == 0 ? ap.style.display = "none" : ap.style.display = "initial" });
 }
 
 // Actualiza los datos que se muestra de entrada grupal o individual
@@ -156,14 +180,17 @@ function actualizaFormularioEntrada() {
     let seleccionButaca = document.querySelector("#formularioEntrada #butacaSeleccionada");
     if (document.querySelector("#tipoEntrada1").checked) {
         if (representacionSeleccionada.value != "00") {
-            seleccionButaca.setAttribute('multiple', true);
+            //seleccionButaca.setAttribute('multiple', true);
         }
         document.querySelector("#personasGrupal").parentNode.parentNode.style.display = "block";
     } else {
-        seleccionButaca.removeAttribute('multiple');
+        //seleccionButaca.removeAttribute('multiple');
         document.querySelector("#personasGrupal").parentNode.parentNode.style.display = "none";
     }
     document.querySelector("#totalEntrada").value = 0; // Reinicia a 0 el precio si el usuario no ha selccionado ninguna butaca.
+    document.querySelectorAll(".fila1, .fila2, .fila3, .fila4").forEach(ap => { ap.children.length == 0 ? ap.style.display = "none" : ap.style.display = "initial" });
+
+    document.querySelectorAll(".platea, .anfiteatro, .paraiso, .palco").forEach(ap => { representacionSeleccionada.value == "00" ? ap.style.display = "none" : ap.style.display = "initial" });
 }
 
 function cambiaPrecioEntrada() {

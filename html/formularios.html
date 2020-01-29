@@ -1,5 +1,22 @@
 <!-- Formulario comprar entrada -->
 <form id="formularioEntrada">
+    <div id="butacasRepresentadas" class="grid-container col-6">
+        <div class="platea">
+            <div class="fila1"></div>
+            <div class="fila2"></div>
+            <div class="fila3"></div>
+            <div class="fila4"></div>
+        </div>
+        <div class="palco"></div>
+        <div class="anfiteatro">
+            <div class="fila1"></div>
+            <div class="fila2"></div>
+        </div>
+        <div class="paraiso">
+            <div class="fila1"></div>
+            <div class="fila2"></div>
+        </div>
+    </div>
     <div class="form-group">
         <label for="representacionSeleccionada">Representación</label>
         <div>
@@ -21,16 +38,16 @@
             </div>
         </div>
     </div>
-    <div class="form-group">
+    <!-- <div class="form-group">
         <label for="butacaSeleccionada">Butaca</label>
         <div>
             <select id="butacaSeleccionada" name="butacaSeleccionada" aria-describedby="butacaSeleccionadaHelpBlock" required="required" class="custom-select">
-                <!-- Butacas de la base de datos -->
+                Butacas de la base de datos
             </select>
             <div class="invalid-feedback">Debe seleccionar una o más butacas.</div>
             <span id="butacaSeleccionadaHelpBlock" class="form-text text-muted">Selecciona una o más butacas</span>
         </div>
-    </div>
+    </div> -->
     <div class="form-group">
         <div>
             <div class="custom-control custom-checkbox custom-control-inline">
@@ -81,12 +98,11 @@
         <label for="fechaInicioRepresentacion" class="col-2 col-form-label">Fecha (Inicio/Fin)</label>
         <div class="col-5">
             <input id="fechaInicioRepresentacion" name="fechaInicioRepresentacion" type="date" class="form-control" required="required">
-                <div class="invalid-feedback">Debe introducir una fecha válida</div>
+            <div class="invalid-feedback">Debe introducir una fecha válida</div>
         </div>
         <div class="col-5">
             <input id="fechaFinalRepresentacion" name="fechaFinalRepresentacion" type="date" class="form-control" required="required">
-                <div class="invalid-feedback">Debe introducir una fecha válida</div>
-
+            <div class="invalid-feedback">Debe introducir una fecha válida</div>
         </div>
     </div>
     <div class="form-group row">
@@ -124,7 +140,7 @@
     </div>
     <div class="form-group row">
         <div class="offset-2 col-10">
-            <button name="submit" type="button" class="btn btn-primary" >Añadir</button>
+            <button name="submit" type="button" class="btn btn-primary">Añadir</button>
         </div>
     </div>
 </form>

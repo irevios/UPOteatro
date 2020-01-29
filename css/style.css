@@ -1,3 +1,31 @@
+/* Colores */
+:root {
+    --principal: #2c3569;
+    --principalTransparente: #2C35695f;
+    --outline: #3B46A0;
+    --colorContraste: #ffffff;
+
+    --formValido: #71BE40FF;
+    --formInvalido: #E02A1EFF;
+    --formDeshabilitado:#e0e0e0;
+    --btnEditar: #208749;
+    --btnEliminar: #E02A1EFF;
+
+    --platea: #F509195F;
+    --anfiteatro: #F0DC0E5F;
+    --palco: #B0FE695F;
+    --paraiso: #42B0FE5F;
+
+    --lineaButaca:#5B5B5F;
+    --butaca:#9A999E;
+    --lineaButacaHover:#9A999E;
+    --butacaHover:#C3C3C5;
+    --lineaButacaOcupada:#60161D;
+    --butacaOcupada:#A01127;
+    --lineaButacaSelect:#001D7E;
+    --butacaSelect:#4A72B2;
+}
+
 body {
     max-height: 100vh;
 }
@@ -6,33 +34,29 @@ body.grande {
     overflow: hidden;
 }
 
-.jumbotron>* {
-    transition: 1s;
+.col-md-12 {
+    padding: 0 !important;
 }
 
 .container-fluid {
     padding: 0 !important;
 }
 
-.col-md-12 {
-    padding: 0 !important;
-}
-
 .navbar-brand {
-    color: #2c3569 !important;
+    color: var(--principal) !important;
     font-weight: 600;
     text-transform: uppercase;
 }
 
 .active>.nav-link {
-    color: #2c3569 !important;
+    color: var(--principal) !important;
 }
 
 .jumbotron {
     background: url("../img/asientos.jpg");
     background-size: cover;
     background-position: center 30%;
-    color: white;
+    color: var(--colorContraste);
     border-radius: 0;
     text-align: center;
 }
@@ -41,6 +65,10 @@ body.grande {
     margin-top: 2em;
     font-size: 3rem;
     text-shadow: 0 0 17px #333;
+}
+
+.jumbotron>* {
+    transition: 1s;
 }
 
 body.grande .jumbotron {
@@ -60,22 +88,22 @@ input[type="radio"]~.custom-control-label {
 
 .custom-checkbox .custom-control-input:checked~.custom-control-label:before,
 .custom-radio .custom-control-input:checked~.custom-control-label:before {
-    background-color: #2c3569;
+    background-color: var(--principal);
 }
 
 .custom-control-input:focus~.custom-control-label:before {
-    box-shadow: 0 0 0 1px #fafafa, 0 0 0 0.2rem rgba(150, 0, 0, 0.25);
+    box-shadow: 0 0 0 1px var(--colorContraste), 0 0 0 0.2rem var(--principalTransparente);
 }
 
 .custom-control-input:active~.custom-control-label:before {
-    background-color: #2c3569;
+    background-color: var(--principal);
 }
 
 .custom-file-control,
 .form-control,
 .is-focused .custom-file-control,
 .is-focused .form-control {
-    background-image: linear-gradient(0deg, #e43838 2px, rgba(0, 150, 136, 0) 0), linear-gradient(0deg, rgba(0, 0, 0, .26) 1px, transparent 0);
+    background-image: linear-gradient(0deg, var(--outline) 2px, rgba(0, 150, 136, 0) 0), linear-gradient(0deg, rgba(0, 0, 0, .26) 1px, transparent 0);
 }
 
 .btn-primary.active.custom-file-control:before,
@@ -90,20 +118,20 @@ input[type="radio"]~.custom-control-label {
 .btn.btn-primary:hover,
 .open>.btn-primary.dropdown-toggle.custom-file-control:before,
 .open>.btn.btn-primary.dropdown-toggle {
-    color: #fff;
-    background-color: #2c3569;
-    border-color: #2c3569;
+    color: var(--colorContraste);
+    background-color: var(--principal);
+    border-color: var(--principal);
 }
 
 .custom-select:focus {
-    border-color: #2c3569;
+    border-color: var(--principal);
 }
 
 .btn-primary.custom-file-control:before,
 .btn.btn-primary {
-    color: #2c3569;
+    color: var(--principal);
     background-color: transparent;
-    border: solid 1px #2c3569;
+    border: solid 1px var(--principal);
 }
 
 #formularios {
@@ -134,19 +162,19 @@ input {
 }
 
 .fa-times {
-    color: #2c3569;
+    color: var(--btnEliminar);
 }
 
 .fa-pencil {
-    color: #208749;
+    color: var(--btnEditar);
 }
 
-li > a {
+li>a {
     cursor: pointer;
 }
 
 .was-validated input:invalid {
-    border: 2px solid #E02A1EFF;
+    border: 2px solid var(--formInvalido);
     border-radius: 4px;
 }
 
@@ -155,7 +183,7 @@ li > a {
 }
 
 .invalid-feedback {
-    color: #E02A1EFF;
+    color: var(--formInvalido);
 }
 
 .was-validated input:invalid .invalid-feedback {
@@ -170,43 +198,198 @@ li > a {
 .was-validated input:invalid~.fa-close,
 .was-validated .error~.fa-close,
 .was-validated .error~div .fa-close {
-    color: #E02A1EFF;
+    color: var(--formInvalido);
     display: inline-block;
 }
 
 .was-validated .valido {
-    border: 2px solid #71BE40FF !important;
+    border: 2px solid var(--formValido) !important;
     border-radius: 4px !important;
 }
 
 .was-validated .error {
-    border: 2px solid #E23636FF !important;
+    border: 2px solid var(--formInvalido) !important;
     border-radius: 4px !important;
 }
 
 .filtro {
-    border: 2px solid #e0e0e0;
+    border: 2px solid var(--formDeshabilitado);
     border-radius: 4px;
     padding: 2em;
 }
 
-th > .row {
+th>.row {
     margin: 0;
 }
 
-th > *, .modal{
+th>*,
+.modal {
     pointer-events: none;
 }
-th.ordenable{
+
+th.ordenable {
     pointer-events: auto;
     cursor: pointer;
 }
 
-.modal{
+.modal {
     display: block;
 }
 
-.modal.show{
+.modal.show {
     pointer-events: auto;
 }
+
+/* Representación de butacas */
+.grid-container {
+    display: grid;
+    grid-template-columns: 3em 16em;
+    grid-template-rows: auto;
+    margin: 0 auto;
+    overflow: scroll;
+    max-width: fit-content;
+}
+
+.fila2:after {
+    content: "2";
+    font-size: 0.7em;
+}
+
+.fila1:after {
+    content: "1";
+    font-size: 0.7em;
+}
+
+.fila3:after {
+    content: "3";
+    font-size: 0.7em;
+}
+
+.fila4:after {
+    content: "4";
+    font-size: 0.7em;
+}
+
+.platea {
+    background-color: var(--platea);
+}
+
+.anfiteatro {
+    background-color: var(--anfiteatro);
+}
+
+.palco {
+    background-color: var(--palco);
+}
+
+.paraiso {
+    background-color: var(--paraiso);
+}
+
+.fila1,
+.fila2,
+.fila3,
+.fila4 {
+    margin: 0 auto;
+    padding: 0 0.5em;
+}
+
+.platea,
+.anfiteatro,
+.palco,
+.paraiso {
+    padding: 0.5em 0;
+}
+
+.platea {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-area: 3 / 2 / 4 / 3;
+}
+
+.platea .fila1 {
+    grid-area: 4 / 1 / 5 / 2;
+}
+
+.platea .fila2 {
+    grid-area: 3 / 1 / 4 / 2;
+}
+
+.platea .fila3 {
+    grid-area: 2 / 1 / 3 / 2;
+}
+
+.platea .fila4 {
+    grid-area: 1 / 1 / 2 / 2;
+}
+
+.anfiteatro {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-area: 2 / 2 / 3 / 3;
+}
+
+.anfiteatro .fila1 {
+    grid-area: 2 / 1 / 3 / 2;
+}
+
+.anfiteatro .fila2 {
+    grid-area: 1 / 1 / 2 / 2;
+}
+
+.paraiso {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-area: 1 / 2 / 2 / 3;
+}
+
+.paraiso .fila1 {
+    grid-area: 2 / 1 / 3 / 2;
+}
+
+.paraiso .fila2 {
+    grid-area: 1 / 1 / 2 / 2;
+}
+
+.palco {
+    grid-area: 2 / 1 / 4 / 2;
+}
+
+@font-face {
+    font-family: 'butaca';
+    src: url('../fonts/butaca.woff?n1hgk1') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+}
+
+.butaca-silla:before {
+    font-family: 'butaca' !important;
+    content: "\e900";
+    font-size: 1em;
+}
+
+.butaca-silla {
+    -webkit-text-stroke-color: var(--lineaButaca);
+    color: var(--butaca);
+    -webkit-text-stroke-width: 0.08em;
+    font-size: 1.3em;
+    padding: 0.3em !important;
+}
+
+.butaca-silla:hover {
+    -webkit-text-stroke-color: var(--lineaButacaHover);
+    color: var(--butacaHover);
+}
+
+.butaca-silla.ocupada {
+    -webkit-text-stroke-color: var(--lineaButacaOcupada);
+    color: var(--butacaOcupada);
+}
+.butaca-silla.seleccionada {
+    -webkit-text-stroke-color: var(--lineaButacaSelect);
+    color: var(--butacaSelect);
 }

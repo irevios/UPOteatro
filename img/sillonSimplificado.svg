@@ -1,7 +1,0 @@
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg">
-  <g fill="#9A999E" stroke="#5B5B5F" stroke-linecap="round" stroke-linejoin="round" stroke-width=".5">
-    <rect height="5.4193" ry=".907" style="paint-order:normal" width="7.2521" x="1.2146" y=".41766"/>
-    <rect height="2.2249" ry="0" style="paint-order:normal" width="5.3418" x="2.1697" y="5.8009"/>
-    <path d="m1.1847 4.3808c-0.55679 0-1.0039 0.44711-1.0039 1.0039v3.4941c0 0.4769 0.38248 0.85938 0.85937 0.85938h7.5996c0.4769 0 0.86133-0.38248 0.86133-0.85938v-3.4941c0-0.55679-0.44907-1.0039-1.0059-1.0039s-1.0039 0.44711-1.0039 1.0039v2.6406h-5.3008v-2.6406c0-0.55679-0.44907-1.0039-1.0059-1.0039z" style="paint-order:normal"/>
-  </g>
-</svg>
