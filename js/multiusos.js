@@ -101,7 +101,7 @@ function creaTabla(headers, id) {
     return div;
 }
 
-// Convierte fecha Date a formato DD/MM/AA
+// Convierte fecha Date a formato DD/MM/AAAA
 function fechaToString(fecha) {
     let dia = fecha.getDate();
     let mes = fecha.getMonth();
@@ -109,12 +109,56 @@ function fechaToString(fecha) {
     return dia + "/" + mes + "/" + año;
 }
 
-// Convierte una fecha DD/MM/AA a Date
+// Convierte una fecha DD/MM/AAAA a Date
 function fechaToDate(fecha) {
     let dia = fecha.split("/")[0];
     let mes = fecha.split("/")[1];
-    let año = fecha.split("/")[2]
+    let año = fecha.split("/")[2];
     return new Date(año + "/" + mes + "/" + dia);
+}
+
+// Convierte una fecha Date a AAAA-MM-DD
+function fechaToAmericana(fecha) {
+    let dia = fecha.getDate();
+    let mes = fecha.getMonth();
+    let año = fecha.getFullYear();
+    return año + "-" + (mes < 10 ? "0" + mes : mes) + "-" + (dia < 10 ? "0" + dia : dia);
+}
+
+// Convierte una fecha de AAAA/MM/DD a Date
+function fechaAmericanaToDate(fecha) {
+    let dia = fecha.split("-")[2];
+    let mes = fecha.split("-")[1];
+    let año = fecha.split("-")[0];
+    return new Date(año + "/" + mes + "/" + dia);
+}
+
+// Comprueba si dos fechas son consecutivas
+function esFechaConsecutivaPosterior(fechaA, fechaB) {
+    let diaA = fechaA.getDate();
+    let diaB = fechaB.getDate();
+
+    return diaA + 1 == diaB ? true : false;
+}
+
+function esFechaConsecutivaAnterior(fechaA, fechaB) {
+    let diaA = fechaA.getDate();
+    let diaB = fechaB.getDate();
+
+    return diaA == diaB + 1 ? true : false;
+}
+
+// Devuelve un array de fechas que estén dentro de un intervalo
+function fechasIntervalo(fechaInicio, fechaFin) {
+    let fechas = [];
+    let fechaBase = fechaInicio;
+    let fechaLimite = fechaFin.getDate() + 1;
+    for (var i = 0; i <= (fechaFin - fechaInicio) / (1000 * 3600 * 24); i++) {
+        let fechaSiguiente = new Date(fechaBase);
+        fechaSiguiente.setDate(fechaSiguiente.getDate() + i);
+        fechas.push(fechaSiguiente);
+    };
+    return fechas;
 }
 
 // Convierte un texto a formato titulo
@@ -146,26 +190,26 @@ function agregaBoton(tipo, fila, codigo) {
 }
 
 //Añade representacion
-function nuevaRepresentacion(apartado){
-    switch(apartado){
+function nuevaRepresentacion(apartado) {
+    switch (apartado) {
         case "#formularioRepresentacion":
-        break;
+            break;
 
         case "#formularioEspectaculo":
-        let nombre = document.querySelector("#nombreEspectaculo").value;
-        let productor = document.querySelector("#nombreProductorEspectaculo").value;
-        let categoria = document.querySelector("#categoriaEspectaculo").value;
-        let gastos = document.querySelector("#gastosEspectaculo").value;
-        let compania = document.querySelector("#companiaSeleccionada").value;
-        let obra = upoTeatro.buscaObra(document.querySelector("#obraSeleccionada").value);
+            let nombre = document.querySelector("#nombreEspectaculo").value;
+            let productor = document.querySelector("#nombreProductorEspectaculo").value;
+            let categoria = document.querySelector("#categoriaEspectaculo").value;
+            let gastos = document.querySelector("#gastosEspectaculo").value;
+            let compania = document.querySelector("#companiaSeleccionada").value;
+            let obra = upoTeatro.buscaObra(document.querySelector("#obraSeleccionada").value);
 
-        let oEspectaculo = new Espectaculo("A", nombre, productor, categoria, gastos, obra, compania);
-        upoTeatro.agregaEspectaculo(oEspectaculo);
-        alert("CREADO");
-        break;
+            let oEspectaculo = new Espectaculo("A", nombre, productor, categoria, gastos, obra, compania);
+            upoTeatro.agregaEspectaculo(oEspectaculo);
+            alert("CREADO");
+            break;
 
         case "#formularioEntrada":
-        alert("Nueva Entrada");
-        break;
+            alert("Nueva Entrada");
+            break;
     }
 }

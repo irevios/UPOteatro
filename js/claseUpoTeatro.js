@@ -15,7 +15,7 @@ class UpoTeatro {
         } else { return false; }
     }
     agregaRepresentacion(representacion) {
-        if (this.representaciones.filter(representacionNuevo => representacionNuevo.codigo == representacion.codigo).length == 0) {
+        if (this.representaciones.filter(representacionNuevo => representacionNuevo.fecha == representacion.fecha).length == 0) {
             this.representaciones.push(representacion);
             return true;
         } else { return false; }
@@ -32,7 +32,7 @@ class UpoTeatro {
         } else { return false; }
     }
     agregaEspectaculo(espectaculo) {
-        if (this.espectaculos.filter(espectaculoNuevo => espectaculoNuevo.codigo == espectaculo.codigo).length == 0) {
+        if (this.espectaculos.filter(espectaculoNuevo => espectaculoNuevo.nombre == espectaculo.nombre && espectaculoNuevo.compania == espectaculo.compania).length == 0) {
             this.espectaculos.push(espectaculo);
             return true;
         } else { return false; }
