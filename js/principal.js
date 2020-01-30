@@ -106,7 +106,6 @@ function editaElimina(e) {
                     editaEspectaculo(e.target.dataset.id);
                     break;
             }
-            mensajeModal("¡Le has dado a editar!");
         }, 10);
     }
 }
@@ -142,10 +141,17 @@ function editaEntrada(id) {
     document.querySelector("#entradaAdaptada_0").checked = adaptada;
     cambiaPrecioEntrada();
     document.querySelector("#formularios button[name='submit']").textContent = "Editar";
-    //document.querySelector("#formularios button[name='submit']").addEventListener("click", /*--*/ );
+    document.querySelector("#formularios button[name='submit']").addEventListener("click", () => {
+        representacion.borraEntrada(id);
+        if (!document.querySelector("#formularioEntrada").classList.contains("was-validated")) {
+            document.querySelector(".modal #mensaje").textContent = "Entrada editada correctamente.";
+            muestraEnPantalla("listaEntrada");
+        }
+    });
 }
 
 function editaRepresentacion(id) {
+    document.querySelector(".jumbotron p").textContent = "Edita representación";
     let representacion = upoTeatro.buscaRepresentacion(id);
     let todas = upoTeatro.buscaRepresentacionPorIntervaloDeUna(representacion);
     let teatro = upoTeatro.buscaTeatroPorRepresentacion(id);
@@ -164,10 +170,17 @@ function editaRepresentacion(id) {
     document.querySelector("#espectaculoSeleccionado").value = espectaculo.codigo;
     document.querySelector("#espectaculoSeleccionado").disabled = true;
     document.querySelector("#formularios button[name='submit']").textContent = "Editar";
-    //document.querySelector("#formularios button[name='submit']").addEventListener("click", /*--*/ );
+    document.querySelector("#formularios button[name='submit']").addEventListener("click", () => {
+        upoTeatro.borrarRepresentacion(id);
+        if (!document.querySelector("#formularioRepresentacion").classList.contains("was-validated")) {
+            document.querySelector(".modal #mensaje").textContent = "Representación editada correctamente.";
+            muestraEnPantalla("listaRepresentacion");
+        }
+    });
 }
 
 function editaEspectaculo(id) {
+    document.querySelector(".jumbotron p").textContent = "Edita espectáculo";
     let espectaculo = upoTeatro.buscaEspectaculo(id);
     let nombre = espectaculo.nombre;
     let productor = espectaculo.productor;
@@ -182,7 +195,13 @@ function editaEspectaculo(id) {
     document.querySelector("#companiaSeleccionada").value = compania;
     document.querySelector("#obraSeleccionada").value = obra;
     document.querySelector("#formularios button[name='submit']").textContent = "Editar";
-    //document.querySelector("#formularios button[name='submit']").addEventListener("click", /*--*/ );
+    document.querySelector("#formularios button[name='submit']").addEventListener("click", () => {
+        upoTeatro.borrarEspectaculo(id);
+        if (!document.querySelector("#formularioEspectaculo").classList.contains("was-validated")) {
+            document.querySelector(".modal #mensaje").textContent = "Espectáculo editado correctamente.";
+            muestraEnPantalla("listaEspectaculo");
+        }
+    });
 }
 
 // Filtros
