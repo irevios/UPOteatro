@@ -104,7 +104,7 @@ function creaTabla(headers, id) {
 // Convierte fecha Date a formato DD/MM/AAAA
 function fechaToString(fecha) {
     let dia = fecha.getDate();
-    let mes = fecha.getMonth();
+    let mes = fecha.getMonth() + 1;
     let año = fecha.getFullYear();
     return dia + "/" + mes + "/" + año;
 }
@@ -120,7 +120,7 @@ function fechaToDate(fecha) {
 // Convierte una fecha Date a AAAA-MM-DD
 function fechaToAmericana(fecha) {
     let dia = fecha.getDate();
-    let mes = fecha.getMonth();
+    let mes = fecha.getMonth() + 1;
     let año = fecha.getFullYear();
     return año + "-" + (mes < 10 ? "0" + mes : mes) + "-" + (dia < 10 ? "0" + dia : dia);
 }
