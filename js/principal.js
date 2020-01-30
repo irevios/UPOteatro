@@ -297,6 +297,7 @@ function nuevasCreaciones(apartado){
 
         let oEspectaculo = new Espectaculo(codigo, nombre, productor, categoria, gastos, obra, compania);
         upoTeatro.agregaEspectaculo(oEspectaculo);
+        mensajeModal("Espectáculo creado correctamente.");
         document.querySelector(apartado).reset();
         break;
 
