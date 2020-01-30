@@ -29,10 +29,12 @@ function validar(apartado) { // Llamo validar con el apartado que quiero validar
         if(representacion == "00")
         {
             error = true;
+            document.querySelector(apartado+" #representacionSeleccionada").classList.add("error");
             document.querySelector(apartado).classList.add("was-validated");
         }
         else
         {
+            document.querySelector(apartado+" #representacionSeleccionada").classList.remove("error");
             let individual = document.getElementById("tipoEntrada0").checked;
             let butacasSel = document.querySelectorAll("#butacasRepresentadas .seleccionada");
             
@@ -40,7 +42,6 @@ function validar(apartado) { // Llamo validar con el apartado que quiero validar
             {
                 if(butacasSel.length == 0){
                     error = true;
-                    document.querySelector(apartado).classList.add("was-validated");
                 }
             }
             else
@@ -48,7 +49,6 @@ function validar(apartado) { // Llamo validar con el apartado que quiero validar
                 if(butacasSel.length <= 1)
                     {
                         error = true;
-                    document.querySelector(apartado).classList.add("was-validated");
                 }
             }
         }  
