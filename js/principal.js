@@ -22,6 +22,39 @@ function validar(apartado) { // Llamo validar con el apartado que quiero validar
     let error = false;
     let elemento;
 
+    if(apartado=="#formularioEntrada")
+    {
+
+        let representacion = document.querySelector(apartado+" #representacionSeleccionada").value;
+        if(representacion == "00")
+        {
+            error = true;
+            document.querySelector(apartado).classList.add("was-validated");
+        }
+        else
+        {
+            let individual = document.getElementById("tipoEntrada0").checked;
+            let butacasSel = document.querySelectorAll("#butacasRepresentadas .seleccionada");
+            
+            if(individual)
+            {
+                if(butacasSel.length == 0){
+                    error = true;
+                    document.querySelector(apartado).classList.add("was-validated");
+                }
+            }
+            else
+            {
+                if(butacasSel.length <= 1)
+                    {
+                        error = true;
+                    document.querySelector(apartado).classList.add("was-validated");
+                }
+            }
+        }  
+    }
+    else
+    {
     // Valida si los datos no están vacíos y son correctos
     for (let i = 0; i < document.querySelector(apartado).getElementsByTagName('input').length; i++) {
         elemento = document.querySelector(apartado).getElementsByTagName('input')[i];
@@ -31,19 +64,27 @@ function validar(apartado) { // Llamo validar con el apartado que quiero validar
             document.querySelector(apartado).classList.add("was-validated");
         }
     }
-    if (error) {
-        mensajeModal("Hiciste algo mal, comprueba los errores");
-    } else { // Si todo esta relleno y correcto borra los errores 
+}
+
+if (error) {
+    mensajeModal("Hiciste algo mal, comprueba los errores");
+    } 
+    else { // Si todo esta relleno y correcto borra los errores 
         document.querySelector(apartado).classList.remove("was-validated");
 
         // ---- e inserta datos a donde sea necesario ----
     }
+
 }
 
 function compruebaFinFecha(fechaInicio, fechaFin) {
     fechaFin.value = "";
     fechaFin.setAttribute("min", fechaInicio.value);
 }
+
+
+
+
 
 // Eliminar Entradas
 document.querySelector("#formularios").addEventListener("click", editaElimina);
@@ -52,14 +93,14 @@ function editaElimina(e) {
     if (e.target.tagName == "BUTTON" && e.target.dataset.tipo == "borrar") {
         switch (e.currentTarget.querySelector(".table-responsive").id) {
             case "listadoEntradas":
-                upoTeatro.buscaRepresentacionPorEntrada(e.target.dataset.id).borrarEntrada(e.target.dataset.id);
-                break;
+            upoTeatro.buscaRepresentacionPorEntrada(e.target.dataset.id).borrarEntrada(e.target.dataset.id);
+            break;
             case "listadoRepresentaciones":
-                upoTeatro.borrarRepresentacion(e.target.dataset.id);
-                break;
+            upoTeatro.borrarRepresentacion(e.target.dataset.id);
+            break;
             case "listadoEspectaculos":
-                upoTeatro.borrarEspectaculo(e.target.dataset.id);
-                break;
+            upoTeatro.borrarEspectaculo(e.target.dataset.id);
+            break;
         }
         e.target.parentElement.parentElement.remove();
     } else if (e.target.tagName == "BUTTON" && e.target.dataset.tipo == "editar") {
@@ -68,14 +109,14 @@ function editaElimina(e) {
         setTimeout(() => {
             switch (apartado) {
                 case "listadoEntradas":
-                    editaEntrada(e.target.dataset.id);
-                    break;
+                editaEntrada(e.target.dataset.id);
+                break;
                 case "listadoRepresentaciones":
-                    editaRepresentacion(e.target.dataset.id);
-                    break;
+                editaRepresentacion(e.target.dataset.id);
+                break;
                 case "listadoEspectaculos":
-                    editaEspectaculo(e.target.dataset.id);
-                    break;
+                editaEspectaculo(e.target.dataset.id);
+                break;
             }
             mensajeModal("¡Le has dado a editar!");
         }, 10);
