@@ -22,15 +22,40 @@ function validar(apartado) { // Llamo validar con el apartado que quiero validar
     let error = false;
     let elemento;
 
+    if (apartado == "#formularioEntrada") {
+
+        let representacion = document.querySelector("#representacionSeleccionada").value;
+        if (representacion == "00") {
+            error = true;
+            document.querySelector("#representacionSeleccionada").classList.add("error");
+            document.querySelector(" #representacionSeleccionada").addEventListener("change", () => document.querySelector("#representacionSeleccionada").classList.remove("error"));
+        } else {
+            let individual = document.getElementById("tipoEntrada0").checked;
+            let butacasSel = document.querySelectorAll("#butacasRepresentadas .seleccionada");
+
+            if (individual) {
+                if (butacasSel.length == 0) {
+                    error = true;
+                    document.querySelector("#butacasRepresentadas").classList.add("error");
+                }
+            } else {
+                if (butacasSel.length <= 1) {
+                    error = true;
+                    document.querySelector("#butacasRepresentadas").classList.add("error");
+                }
+            }
+        }
+    }
+
     // Valida si los datos no están vacíos y son correctos
     for (let i = 0; i < document.querySelector(apartado).getElementsByTagName('input').length; i++) {
         elemento = document.querySelector(apartado).getElementsByTagName('input')[i];
 
         if (elemento.value == "" || document.querySelector(apartado).querySelectorAll(":invalid").length != 0) {
             error = true;
-            document.querySelector(apartado).classList.add("was-validated");
         }
     }
+    document.querySelector(apartado).classList.add("was-validated");
     if (error) {
         mensajeModal("Hiciste algo mal, comprueba los errores");
     } else { // Si todo esta relleno y correcto borra los errores 
@@ -38,12 +63,17 @@ function validar(apartado) { // Llamo validar con el apartado que quiero validar
 
         // ---- e inserta datos a donde sea necesario ----
     }
+
 }
 
 function compruebaFinFecha(fechaInicio, fechaFin) {
     fechaFin.value = "";
     fechaFin.setAttribute("min", fechaInicio.value);
 }
+
+
+
+
 
 // Eliminar Entradas
 document.querySelector("#formularios").addEventListener("click", editaElimina);
@@ -113,17 +143,26 @@ function editaEntrada(id) {
     document.querySelector("#entradaAdaptada_0").checked = adaptada;
     cambiaPrecioEntrada();
     document.querySelector("#formularios button[name='submit']").textContent = "Editar";
-    document.querySelector("#formularios button[name='submit']").addEventListener("click", /*--*/ );
+    //document.querySelector("#formularios button[name='submit']").addEventListener("click", /*--*/ );
 }
 
 function editaRepresentacion(id) {
+    let representacion = upoTeatro.buscaRepresentacion(id);
+    let teatro = upoTeatro.buscaTeatroPorRepresentacion(id);
+    let fecha = representacion.fecha;
+    let adaptada = representacion.adaptada;
+    let precioBase = representacion.precioBase;
+    let espectaculo = representacion.espectaculo;
+    document.querySelector("#teatroSeleccionado").value = teatro.codigo;
+    document.querySelector("#fechaInicioRepresentacion").value = fecha.toLocaleDateString();
+    document.querySelector("#fechaFinalRepresentacion").value = fecha.toLocaleDateString();
     document.querySelector("#formularios button[name='submit']").textContent = "Editar";
-    document.querySelector("#formularios button[name='submit']").addEventListener("click", /*--*/ );
+    //document.querySelector("#formularios button[name='submit']").addEventListener("click", /*--*/ );
 }
 
 function editaEspectaculo(id) {
     document.querySelector("#formularios button[name='submit']").textContent = "Editar";
-    document.querySelector("#formularios button[name='submit']").addEventListener("click", /*--*/ );
+    //document.querySelector("#formularios button[name='submit']").addEventListener("click", /*--*/ );
 }
 
 // Filtros

@@ -122,7 +122,9 @@ input[type="radio"]~.custom-control-label {
     background-color: var(--principal);
     border-color: var(--principal);
 }
-
+.btn.btn-primary:active:focus{
+    color: var(--principal);
+}
 .custom-select:focus {
     border-color: var(--principal);
 }

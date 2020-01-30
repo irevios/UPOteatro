@@ -109,6 +109,7 @@ function fechaToString(fecha) {
     return dia + "/" + mes + "/" + año;
 }
 
+// Convierte una fecha DD/MM/AA a Date
 function fechaToDate(fecha) {
     let dia = fecha.split("/")[0];
     let mes = fecha.split("/")[1];
