@@ -368,17 +368,25 @@ function nuevasCreaciones(apartado){
         }
 
         let fechas=[];
-        let fechaInicio = document.querySelector("#fechaInicioRepresentacion").value.split("-");
-        let fechaFin = document.querySelector("#fechaFinalRepresentacion").value.split("-");
-        alert(fechaInicio[2]);
-        fechaInicio[2]++;
-        alert(fechaInicio[2]);
+        let fechaInicio = fechaToDate(document.querySelector("#fechaInicioRepresentacion").value);
+        let fechaFin = fechaToDate(document.querySelector("#fechaFinalRepresentacion").value);
+        let numeroInicio = fechaInicio.getDate();
+        do
+        {
+            fechas.push(fechaInicio.setDate());
+        }
+        while(numeroInicio<=fechaFin.getDate())
+        {
+            fechas.push(fechaInicio.getDate()+1);
+            numeroInicio++;
+        }
         
-        // while(fechaInicio[2]<=fechaFin[2])
-        // {
-        //     fechas.push(fechaInicio);
-        //     fechaInicio[2]++;
-        // }
+        for(let i=0;i<fechas.length;i++)
+        {
+            alert(fechas[i].getDate()+"-"+fechas.getMonth()+"-"+fechas.getFullYear());
+        }
+
+        //SUMAR FECHAS
 
         let adaptada;
         if(document.querySelector("#representacionAdaptada").checked)
