@@ -234,7 +234,7 @@ function rellenaFormEspectaculo() {
     // Select compañias
     upoTeatro.companias.forEach(compania => {
         let opcion = document.createElement("option");
-        opcion.value = compania.codigo;
+        opcion.value = compania.cif;
         opcion.textContent = compania.nombre;
         document.querySelector("#companiaSeleccionada").append(opcion);
     });
