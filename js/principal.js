@@ -60,8 +60,7 @@ function validar(apartado) { // Llamo validar con el apartado que quiero validar
         mensajeModal("Hiciste algo mal, comprueba los errores");
     } else { // Si todo esta relleno y correcto borra los errores 
         document.querySelector(apartado).classList.remove("was-validated");
-
-        // ---- e inserta datos a donde sea necesario ----
+        nuevasCreaciones(apartado);
     }
 
 }
@@ -271,4 +270,38 @@ function mensajeModal(texto) {
 
 function cierraModal() {
     document.querySelector(".modal").classList.remove("show");
+}
+
+//Añade representacion
+function nuevasCreaciones(apartado){
+    switch(apartado){
+        case "#formularioRepresentacion":
+        break;
+
+        case "#formularioEspectaculo":
+        let ultimoCodigo = upoTeatro.espectaculos[upoTeatro.espectaculos.length-1].codigo.split("");
+        let codigo="";
+        for(let i=0;i<ultimoCodigo.length;i++)
+        {
+            if(i == (ultimoCodigo.length-1))
+                codigo+=parseInt(ultimoCodigo[i])+1;
+            else
+                codigo+=ultimoCodigo[i];
+        }
+        let nombre = document.querySelector("#nombreEspectaculo").value;
+        let productor = document.querySelector("#nombreProductorEspectaculo").value;
+        let categoria = document.querySelector("#categoriaEspectaculo").value;
+        let gastos = document.querySelector("#gastosEspectaculo").value;
+        let compania = upoTeatro.buscaCompania(document.querySelector("#companiaSeleccionada").value);
+        let obra = upoTeatro.buscaObra(document.querySelector("#obraSeleccionada").value);
+
+        let oEspectaculo = new Espectaculo(codigo, nombre, productor, categoria, gastos, obra, compania);
+        upoTeatro.agregaEspectaculo(oEspectaculo);
+        document.querySelector(apartado).reset();
+        break;
+
+        case "#formularioEntrada":
+        alert("Nueva Entrada");
+        break;
+    }
 }
