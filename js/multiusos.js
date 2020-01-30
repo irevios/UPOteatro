@@ -101,7 +101,7 @@ function creaTabla(headers, id) {
     return div;
 }
 
-// Convierte fecha Date a formato DD/MM/AA
+// Convierte fecha Date a formato DD/MM/AAAA
 function fechaToString(fecha) {
     let dia = fecha.getDate();
     let mes = fecha.getMonth();
@@ -109,12 +109,28 @@ function fechaToString(fecha) {
     return dia + "/" + mes + "/" + año;
 }
 
-// Convierte una fecha DD/MM/AA a Date
+// Convierte una fecha DD/MM/AAAA a Date
 function fechaToDate(fecha) {
     let dia = fecha.split("/")[0];
     let mes = fecha.split("/")[1];
-    let año = fecha.split("/")[2]
+    let año = fecha.split("/")[2];
     return new Date(año + "/" + mes + "/" + dia);
+}
+
+// Convierte una fecha Date a AAAA-MM-DD
+function fechaToAmericana(fecha) {
+    let dia = fecha.getDate();
+    let mes = fecha.getMonth();
+    let año = fecha.getFullYear();
+    return año + "-" + (mes < 10 ? "0" + mes : mes) + "-" + (dia < 10 ? "0" + dia : dia);
+}
+
+// Comprueba si dos fechas son consecutivas
+function esFechaConsecutiva(fechaA, fechaB) {
+    let diaA = fechaA.getDate();
+    let diaB = fechaB.getDate();
+
+    return diaA + 1 == diaB || diaA == diaB + 1 ? true : false;
 }
 
 // Convierte un texto a formato titulo
@@ -143,4 +159,29 @@ function agregaBoton(tipo, fila, codigo) {
     }
     boton.append(icono);
     celda.append(boton);
+}
+
+//Añade representacion
+function nuevaRepresentacion(apartado){
+    switch(apartado){
+        case "#formularioRepresentacion":
+        break;
+
+        case "#formularioEspectaculo":
+        let nombre = document.querySelector("#nombreEspectaculo").value;
+        let productor = document.querySelector("#nombreProductorEspectaculo").value;
+        let categoria = document.querySelector("#categoriaEspectaculo").value;
+        let gastos = document.querySelector("#gastosEspectaculo").value;
+        let compania = document.querySelector("#companiaSeleccionada").value;
+        let obra = upoTeatro.buscaObra(document.querySelector("#obraSeleccionada").value);
+
+        let oEspectaculo = new Espectaculo("A", nombre, productor, categoria, gastos, obra, compania);
+        upoTeatro.agregaEspectaculo(oEspectaculo);
+        alert("CREADO");
+        break;
+
+        case "#formularioEntrada":
+        alert("Nueva Entrada");
+        break;
+    }
 }
