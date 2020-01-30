@@ -89,15 +89,28 @@ class UpoTeatro {
     buscaObra(codigo) {
         return this.obras.filter(obra => obra.codigo == codigo)[0];
     }
-    buscaRepresentacionPorIntervaloDeUna(representacion){
+    buscaRepresentacionPorIntervaloDeUna(representacion) {
         let teatro = this.buscaTeatroPorRepresentacion(representacion.codigo);
+        let repInicial = representacion;
         let representacionIntervalo = [representacion];
-        teatro.representaciones.forEach(rep =>{
-            if(esFechaConsecutiva(representacion.fecha,rep.fecha) && representacion.precioBase == rep.precioBase){
+        let repr = teatro.representaciones;
+        repr.sort((repA, repB) => { return repA.fecha - repB.fecha });
+        repr.forEach(rep => {
+            if (representacion.precioBase == rep.precioBase &&
+                representacion.espectaculo == rep.espectaculo &&
+                esFechaConsecutivaPosterior(representacion.fecha, rep.fecha)) {
                 representacionIntervalo.push(rep);
-                representacion=rep;
+                representacion = rep;
             }
         });
+        repr.sort((repA, repB) => { return repB.fecha - repA.fecha });
+        repr.forEach(rep => {
+            if (repInicial.precioBase == rep.precioBase && repInicial.espectaculo == rep.espectaculo && esFechaConsecutivaAnterior(repInicial.fecha, rep.fecha)) {
+                representacionIntervalo.push(rep);
+                repInicial = rep;
+            }
+        });
+        representacionIntervalo.sort((repA, repB) => { return repA.fecha - repB.fecha });
         return representacionIntervalo;
     }
     listadoEntradas() {
