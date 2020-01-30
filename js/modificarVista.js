@@ -121,8 +121,6 @@ function rellenaFormEntrada() {
     // Select multiple butacas
     let representacionSeleccionada = document.querySelector("#representacionSeleccionada");
     representacionSeleccionada.addEventListener("change", cambiaButacasFormEntrada);
-    let butacaSeleccionada = document.querySelector("#butacaSeleccionada");
-    //butacaSeleccionada.addEventListener("change", cambiaPrecioEntrada);
     actualizaFormularioEntrada();
 
     // Tipo de entrada cambia el select multiple

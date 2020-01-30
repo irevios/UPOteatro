@@ -83,43 +83,47 @@ function editaElimina(e) {
 }
 
 // Editar
-
-// WIP
 function editaEntrada(id) {
     let representacion = upoTeatro.buscaRepresentacionPorEntrada(id);
     let entrada = representacion.buscaEntrada(id);
     let entradaTipo = entrada instanceof EntradaIndividual ? "individual" : "grupal";
-    let butaca = entrada.butacas;
+    let butacas = entrada.butacas;
     let adaptada = entrada.adaptada;
     let precio = entrada.precio;
-    console.log(entradaTipo);
     let tipo;
     let personas;
     document.querySelector("#representacionSeleccionada").value = representacion.codigo;
     cambiaButacasFormEntrada();
-    document.querySelector("#butacaSeleccionada").value = butaca[0].idButaca();
-    document.querySelector("#butacaSeleccionada option[value='" + butaca[0].idButaca() + "']").disabled = false;
+    document.querySelectorAll("#butacasRepresentadas i").forEach(silla => {
+        butacas.forEach(butaca => {
+            if (silla.dataset.butaca == butaca.idButaca()) {
+                silla.classList.add("seleccionada");
+                silla.classList.remove("ocupada");
+            }
+        });
+    });
     if (entradaTipo == "individual") {
         let tipo = entrada.tipo;
-        document.querySelector("#tipoEntrada0").checked = true;
+        document.querySelector("#tipoEntrada0").setAttribute("checked", "checked");
     } else {
         let personas = entrada.numPersonas;
-        document.querySelector("#tipoEntrada1").checked = true;
+        document.querySelector("#tipoEntrada1").setAttribute("checked", "checked");
     }
+    document.querySelector("#personasGrupal").closest(".col-4").style.display = document.querySelector("#tipoEntrada1").checked ? "block" : "none";
     document.querySelector("#entradaAdaptada_0").checked = adaptada;
-    document.querySelector("#totalEntrada").value = precio;
+    cambiaPrecioEntrada();
     document.querySelector("#formularios button[name='submit']").textContent = "Editar";
-    document.querySelector("#formularios button[name='submit']").addEventListener("click", () => editaObjeto(id));
+    document.querySelector("#formularios button[name='submit']").addEventListener("click", /*--*/ );
 }
 
 function editaRepresentacion(id) {
     document.querySelector("#formularios button[name='submit']").textContent = "Editar";
-    document.querySelector("#formularios button[name='submit']").addEventListener("click", () => editaObjeto(id));
+    document.querySelector("#formularios button[name='submit']").addEventListener("click", /*--*/ );
 }
 
 function editaEspectaculo(id) {
     document.querySelector("#formularios button[name='submit']").textContent = "Editar";
-    document.querySelector("#formularios button[name='submit']").addEventListener("click", () => editaObjeto(id));
+    document.querySelector("#formularios button[name='submit']").addEventListener("click", /*--*/ );
 }
 
 // Filtros
