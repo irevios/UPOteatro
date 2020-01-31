@@ -366,18 +366,18 @@ function nuevasCreaciones(apartado) {
             let fechaFin = fechaToDate(document.querySelector("#fechaFinalRepresentacion").value);
             let fechas = fechasIntervalo(fechaInicio, fechaFin);
             let teatro = upoTeatro.buscaTeatro(document.querySelector("#teatroSeleccionado").value);
-            for (let i = 0; i < fechas.length; i++) {
+            fechas.forEach(fecha => {
 
 
                 let codigoRepresentacion = getSiguienteCodigo(teatro.representaciones);
-
-                oRepresentacion = new Representacion(codigoRepresentacion, fechas[i], adaptada, precioBase, oEsp);
-
-                if (!teatro.agregaRepresentacion(oRepresentacion)) {
+                console.log(codigoRepresentacion);
+                oRepresentacion = new Representacion(codigoRepresentacion, fecha, adaptada, precioBase, oEsp);
+                console.log(codigoRepresentacion, fecha, adaptada, precioBase, oEsp);
+                if (teatro.agregaRepresentacion(oRepresentacion) == false) {
                     correcto = false;
                     incorrectos += fecha + "\n";
                 }
-            }
+            });
 
             setTimeout(() => {
                 if (correcto) {
@@ -474,7 +474,12 @@ function getSiguienteCodigo(lista) {
     let ultimoCodigo = ordenada[ordenada.length - 1];
     let numRexp = /([A-Z]{1,2})([0-9]+)/;
     ultimoCodigo = ultimoCodigo.split(numRexp);
+    console.log(ultimoCodigo);
     let letra = ultimoCodigo[1];
-    let num = (parseInt(ultimoCodigo[2]) + 1) * ((ultimoCodigo[2].length - 1) == 1 ? 0.1 : (ultimoCodigo[2].length - 1) ? 0.01 : 0.001);
-    return (letra + num).replace(".", "");
+    let n = parseInt(ultimoCodigo[2]) + 1;
+    let num = pad(n, ultimoCodigo[2].length == 3 ? 3 : 2);
+
+    return (letra + num);
 }
+
+function pad(num, size) { return ('0000000000000000000' + num).substr(-size); }

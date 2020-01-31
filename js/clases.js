@@ -10,7 +10,7 @@ class Teatro {
         this.butacas = [];
     }
     agregaRepresentacion(representacion) {
-        if (this.representaciones.filter(representacionNuevo => representacionNuevo.fecha == representacion.fecha && representacionNuevo.espectaculo == representacion.espectaculo).length == 0) {
+        if (this.representaciones.filter(representacionNuevo => representacionNuevo.espectaculo == representacion.espectaculo && representacionNuevo.fecha == representacion.fecha).length == 0) {
             this.representaciones.push(representacion);
             return true;
         } else { return false; }
@@ -77,6 +77,15 @@ class Representacion {
             return true;
         } else { return false; }
     }
+    borrarEntrada(codigo) {
+        if (this.buscaEntrada(codigo) != undefined) {
+            this.entradas = this.entradas.filter(entrada => entrada.codigo != codigo);
+            return true;
+        } else { return false; }
+    }
+    buscaEntrada(codigo) {
+        return this.entradas.filter(entrada => entrada.codigo == codigo)[0];
+    }
     butacaOcupada(butaca) {
         let ocupada = false;
         this.entradas.forEach(entrada => {
@@ -90,15 +99,6 @@ class Representacion {
         });
         return ocupada;
     }
-    buscaEntrada(codigo) {
-        return this.entradas.filter(entrada => entrada.codigo == codigo)[0];
-    }
-    borrarEntrada(codigo) {
-        if (this.buscaEntrada(codigo) != undefined) {
-            this.entradas = this.entradas.filter(entrada => entrada.codigo != codigo);
-            return true;
-        } else { return false; }
-    }
     toHTMLrow() {
         let fila = document.createElement("tr");
         let celda = fila.insertCell(-1);
@@ -106,7 +106,7 @@ class Representacion {
         celda = fila.insertCell(-1);
         celda.textContent = this.adaptada ? "Sí" : "No";
         celda = fila.insertCell(-1);
-        celda.textContent = this.precioBase;
+        celda.textContent = this.precioBase + "€";
         celda = fila.insertCell(-1);
         celda.textContent = this.espectaculo.nombre;
         if (esAdmin()) {
