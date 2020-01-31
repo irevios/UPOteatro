@@ -402,7 +402,7 @@ function nuevasCreaciones(apartado) {
         case "#formularioEntrada":
             let oEntradaAComprar;
             let representacionSeleccionada = upoTeatro.buscaRepresentacion(document.querySelector("#representacionSeleccionada").value);
-            console.log(representacionSeleccionada);
+            let teatroSeleccionado = upoTeatro.buscaTeatroPorRepresentacion(document.querySelector("#representacionSeleccionada").value);
 
             let esAdaptada;
             if (document.querySelector("#entradaAdaptada_0").checked) {
@@ -423,24 +423,23 @@ function nuevasCreaciones(apartado) {
 
                 //INDIVIDUAL
                 butacaFragmentacion = butacasSeleccionadas[0].dataset.butaca.split("-");
-                oButaca= new Butaca(butacaFragmentacion[2], butacaFragmentacion[1],butacaFragmentacion[0],2);
+                oButaca = teatroSeleccionado.buscaButaca(butacaFragmentacion[0], butacaFragmentacion[1], butacaFragmentacion[2]);
                 tipo = butacaFragmentacion[0];
 
-                oEntradaAComprar = new EntradaIndividual(codigoEntrada, esAdaptada, oButaca, totalEntrada, tipo);
+                oEntradaAComprar = new EntradaIndividual(codigoEntrada, esAdaptada, [oButaca], representacionSeleccionada.precioBase, tipo);
 
                 console.log(JSON.stringify(oEntradaAComprar));
             } else {
                 //GRUPAL
                 let numPersonas = document.querySelector("#personasGrupal").value;
-                let precioEntradaGrupal = totalEntrada / numPersonas;
-                
+
                 let butacas = []
                 for (let i = 0; i < butacasSeleccionadas.length; i++) {
                     butacaFragmentacion = butacasSeleccionadas[i].dataset.butaca.split("-");
-                    oButaca= new Butaca(butacaFragmentacion[2], butacaFragmentacion[1],butacaFragmentacion[0],2);
+                    oButaca = teatroSeleccionado.buscaButaca(butacaFragmentacion[0], butacaFragmentacion[1], butacaFragmentacion[2]); // Las butacas no se crean, se buscan
                     butacas.push(oButaca);
                 }
-                oEntradaAComprar = new EntradaGrupal(codigoEntrada, esAdaptada, butacas, precioEntradaGrupal, numPersonas);
+                oEntradaAComprar = new EntradaGrupal(codigoEntrada, esAdaptada, butacas, representacionSeleccionada.precioBase, numPersonas);
                 console.log(JSON.stringify(oEntradaAComprar));
             }
             setTimeout(() => {
