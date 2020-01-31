@@ -117,17 +117,13 @@ class UpoTeatro {
         let tabla = creaTabla(["Teatro", "Fecha", "Adaptada", "Precio Base", "Espectáculo", "Editar", "Borrar"], "listadoRepresentaciones");
         let a = [];
         a.push(this.teatros[0].representaciones[0]);
-        console.log(a);
         this.teatros.forEach(teatro => {
             teatro.representaciones.forEach(rep => {
-                //console.log(this.compruebaSiExisteRepresentacionEnLaLista(representaciones, rep), representaciones);
-                if (!this.compruebaSiExisteRepresentacionEnLaLista(a, rep)) {
+                if (this.compruebaSiExisteRepresentacionEnLaLista(a, rep)) {
                     a.push(rep);
-                    console.log(rep);
                 }
 
             });
-
         });
         a.forEach(representacion => {
             let linea = representacion.toHTMLrow();
@@ -147,14 +143,7 @@ class UpoTeatro {
         return tabla;
     }
     compruebaSiExisteRepresentacionEnLaLista(lista, busca) {
-        let coincide = false;
-        console.log(lista);
-        lista.forEach(rep => {
-            if (this.buscaTeatroPorRepresentacion(rep) == this.buscaTeatroPorRepresentacion(busca) && rep.espectaculo == busca.espectaculo) {
-                coincide = true;
-            }
-        });
-        return coincide;
+        return lista.filter(rep => this.buscaTeatroPorRepresentacion(rep.codigo) == this.buscaTeatroPorRepresentacion(busca.codigo) && rep.espectaculo == busca.espectaculo && rep.precioBase == busca.precioBase && rep.adaptada == busca.adaptada).length == 0;
     }
     listadoEspectaculos() {
         let tabla = creaTabla(["Espectáculo", "Productor", "Categoría", "Gastos", "Obra", "Compañía", "Editar", "Borrar"], "listadoEspectaculos");
