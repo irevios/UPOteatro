@@ -428,19 +428,5 @@ function nuevasCreaciones(apartado) {
             break;
 
             case "#formularioEntrada":
-        //compraEntrada(entrada)
-        //class Entrada {constructor(codigo, adaptada, butacas, precioBase) 
-            let representacionSeleccionada = document.querySelector("#representacionSeleccionada").value;
-
-            let esAdaptada;
-            if (document.querySelector("#entradaAdaptada_0").checked)
-                esAdaptada = true;
-            else
-                esAdaptada = false;
-
-            let totalEntrada = document.querySelector("#totalEntrada").value;
-
-            alert("entrada creada | "+representacionSeleccionada+" / "+esAdaptada+" / "+totalEntrada);
-            break;
         }
     }
