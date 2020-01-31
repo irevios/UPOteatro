@@ -412,6 +412,7 @@ function nuevasCreaciones(apartado) {
             }, 100);
             break;
             case "#formularioEntrada":
+            let oEntradaAComprar;
         //compraEntrada(entrada)
         //class Entrada {constructor(codigo, adaptada, butacas, precioBase) 
             let representacionSeleccionada = document.querySelector("#representacionSeleccionada").value;
@@ -423,10 +424,11 @@ function nuevasCreaciones(apartado) {
                 esAdaptada = false;
 
             let totalEntrada = document.querySelector("#totalEntrada").value;
+            
 
             let butacasSeleccionadas = formularioEntrada.parentElement.getElementsByClassName("seleccionada");
             for(let i = 0; i<butacasSeleccionadas.length; i++)
-                {
+                {   
                     alert("entrada creada | "+representacionSeleccionada+" / "+esAdaptada+" / "+totalEntrada+" / "+butacasSeleccionadas[i].dataset.butaca);
                 }
             break;
