@@ -370,9 +370,7 @@ function nuevasCreaciones(apartado) {
 
 
                 let codigoRepresentacion = getSiguienteCodigo(teatro.representaciones);
-                console.log(codigoRepresentacion);
                 oRepresentacion = new Representacion(codigoRepresentacion, fecha, adaptada, precioBase, oEsp);
-                console.log(codigoRepresentacion, fecha, adaptada, precioBase, oEsp);
                 if (teatro.agregaRepresentacion(oRepresentacion) == false) {
                     correcto = false;
                     incorrectos += fecha + "\n";
@@ -474,7 +472,6 @@ function getSiguienteCodigo(lista) {
     let ultimoCodigo = ordenada[ordenada.length - 1];
     let numRexp = /([A-Z]{1,2})([0-9]+)/;
     ultimoCodigo = ultimoCodigo.split(numRexp);
-    console.log(ultimoCodigo);
     let letra = ultimoCodigo[1];
     let n = parseInt(ultimoCodigo[2]) + 1;
     let num = pad(n, ultimoCodigo[2].length == 3 ? 3 : 2);
