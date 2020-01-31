@@ -142,26 +142,67 @@ function editaEntrada(id) {
     document.querySelector("#entradaAdaptada_0").checked = adaptada;
     cambiaPrecioEntrada();
     document.querySelector("#formularios button[name='submit']").textContent = "Editar";
-    //document.querySelector("#formularios button[name='submit']").addEventListener("click", /*--*/ );
+    document.querySelector("#formularios button[name='submit']").addEventListener("click", () => {
+        representacion.borraEntrada(id);
+        if (!document.querySelector("#formularioEntrada").classList.contains("was-validated")) {
+            document.querySelector(".modal #mensaje").textContent = "Entrada editada correctamente.";
+            muestraEnPantalla("listaEntrada");
+        }
+    });
 }
 
 function editaRepresentacion(id) {
+    document.querySelector(".jumbotron p").textContent = "Edita representación";
     let representacion = upoTeatro.buscaRepresentacion(id);
+    let todas = upoTeatro.buscaRepresentacionPorIntervaloDeUna(representacion);
     let teatro = upoTeatro.buscaTeatroPorRepresentacion(id);
-    let fecha = representacion.fecha;
+    let fechaInicial = todas[0].fecha;
+    let fechaFinal = todas[todas.length - 1].fecha;
+    console.log(todas, fechaInicial, fechaFinal);
     let adaptada = representacion.adaptada;
     let precioBase = representacion.precioBase;
     let espectaculo = representacion.espectaculo;
     document.querySelector("#teatroSeleccionado").value = teatro.codigo;
-    document.querySelector("#fechaInicioRepresentacion").value = fecha.toLocaleDateString();
-    document.querySelector("#fechaFinalRepresentacion").value = fecha.toLocaleDateString();
+    document.querySelector("#teatroSeleccionado").disabled = true;
+    document.querySelector("#fechaInicioRepresentacion").value = fechaToAmericana(fechaInicial);
+    document.querySelector("#fechaFinalRepresentacion").value = fechaToAmericana(fechaFinal);
+    document.querySelector("#representacionAdaptada").checked = adaptada;
+    document.querySelector("#precioBaseRepresentacion").value = precioBase;
+    document.querySelector("#espectaculoSeleccionado").value = espectaculo.codigo;
+    document.querySelector("#espectaculoSeleccionado").disabled = true;
     document.querySelector("#formularios button[name='submit']").textContent = "Editar";
-    //document.querySelector("#formularios button[name='submit']").addEventListener("click", /*--*/ );
+    document.querySelector("#formularios button[name='submit']").addEventListener("click", () => {
+        upoTeatro.borrarRepresentacion(id);
+        if (!document.querySelector("#formularioRepresentacion").classList.contains("was-validated")) {
+            document.querySelector(".modal #mensaje").textContent = "Representación editada correctamente.";
+            muestraEnPantalla("listaRepresentacion");
+        }
+    });
 }
 
 function editaEspectaculo(id) {
+    document.querySelector(".jumbotron p").textContent = "Edita espectáculo";
+    let espectaculo = upoTeatro.buscaEspectaculo(id);
+    let nombre = espectaculo.nombre;
+    let productor = espectaculo.productor;
+    let categoria = espectaculo.categoria;
+    let gastos = espectaculo.gastos;
+    let obra = espectaculo.obra.codigo;
+    let compania = espectaculo.compania.cif;
+    document.querySelector("#nombreEspectaculo").value = nombre;
+    document.querySelector("#nombreProductorEspectaculo").value = productor;
+    document.querySelector("#categoriaEspectaculo").value = categoria;
+    document.querySelector("#gastosEspectaculo").value = gastos;
+    document.querySelector("#companiaSeleccionada").value = compania;
+    document.querySelector("#obraSeleccionada").value = obra;
     document.querySelector("#formularios button[name='submit']").textContent = "Editar";
-    //document.querySelector("#formularios button[name='submit']").addEventListener("click", /*--*/ );
+    document.querySelector("#formularios button[name='submit']").addEventListener("click", () => {
+        upoTeatro.borrarEspectaculo(id);
+        if (!document.querySelector("#formularioEspectaculo").classList.contains("was-validated")) {
+            document.querySelector(".modal #mensaje").textContent = "Espectáculo editado correctamente.";
+            muestraEnPantalla("listaEspectaculo");
+        }
+    });
 }
 
 // Filtros
@@ -270,78 +311,6 @@ function mensajeModal(texto) {
 
 function cierraModal() {
     document.querySelector(".modal").classList.remove("show");
-}
-
-//Añade representacion
-function nuevasCreaciones(apartado) {
-
-    let ultimoCodigo;
-
-    switch (apartado) {
-        case "#formularioRepresentacion":
-            //Fechas, todas las que estén en el intervalo
-            //class Representacion { constructor(codigo, fecha, adaptada, precioBase, espectaculo)
-            //agregaRepresentacion
-
-            ultimoCodigo = upoTeatro.representaciones[upoTeatro.representaciones.length - 1].codigo.split("");
-            let codigoRepresentacion = "";
-            for (let i = 0; i < ultimoCodigo.length; i++) {
-                if (i == (ultimoCodigo.length - 1))
-                    codigoRepresentacion += parseInt(ultimoCodigo[i]) + 1;
-                else
-                    codigoRepresentacion += ultimoCodigo[i];
-            }
-
-            let fechas = [];
-            let fechaInicio = document.querySelector("#fechaInicioRepresentacion").value.split("-");
-            let fechaFin = document.querySelector("#fechaFinalRepresentacion").value.split("-");
-            alert(fechaInicio[2]);
-            fechaInicio[2]++;
-            alert(fechaInicio[2]);
-
-            // while(fechaInicio[2]<=fechaFin[2])
-            // {
-            //     fechas.push(fechaInicio);
-            //     fechaInicio[2]++;
-            // }
-
-            let adaptada;
-            if (document.querySelector("#representacionAdaptada").checked)
-                adaptada = "S";
-            else
-                adaptada = "N";
-
-            let precioBase = document.querySelector("#precioBaseRepresentacion").value;
-            let espectaculo = document.querySelector("#espectaculoSeleccionado").value;
-            break;
-
-
-        case "#formularioEspectaculo":
-            ultimoCodigo = upoTeatro.espectaculos[upoTeatro.espectaculos.length - 1].codigo.split("");
-            let codigoEspectaculo = "";
-            for (let i = 0; i < ultimoCodigo.length; i++) {
-                if (i == (ultimoCodigo.length - 1))
-                    codigoEspectaculo += parseInt(ultimoCodigo[i]) + 1;
-                else
-                    codigoEspectaculo += ultimoCodigo[i];
-            }
-            let nombre = document.querySelector("#nombreEspectaculo").value;
-            let productor = document.querySelector("#nombreProductorEspectaculo").value;
-            let categoria = document.querySelector("#categoriaEspectaculo").value;
-            let gastos = document.querySelector("#gastosEspectaculo").value;
-            let compania = upoTeatro.buscaCompania(document.querySelector("#companiaSeleccionada").value);
-            let obra = upoTeatro.buscaObra(document.querySelector("#obraSeleccionada").value);
-
-            let oEspectaculo = new Espectaculo(codigoEspectaculo, nombre, productor, categoria, gastos, obra, compania);
-            upoTeatro.agregaEspectaculo(oEspectaculo);
-            mensajeModal("Espectáculo creado correctamente.");
-            document.querySelector(apartado).reset();
-            break;
-
-        case "#formularioEntrada":
-            alert("Nueva Entrada");
-            break;
-    }
 }
 
 //Añade representacion
