@@ -423,14 +423,20 @@ function nuevasCreaciones(apartado) {
                 esAdaptada = false;
 
             let totalEntrada = document.querySelector("#totalEntrada").value;
-            
+            let tipo;
 
             let butacasSeleccionadas = formularioEntrada.parentElement.getElementsByClassName("seleccionada");
             if(butacasSeleccionadas.length == 1)
             {
-                //INDIVIDUAL -> oEntradaAComprar = new EntradaIndividual(*codigo*, esAdaptada, butacasSeleccionadas[0], totalEntrada, ¿tipo?)
+
+                let tipoSplit = butacasSeleccionadas[0].dataset.butaca.split("-");
+                tipo = tipoSplit[0];
+
+                oEntradaAComprar = new EntradaIndividual("AA", esAdaptada, butacasSeleccionadas[0].dataset.butaca, totalEntrada, tipo);
+                               
+                //oEntradaAComprar = new EntradaIndividual(*codigo*, esAdaptada, butacasSeleccionadas[0], totalEntrada, ¿tipo?)
                 //compraEntrada(oEntradaAComprar)
-                console.log("New EntradaIndividual\nCodigo: ¿? \nesAdaptada: "+esAdaptada+"\nbutacaSeleccionada: "+butacasSeleccionadas[0].dataset.butaca+"\ntotalEntrada:"+totalEntrada+"\n¿Tipo?");
+                console.log(JSON.stringify(oEntradaAComprar));
             }
             else
             {
