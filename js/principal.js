@@ -418,13 +418,15 @@ function nuevasCreaciones(apartado) {
             let oButaca;//constructor(numero, fila, zona, coefPrecio)
 
             let butacasSeleccionadas = formularioEntrada.parentElement.getElementsByClassName("seleccionada");
+            let butacaFragmentacion
             if (butacasSeleccionadas.length == 1) {
 
                 //INDIVIDUAL
-                let tipoSplit = butacasSeleccionadas[0].dataset.butaca.split("-");
-                tipo = tipoSplit[0];
+                butacaFragmentacion = butacasSeleccionadas[0].dataset.butaca.split("-");
+                oButaca= new Butaca(butacaFragmentacion[2], butacaFragmentacion[1],butacaFragmentacion[0],2);
+                tipo = butacaFragmentacion[0];
 
-                oEntradaAComprar = new EntradaIndividual(codigoEntrada, esAdaptada, butacasSeleccionadas[0].dataset.butaca, totalEntrada, tipo);
+                oEntradaAComprar = new EntradaIndividual(codigoEntrada, esAdaptada, oButaca, totalEntrada, tipo);
 
                 console.log(JSON.stringify(oEntradaAComprar));
             } else {
@@ -434,7 +436,7 @@ function nuevasCreaciones(apartado) {
                 
                 let butacas = []
                 for (let i = 0; i < butacasSeleccionadas.length; i++) {
-                    let butacaFragmentacion = butacasSeleccionadas[i].dataset.butaca.split("-");
+                    butacaFragmentacion = butacasSeleccionadas[i].dataset.butaca.split("-");
                     oButaca= new Butaca(butacaFragmentacion[2], butacaFragmentacion[1],butacaFragmentacion[0],2);
                     butacas.push(oButaca);
                 }
