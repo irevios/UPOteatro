@@ -142,7 +142,7 @@ class UpoTeatro {
         });
         return tabla;
     }
-    compruebaSiExisteRepresentacionEnLaLista(lista, busca) {
+    compruebaSiExisteRepresentacionEnLaLista(lista, busca) {        
         return lista.filter(rep => this.buscaTeatroPorRepresentacion(rep.codigo) == this.buscaTeatroPorRepresentacion(busca.codigo) && rep.espectaculo == busca.espectaculo && rep.precioBase == busca.precioBase && rep.adaptada == busca.adaptada).length == 0;
     }
     listadoEspectaculos() {
