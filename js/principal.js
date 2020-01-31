@@ -415,7 +415,7 @@ function nuevasCreaciones(apartado) {
             let tipo;
 
             let codigoEntrada = getSiguienteCodigo(upoTeatro.listaEntradas());
-            let oButaca;//constructor(numero, fila, zona, coefPrecio)
+            let oButaca;
 
             let butacasSeleccionadas = formularioEntrada.parentElement.getElementsByClassName("seleccionada");
             let butacaFragmentacion
@@ -441,7 +441,7 @@ function nuevasCreaciones(apartado) {
                     butacas.push(oButaca);
                 }
                 oEntradaAComprar = new EntradaGrupal(codigoEntrada, esAdaptada, butacas, precioEntradaGrupal, numPersonas);
-                console.log("New EntradaGrupal\nCodigo: " + codigoEntrada + " \nesAdaptada: " + esAdaptada + "\nbutacaSeleccionada: " + butacas.join() + "\ntotalEntrada:" + precioEntradaGrupal + "\nnumPersonas: " + numPersonas);
+                console.log(JSON.stringify(oEntradaAComprar));
             }
             setTimeout(() => {
                 if (representacionSeleccionada.compraEntrada(oEntradaAComprar)) {
