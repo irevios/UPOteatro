@@ -426,8 +426,6 @@ function nuevasCreaciones(apartado) {
                 tipo = butacaFragmentacion[0];
 
                 oEntradaAComprar = new EntradaIndividual(codigoEntrada, esAdaptada, [oButaca], representacionSeleccionada.precioBase, tipo);
-
-                console.log(JSON.stringify(oEntradaAComprar));
             } else {
                 //GRUPAL
                 let numPersonas = document.querySelector("#personasGrupal").value;
@@ -439,12 +437,14 @@ function nuevasCreaciones(apartado) {
                     butacas.push(oButaca);
                 }
                 oEntradaAComprar = new EntradaGrupal(codigoEntrada, esAdaptada, butacas, representacionSeleccionada.precioBase, numPersonas);
-                console.log(JSON.stringify(oEntradaAComprar));
             }
             setTimeout(() => {
                 if (representacionSeleccionada.compraEntrada(oEntradaAComprar)) {
                     mensajeModal("Has comprado la entrada correctamente");
-                    document.querySelector(apartado).reset();
+                    //RESET
+                    document.querySelector("#representacionSeleccionada").value = "00";
+                    document.querySelector("#totalEntrada").value = "0";
+                    actualizaFormularioEntrada();
                 } else {
                     mensajeModal("Ha ocurrido un error, inténtelo más tarde.");
                 }
