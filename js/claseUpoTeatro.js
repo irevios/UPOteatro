@@ -87,21 +87,17 @@ class UpoTeatro {
     listadoRepresentaciones() {
         let tabla = creaTabla(["Teatro", "Fecha", "Adaptada", "Precio Base", "Espectáculo", "Editar", "Borrar"], "listadoRepresentaciones");
         let a = [];
-        a.push(this.teatros[0].representaciones[0]);
-        this.teatros.sort((tA, tB) => { return parseInt(tA.codigo.substring(1)) - parseInt(tB.codigo.substring(1)) });
-        this.teatros.forEach(teatro => {
-            teatro.representaciones.sort((rA, rB) => { return rA.codigo - rB.codigo });
-            teatro.representaciones.forEach(rep => {
-                if (this.coincideRepresentacion(a, rep)) {
-                    a.push(rep);
-                }
-            });
-        });
+        this.teatros.sort((tA, tB) => { return parseInt(tA.codigo.substring(2)) - parseInt(tB.codigo.substring(2)) });
+        a.push(this.listaRepresentaciones()[0]);
+        this.listaRepresentaciones().forEach(rep => {
+            if (this.coincideRepresentacion(a, rep)) {
+                a.push(rep);
+            }
+        })
         a.forEach(representacion => {
             let linea = representacion.toHTMLrow();
             let celdaTeatro = linea.insertCell(0);
             let teatro = this.buscaTeatroPorRepresentacion(representacion.codigo);
-            console.log(teatro);
             celdaTeatro.textContent = teatro.nombre;
             let fechas = teatro.buscaRepresentacionesIntervalo(representacion);
             let fInicio = fechaToString(fechas[0].fecha);

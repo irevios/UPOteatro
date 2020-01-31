@@ -84,7 +84,11 @@ function editaElimina(e) {
                 upoTeatro.buscaRepresentacionPorEntrada(e.target.dataset.id).borrarEntrada(e.target.dataset.id);
                 break;
             case "listadoRepresentaciones":
-                upoTeatro.buscaTeatroPorRepresentacion(e.target.dataset.id).borrarRepresentacion(e.target.dataset.id);
+                let teatro = upoTeatro.buscaTeatroPorRepresentacion(e.target.dataset.id);
+                let todas = teatro.buscaRepresentacionesIntervalo(teatro.buscaRepresentacion(e.target.dataset.id));
+                todas.forEach(rep => {
+                    teatro.borrarRepresentacion(rep.codigo);
+                });
                 break;
             case "listadoEspectaculos":
                 upoTeatro.borrarEspectaculo(e.target.dataset.id);
@@ -180,7 +184,7 @@ function editaRepresentacion(id) {
                 document.querySelector(".modal #mensaje").textContent = "Representación editada correctamente.";
                 muestraEnPantalla("listaRepresentacion");
             }
-        }, 101);
+        }, 200);
     });
 }
 
@@ -367,22 +371,26 @@ function nuevasCreaciones(apartado) {
             let teatro = upoTeatro.buscaTeatro(document.querySelector("#teatroSeleccionado").value);
             let repAIntroducir = [];
             let incorrectos = document.createElement("div");
-            fechas.forEach(fecha => {
-                let codigoRepresentacion = getSiguienteCodigo(upoTeatro.listaRepresentaciones());
-                oRepresentacion = new Representacion(codigoRepresentacion, fecha, adaptada, precioBase, oEsp);
-                if (!teatro.esPosibleAgregarRepresentacion(oRepresentacion)) {
-                    correcto = false;
-                    let p = document.createElement("p");
-                    p.textContent = fechaToString(fecha);
-                    incorrectos.append(p);
-                } else {
-                    repAIntroducir.push(oRepresentacion);
-                }
-
-            });
             setTimeout(() => {
+                fechas.forEach(fecha => {
+                    let codigoRepresentacion = getSiguienteCodigo(upoTeatro.listaRepresentaciones());
+                    oRepresentacion = new Representacion(codigoRepresentacion, fecha, adaptada, precioBase, oEsp);
+                    if (!teatro.esPosibleAgregarRepresentacion(oRepresentacion)) {
+                        correcto = false;
+                        let p = document.createElement("p");
+                        p.textContent = fechaToString(fecha);
+                        incorrectos.append(p);
+                    } else {
+                        repAIntroducir.push(oRepresentacion);
+                    }
+
+                });
+
                 if (correcto) {
-                    setTimeout(() => { repAIntroducir.forEach(rep => teatro.agregaRepresentacion(rep)) }, 100);
+                    repAIntroducir.forEach(rep => {
+                        teatro.agregaRepresentacion(rep);
+                    })
+
                     mensajeModal("Representacion creada correctamente.");
                     document.querySelector(apartado).reset();
                 } else {
@@ -481,7 +489,6 @@ function getSiguienteCodigo(lista) {
         return parseInt(a.substr(2)) - parseInt(b.substr(2));
     });
     let ultimoCodigo = ordenada[ordenada.length - 1];
-    console.log(ultimoCodigo);
     let letra = ultimoCodigo.substr(0, 2);
     let n = parseInt(ultimoCodigo.substr(2)) + 1;
 

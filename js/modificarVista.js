@@ -191,6 +191,7 @@ function seleccionaButaca(e) {
 
 
 function cambiaPrecioEntrada() {
+    document.querySelector("#totalEntrada").value = 0;
     let teatro = upoTeatro.buscaTeatroPorRepresentacion(document.querySelector("#formularioEntrada #representacionSeleccionada").value);
     let representacion = teatro.buscaRepresentacion(document.querySelector("#formularioEntrada #representacionSeleccionada").value);
     let coefButaca;
