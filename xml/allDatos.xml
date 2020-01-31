@@ -1,31 +1,31 @@
 <datos>
     <!-- Base de datos de ejemplo de obras -->
     <obras>
-        <obra cod="OB001">
+        <obra cod="OB01">
             <nombre>Hamlet</nombre>
             <autor>William Shakespeare</autor>
         </obra>
-        <obra cod="OB002">
+        <obra cod="OB02">
             <nombre>La Celestina</nombre>
             <autor>Fernando de Rojas</autor>
         </obra>
-        <obra cod="OB003">
+        <obra cod="OB03">
             <nombre>La llamada</nombre>
             <autor>Javier Calvo</autor>
         </obra>
-        <obra cod="OB004">
+        <obra cod="OB04">
             <nombre>Billy Elliot</nombre>
             <autor>Lee Hall</autor>
         </obra>
-        <obra cod="OB005">
+        <obra cod="OB05">
             <nombre>Yerma</nombre>
             <autor>Federico García Lorca</autor>
         </obra>
-        <obra cod="OB006">
+        <obra cod="OB06">
             <nombre>Lo invisible</nombre>
             <autor>José Martínez Ruíz "Azorín"</autor>
         </obra>
-        <obra cod="OB007">
+        <obra cod="OB07">
             <nombre>Riot Comedy</nombre>
             <autor>Influencers</autor>
         </obra>
@@ -59,43 +59,43 @@
     </companias>
     <!-- Base de datos de ejemplo de espectáculos -->
     <espectaculos>
-        <espectaculo cod="ES001" obra="OB003" compania="B32212532">
+        <espectaculo cod="E001" obra="OB03" compania="B32212532">
             <nombre>La llamada El Musical</nombre>
             <productor>Mariano Blanes Arguelles</productor>
             <categoria>Musical</categoria>
             <gastos>15600</gastos>
         </espectaculo>
-        <espectaculo cod="ES002" obra="OB002" compania="K64801160">
+        <espectaculo cod="E002" obra="OB02" compania="K64801160">
             <nombre>La Celestina</nombre>
             <productor>Guillermo Casanova Cruces</productor>
             <categoria>Tragicomedia</categoria>
             <gastos>24100</gastos>
         </espectaculo>
-        <espectaculo cod="ES003" obra="OB001" compania="P61657821">
+        <espectaculo cod="E003" obra="OB01" compania="P61657821">
             <nombre>Hamlet</nombre>
             <productor>Paula Blanco Almansa</productor>
             <categoria>Tragedia</categoria>
             <gastos>47400</gastos>
         </espectaculo>
-        <espectaculo cod="ES004" obra="OB004" compania="B32212532">
+        <espectaculo cod="E004" obra="OB04" compania="B32212532">
             <nombre>Billy Elliot</nombre>
             <productor>Jose Ignacio Ulloa Bautista</productor>
             <categoria>Musical</categoria>
             <gastos>32300</gastos>
         </espectaculo>
-        <espectaculo cod="ES005" obra="OB004" compania="G44106268">
+        <espectaculo cod="E005" obra="OB04" compania="G44106268">
             <nombre>Billy Elliot La Parodia</nombre>
             <productor>Rafael Fabregat Folch</productor>
             <categoria>Comedia</categoria>
             <gastos>12000</gastos>
         </espectaculo>
-        <espectaculo cod="ES006" obra="OB006" compania="V0723490I">
+        <espectaculo cod="E006" obra="OB06" compania="V0723490I">
             <nombre>Lo invisible</nombre>
             <productor>Fernando Salvador</productor>
             <categoria>Suspense</categoria>
             <gastos>3864</gastos>
         </espectaculo>
-        <espectaculo cod="ES007" obra="OB007" compania="V0723490I">
+        <espectaculo cod="E007" obra="OB07" compania="V0723490I">
             <nombre>Riot Comedy - Show de comedia femenina</nombre>
             <productor>Penny JayG</productor>
             <categoria>Comedia</categoria>
@@ -104,125 +104,125 @@
     </espectaculos>
     <!-- Base de datos de ejemplo de teatros -->
     <teatros>
-        <teatro cod="TE001">
+        <teatro cod="T001">
             <nombre>Lope de Vega</nombre>
             <direccion>Av. de María Luisa, s/n, 41013 Sevilla</direccion>
         </teatro>
-        <teatro cod="TE002">
+        <teatro cod="T002">
             <nombre>La Maestranza</nombre>
             <direccion>Paseo de Cristóbal Colón, 22, 41001 Sevilla</direccion>
         </teatro>
-        <teatro cod="TE004">
+        <teatro cod="T004">
             <nombre>El Teatro de Triana</nombre>
             <direccion>Calle Condes de Bustillo, 17, 41010 Sevilla</direccion>
         </teatro>
-        <teatro cod="TE003">
+        <teatro cod="T003">
             <nombre>Quintero</nombre>
             <direccion>Calle Cuna, 15, 41004 Sevilla</direccion>
         </teatro>
     </teatros>
     <!-- Base de datos de ejemplo de representaciones -->
     <representaciones>
-        <teatro cod="TE001">
-            <representacion adaptada="N" cod="RE001" espectaculo="ES001">
+        <teatro cod="T001">
+            <representacion adaptada="N" cod="R01" espectaculo="E001">
                 <fecha>2020-03-02</fecha>
                 <precioBase>35.5</precioBase>
             </representacion>
-            <representacion adaptada="N" cod="RE002" espectaculo="ES001">
+            <representacion adaptada="N" cod="R02" espectaculo="E001">
                 <fecha>2020-03-03</fecha>
                 <precioBase>35.5</precioBase>
             </representacion>
-            <representacion adaptada="N" cod="RE003" espectaculo="ES001">
+            <representacion adaptada="N" cod="R03" espectaculo="E001">
                 <fecha>2020-03-04</fecha>
                 <precioBase>35.5</precioBase>
             </representacion>
-            <representacion adaptada="N" cod="RE004" espectaculo="ES001">
+            <representacion adaptada="N" cod="R04" espectaculo="E001">
                 <fecha>2020-03-05</fecha>
                 <precioBase>35.5</precioBase>
             </representacion>
-            <representacion adaptada="N" cod="RE005" espectaculo="ES001">
+            <representacion adaptada="N" cod="R05" espectaculo="E001">
                 <fecha>2020-03-06</fecha>
                 <precioBase>35.5</precioBase>
             </representacion>
-            <representacion adaptada="N" cod="RE006" espectaculo="ES001">
+            <representacion adaptada="N" cod="R06" espectaculo="E001">
                 <fecha>2020-03-07</fecha>
                 <precioBase>35.5</precioBase>
             </representacion>
-            <representacion adaptada="N" cod="RE007" espectaculo="ES001">
+            <representacion adaptada="N" cod="R07" espectaculo="E001">
                 <fecha>2020-03-08</fecha>
                 <precioBase>35.5</precioBase>
             </representacion>
         </teatro>
-        <teatro cod="TE002">
-            <representacion adaptada="N" cod="RE008" espectaculo="ES002">
+        <teatro cod="T002">
+            <representacion adaptada="N" cod="R08" espectaculo="E002">
                 <fecha>2020-08-29</fecha>
                 <precioBase>55.5</precioBase>
             </representacion>
-            <representacion adaptada="N" cod="RE009" espectaculo="ES002">
+            <representacion adaptada="N" cod="R09" espectaculo="E002">
                 <fecha>2020-08-30</fecha>
                 <precioBase>55.5</precioBase>
             </representacion>
-            <representacion adaptada="S" cod="RE012" espectaculo="ES003">
+            <representacion adaptada="S" cod="R12" espectaculo="E003">
                 <fecha>2020-04-14</fecha>
                 <precioBase>38.8</precioBase>
             </representacion>
-            <representacion adaptada="N" cod="RE014" espectaculo="ES004">
+            <representacion adaptada="N" cod="R14" espectaculo="E004">
                 <fecha>2020-11-09</fecha>
                 <precioBase>45.5</precioBase>
             </representacion>
-            <representacion adaptada="S" cod="RE015" espectaculo="ES005">
+            <representacion adaptada="S" cod="R15" espectaculo="E005">
                 <fecha>2020-02-05</fecha>
                 <precioBase>20.6</precioBase>
             </representacion>
-            <representacion adaptada="S" cod="RE016" espectaculo="ES005">
+            <representacion adaptada="S" cod="R16" espectaculo="E005">
                 <fecha>2020-02-06</fecha>
                 <precioBase>20.6</precioBase>
             </representacion>
-            <representacion adaptada="S" cod="RE017" espectaculo="ES005">
+            <representacion adaptada="S" cod="R17" espectaculo="E005">
                 <fecha>2020-02-07</fecha>
                 <precioBase>20.6</precioBase>
             </representacion>
         </teatro>
-        <teatro cod="TE003">
-            <representacion adaptada="S" cod="RE010" espectaculo="ES003">
+        <teatro cod="T003">
+            <representacion adaptada="S" cod="R10" espectaculo="E003">
                 <fecha>2020-04-12</fecha>
                 <precioBase>38.8</precioBase>
             </representacion>
-            <representacion adaptada="S" cod="RE011" espectaculo="ES003">
+            <representacion adaptada="S" cod="R11" espectaculo="E003">
                 <fecha>2020-04-13</fecha>
                 <precioBase>48.8</precioBase>
             </representacion>
-            <representacion adaptada="N" cod="RE013" espectaculo="ES003">
+            <representacion adaptada="N" cod="R13" espectaculo="E003">
                 <fecha>2020-04-15</fecha>
                 <precioBase>48.8</precioBase>
             </representacion>
-            <representacion adaptada="S" cod="RE018" espectaculo="ES005">
+            <representacion adaptada="S" cod="R18" espectaculo="E005">
                 <fecha>2020-02-08</fecha>
                 <precioBase>20.6</precioBase>
             </representacion>
-            <representacion adaptada="S" cod="RE019" espectaculo="ES005">
+            <representacion adaptada="S" cod="R19" espectaculo="E005">
                 <fecha>2020-02-09</fecha>
                 <precioBase>20.6</precioBase>
             </representacion>
-            <representacion adaptada="S" cod="RE020" espectaculo="ES005">
+            <representacion adaptada="S" cod="R20" espectaculo="E005">
                 <fecha>2020-02-10</fecha>
                 <precioBase>20.6</precioBase>
             </representacion>
         </teatro>
-        <teatro cod="TE004">
-            <representacion adaptada="S" cod="RE021" espectaculo="ES006">
+        <teatro cod="T004">
+            <representacion adaptada="S" cod="R21" espectaculo="E006">
                 <fecha>2020-02-14</fecha>
                 <precioBase>6</precioBase>
             </representacion>
-            <representacion adaptada="S" cod="RE022" espectaculo="ES006">
+            <representacion adaptada="S" cod="R22" espectaculo="E006">
                 <fecha>2020-02-11</fecha>
                 <precioBase>12</precioBase>
             </representacion>
-            <representacion adaptada="S" cod="RE023" espectaculo="ES006">
+            <representacion adaptada="S" cod="R23" espectaculo="E006">
                 <fecha>2020-02-12</fecha>
                 <precioBase>12</precioBase>
             </representacion>
-            <representacion adaptada="S" cod="RE024" espectaculo="ES006">
+            <representacion adaptada="S" cod="R24" espectaculo="E006">
                 <fecha>2020-02-13</fecha>
                 <precioBase>6</precioBase>
             </representacion>
@@ -230,7 +230,7 @@
     </representaciones>
     <!-- Base de datos de ejemplo de butacas -->
     <listaButacas>
-        <butacas teatro="TE001">
+        <butacas teatro="T001">
             <zona coefPrecio="2" nomZona="palco">
                 <fila num="1">
                     <butaca num="1" />
@@ -294,7 +294,7 @@
                 </fila>
             </zona>
         </butacas>
-        <butacas teatro="TE002">
+        <butacas teatro="T002">
             <zona coefPrecio="2.2" nomZona="palco">
                 <fila num="1">
                     <butaca num="1" />
@@ -343,7 +343,7 @@
                 </fila>
             </zona>
         </butacas>
-        <butacas teatro="TE003">
+        <butacas teatro="T003">
             <zona coefPrecio="1.8" nomZona="palco">
                 <fila num="1">
                     <butaca num="1" />
@@ -424,7 +424,7 @@
                 </fila>
             </zona>
         </butacas>
-        <butacas teatro="TE004">
+        <butacas teatro="T004">
             <zona coefPrecio="1" nomZona="palco">
                 <fila num="1">
                     <butaca num="1" />
@@ -509,19 +509,19 @@
     <!-- Base de datos de ejemplo de entradas -->
     <entradas>
         <entrada cod="EN001" tipo="individual">
-            <representacion>RE004</representacion>
+            <representacion>R04</representacion>
             <butaca fila="1" num="5" />
             <adaptada>N</adaptada>
             <tipo>palco</tipo>
         </entrada>
         <entrada cod="EN002" tipo="individual">
-            <representacion>RE004</representacion>
+            <representacion>R04</representacion>
             <butaca fila="2" num="2" />
             <adaptada>N</adaptada>
             <tipo>anfiteatro</tipo>
         </entrada>
         <entrada cod="EN003" numPersonas="5" tipo="grupal">
-            <representacion>RE016</representacion>
+            <representacion>R16</representacion>
             <adaptada>N</adaptada>
             <butacas>
                 <butaca fila="1" num="1" />
@@ -532,7 +532,7 @@
             </butacas>
         </entrada>
         <entrada cod="EN004" numPersonas="7" tipo="grupal">
-            <representacion>RE019</representacion>
+            <representacion>R19</representacion>
             <adaptada>N</adaptada>
             <butacas>
                 <butaca fila="1" num="1" />
@@ -545,7 +545,7 @@
             </butacas>
         </entrada>
         <entrada cod="EN005" tipo="individual">
-            <representacion>RE015</representacion>
+            <representacion>R15</representacion>
             <butaca fila="1" num="3" />
             <adaptada>S</adaptada>
             <tipo>paraiso</tipo>

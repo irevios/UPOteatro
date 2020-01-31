@@ -95,6 +95,7 @@ class UpoTeatro {
                 if (this.coincideRepresentacion(a, rep)) {
                     a.push(rep);
                 }
+
             });
         });
         a.forEach(representacion => {
