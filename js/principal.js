@@ -368,7 +368,7 @@ function nuevasCreaciones(apartado) {
             let repAIntroducir = [];
             let incorrectos = document.createElement("div");
             fechas.forEach(fecha => {
-                let codigoRepresentacion = getSiguienteCodigo(teatro.representaciones);
+                let codigoRepresentacion = getSiguienteCodigo(upoTeatro.listaRepresentaciones());
                 oRepresentacion = new Representacion(codigoRepresentacion, fecha, adaptada, precioBase, oEsp);
                 if (!teatro.esPosibleAgregarRepresentacion(oRepresentacion)) {
                     correcto = false;
@@ -377,13 +377,12 @@ function nuevasCreaciones(apartado) {
                     incorrectos.append(p);
                 } else {
                     repAIntroducir.push(oRepresentacion);
-                    console.log(repAIntroducir);
                 }
 
             });
             setTimeout(() => {
                 if (correcto) {
-                    repAIntroducir.forEach(rep => teatro.agregaRepresentacion(rep));
+                    setTimeout(() => {repAIntroducir.forEach(rep => teatro.agregaRepresentacion(rep))},100);
                     mensajeModal("Representacion creada correctamente.");
                     document.querySelector(apartado).reset();
                 } else {

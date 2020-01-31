@@ -46,7 +46,6 @@ class UpoTeatro {
             if (teatro.representaciones.filter(representacion => representacion.codigo == codigo).length != 0) {
                 teatroConRepresentacion = teatro;
             }
-
         });
         return teatroConRepresentacion;
     }
@@ -89,7 +88,9 @@ class UpoTeatro {
         let tabla = creaTabla(["Teatro", "Fecha", "Adaptada", "Precio Base", "Espectáculo", "Editar", "Borrar"], "listadoRepresentaciones");
         let a = [];
         a.push(this.teatros[0].representaciones[0]);
+        this.teatros.sort((tA, tB) => { return parseInt(tA.codigo.substring(1)) - parseInt(tB.codigo.substring(1)) });
         this.teatros.forEach(teatro => {
+            teatro.representaciones.sort((rA, rB) => { return rA.codigo - rB.codigo });
             teatro.representaciones.forEach(rep => {
                 if (this.coincideRepresentacion(a, rep)) {
                     a.push(rep);
@@ -101,6 +102,7 @@ class UpoTeatro {
             let linea = representacion.toHTMLrow();
             let celdaTeatro = linea.insertCell(0);
             let teatro = this.buscaTeatroPorRepresentacion(representacion.codigo);
+            console.log(teatro);
             celdaTeatro.textContent = teatro.nombre;
             let fechas = teatro.buscaRepresentacionesIntervalo(representacion);
             let fInicio = fechaToString(fechas[0].fecha);
@@ -134,5 +136,14 @@ class UpoTeatro {
             });
         });
         return entradas;
+    }
+    listaRepresentaciones() {
+        let representaciones = [];
+        this.teatros.forEach(teatro => {
+            teatro.representaciones.forEach(representacion => {
+                representaciones.push(representacion);
+            });
+        });
+        return representaciones;
     }
 }
