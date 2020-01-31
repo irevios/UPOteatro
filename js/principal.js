@@ -424,7 +424,11 @@ function nuevasCreaciones(apartado) {
 
             let totalEntrada = document.querySelector("#totalEntrada").value;
 
-            alert("entrada creada | "+representacionSeleccionada+" / "+esAdaptada+" / "+totalEntrada);
+            let butacasSeleccionadas = formularioEntrada.parentElement.getElementsByClassName("seleccionada");
+            for(let i = 0; i<butacasSeleccionadas.length; i++)
+                {
+                    alert("entrada creada | "+representacionSeleccionada+" / "+esAdaptada+" / "+totalEntrada+" / "+butacasSeleccionadas[i].dataset.butaca);
+                }
             break;
 
             case "#formularioEntrada":
