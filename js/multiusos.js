@@ -188,28 +188,3 @@ function agregaBoton(tipo, fila, codigo) {
     boton.append(icono);
     celda.append(boton);
 }
-
-//Añade representacion
-function nuevaRepresentacion(apartado) {
-    switch (apartado) {
-        case "#formularioRepresentacion":
-            break;
-
-        case "#formularioEspectaculo":
-            let nombre = document.querySelector("#nombreEspectaculo").value;
-            let productor = document.querySelector("#nombreProductorEspectaculo").value;
-            let categoria = document.querySelector("#categoriaEspectaculo").value;
-            let gastos = document.querySelector("#gastosEspectaculo").value;
-            let compania = document.querySelector("#companiaSeleccionada").value;
-            let obra = upoTeatro.buscaObra(document.querySelector("#obraSeleccionada").value);
-
-            let oEspectaculo = new Espectaculo("A", nombre, productor, categoria, gastos, obra, compania);
-            upoTeatro.agregaEspectaculo(oEspectaculo);
-            alert("CREADO");
-            break;
-
-        case "#formularioEntrada":
-            alert("Nueva Entrada");
-            break;
-    }
-}

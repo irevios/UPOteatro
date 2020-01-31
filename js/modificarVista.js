@@ -199,9 +199,10 @@ function cambiaPrecioEntrada() {
         document.querySelector("#personasGrupal").value = personas;
         coefButaca = personas;
     } else {
-        if (elementoExiste("#butacasRepresentadas .seleccionada"))
+        if (elementoExiste("#butacasRepresentadas .seleccionada")) {
             let butacaSeleccionada = document.querySelector("#butacasRepresentadas .seleccionada").dataset.butaca.split("-");
-        coefButaca = teatro.buscaButaca(butacaSeleccionada[0], butacaSeleccionada[1], butacaSeleccionada[2]).coefPrecio;
+            coefButaca = teatro.buscaButaca(butacaSeleccionada[0], butacaSeleccionada[1], butacaSeleccionada[2]).coefPrecio;
+        }
     }
     document.querySelector("#totalEntrada").value = (parseFloat(representacion.precioBase) * parseFloat(coefButaca)).toFixed(2);
 }
