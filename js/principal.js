@@ -152,7 +152,7 @@ function editaEntrada(id) {
                 document.querySelector(".modal #mensaje").textContent = "Entrada editada correctamente.";
                 muestraEnPantalla("listaEntrada");
             }
-        }, 101);
+        }, 200);
     });
 }
 
@@ -211,7 +211,7 @@ function editaEspectaculo(id) {
                 document.querySelector(".modal #mensaje").textContent = "Espectáculo editado correctamente.";
                 muestraEnPantalla("listaEspectaculo");
             }
-        }, 101);
+        }, 200);
     });
 }
 
