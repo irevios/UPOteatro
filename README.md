@@ -3,9 +3,9 @@
 
 UpoTeatro es una aplicacion web para gestionar diferentes teatros con sus entradas y representaciones.
 
-La idea fue producida por un equipo de estudiantes de la Universidad de Pablo Olavide: [Documentación](Enunciado/UPOTEATRO.pdf)
+La idea fue producida por un equipo de estudiantes de la Universidad de Pablo Olavide: [Documentación](Documentación/UPOTEATRO.pdf)
 
-Puedes ver el diagrama de clases [en este link](Enunciado/Diagrama.pdf).
+Puedes ver el diagrama de clases [en este link](Documentación/Diagrama.pdf).
 
 ### Clases
 * **Upoteatro**: contiene la información de todo el sistema
