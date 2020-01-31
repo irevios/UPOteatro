@@ -414,8 +414,8 @@ function nuevasCreaciones(apartado) {
             break;
             case "#formularioEntrada":
             let oEntradaAComprar;
-
-            let representacionSeleccionada = document.querySelector("#representacionSeleccionada").value;
+            let codRepresentacionSeleccionada = document.querySelector("#representacionSeleccionada").value;
+            
 
             let esAdaptada;
             if (document.querySelector("#entradaAdaptada_0").checked)
@@ -429,24 +429,22 @@ function nuevasCreaciones(apartado) {
             let butacasSeleccionadas = formularioEntrada.parentElement.getElementsByClassName("seleccionada");
             if(butacasSeleccionadas.length == 1)
             {
-
+                //INDIVIDUAL
                 let tipoSplit = butacasSeleccionadas[0].dataset.butaca.split("-");
                 tipo = tipoSplit[0];
 
                 oEntradaAComprar = new EntradaIndividual("AA", esAdaptada, butacasSeleccionadas[0].dataset.butaca, totalEntrada, tipo);
-                               
-                //oEntradaAComprar = new EntradaIndividual(*codigo*, esAdaptada, butacasSeleccionadas[0], totalEntrada, ¿tipo?)
-                //compraEntrada(oEntradaAComprar)
+                
                 console.log(JSON.stringify(oEntradaAComprar));
             }
             else
             {
+                //GRUPAL
                 let numPersonas = document.querySelector("#personasGrupal").value;
                 let precioEntradaGrupal = totalEntrada/numPersonas;
-                //MULTIPLE -> oEntradaAComprar = new EntradaGrupal(*codigo*, esAdaptada, butacasSeleccionadas[i], totalEntrada(¿Entre numentradas?), numPersonas)
                 for(let i = 0; i<butacasSeleccionadas.length; i++)
                 {   
-                    //compraEntrada(oEntradaAComprar)
+                    oEntradaAComprar = new EntradaGrupal("AA", esAdaptada, butacasSeleccionadas[i].dataset.butaca, precioEntradaGrupal, numPersonas);
                     console.log("New EntradaGrupal\nCodigo: ¿? \nesAdaptada: "+esAdaptada+"\nbutacaSeleccionada: "+butacasSeleccionadas[i].dataset.butaca+"\ntotalEntrada:"+precioEntradaGrupal+"\nnumPersonas: "+numPersonas);
                 }
             }            
