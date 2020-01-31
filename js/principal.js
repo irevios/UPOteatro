@@ -413,8 +413,7 @@ function nuevasCreaciones(apartado) {
             break;
             case "#formularioEntrada":
             let oEntradaAComprar;
-        //compraEntrada(entrada)
-        //class Entrada {constructor(codigo, adaptada, butacas, precioBase) 
+
             let representacionSeleccionada = document.querySelector("#representacionSeleccionada").value;
 
             let esAdaptada;
@@ -427,10 +426,23 @@ function nuevasCreaciones(apartado) {
             
 
             let butacasSeleccionadas = formularioEntrada.parentElement.getElementsByClassName("seleccionada");
-            for(let i = 0; i<butacasSeleccionadas.length; i++)
+            if(butacasSeleccionadas.length == 1)
+            {
+                //INDIVIDUAL -> oEntradaAComprar = new EntradaIndividual(*codigo*, esAdaptada, butacasSeleccionadas[0], totalEntrada, ¿tipo?)
+                //compraEntrada(oEntradaAComprar)
+                console.log("New EntradaIndividual\nCodigo: ¿? \nesAdaptada: "+esAdaptada+"\nbutacaSeleccionada: "+butacasSeleccionadas[0].dataset.butaca+"\ntotalEntrada:"+totalEntrada+"\n¿Tipo?");
+            }
+            else
+            {
+                let numPersonas = document.querySelector("#personasGrupal").value;
+                let precioEntradaGrupal = totalEntrada/numPersonas;
+                //MULTIPLE -> oEntradaAComprar = new EntradaGrupal(*codigo*, esAdaptada, butacasSeleccionadas[i], totalEntrada(¿Entre numentradas?), numPersonas)
+                for(let i = 0; i<butacasSeleccionadas.length; i++)
                 {   
-                    alert("entrada creada | "+representacionSeleccionada+" / "+esAdaptada+" / "+totalEntrada+" / "+butacasSeleccionadas[i].dataset.butaca);
+                    //compraEntrada(oEntradaAComprar)
+                    console.log("New EntradaGrupal\nCodigo: ¿? \nesAdaptada: "+esAdaptada+"\nbutacaSeleccionada: "+butacasSeleccionadas[i].dataset.butaca+"\ntotalEntrada:"+precioEntradaGrupal+"\nnumPersonas: "+numPersonas);
                 }
+            }            
             break;
 
             case "#formularioEntrada":
