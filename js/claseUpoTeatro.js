@@ -112,13 +112,31 @@ class UpoTeatro {
     }
     listadoRepresentaciones() {
         let tabla = creaTabla(["Teatro", "Fecha", "Adaptada", "Precio Base", "Espectáculo", "Editar", "Borrar"], "listadoRepresentaciones");
-        this.teatros.forEach(teatro => {
-            teatro.representaciones.forEach(representacion => {
-                let linea = representacion.toHTMLrow();
-                let celdaTeatro = linea.insertCell(0);
-                celdaTeatro.textContent = teatro.nombre;
-                tabla.querySelector("table").tBodies[0].append(linea);
+        let representaciones = [this.teatros[0].representaciones[0]];
+        representaciones.forEach(rep1 => {
+            this.teatros.forEach(teatro => {
+                teatro.representaciones.forEach(rep2 => {
+                    if (rep1.codigo != rep2.codigo && rep1.adaptada != rep2.adaptada && rep1.precioBase != rep2.precioBase && rep1.espectaculo != rep2.espectaculo) {
+                        representaciones.push(rep2);
+                    }
+                });
             });
+
+        });
+        representaciones.forEach(representacion => {
+            let linea = representacion.toHTMLrow();
+            let celdaTeatro = linea.insertCell(0);
+            let teatro = this.buscaTeatroPorRepresentacion(representacion.codigo);
+            celdaTeatro.textContent = teatro.nombre;
+            let fechas = teatro.buscaRepresentacionPorIntervaloDeUna(representacion);
+            let fInicio = fechaToString(fechas[0].fecha);
+            let fFin = fechaToString(fechas[fechas.length - 1].fecha);
+            tabla.querySelector("table").tBodies[0].append(linea);
+            if (fInicio == fFin) {
+                linea.cells[1].textContent = fInicio;
+            } else {
+                linea.cells[1].textContent = fInicio + " - " + fFin;
+            }
         });
         return tabla;
     }

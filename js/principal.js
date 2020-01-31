@@ -243,7 +243,8 @@ function buscaFecha() {
     let fechaFinal = document.querySelector("#filtroFechaFinal").value;
     let lineas = Array.from(document.querySelectorAll("table tbody tr")).filter(linea => {
         let contiene = false;
-        let fechaBuscando = linea.cells[1].textContent;
+        let fechaBuscando = linea.cells[1].contains(" - ") ? linea.cells[1].split(" - ")[0] : linea.cells[1].textContent;
+        console.log(fechaBuscando);
         if ((fechaInicial != undefined && fechaFinal != undefined) && fechaToDate(fechaBuscando) >= fechaToDate(fechaInicial) && fechaToDate(fechaBuscando) <= fechaToDate(fechaFinal)) {
             contiene = true;
         }
@@ -280,8 +281,8 @@ function ordenaTabla(e) {
         // Según el tipo del campo hacemos diferentes comparadores
         let campoTexto = ["Representación", "Adaptada", "Teatro", "Espectáculo", "Productor", "Categoría", "Obra", "Compañía"]
         let campoNumero = ["Precio", "Precio Base", "Gastos"];
-        let lineas = [];
-        document.querySelectorAll("tbody tr").forEach(linea => lineas.push(linea)); // Pasa los tr a un array
+        let lineas = Array.from( document.querySelectorAll("tbody tr"));
+        //document.querySelectorAll("tbody tr").forEach(linea => lineas.push(linea)); // Pasa los tr a un array
 
         if (campoTexto.includes(seleccionado)) {
             lineas.sort((lineaA, lineaB) => { // Ordena los tr del array
@@ -299,8 +300,8 @@ function ordenaTabla(e) {
         }
         if (seleccionado == "Fecha") {
             lineas.sort((lineaA, lineaB) => { // Ordena los tr del array
-                let fechaA = fechaToDate(lineaA.cells[numCelda].textContent);
-                let fechaB = fechaToDate(lineaB.cells[numCelda].textContent);
+                let fechaA = fechaToDate(lineaA.cells[numCelda].textContent.includes(" - ") ? lineaA.cells[numCelda].textContent.split(" - ")[0] : lineaA.cells[numCelda].textContent);
+                let fechaB = fechaToDate(lineaB.cells[numCelda].textContent.includes(" - ") ? lineaB.cells[numCelda].textContent.split(" - ")[0] : lineaB.cells[numCelda].textContent);
                 return ascendente ? fechaA - fechaB : fechaB - fechaA;
             });
         }
