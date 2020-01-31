@@ -84,7 +84,7 @@ function editaElimina(e) {
                 upoTeatro.buscaRepresentacionPorEntrada(e.target.dataset.id).borrarEntrada(e.target.dataset.id);
                 break;
             case "listadoRepresentaciones":
-                upoTeatro.borrarRepresentacion(e.target.dataset.id); // TO DO
+                upoTeatro.buscaTeatroPorRepresentacion(e.target.dataset.id).borrarRepresentacion(e.target.dataset.id);
                 break;
             case "listadoEspectaculos":
                 upoTeatro.borrarEspectaculo(e.target.dataset.id);
@@ -362,7 +362,7 @@ function nuevasCreaciones(apartado) {
                         codigoRepresentacion += ultimoCodigo[f];
                 }
 
-                oRepresentacion = new Representacion(codigoRepresentacion,fechas[i], adaptada, precioBase, oEsp);
+                oRepresentacion = new Representacion(codigoRepresentacion, fechas[i], adaptada, precioBase, oEsp);
 
                 if (!teatro.agregaRepresentacion(oRepresentacion)) {
                     correcto = false;
