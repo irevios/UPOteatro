@@ -73,30 +73,6 @@ class UpoTeatro {
     buscaObra(codigo) {
         return this.obras.filter(obra => obra.codigo == codigo)[0];
     }
-    buscaRepresentacionesIntervalo(representacion) {
-        let teatro = this.buscaTeatroPorRepresentacion(representacion.codigo);
-        let repInicial = representacion;
-        let representacionIntervalo = [representacion];
-        let repr = teatro.representaciones;
-        repr.sort((repA, repB) => { return repA.fecha - repB.fecha });
-        repr.forEach(rep => {
-            if (representacion.precioBase == rep.precioBase &&
-                representacion.espectaculo == rep.espectaculo &&
-                esFechaConsecutivaPosterior(representacion.fecha, rep.fecha)) {
-                representacionIntervalo.push(rep);
-                representacion = rep;
-            }
-        });
-        repr.sort((repA, repB) => { return repB.fecha - repA.fecha });
-        repr.forEach(rep => {
-            if (repInicial.precioBase == rep.precioBase && repInicial.espectaculo == rep.espectaculo && esFechaConsecutivaAnterior(repInicial.fecha, rep.fecha)) {
-                representacionIntervalo.push(rep);
-                repInicial = rep;
-            }
-        });
-        representacionIntervalo.sort((repA, repB) => { return repA.fecha - repB.fecha });
-        return representacionIntervalo;
-    }
     listadoEntradas() {
         let tabla = creaTabla(["Representación", "Fecha", "Adaptada", "Precio", "Butacas", "Tipo de entrada / Nº Personas", "Editar", "Borrar"], "listadoEntradas");
         this.listaEntradas().forEach(entrada => {
@@ -126,7 +102,7 @@ class UpoTeatro {
             let celdaTeatro = linea.insertCell(0);
             let teatro = this.buscaTeatroPorRepresentacion(representacion.codigo);
             celdaTeatro.textContent = teatro.nombre;
-            let fechas = teatro.buscaRepresentacionPorIntervaloDeUna(representacion);
+            let fechas = teatro.buscaRepresentacionesIntervalo(representacion);
             let fInicio = fechaToString(fechas[0].fecha);
             let fFin = fechaToString(fechas[fechas.length - 1].fecha);
             tabla.querySelector("table").tBodies[0].append(linea);

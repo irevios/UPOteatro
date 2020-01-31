@@ -34,7 +34,7 @@ class Teatro {
     buscaRepresentacion(codigo) {
         return this.representaciones.filter(representacion => representacion.codigo == codigo)[0];
     }
-    buscaRepresentacionPorIntervaloDeUna(representacion) {
+    buscaRepresentacionesIntervalo(representacion) {
         let repInicial = representacion;
         let representacionIntervalo = [representacion];
         let repr = this.representaciones;
