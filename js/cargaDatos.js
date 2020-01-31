@@ -9,8 +9,8 @@ function cargaDatos(xml) {
     cargaInicialObras(xml.querySelectorAll("obra"));
     cargaInicialCompanias(xml.querySelectorAll("compania"));
     cargaInicialEspectaculos(xml.querySelectorAll("espectaculo"));
-    cargaInicialRepresentaciones(xml.querySelectorAll("datos> representaciones > representacion"));
-    cargaInicialTeatros(xml.querySelectorAll("teatro"));
+    cargaInicialTeatros(xml.querySelectorAll("datos > teatros > teatro"));
+    cargaInicialRepresentaciones(xml.querySelectorAll("datos > representaciones representacion"));
     cargaInicialButacas(xml.querySelectorAll("butacas"));
     cargaInicialEntradas(xml.querySelectorAll("entrada"));
 }
@@ -51,9 +51,19 @@ function cargaInicialEspectaculos(espectaculos) {
     });
 }
 
+function cargaInicialTeatros(teatros) {
+    teatros.forEach(teatro => {
+        let codigo = teatro.getAttribute("cod");
+        let nombre = teatro.querySelector("nombre").textContent;
+        let direccion = teatro.querySelector("direccion").textContent;
+        let nuevoTeatro = new Teatro(codigo, nombre, direccion);
+        upoTeatro.agregaTeatro(nuevoTeatro);
+    });
+}
 
 function cargaInicialRepresentaciones(representaciones) {
     representaciones.forEach(representacion => {
+        let teatro = upoTeatro.buscaTeatro(representacion.parentElement.getAttribute("cod"));
         let codigo = representacion.getAttribute("cod");
         let fecha = new Date(representacion.querySelector("fecha").textContent);
         let adaptada = representacion.getAttribute("adaptada") == "N" ? false : true;
@@ -61,22 +71,7 @@ function cargaInicialRepresentaciones(representaciones) {
         let espectaculo = upoTeatro.buscaEspectaculo(representacion.getAttribute("espectaculo"));
 
         let nuevaRepresentacion = new Representacion(codigo, fecha, adaptada, precioBase, espectaculo);
-        upoTeatro.agregaRepresentacion(nuevaRepresentacion);
-    });
-}
-
-function cargaInicialTeatros(teatros) {
-    teatros.forEach(teatro => {
-        let codigo = teatro.getAttribute("cod");
-        let nombre = teatro.querySelector("nombre").textContent;
-        let direccion = teatro.querySelector("direccion").textContent;
-        let representaciones = teatro.querySelectorAll("representacion");
-        let nuevaTeatro = new Teatro(codigo, nombre, direccion);
-        representaciones.forEach(representacion => {
-            let codRepresentacion = representacion.getAttribute("cod");
-            nuevaTeatro.agregaRepresentacion(upoTeatro.buscaRepresentacion(codRepresentacion));
-        })
-        upoTeatro.agregaTeatro(nuevaTeatro);
+        teatro.agregaRepresentacion(nuevaRepresentacion);
     });
 }
 
@@ -100,8 +95,8 @@ function cargaInicialButacas(butacas) {
 
 function cargaInicialEntradas(xml) {
     xml.forEach(entrada => {
-        let representacion = upoTeatro.buscaRepresentacion(entrada.querySelector("representacion").textContent);
         let teatro = upoTeatro.buscaTeatroPorRepresentacion(entrada.querySelector("representacion").textContent);
+        let representacion = teatro.buscaRepresentacion(entrada.querySelector("representacion").textContent);
         let codigo = entrada.getAttribute("cod");
         let adaptada = entrada.querySelector("adaptada").textContent == "N" ? false : true;
         let butaca;

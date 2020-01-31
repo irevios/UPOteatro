@@ -7,7 +7,7 @@
 
     --formValido: #71BE40FF;
     --formInvalido: #E02A1EFF;
-    --formDeshabilitado:#e0e0e0;
+    --formDeshabilitado: #e0e0e0;
     --btnEditar: #208749;
     --btnEliminar: #E02A1EFF;
 
@@ -16,14 +16,14 @@
     --palco: #B0FE695F;
     --paraiso: #42B0FE5F;
 
-    --lineaButaca:#5B5B5F;
-    --butaca:#9A999E;
-    --lineaButacaHover:#9A999E;
-    --butacaHover:#C3C3C5;
-    --lineaButacaOcupada:#60161D;
-    --butacaOcupada:#A01127;
-    --lineaButacaSelect:#001D7E;
-    --butacaSelect:#4A72B2;
+    --lineaButaca: #5B5B5F;
+    --butaca: #9A999E;
+    --lineaButacaHover: #9A999E;
+    --butacaHover: #C3C3C5;
+    --lineaButacaOcupada: #60161D;
+    --butacaOcupada: #A01127;
+    --lineaButacaSelect: #001D7E;
+    --butacaSelect: #4A72B2;
 }
 
 body {
@@ -122,9 +122,11 @@ input[type="radio"]~.custom-control-label {
     background-color: var(--principal);
     border-color: var(--principal);
 }
-.btn.btn-primary:active:focus{
+
+.btn.btn-primary:active:focus {
     color: var(--principal);
 }
+
 .custom-select:focus {
     border-color: var(--principal);
 }
@@ -174,9 +176,11 @@ input {
 li>a {
     cursor: pointer;
 }
-select:required{
+
+select:required {
     box-shadow: none;
 }
+
 .was-validated input:invalid {
     border: 2px solid var(--formInvalido);
     border-radius: 4px;
@@ -215,6 +219,7 @@ select:required{
     border: 2px solid var(--formInvalido) !important;
     border-radius: 4px !important;
 }
+
 /* Filtro */
 .filtro {
     border: 2px solid var(--formDeshabilitado);
@@ -227,7 +232,8 @@ th>.row {
 }
 
 th>*,
-.modal {
+.modal,
+.modal * {
     pointer-events: none;
 }
 
@@ -241,7 +247,8 @@ th.ordenable {
     display: block;
 }
 
-.modal.show {
+.modal.show,
+.modal.show * {
     pointer-events: auto;
 }
 
@@ -393,6 +400,7 @@ th.ordenable {
     -webkit-text-stroke-color: var(--lineaButacaOcupada);
     color: var(--butacaOcupada);
 }
+
 .butaca-silla.seleccionada {
     -webkit-text-stroke-color: var(--lineaButacaSelect);
     color: var(--butacaSelect);

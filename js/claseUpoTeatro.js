@@ -3,7 +3,6 @@
 class UpoTeatro {
     constructor() {
         this.teatros = [];
-        this.representaciones = [];
         this.espectaculos = [];
         this.companias = [];
         this.obras = [];
@@ -11,23 +10,6 @@ class UpoTeatro {
     agregaTeatro(teatro) {
         if (this.teatros.filter(teatroNuevo => teatroNuevo.nombre == teatro.nombre).length == 0) {
             this.teatros.push(teatro);
-            return true;
-        } else { return false; }
-    }
-    agregaRepresentacion(representacion) {
-        if (this.representaciones.filter(representacionNuevo => representacionNuevo.fecha == representacion.fecha).length == 0) {
-            this.representaciones.push(representacion);
-            return true;
-        } else { return false; }
-    }
-    borrarRepresentacion(codigo) {
-        if (this.buscaRepresentacion(codigo) != undefined) {
-            this.representaciones = this.representaciones.filter(representacion => representacion.codigo != codigo);
-            this.teatros.forEach(teatro => {
-                if (teatro.buscaRepresentacion(codigo) != undefined) {
-                    teatro.representaciones = teatro.representaciones.filter(representacion => representacion.codigo != codigo);
-                }
-            });
             return true;
         } else { return false; }
     }
@@ -70,15 +52,14 @@ class UpoTeatro {
     }
     buscaRepresentacionPorEntrada(codigo) {
         let representacionConEntrada = null;
-        this.representaciones.forEach(representacion => {
-            if (representacion.entradas.filter(entrada => entrada.codigo == codigo).length != 0) {
-                representacionConEntrada = representacion;
-            }
+        this.teatros.forEach(teatro => {
+            teatro.representaciones.forEach(representacion => {
+                if (representacion.entradas.filter(entrada => entrada.codigo == codigo).length != 0) {
+                    representacionConEntrada = representacion;
+                }
+            });
         });
         return representacionConEntrada;
-    }
-    buscaRepresentacion(codigo) {
-        return this.representaciones.filter(representacion => representacion.codigo == codigo)[0];
     }
     buscaEspectaculo(codigo) {
         return this.espectaculos.filter(espectaculo => espectaculo.codigo == codigo)[0];

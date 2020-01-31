@@ -142,8 +142,9 @@ function actualizaFormularioEntrada() {
 function cambiaButacasFormEntrada() {
     if (representacionSeleccionada.value != "00") {
         actualizaFormularioEntrada();
-        let representacion = upoTeatro.buscaRepresentacion(document.querySelector("#formularioEntrada #representacionSeleccionada").value);
-        let butacas = upoTeatro.buscaTeatroPorRepresentacion(document.querySelector("#formularioEntrada #representacionSeleccionada").value).butacas;
+        let teatro = upoTeatro.buscaTeatroPorRepresentacion(document.querySelector("#formularioEntrada #representacionSeleccionada").value);
+        let butacas = teatro.butacas;
+        let representacion = teatro.buscaRepresentacion(document.querySelector("#formularioEntrada #representacionSeleccionada").value);
         document.querySelectorAll(".platea > *, .anfiteatro > *, .paraiso > *, .palco").forEach(b => b.textContent = "");
         butacas.forEach(butaca => {
             let icoButaca = document.createElement("i");
@@ -190,8 +191,8 @@ function seleccionaButaca(e) {
 
 
 function cambiaPrecioEntrada() {
-    let representacion = upoTeatro.buscaRepresentacion(document.querySelector("#formularioEntrada #representacionSeleccionada").value);
     let teatro = upoTeatro.buscaTeatroPorRepresentacion(document.querySelector("#formularioEntrada #representacionSeleccionada").value);
+    let representacion = teatro.buscaRepresentacion(document.querySelector("#formularioEntrada #representacionSeleccionada").value);
     let coefButaca;
     if (document.querySelector("#tipoEntrada1").checked) {
         let personas = document.querySelectorAll("#butacasRepresentadas .seleccionada").length;

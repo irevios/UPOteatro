@@ -1,7 +1,7 @@
 // En este documento se define todas las clases, menos UpoTeatro, junto a sus métodos.
 "use strict";
 class Teatro {
-    constructor(codigo, nombre, direccion, representaciones) {
+    constructor(codigo, nombre, direccion) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.direccion = direccion;
@@ -10,7 +10,7 @@ class Teatro {
         this.butacas = [];
     }
     agregaRepresentacion(representacion) {
-        if (this.representaciones.filter(representacionNuevo => representacionNuevo.codigo == representacion.codigo).length == 0) {
+        if (this.representaciones.filter(representacionNuevo => representacionNuevo.fecha == representacion.fecha).length == 0) {
             this.representaciones.push(representacion);
             return true;
         } else { return false; }
@@ -21,11 +21,41 @@ class Teatro {
             return true;
         } else { return false; }
     }
+    borrarRepresentacion(codigo) {
+        if (this.buscaRepresentacion(codigo) != undefined) {
+            this.representaciones = this.representaciones.filter(representacion => representacion.codigo != codigo);
+            return true;
+        } else { return false; }
+
+    }
     buscaButaca(zona, fila, num) {
         return this.butacas.filter(butaca => butaca.numero == num && butaca.fila == fila && butaca.zona == zona)[0];
     }
     buscaRepresentacion(codigo) {
         return this.representaciones.filter(representacion => representacion.codigo == codigo)[0];
+    }
+    buscaRepresentacionPorIntervaloDeUna(representacion) {
+        let repInicial = representacion;
+        let representacionIntervalo = [representacion];
+        let repr = this.representaciones;
+        repr.sort((repA, repB) => { return repA.fecha - repB.fecha });
+        repr.forEach(rep => {
+            if (representacion.precioBase == rep.precioBase &&
+                representacion.espectaculo == rep.espectaculo &&
+                esFechaConsecutivaPosterior(representacion.fecha, rep.fecha)) {
+                representacionIntervalo.push(rep);
+                representacion = rep;
+            }
+        });
+        repr.sort((repA, repB) => { return repB.fecha - repA.fecha });
+        repr.forEach(rep => {
+            if (repInicial.precioBase == rep.precioBase && repInicial.espectaculo == rep.espectaculo && esFechaConsecutivaAnterior(repInicial.fecha, rep.fecha)) {
+                representacionIntervalo.push(rep);
+                repInicial = rep;
+            }
+        });
+        representacionIntervalo.sort((repA, repB) => { return repA.fecha - repB.fecha });
+        return representacionIntervalo;
     }
     calculaAforo() {
         this.aforo = this.butacas.length;

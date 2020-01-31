@@ -95,163 +95,147 @@
             <categoria>Suspense</categoria>
             <gastos>3864</gastos>
         </espectaculo>
-        <espectaculo cod="E006" obra="Ob07" compania="V0723490I">
+        <espectaculo cod="E007" obra="Ob07" compania="V0723490I">
             <nombre>Riot Comedy - Show de comedia femenina</nombre>
             <productor>Penny JayG</productor>
             <categoria>Comedia</categoria>
             <gastos>5640</gastos>
         </espectaculo>
     </espectaculos>
-    <!-- Base de datos de ejemplo de representaciones -->
-    <representaciones>
-        <representacion adaptada="N" cod="R01" espectaculo="E001">
-            <fecha>2020-03-02</fecha>
-            <precioBase>35.5</precioBase>
-        </representacion>
-        <representacion adaptada="N" cod="R02" espectaculo="E001">
-            <fecha>2020-03-03</fecha>
-            <precioBase>35.5</precioBase>
-        </representacion>
-        <representacion adaptada="N" cod="R03" espectaculo="E001">
-            <fecha>2020-03-04</fecha>
-            <precioBase>35.5</precioBase>
-        </representacion>
-        <representacion adaptada="N" cod="R04" espectaculo="E001">
-            <fecha>2020-03-05</fecha>
-            <precioBase>35.5</precioBase>
-        </representacion>
-        <representacion adaptada="N" cod="R05" espectaculo="E001">
-            <fecha>2020-03-06</fecha>
-            <precioBase>35.5</precioBase>
-        </representacion>
-        <representacion adaptada="N" cod="R06" espectaculo="E001">
-            <fecha>2020-03-07</fecha>
-            <precioBase>35.5</precioBase>
-        </representacion>
-        <representacion adaptada="N" cod="R07" espectaculo="E001">
-            <fecha>2020-03-08</fecha>
-            <precioBase>35.5</precioBase>
-        </representacion>
-        <representacion adaptada="N" cod="R08" espectaculo="E002">
-            <fecha>2020-08-29</fecha>
-            <precioBase>55.5</precioBase>
-        </representacion>
-        <representacion adaptada="N" cod="R09" espectaculo="E002">
-            <fecha>2020-08-30</fecha>
-            <precioBase>55.5</precioBase>
-        </representacion>
-        <representacion adaptada="S" cod="R10" espectaculo="E003">
-            <fecha>2020-04-12</fecha>
-            <precioBase>38.8</precioBase>
-        </representacion>
-        <representacion adaptada="S" cod="R11" espectaculo="E003">
-            <fecha>2020-04-13</fecha>
-            <precioBase>38.8</precioBase>
-        </representacion>
-        <representacion adaptada="S" cod="R12" espectaculo="E003">
-            <fecha>2020-04-14</fecha>
-            <precioBase>38.8</precioBase>
-        </representacion>
-        <representacion adaptada="S" cod="R13" espectaculo="E003">
-            <fecha>2020-04-15</fecha>
-            <precioBase>38.8</precioBase>
-        </representacion>
-        <representacion adaptada="N" cod="R14" espectaculo="E004">
-            <fecha>2020-11-09</fecha>
-            <precioBase>45.5</precioBase>
-        </representacion>
-        <representacion adaptada="S" cod="R15" espectaculo="E005">
-            <fecha>2020-02-05</fecha>
-            <precioBase>20.6</precioBase>
-        </representacion>
-        <representacion adaptada="S" cod="R16" espectaculo="E005">
-            <fecha>2020-02-06</fecha>
-            <precioBase>20.6</precioBase>
-        </representacion>
-        <representacion adaptada="S" cod="R17" espectaculo="E005">
-            <fecha>2020-02-07</fecha>
-            <precioBase>20.6</precioBase>
-        </representacion>
-        <representacion adaptada="S" cod="R18" espectaculo="E005">
-            <fecha>2020-02-08</fecha>
-            <precioBase>20.6</precioBase>
-        </representacion>
-        <representacion adaptada="S" cod="R19" espectaculo="E005">
-            <fecha>2020-02-09</fecha>
-            <precioBase>20.6</precioBase>
-        </representacion>
-        <representacion adaptada="S" cod="R20" espectaculo="E005">
-            <fecha>2020-02-10</fecha>
-            <precioBase>20.6</precioBase>
-        </representacion>
-        <representacion adaptada="S" cod="R21" espectaculo="E006">
-            <fecha>2020-02-14</fecha>
-            <precioBase>6</precioBase>
-        </representacion>
-        <representacion adaptada="N" cod="R22" espectaculo="E006">
-            <fecha>2020-02-11</fecha>
-            <precioBase>12</precioBase>
-        </representacion>
-        <representacion adaptada="S" cod="R23" espectaculo="E006">
-            <fecha>2020-02-12</fecha>
-            <precioBase>12</precioBase>
-        </representacion>
-        <representacion adaptada="D" cod="R24" espectaculo="E006">
-            <fecha>2020-02-13</fecha>
-            <precioBase>6</precioBase>
-        </representacion>
-    </representaciones>
     <!-- Base de datos de ejemplo de teatros -->
     <teatros>
         <teatro cod="T001">
             <nombre>Lope de Vega</nombre>
             <direccion>Av. de María Luisa, s/n, 41013 Sevilla</direccion>
-            <representaciones>
-                <representacion cod="R01" />
-                <representacion cod="R02" />
-                <representacion cod="R03" />
-                <representacion cod="R04" />
-                <representacion cod="R05" />
-                <representacion cod="R06" />
-                <representacion cod="R07" />
-            </representaciones>
         </teatro>
         <teatro cod="T002">
             <nombre>La Maestranza</nombre>
             <direccion>Paseo de Cristóbal Colón, 22, 41001 Sevilla</direccion>
-            <representaciones>
-                <representacion cod="R08" />
-                <representacion cod="R09" />
-                <representacion cod="R12" />
-                <representacion cod="R14" />
-                <representacion cod="R15" />
-                <representacion cod="R16" />
-                <representacion cod="R17" />
-            </representaciones>
         </teatro>
         <teatro cod="T003">
             <nombre>Quintero</nombre>
             <direccion>Calle Cuna, 15, 41004 Sevilla</direccion>
-            <representaciones>
-                <representacion cod="R10" />
-                <representacion cod="R11" />
-                <representacion cod="R13" />
-                <representacion cod="R18" />
-                <representacion cod="R19" />
-                <representacion cod="R20" />
-            </representaciones>
         </teatro>
         <teatro cod="T004">
             <nombre>El Teatro de Triana</nombre>
             <direccion>Calle Condes de Bustillo, 17, 41010 Sevilla</direccion>
-            <representaciones>
-                <representacion cod="R21" />
-                <representacion cod="R22" />
-                <representacion cod="R23" />
-                <representacion cod="R24" />
-            </representaciones>
         </teatro>
     </teatros>
+    <!-- Base de datos de ejemplo de representaciones -->
+    <representaciones>
+        <teatro cod="T001">
+            <representacion adaptada="N" cod="R01" espectaculo="E001">
+                <fecha>2020-03-02</fecha>
+                <precioBase>35.5</precioBase>
+            </representacion>
+            <representacion adaptada="N" cod="R02" espectaculo="E001">
+                <fecha>2020-03-03</fecha>
+                <precioBase>35.5</precioBase>
+            </representacion>
+            <representacion adaptada="N" cod="R03" espectaculo="E001">
+                <fecha>2020-03-04</fecha>
+                <precioBase>35.5</precioBase>
+            </representacion>
+            <representacion adaptada="N" cod="R04" espectaculo="E001">
+                <fecha>2020-03-05</fecha>
+                <precioBase>35.5</precioBase>
+            </representacion>
+            <representacion adaptada="N" cod="R05" espectaculo="E001">
+                <fecha>2020-03-06</fecha>
+                <precioBase>35.5</precioBase>
+            </representacion>
+            <representacion adaptada="N" cod="R06" espectaculo="E001">
+                <fecha>2020-03-07</fecha>
+                <precioBase>35.5</precioBase>
+            </representacion>
+            <representacion adaptada="N" cod="R07" espectaculo="E001">
+                <fecha>2020-03-08</fecha>
+                <precioBase>35.5</precioBase>
+            </representacion>
+        </teatro>
+        <teatro cod="T002">
+            <representacion adaptada="N" cod="R08" espectaculo="E002">
+                <fecha>2020-08-29</fecha>
+                <precioBase>55.5</precioBase>
+            </representacion>
+            <representacion adaptada="N" cod="R09" espectaculo="E002">
+                <fecha>2020-08-30</fecha>
+                <precioBase>55.5</precioBase>
+            </representacion>
+        </teatro>
+        <teatro cod="T003">
+            <representacion adaptada="S" cod="R10" espectaculo="E003">
+                <fecha>2020-04-12</fecha>
+                <precioBase>38.8</precioBase>
+            </representacion>
+            <representacion adaptada="S" cod="R11" espectaculo="E003">
+                <fecha>2020-04-13</fecha>
+                <precioBase>38.8</precioBase>
+            </representacion>
+        </teatro>
+        <teatro cod="T002">
+            <representacion adaptada="S" cod="R12" espectaculo="E003">
+                <fecha>2020-04-14</fecha>
+                <precioBase>38.8</precioBase>
+            </representacion>
+        </teatro>
+        <teatro cod="T003">
+            <representacion adaptada="S" cod="R13" espectaculo="E003">
+                <fecha>2020-04-15</fecha>
+                <precioBase>38.8</precioBase>
+            </representacion>
+        </teatro>
+        <teatro cod="T002">
+            <representacion adaptada="N" cod="R14" espectaculo="E004">
+                <fecha>2020-11-09</fecha>
+                <precioBase>45.5</precioBase>
+            </representacion>
+            <representacion adaptada="S" cod="R15" espectaculo="E005">
+                <fecha>2020-02-05</fecha>
+                <precioBase>20.6</precioBase>
+            </representacion>
+            <representacion adaptada="S" cod="R16" espectaculo="E005">
+                <fecha>2020-02-06</fecha>
+                <precioBase>20.6</precioBase>
+            </representacion>
+            <representacion adaptada="S" cod="R17" espectaculo="E005">
+                <fecha>2020-02-07</fecha>
+                <precioBase>20.6</precioBase>
+            </representacion>
+        </teatro>
+        <teatro cod="T003">
+            <representacion adaptada="S" cod="R18" espectaculo="E005">
+                <fecha>2020-02-08</fecha>
+                <precioBase>20.6</precioBase>
+            </representacion>
+            <representacion adaptada="S" cod="R19" espectaculo="E005">
+                <fecha>2020-02-09</fecha>
+                <precioBase>20.6</precioBase>
+            </representacion>
+            <representacion adaptada="S" cod="R20" espectaculo="E005">
+                <fecha>2020-02-10</fecha>
+                <precioBase>20.6</precioBase>
+            </representacion>
+        </teatro>
+        <teatro cod="T004">
+            <representacion adaptada="S" cod="R21" espectaculo="E006">
+                <fecha>2020-02-14</fecha>
+                <precioBase>6</precioBase>
+            </representacion>
+            <representacion adaptada="N" cod="R22" espectaculo="E006">
+                <fecha>2020-02-11</fecha>
+                <precioBase>12</precioBase>
+            </representacion>
+            <representacion adaptada="S" cod="R23" espectaculo="E006">
+                <fecha>2020-02-12</fecha>
+                <precioBase>12</precioBase>
+            </representacion>
+            <representacion adaptada="D" cod="R24" espectaculo="E006">
+                <fecha>2020-02-13</fecha>
+                <precioBase>6</precioBase>
+            </representacion>
+        </teatro>
+    </representaciones>
     <!-- Base de datos de ejemplo de butacas -->
     <listaButacas>
         <butacas teatro="T001">
