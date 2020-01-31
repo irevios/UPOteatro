@@ -24,6 +24,8 @@
     --butacaOcupada: #A01127;
     --lineaButacaSelect: #001D7E;
     --butacaSelect: #4A72B2;
+    --lineaButacaSelectHover: #235AFE;
+    --butacaSelectHover: #7D9BC8;
 }
 
 body {
@@ -404,4 +406,8 @@ th.ordenable {
 .butaca-silla.seleccionada {
     -webkit-text-stroke-color: var(--lineaButacaSelect);
     color: var(--butacaSelect);
+}
+.butaca-silla.seleccionada:hover {
+    -webkit-text-stroke-color: var(--lineaButacaSelectHover);
+    color: var(--butacaSelectHover);
 }

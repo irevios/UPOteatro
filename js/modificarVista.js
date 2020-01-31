@@ -194,17 +194,18 @@ function cambiaPrecioEntrada() {
     let teatro = upoTeatro.buscaTeatroPorRepresentacion(document.querySelector("#formularioEntrada #representacionSeleccionada").value);
     let representacion = teatro.buscaRepresentacion(document.querySelector("#formularioEntrada #representacionSeleccionada").value);
     let coefButaca;
-    if (document.querySelector("#tipoEntrada1").checked) {
-        let personas = document.querySelectorAll("#butacasRepresentadas .seleccionada").length;
-        document.querySelector("#personasGrupal").value = personas;
-        coefButaca = personas;
-    } else {
-        if (elementoExiste("#butacasRepresentadas .seleccionada")) {
+    if (elementoExiste("#butacasRepresentadas .seleccionada")) {
+        if (document.querySelector("#tipoEntrada1").checked) {
+            let personas = document.querySelectorAll("#butacasRepresentadas .seleccionada").length;
+            document.querySelector("#personasGrupal").value = personas;
+            coefButaca = personas;
+        } else {
+
             let butacaSeleccionada = document.querySelector("#butacasRepresentadas .seleccionada").dataset.butaca.split("-");
             coefButaca = teatro.buscaButaca(butacaSeleccionada[0], butacaSeleccionada[1], butacaSeleccionada[2]).coefPrecio;
         }
+        document.querySelector("#totalEntrada").value = (parseFloat(representacion.precioBase) * parseFloat(coefButaca)).toFixed(2);
     }
-    document.querySelector("#totalEntrada").value = (parseFloat(representacion.precioBase) * parseFloat(coefButaca)).toFixed(2);
 }
 
 /// Rellena todos los campos de la base de datos en el formulario de representación
