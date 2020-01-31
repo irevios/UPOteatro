@@ -243,9 +243,25 @@ function buscaFecha() {
     let fechaFinal = document.querySelector("#filtroFechaFinal").value;
     let lineas = Array.from(document.querySelectorAll("table tbody tr")).filter(linea => {
         let contiene = false;
-        let fechaBuscando = linea.cells[1].textContent.includes(" - ") ? linea.cells[1].textContent.split(" - ")[0] : linea.cells[1].textContent;
-        if ((fechaInicial != undefined && fechaFinal != undefined) && fechaToDate(fechaBuscando) >= fechaToDate(fechaInicial) && fechaToDate(fechaBuscando) <= fechaToDate(fechaFinal)) {
-            contiene = true;
+        let fechas;
+        let fechaBuscando;
+        if (linea.cells[1].textContent.includes(" - ")) {
+            let fechaBuscandoIni = fechaToDate(linea.cells[1].textContent.split(" - ")[0]);
+            let fechaBuscandoFin = fechaToDate(linea.cells[1].textContent.split(" - ")[1]);
+            fechas = fechasIntervalo(fechaBuscandoIni, fechaBuscandoFin);
+        } else {
+            fechaBuscando = fechaToDate(linea.cells[1].textContent);
+        }
+        if (fechaInicial != undefined && fechaFinal != undefined) {
+            if (fechaBuscando != undefined && fechaBuscando >= fechaToDate(fechaInicial) && fechaBuscando <= fechaToDate(fechaFinal)) {
+                contiene = true;
+            } else if (fechas != undefined) {
+                fechas.forEach(fecha => {
+                    if (fecha >= fechaToDate(fechaInicial) && fecha <= fechaToDate(fechaFinal)) {
+                        contiene = true;
+                    }
+                });
+            }
         }
         linea.dataset.fechaCoincide = fechaInicial == "" || fechaFinal == "" ? "" : contiene;
         ocultaFila(linea);
@@ -371,10 +387,6 @@ function nuevasCreaciones(apartado) {
                     mensajeModal("Las fechas |" + incorrectos + "| ya están ocupadas.");
                 }
             }, 100);
-
-            for (let i = 0; i < teatro.representaciones.length; i++) {
-                console.log(JSON.stringify(teatro.representaciones[i]));
-            }
             break;
 
 
