@@ -81,14 +81,14 @@ function editaElimina(e) {
     if (e.target.tagName == "BUTTON" && e.target.dataset.tipo == "borrar") {
         switch (e.currentTarget.querySelector(".table-responsive").id) {
             case "listadoEntradas":
-                upoTeatro.buscaRepresentacionPorEntrada(e.target.dataset.id).borrarEntrada(e.target.dataset.id);
-                break;
+            upoTeatro.buscaRepresentacionPorEntrada(e.target.dataset.id).borrarEntrada(e.target.dataset.id);
+            break;
             case "listadoRepresentaciones":
-                upoTeatro.buscaTeatroPorRepresentacion(e.target.dataset.id).borrarRepresentacion(e.target.dataset.id);
-                break;
+            upoTeatro.buscaTeatroPorRepresentacion(e.target.dataset.id).borrarRepresentacion(e.target.dataset.id);
+            break;
             case "listadoEspectaculos":
-                upoTeatro.borrarEspectaculo(e.target.dataset.id);
-                break;
+            upoTeatro.borrarEspectaculo(e.target.dataset.id);
+            break;
         }
         e.target.parentElement.parentElement.remove();
     } else if (e.target.tagName == "BUTTON" && e.target.dataset.tipo == "editar") {
@@ -97,14 +97,14 @@ function editaElimina(e) {
         setTimeout(() => {
             switch (apartado) {
                 case "listadoEntradas":
-                    editaEntrada(e.target.dataset.id);
-                    break;
+                editaEntrada(e.target.dataset.id);
+                break;
                 case "listadoRepresentaciones":
-                    editaRepresentacion(e.target.dataset.id);
-                    break;
+                editaRepresentacion(e.target.dataset.id);
+                break;
                 case "listadoEspectaculos":
-                    editaEspectaculo(e.target.dataset.id);
-                    break;
+                editaEspectaculo(e.target.dataset.id);
+                break;
             }
         }, 100);
     }
@@ -328,27 +328,27 @@ function nuevasCreaciones(apartado) {
     switch (apartado) {
         case "#formularioRepresentacion":
 
-            let oRepresentacion;
-            let adaptada;
-            if (document.querySelector("#representacionAdaptada").checked)
-                adaptada = true;
-            else
-                adaptada = false;
+        let oRepresentacion;
+        let adaptada;
+        if (document.querySelector("#representacionAdaptada").checked)
+            adaptada = true;
+        else
+            adaptada = false;
 
-            let precioBase = document.querySelector("#precioBaseRepresentacion").value;
+        let precioBase = document.querySelector("#precioBaseRepresentacion").value;
 
-            let oEsp;
-            let codEspectaculo = document.querySelector("#espectaculoSeleccionado").value;
-            for (let i = 0; i < upoTeatro.espectaculos.length; i++) {
-                if (upoTeatro.espectaculos[i].codigo == codEspectaculo)
-                    oEsp = upoTeatro.espectaculos[i];
-            }
+        let oEsp;
+        let codEspectaculo = document.querySelector("#espectaculoSeleccionado").value;
+        for (let i = 0; i < upoTeatro.espectaculos.length; i++) {
+            if (upoTeatro.espectaculos[i].codigo == codEspectaculo)
+                oEsp = upoTeatro.espectaculos[i];
+        }
 
-            let incorrectos = "";
-            let correcto = true;
+        let incorrectos = "";
+        let correcto = true;
 
-            let fechaInicio = fechaToDate(document.querySelector("#fechaInicioRepresentacion").value);
-            let fechaFin = fechaToDate(document.querySelector("#fechaFinalRepresentacion").value);
+        let fechaInicio = fechaToDate(document.querySelector("#fechaInicioRepresentacion").value);
+        let fechaFin = fechaToDate(document.querySelector("#fechaFinalRepresentacion").value);
             let fechas = fechasIntervalo(fechaInicio, fechaFin); // fechas ya tiene cada fecha en formato Date para poderse introducir directamente
             let teatro = upoTeatro.buscaTeatro(document.querySelector("#teatroSeleccionado").value);
             for (let i = 0; i < fechas.length; i++) {
@@ -386,7 +386,7 @@ function nuevasCreaciones(apartado) {
             break;
 
 
-        case "#formularioEspectaculo":
+            case "#formularioEspectaculo":
             ultimoCodigo = upoTeatro.espectaculos[upoTeatro.espectaculos.length - 1].codigo.split("");
             let codigoEspectaculo = "";
             for (let i = 0; i < ultimoCodigo.length; i++) {
@@ -412,5 +412,40 @@ function nuevasCreaciones(apartado) {
                 }
             }, 100);
             break;
+            case "#formularioEntrada":
+            let oEntradaAComprar;
+
+            let representacionSeleccionada = document.querySelector("#representacionSeleccionada").value;
+
+            let esAdaptada;
+            if (document.querySelector("#entradaAdaptada_0").checked)
+                esAdaptada = true;
+            else
+                esAdaptada = false;
+
+            let totalEntrada = document.querySelector("#totalEntrada").value;
+            
+
+            let butacasSeleccionadas = formularioEntrada.parentElement.getElementsByClassName("seleccionada");
+            if(butacasSeleccionadas.length == 1)
+            {
+                //INDIVIDUAL -> oEntradaAComprar = new EntradaIndividual(*codigo*, esAdaptada, butacasSeleccionadas[0], totalEntrada, ¿tipo?)
+                //compraEntrada(oEntradaAComprar)
+                console.log("New EntradaIndividual\nCodigo: ¿? \nesAdaptada: "+esAdaptada+"\nbutacaSeleccionada: "+butacasSeleccionadas[0].dataset.butaca+"\ntotalEntrada:"+totalEntrada+"\n¿Tipo?");
+            }
+            else
+            {
+                let numPersonas = document.querySelector("#personasGrupal").value;
+                let precioEntradaGrupal = totalEntrada/numPersonas;
+                //MULTIPLE -> oEntradaAComprar = new EntradaGrupal(*codigo*, esAdaptada, butacasSeleccionadas[i], totalEntrada(¿Entre numentradas?), numPersonas)
+                for(let i = 0; i<butacasSeleccionadas.length; i++)
+                {   
+                    //compraEntrada(oEntradaAComprar)
+                    console.log("New EntradaGrupal\nCodigo: ¿? \nesAdaptada: "+esAdaptada+"\nbutacaSeleccionada: "+butacasSeleccionadas[i].dataset.butaca+"\ntotalEntrada:"+precioEntradaGrupal+"\nnumPersonas: "+numPersonas);
+                }
+            }            
+            break;
+
+            case "#formularioEntrada":
+        }
     }
-}
