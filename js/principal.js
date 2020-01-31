@@ -370,13 +370,14 @@ function nuevasCreaciones(apartado) {
             fechas.forEach(fecha => {
                 let codigoRepresentacion = getSiguienteCodigo(teatro.representaciones);
                 oRepresentacion = new Representacion(codigoRepresentacion, fecha, adaptada, precioBase, oEsp);
-                if (teatro.esPosibleAgregarRepresentacion(oRepresentacion)) {
+                if (!teatro.esPosibleAgregarRepresentacion(oRepresentacion)) {
                     correcto = false;
                     let p = document.createElement("p");
                     p.textContent = fechaToString(fecha);
                     incorrectos.append(p);
                 } else {
                     repAIntroducir.push(oRepresentacion);
+                    console.log(repAIntroducir);
                 }
 
             });
@@ -388,11 +389,12 @@ function nuevasCreaciones(apartado) {
                 } else {
                     let p = document.createElement("p");
                     p.textContent = "Las siguientes fechas ya están ocupadas";
-                   
+
                     document.querySelector(".modal").classList.add("show");
                     document.querySelector(".modal #mensaje").textContent = "";
                     incorrectos.insertBefore(p, incorrectos.firstChild);
-                    document.querySelector(".modal #mensaje").append(incorrectos);                }
+                    document.querySelector(".modal #mensaje").append(incorrectos);
+                }
             }, 100);
             break;
 
