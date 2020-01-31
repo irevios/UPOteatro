@@ -382,7 +382,7 @@ function nuevasCreaciones(apartado) {
             });
             setTimeout(() => {
                 if (correcto) {
-                    setTimeout(() => {repAIntroducir.forEach(rep => teatro.agregaRepresentacion(rep))},100);
+                    setTimeout(() => { repAIntroducir.forEach(rep => teatro.agregaRepresentacion(rep)) }, 100);
                     mensajeModal("Representacion creada correctamente.");
                     document.querySelector(apartado).reset();
                 } else {
@@ -477,15 +477,13 @@ function nuevasCreaciones(apartado) {
 function getSiguienteCodigo(lista) {
     let ordenada = [];
     lista.forEach(elem => ordenada.push(elem.codigo));
-    ordenada.sort((a, b) => { return a.localeCompare(b) });
+    ordenada.sort((a, b) => {
+        return parseInt(a.substr(2)) - parseInt(b.substr(2));
+    });
     let ultimoCodigo = ordenada[ordenada.length - 1];
-    let numRexp = /([A-Z]{1,2})([0-9]+)/;
-    ultimoCodigo = ultimoCodigo.split(numRexp);
-    let letra = ultimoCodigo[1];
-    let n = parseInt(ultimoCodigo[2]) + 1;
-    let num = pad(n, ultimoCodigo[2].length == 3 ? 3 : 2);
+    console.log(ultimoCodigo);
+    let letra = ultimoCodigo.substr(0, 2);
+    let n = parseInt(ultimoCodigo.substr(2)) + 1;
 
-    return (letra + num);
+    return (letra + (n < 100 ? "0" : "") + n);
 }
-
-function pad(num, size) { return ('0000000000000000000' + num).substr(-size); }
