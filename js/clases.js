@@ -10,13 +10,13 @@ class Teatro {
         this.butacas = [];
     }
     agregaRepresentacion(representacion) {
-        if (this.representaciones.filter(representacionNuevo => representacionNuevo.espectaculo == representacion.espectaculo && fechaToString(representacionNuevo.fecha) == fechaToString(representacion.fecha)).length == 0) {
+        if (this.representaciones.filter(representacionNuevo => fechaToString(representacionNuevo.fecha) == fechaToString(representacion.fecha)).length == 0) {
             this.representaciones.push(representacion);
             return true;
         } else { return false; }
     }
     esPosibleAgregarRepresentacion(representacion) {
-         if (this.representaciones.filter(representacionNuevo => representacionNuevo.espectaculo == representacion.espectaculo && fechaToString(representacionNuevo.fecha) == fechaToString(representacion.fecha)).length == 0) {
+        if (this.representaciones.filter(representacionNuevo => fechaToString(representacionNuevo.fecha) == fechaToString(representacion.fecha)).length == 0) {
             return true;
         } else { return false; }
     }
