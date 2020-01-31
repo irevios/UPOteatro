@@ -364,7 +364,7 @@ function nuevasCreaciones(apartado) {
 
             let fechaInicio = fechaToDate(document.querySelector("#fechaInicioRepresentacion").value);
             let fechaFin = fechaToDate(document.querySelector("#fechaFinalRepresentacion").value);
-            let fechas = fechasIntervalo(fechaInicio, fechaFin); // fechas ya tiene cada fecha en formato Date para poderse introducir directamente
+            let fechas = fechasIntervalo(fechaInicio, fechaFin);
             let teatro = upoTeatro.buscaTeatro(document.querySelector("#teatroSeleccionado").value);
             for (let i = 0; i < fechas.length; i++) {
 
@@ -445,7 +445,7 @@ function nuevasCreaciones(apartado) {
                 let butacas = []
                 for (let i = 0; i < butacasSeleccionadas.length; i++) {
                     butacaFragmentacion = butacasSeleccionadas[i].dataset.butaca.split("-");
-                    oButaca = teatroSeleccionado.buscaButaca(butacaFragmentacion[0], butacaFragmentacion[1], butacaFragmentacion[2]); // Las butacas no se crean, se buscan
+                    oButaca = teatroSeleccionado.buscaButaca(butacaFragmentacion[0], butacaFragmentacion[1], butacaFragmentacion[2]);
                     butacas.push(oButaca);
                 }
                 oEntradaAComprar = new EntradaGrupal(codigoEntrada, esAdaptada, butacas, representacionSeleccionada.precioBase, numPersonas);

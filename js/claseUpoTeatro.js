@@ -99,17 +99,13 @@ class UpoTeatro {
     }
     listadoEntradas() {
         let tabla = creaTabla(["Representación", "Fecha", "Adaptada", "Precio", "Butacas", "Tipo de entrada / Nº Personas", "Editar", "Borrar"], "listadoEntradas");
-        this.teatros.forEach(teatro => {
-            teatro.representaciones.forEach(representacion => {
-                representacion.entradas.forEach(entrada => {
-                    let linea = entrada.toHTMLrow();
-                    let celdaRepresentacion = linea.insertCell(0);
-                    celdaRepresentacion.textContent = representacion.espectaculo.nombre;
-                    celdaRepresentacion = linea.insertCell(1);
-                    celdaRepresentacion.textContent = fechaToString(representacion.fecha);
-                    tabla.querySelector("table").tBodies[0].append(linea);
-                });
-            });
+        this.listaEntradas().forEach(entrada => {
+            let linea = entrada.toHTMLrow();
+            let celdaRepresentacion = linea.insertCell(0);
+            celdaRepresentacion.textContent = this.buscaRepresentacionPorEntrada(entrada.codigo).espectaculo.nombre;
+            celdaRepresentacion = linea.insertCell(1);
+            celdaRepresentacion.textContent = fechaToString(this.buscaRepresentacionPorEntrada(entrada.codigo).fecha);
+            tabla.querySelector("table").tBodies[0].append(linea);
         });
         return tabla;
     }
@@ -119,7 +115,7 @@ class UpoTeatro {
         a.push(this.teatros[0].representaciones[0]);
         this.teatros.forEach(teatro => {
             teatro.representaciones.forEach(rep => {
-                if (this.compruebaSiExisteRepresentacionEnLaLista(a, rep)) {
+                if (this.coincideRepresentacion(a, rep)) {
                     a.push(rep);
                 }
 
@@ -142,7 +138,7 @@ class UpoTeatro {
         });
         return tabla;
     }
-    compruebaSiExisteRepresentacionEnLaLista(lista, busca) {        
+    coincideRepresentacion(lista, busca) {
         return lista.filter(rep => this.buscaTeatroPorRepresentacion(rep.codigo) == this.buscaTeatroPorRepresentacion(busca.codigo) && rep.espectaculo == busca.espectaculo && rep.precioBase == busca.precioBase && rep.adaptada == busca.adaptada).length == 0;
     }
     listadoEspectaculos() {
