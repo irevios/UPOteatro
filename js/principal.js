@@ -156,7 +156,7 @@ function editaRepresentacion(id) {
     document.querySelector(".jumbotron p").textContent = "Edita representación";
     let teatro = upoTeatro.buscaTeatroPorRepresentacion(id);
     let representacion = teatro.buscaRepresentacion(id);
-    let todas = teatro.buscaRepresentacionPorIntervaloDeUna(representacion);
+    let todas = teatro.buscaRepresentacionesIntervalo(representacion);
     let fechaInicial = todas[0].fecha;
     let fechaFinal = todas[todas.length - 1].fecha;
     let adaptada = representacion.adaptada;

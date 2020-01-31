@@ -73,7 +73,7 @@ class UpoTeatro {
     buscaObra(codigo) {
         return this.obras.filter(obra => obra.codigo == codigo)[0];
     }
-    buscaRepresentacionPorIntervaloDeUna(representacion) {
+    buscaRepresentacionesIntervalo(representacion) {
         let teatro = this.buscaTeatroPorRepresentacion(representacion.codigo);
         let repInicial = representacion;
         let representacionIntervalo = [representacion];
