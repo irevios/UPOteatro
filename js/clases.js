@@ -10,7 +10,7 @@ class Teatro {
         this.butacas = [];
     }
     agregaRepresentacion(representacion) {
-        if (this.representaciones.filter(representacionNuevo => representacionNuevo.fecha == representacion.fecha).length == 0) {
+        if (this.representaciones.filter(representacionNuevo => representacionNuevo.fecha == representacion.fecha && representacionNuevo.espectaculo == representacion.espectaculo).length == 0) {
             this.representaciones.push(representacion);
             return true;
         } else { return false; }

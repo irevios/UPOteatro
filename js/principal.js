@@ -243,8 +243,7 @@ function buscaFecha() {
     let fechaFinal = document.querySelector("#filtroFechaFinal").value;
     let lineas = Array.from(document.querySelectorAll("table tbody tr")).filter(linea => {
         let contiene = false;
-        let fechaBuscando = linea.cells[1].contains(" - ") ? linea.cells[1].split(" - ")[0] : linea.cells[1].textContent;
-        console.log(fechaBuscando);
+        let fechaBuscando = linea.cells[1].textContent.includes(" - ") ? linea.cells[1].textContent.split(" - ")[0] : linea.cells[1].textContent;
         if ((fechaInicial != undefined && fechaFinal != undefined) && fechaToDate(fechaBuscando) >= fechaToDate(fechaInicial) && fechaToDate(fechaBuscando) <= fechaToDate(fechaFinal)) {
             contiene = true;
         }

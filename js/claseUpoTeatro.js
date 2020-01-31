@@ -115,20 +115,21 @@ class UpoTeatro {
     }
     listadoRepresentaciones() {
         let tabla = creaTabla(["Teatro", "Fecha", "Adaptada", "Precio Base", "Espectáculo", "Editar", "Borrar"], "listadoRepresentaciones");
-        let representaciones = [this.teatros[0].representaciones[0]];
+        let a = [];
+        a.push(this.teatros[0].representaciones[0]);
+        console.log(a);
         this.teatros.forEach(teatro => {
+            teatro.representaciones.forEach(rep => {
+                //console.log(this.compruebaSiExisteRepresentacionEnLaLista(representaciones, rep), representaciones);
+                if (!this.compruebaSiExisteRepresentacionEnLaLista(a, rep)) {
+                    a.push(rep);
+                    console.log(rep);
+                }
 
-            teatro.representaciones.forEach(rep1 => {
-                teatro.representaciones.forEach(rep2 => {
-                    if (rep1.codigo != rep2.codigo && rep1.adaptada != rep2.adaptada && rep1.precioBase != rep2.precioBase && rep1.espectaculo != rep2.espectaculo) {
-                        representaciones.push(rep2);
-                        console.log(rep1);
-                    }
-                });
             });
 
         });
-        representaciones.forEach(representacion => {
+        a.forEach(representacion => {
             let linea = representacion.toHTMLrow();
             let celdaTeatro = linea.insertCell(0);
             let teatro = this.buscaTeatroPorRepresentacion(representacion.codigo);
@@ -144,6 +145,16 @@ class UpoTeatro {
             }
         });
         return tabla;
+    }
+    compruebaSiExisteRepresentacionEnLaLista(lista, busca) {
+        let coincide = false;
+        console.log(lista);
+        lista.forEach(rep => {
+            if (this.buscaTeatroPorRepresentacion(rep) == this.buscaTeatroPorRepresentacion(busca) && rep.espectaculo == busca.espectaculo) {
+                coincide = true;
+            }
+        });
+        return coincide;
     }
     listadoEspectaculos() {
         let tabla = creaTabla(["Espectáculo", "Productor", "Categoría", "Gastos", "Obra", "Compañía", "Editar", "Borrar"], "listadoEspectaculos");
