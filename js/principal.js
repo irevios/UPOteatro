@@ -81,14 +81,14 @@ function editaElimina(e) {
     if (e.target.tagName == "BUTTON" && e.target.dataset.tipo == "borrar") {
         switch (e.currentTarget.querySelector(".table-responsive").id) {
             case "listadoEntradas":
-            upoTeatro.buscaRepresentacionPorEntrada(e.target.dataset.id).borrarEntrada(e.target.dataset.id);
-            break;
+                upoTeatro.buscaRepresentacionPorEntrada(e.target.dataset.id).borrarEntrada(e.target.dataset.id);
+                break;
             case "listadoRepresentaciones":
-            upoTeatro.borrarRepresentacion(e.target.dataset.id);
-            break;
+                upoTeatro.borrarRepresentacion(e.target.dataset.id);
+                break;
             case "listadoEspectaculos":
-            upoTeatro.borrarEspectaculo(e.target.dataset.id);
-            break;
+                upoTeatro.borrarEspectaculo(e.target.dataset.id);
+                break;
         }
         e.target.parentElement.parentElement.remove();
     } else if (e.target.tagName == "BUTTON" && e.target.dataset.tipo == "editar") {
@@ -97,14 +97,14 @@ function editaElimina(e) {
         setTimeout(() => {
             switch (apartado) {
                 case "listadoEntradas":
-                editaEntrada(e.target.dataset.id);
-                break;
+                    editaEntrada(e.target.dataset.id);
+                    break;
                 case "listadoRepresentaciones":
-                editaRepresentacion(e.target.dataset.id);
-                break;
+                    editaRepresentacion(e.target.dataset.id);
+                    break;
                 case "listadoEspectaculos":
-                editaEspectaculo(e.target.dataset.id);
-                break;
+                    editaEspectaculo(e.target.dataset.id);
+                    break;
             }
         }, 100);
     }
@@ -324,13 +324,6 @@ function nuevasCreaciones(apartado) {
 
     switch (apartado) {
         case "#formularioRepresentacion":
-<<<<<<< HEAD
-            //Fechas, todas las que estén en el intervalo
-            //class Representacion { constructor(codigo, fecha, adaptada, precioBase, espectaculo)
-            //agregaRepresentacion
-            let teatro = upoTeatro.buscaTeatro(document.querySelector("#teatroSeleccionado").value);
-            ultimoCodigo = teatro.representaciones[teatro.representaciones.length - 1].codigo.split("");
-=======
 
         let oRepresentacion;
         let adaptada;
@@ -357,9 +350,9 @@ function nuevasCreaciones(apartado) {
         let fechas = fechasIntervalo(fechaInicio, fechaFin); // fechas ya tiene cada fecha en formato Date para poderse introducir directamente
         for (let i = 0; i < fechas.length; i++) {
 
-            ultimoCodigo = upoTeatro.representaciones[upoTeatro.representaciones.length - 1].codigo.split("");
+            let teatro = upoTeatro.buscaTeatro(document.querySelector("#teatroSeleccionado").value);
+            ultimoCodigo = teatro.representaciones[teatro.representaciones.length - 1].codigo.split("");
 
->>>>>>> 954bad51cd2f0630e8048565384e9156f9a97a2c
             let codigoRepresentacion = "";
             for (let f = 0; f < ultimoCodigo.length; f++) 
             {
@@ -415,7 +408,7 @@ function nuevasCreaciones(apartado) {
             let obra = upoTeatro.buscaObra(document.querySelector("#obraSeleccionada").value);
 
             let oEspectaculo = new Espectaculo(codigoEspectaculo, nombre, productor, categoria, gastos, obra, compania);
-            setTimeout(() => {
+           setTimeout(() => {
                 if (upoTeatro.agregaEspectaculo(oEspectaculo)) {
                     mensajeModal("Espectáculo creado correctamente.");
                 } else {
