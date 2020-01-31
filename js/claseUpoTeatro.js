@@ -61,6 +61,9 @@ class UpoTeatro {
         });
         return representacionConEntrada;
     }
+    buscaRepresentacion(codigo) {
+        return this.buscaTeatroPorRepresentacion(codigo).representaciones.filter(rep => rep.codigo == codigo)[0];
+    }
     buscaEspectaculo(codigo) {
         return this.espectaculos.filter(espectaculo => espectaculo.codigo == codigo)[0];
     }
@@ -113,11 +116,13 @@ class UpoTeatro {
     listadoRepresentaciones() {
         let tabla = creaTabla(["Teatro", "Fecha", "Adaptada", "Precio Base", "Espectáculo", "Editar", "Borrar"], "listadoRepresentaciones");
         let representaciones = [this.teatros[0].representaciones[0]];
-        representaciones.forEach(rep1 => {
-            this.teatros.forEach(teatro => {
+        this.teatros.forEach(teatro => {
+
+            teatro.representaciones.forEach(rep1 => {
                 teatro.representaciones.forEach(rep2 => {
                     if (rep1.codigo != rep2.codigo && rep1.adaptada != rep2.adaptada && rep1.precioBase != rep2.precioBase && rep1.espectaculo != rep2.espectaculo) {
                         representaciones.push(rep2);
+                        console.log(rep1);
                     }
                 });
             });
@@ -146,5 +151,16 @@ class UpoTeatro {
             tabla.querySelector("table").tBodies[0].append(espectaculo.toHTMLrow());
         });
         return tabla;
+    }
+    listaEntradas() {
+        let entradas = [];
+        this.teatros.forEach(teatro => {
+            teatro.representaciones.forEach(representacion => {
+                representacion.entradas.forEach(entrada => {
+                    entradas.push(entrada);
+                });
+            });
+        });
+        return entradas;
     }
 }

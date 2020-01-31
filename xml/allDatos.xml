@@ -1,31 +1,31 @@
 <datos>
     <!-- Base de datos de ejemplo de obras -->
     <obras>
-        <obra cod="Ob01">
+        <obra cod="OB01">
             <nombre>Hamlet</nombre>
             <autor>William Shakespeare</autor>
         </obra>
-        <obra cod="Ob02">
+        <obra cod="OB02">
             <nombre>La Celestina</nombre>
             <autor>Fernando de Rojas</autor>
         </obra>
-        <obra cod="Ob03">
+        <obra cod="OB03">
             <nombre>La llamada</nombre>
             <autor>Javier Calvo</autor>
         </obra>
-        <obra cod="Ob04">
+        <obra cod="OB04">
             <nombre>Billy Elliot</nombre>
             <autor>Lee Hall</autor>
         </obra>
-        <obra cod="Ob05">
+        <obra cod="OB05">
             <nombre>Yerma</nombre>
             <autor>Federico García Lorca</autor>
         </obra>
-        <obra cod="Ob06">
+        <obra cod="OB06">
             <nombre>Lo invisible</nombre>
             <autor>José Martínez Ruíz "Azorín"</autor>
         </obra>
-        <obra cod="Ob07">
+        <obra cod="OB07">
             <nombre>Riot Comedy</nombre>
             <autor>Influencers</autor>
         </obra>
@@ -59,43 +59,43 @@
     </companias>
     <!-- Base de datos de ejemplo de espectáculos -->
     <espectaculos>
-        <espectaculo cod="E001" obra="Ob03" compania="B32212532">
+        <espectaculo cod="E001" obra="OB03" compania="B32212532">
             <nombre>La llamada El Musical</nombre>
             <productor>Mariano Blanes Arguelles</productor>
             <categoria>Musical</categoria>
             <gastos>15600</gastos>
         </espectaculo>
-        <espectaculo cod="E002" obra="Ob02" compania="K64801160">
+        <espectaculo cod="E002" obra="OB02" compania="K64801160">
             <nombre>La Celestina</nombre>
             <productor>Guillermo Casanova Cruces</productor>
             <categoria>Tragicomedia</categoria>
             <gastos>24100</gastos>
         </espectaculo>
-        <espectaculo cod="E003" obra="Ob01" compania="P61657821">
+        <espectaculo cod="E003" obra="OB01" compania="P61657821">
             <nombre>Hamlet</nombre>
             <productor>Paula Blanco Almansa</productor>
             <categoria>Tragedia</categoria>
             <gastos>47400</gastos>
         </espectaculo>
-        <espectaculo cod="E004" obra="Ob04" compania="B32212532">
+        <espectaculo cod="E004" obra="OB04" compania="B32212532">
             <nombre>Billy Elliot</nombre>
             <productor>Jose Ignacio Ulloa Bautista</productor>
             <categoria>Musical</categoria>
             <gastos>32300</gastos>
         </espectaculo>
-        <espectaculo cod="E005" obra="Ob04" compania="G44106268">
+        <espectaculo cod="E005" obra="OB04" compania="G44106268">
             <nombre>Billy Elliot La Parodia</nombre>
             <productor>Rafael Fabregat Folch</productor>
             <categoria>Comedia</categoria>
             <gastos>12000</gastos>
         </espectaculo>
-        <espectaculo cod="E006" obra="Ob06" compania="V0723490I">
+        <espectaculo cod="E006" obra="OB06" compania="V0723490I">
             <nombre>Lo invisible</nombre>
             <productor>Fernando Salvador</productor>
             <categoria>Suspense</categoria>
             <gastos>3864</gastos>
         </espectaculo>
-        <espectaculo cod="E007" obra="Ob07" compania="V0723490I">
+        <espectaculo cod="E007" obra="OB07" compania="V0723490I">
             <nombre>Riot Comedy - Show de comedia femenina</nombre>
             <productor>Penny JayG</productor>
             <categoria>Comedia</categoria>
@@ -112,13 +112,13 @@
             <nombre>La Maestranza</nombre>
             <direccion>Paseo de Cristóbal Colón, 22, 41001 Sevilla</direccion>
         </teatro>
-        <teatro cod="T003">
-            <nombre>Quintero</nombre>
-            <direccion>Calle Cuna, 15, 41004 Sevilla</direccion>
-        </teatro>
         <teatro cod="T004">
             <nombre>El Teatro de Triana</nombre>
             <direccion>Calle Condes de Bustillo, 17, 41010 Sevilla</direccion>
+        </teatro>
+        <teatro cod="T003">
+            <nombre>Quintero</nombre>
+            <direccion>Calle Cuna, 15, 41004 Sevilla</direccion>
         </teatro>
     </teatros>
     <!-- Base de datos de ejemplo de representaciones -->
@@ -222,15 +222,15 @@
                 <fecha>2020-02-14</fecha>
                 <precioBase>6</precioBase>
             </representacion>
-            <representacion adaptada="N" cod="R22" espectaculo="E006">
+            <representacion adaptada="S" cod="R22" espectaculo="E006">
                 <fecha>2020-02-11</fecha>
-                <precioBase>12</precioBase>
+                <precioBase>6</precioBase>
             </representacion>
             <representacion adaptada="S" cod="R23" espectaculo="E006">
                 <fecha>2020-02-12</fecha>
-                <precioBase>12</precioBase>
+                <precioBase>6</precioBase>
             </representacion>
-            <representacion adaptada="D" cod="R24" espectaculo="E006">
+            <representacion adaptada="S" cod="R24" espectaculo="E006">
                 <fecha>2020-02-13</fecha>
                 <precioBase>6</precioBase>
             </representacion>

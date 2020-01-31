@@ -72,8 +72,7 @@ class Representacion {
         this.entradas = [];
     }
     compraEntrada(entrada) {
-        if (this.entradas.filter(entradaNuevo => entradaNuevo.butaca == entrada.butaca && this ==
-                entrada.representacion).length == 0) {
+        if (this.entradas.filter(entradaNuevo => entradaNuevo.codigo == entrada.codigo).length == 0) {
             this.entradas.push(entrada);
             return true;
         } else { return false; }

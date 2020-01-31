@@ -81,14 +81,14 @@ function editaElimina(e) {
     if (e.target.tagName == "BUTTON" && e.target.dataset.tipo == "borrar") {
         switch (e.currentTarget.querySelector(".table-responsive").id) {
             case "listadoEntradas":
-            upoTeatro.buscaRepresentacionPorEntrada(e.target.dataset.id).borrarEntrada(e.target.dataset.id);
-            break;
+                upoTeatro.buscaRepresentacionPorEntrada(e.target.dataset.id).borrarEntrada(e.target.dataset.id);
+                break;
             case "listadoRepresentaciones":
-            upoTeatro.buscaTeatroPorRepresentacion(e.target.dataset.id).borrarRepresentacion(e.target.dataset.id);
-            break;
+                upoTeatro.buscaTeatroPorRepresentacion(e.target.dataset.id).borrarRepresentacion(e.target.dataset.id);
+                break;
             case "listadoEspectaculos":
-            upoTeatro.borrarEspectaculo(e.target.dataset.id);
-            break;
+                upoTeatro.borrarEspectaculo(e.target.dataset.id);
+                break;
         }
         e.target.parentElement.parentElement.remove();
     } else if (e.target.tagName == "BUTTON" && e.target.dataset.tipo == "editar") {
@@ -97,14 +97,14 @@ function editaElimina(e) {
         setTimeout(() => {
             switch (apartado) {
                 case "listadoEntradas":
-                editaEntrada(e.target.dataset.id);
-                break;
+                    editaEntrada(e.target.dataset.id);
+                    break;
                 case "listadoRepresentaciones":
-                editaRepresentacion(e.target.dataset.id);
-                break;
+                    editaRepresentacion(e.target.dataset.id);
+                    break;
                 case "listadoEspectaculos":
-                editaEspectaculo(e.target.dataset.id);
-                break;
+                    editaEspectaculo(e.target.dataset.id);
+                    break;
             }
         }, 100);
     }
@@ -142,7 +142,7 @@ function editaEntrada(id) {
     cambiaPrecioEntrada();
     document.querySelector("#formularios button[name='submit']").textContent = "Editar";
     document.querySelector("#formularios button[name='submit']").addEventListener("click", () => {
-        representacion.borraEntrada(id);
+        representacion.borrarEntrada(id);
         setTimeout(() => {
             if (!document.querySelector("#formularioEntrada").classList.contains("was-validated")) {
                 document.querySelector(".modal #mensaje").textContent = "Entrada editada correctamente.";
@@ -281,7 +281,7 @@ function ordenaTabla(e) {
         // Según el tipo del campo hacemos diferentes comparadores
         let campoTexto = ["Representación", "Adaptada", "Teatro", "Espectáculo", "Productor", "Categoría", "Obra", "Compañía"]
         let campoNumero = ["Precio", "Precio Base", "Gastos"];
-        let lineas = Array.from( document.querySelectorAll("tbody tr"));
+        let lineas = Array.from(document.querySelectorAll("tbody tr"));
         //document.querySelectorAll("tbody tr").forEach(linea => lineas.push(linea)); // Pasa los tr a un array
 
         if (campoTexto.includes(seleccionado)) {
@@ -328,40 +328,33 @@ function nuevasCreaciones(apartado) {
     switch (apartado) {
         case "#formularioRepresentacion":
 
-        let oRepresentacion;
-        let adaptada;
-        if (document.querySelector("#representacionAdaptada").checked)
-            adaptada = true;
-        else
-            adaptada = false;
+            let oRepresentacion;
+            let adaptada;
+            if (document.querySelector("#representacionAdaptada").checked)
+                adaptada = true;
+            else
+                adaptada = false;
 
-        let precioBase = document.querySelector("#precioBaseRepresentacion").value;
+            let precioBase = document.querySelector("#precioBaseRepresentacion").value;
 
-        let oEsp;
-        let codEspectaculo = document.querySelector("#espectaculoSeleccionado").value;
-        for (let i = 0; i < upoTeatro.espectaculos.length; i++) {
-            if (upoTeatro.espectaculos[i].codigo == codEspectaculo)
-                oEsp = upoTeatro.espectaculos[i];
-        }
+            let oEsp;
+            let codEspectaculo = document.querySelector("#espectaculoSeleccionado").value;
+            for (let i = 0; i < upoTeatro.espectaculos.length; i++) {
+                if (upoTeatro.espectaculos[i].codigo == codEspectaculo)
+                    oEsp = upoTeatro.espectaculos[i];
+            }
 
-        let incorrectos = "";
-        let correcto = true;
+            let incorrectos = "";
+            let correcto = true;
 
-        let fechaInicio = fechaToDate(document.querySelector("#fechaInicioRepresentacion").value);
-        let fechaFin = fechaToDate(document.querySelector("#fechaFinalRepresentacion").value);
+            let fechaInicio = fechaToDate(document.querySelector("#fechaInicioRepresentacion").value);
+            let fechaFin = fechaToDate(document.querySelector("#fechaFinalRepresentacion").value);
             let fechas = fechasIntervalo(fechaInicio, fechaFin); // fechas ya tiene cada fecha en formato Date para poderse introducir directamente
             let teatro = upoTeatro.buscaTeatro(document.querySelector("#teatroSeleccionado").value);
             for (let i = 0; i < fechas.length; i++) {
 
-                ultimoCodigo = teatro.representaciones[teatro.representaciones.length - 1].codigo.split("");
 
-                let codigoRepresentacion = "";
-                for (let f = 0; f < ultimoCodigo.length; f++) {
-                    if (f == (ultimoCodigo.length - 1))
-                        codigoRepresentacion += parseInt(ultimoCodigo[f]) + 1;
-                    else
-                        codigoRepresentacion += ultimoCodigo[f];
-                }
+                let codigoRepresentacion = getSiguienteCodigo(teatro.representaciones);
 
                 oRepresentacion = new Representacion(codigoRepresentacion, fechas[i], adaptada, precioBase, oEsp);
 
@@ -386,15 +379,9 @@ function nuevasCreaciones(apartado) {
             break;
 
 
-            case "#formularioEspectaculo":
-            ultimoCodigo = upoTeatro.espectaculos[upoTeatro.espectaculos.length - 1].codigo.split("");
-            let codigoEspectaculo = "";
-            for (let i = 0; i < ultimoCodigo.length; i++) {
-                if (i == (ultimoCodigo.length - 1))
-                    codigoEspectaculo += parseInt(ultimoCodigo[i]) + 1;
-                else
-                    codigoEspectaculo += ultimoCodigo[i];
-            }
+        case "#formularioEspectaculo":
+            let codigoEspectaculo = getSiguienteCodigo(upoTeatro.espectaculos);
+
             let nombre = document.querySelector("#nombreEspectaculo").value;
             let productor = document.querySelector("#nombreProductorEspectaculo").value;
             let categoria = document.querySelector("#categoriaEspectaculo").value;
@@ -412,44 +399,65 @@ function nuevasCreaciones(apartado) {
                 }
             }, 100);
             break;
-            case "#formularioEntrada":
+        case "#formularioEntrada":
             let oEntradaAComprar;
-            let codRepresentacionSeleccionada = document.querySelector("#representacionSeleccionada").value;
-            
+            let representacionSeleccionada = upoTeatro.buscaRepresentacion(document.querySelector("#representacionSeleccionada").value);
+            console.log(representacionSeleccionada);
 
             let esAdaptada;
-            if (document.querySelector("#entradaAdaptada_0").checked)
+            if (document.querySelector("#entradaAdaptada_0").checked) {
                 esAdaptada = true;
-            else
+            } else {
                 esAdaptada = false;
+            }
 
             let totalEntrada = document.querySelector("#totalEntrada").value;
             let tipo;
 
+            let codigoEntrada = getSiguienteCodigo(upoTeatro.listaEntradas());
+
             let butacasSeleccionadas = formularioEntrada.parentElement.getElementsByClassName("seleccionada");
-            if(butacasSeleccionadas.length == 1)
-            {
+            if (butacasSeleccionadas.length == 1) {
                 //INDIVIDUAL
                 let tipoSplit = butacasSeleccionadas[0].dataset.butaca.split("-");
                 tipo = tipoSplit[0];
 
-                oEntradaAComprar = new EntradaIndividual("AA", esAdaptada, butacasSeleccionadas[0].dataset.butaca, totalEntrada, tipo);
-                
+                oEntradaAComprar = new EntradaIndividual(codigoEntrada, esAdaptada, butacasSeleccionadas[0].dataset.butaca, totalEntrada, tipo);
+
                 console.log(JSON.stringify(oEntradaAComprar));
-            }
-            else
-            {
+            } else {
                 //GRUPAL
                 let numPersonas = document.querySelector("#personasGrupal").value;
-                let precioEntradaGrupal = totalEntrada/numPersonas;
-                for(let i = 0; i<butacasSeleccionadas.length; i++)
-                {   
-                    oEntradaAComprar = new EntradaGrupal("AA", esAdaptada, butacasSeleccionadas[i].dataset.butaca, precioEntradaGrupal, numPersonas);
-                    console.log("New EntradaGrupal\nCodigo: ¿? \nesAdaptada: "+esAdaptada+"\nbutacaSeleccionada: "+butacasSeleccionadas[i].dataset.butaca+"\ntotalEntrada:"+precioEntradaGrupal+"\nnumPersonas: "+numPersonas);
+                let precioEntradaGrupal = totalEntrada / numPersonas;
+                let butacas = []
+                for (let i = 0; i < butacasSeleccionadas.length; i++) {
+                    butacas.push(butacasSeleccionadas[i].dataset.butaca);
                 }
-            }            
+                oEntradaAComprar = new EntradaGrupal(codigoEntrada, esAdaptada, butacas, precioEntradaGrupal, numPersonas);
+                console.log("New EntradaGrupal\nCodigo: " + codigoEntrada + " \nesAdaptada: " + esAdaptada + "\nbutacaSeleccionada: " + butacas.join() + "\ntotalEntrada:" + precioEntradaGrupal + "\nnumPersonas: " + numPersonas);
+            }
+            setTimeout(() => {
+                if (representacionSeleccionada.compraEntrada(oEntradaAComprar)) {
+                    mensajeModal("Has comprado la entrada correctamente");
+                    document.querySelector(apartado).reset();
+                } else {
+                    mensajeModal("Ha ocurrido un error, inténtelo más tarde.");
+                }
+            }, 100);
             break;
 
-            case "#formularioEntrada":
-        }
+        case "#formularioEntrada":
     }
+}
+
+function getSiguienteCodigo(lista) {
+    let ordenada = [];
+    lista.forEach(elem => ordenada.push(elem.codigo));
+    ordenada.sort((a, b) => { return a.localeCompare(b) });
+    let ultimoCodigo = ordenada[ordenada.length - 1];
+    let numRexp = /([A-Z]{1,2})([0-9]+)/;
+    ultimoCodigo = ultimoCodigo.split(numRexp);
+    let letra = ultimoCodigo[1];
+    let num = (parseInt(ultimoCodigo[2]) + 1) * ((ultimoCodigo[2].length - 1) == 1 ? 0.1 : (ultimoCodigo[2].length - 1) ? 0.01 : 0.001);
+    return (letra + num).replace(".", "");
+}

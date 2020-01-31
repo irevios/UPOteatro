@@ -99,7 +99,7 @@
             <fecha>2020-02-14</fecha>
             <precioBase>6</precioBase>
         </representacion>
-        <representacion adaptada="N" cod="R22" espectaculo="E006">
+        <representacion adaptada="S" cod="R22" espectaculo="E006">
             <fecha>2020-02-11</fecha>
             <precioBase>12</precioBase>
         </representacion>
@@ -107,7 +107,7 @@
             <fecha>2020-02-12</fecha>
             <precioBase>12</precioBase>
         </representacion>
-        <representacion adaptada="D" cod="R24" espectaculo="E006">
+        <representacion adaptada="S" cod="R24" espectaculo="E006">
             <fecha>2020-02-13</fecha>
             <precioBase>6</precioBase>
         </representacion>
