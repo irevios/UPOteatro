@@ -415,9 +415,11 @@ function nuevasCreaciones(apartado) {
             let tipo;
 
             let codigoEntrada = getSiguienteCodigo(upoTeatro.listaEntradas());
+            let oButaca;//constructor(numero, fila, zona, coefPrecio)
 
             let butacasSeleccionadas = formularioEntrada.parentElement.getElementsByClassName("seleccionada");
             if (butacasSeleccionadas.length == 1) {
+
                 //INDIVIDUAL
                 let tipoSplit = butacasSeleccionadas[0].dataset.butaca.split("-");
                 tipo = tipoSplit[0];
@@ -429,9 +431,12 @@ function nuevasCreaciones(apartado) {
                 //GRUPAL
                 let numPersonas = document.querySelector("#personasGrupal").value;
                 let precioEntradaGrupal = totalEntrada / numPersonas;
+                
                 let butacas = []
                 for (let i = 0; i < butacasSeleccionadas.length; i++) {
-                    butacas.push(butacasSeleccionadas[i].dataset.butaca);
+                    let butacaFragmentacion = butacasSeleccionadas[i].dataset.butaca.split("-");
+                    oButaca= new Butaca(butacaFragmentacion[2], butacaFragmentacion[1],butacaFragmentacion[0],2);
+                    butacas.push(oButaca);
                 }
                 oEntradaAComprar = new EntradaGrupal(codigoEntrada, esAdaptada, butacas, precioEntradaGrupal, numPersonas);
                 console.log("New EntradaGrupal\nCodigo: " + codigoEntrada + " \nesAdaptada: " + esAdaptada + "\nbutacaSeleccionada: " + butacas.join() + "\ntotalEntrada:" + precioEntradaGrupal + "\nnumPersonas: " + numPersonas);
