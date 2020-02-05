@@ -235,23 +235,6 @@ CREATE TABLE `categoria` (
   `NOMBRE` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `categoria`
---
-
-INSERT INTO `categoria` (`CODIGO`, `NOMBRE`) VALUES
-(1, 'Comedia'),
-(2, 'Musical'),
-(3, 'Pantomima'),
-(4, 'Marionetas'),
-(5, 'Absurdo'),
-(6, 'Tragicomedia'),
-(7, 'Tragedia'),
-(8, 'Independiente'),
-(9, 'Poético'),
-(10, 'Suspense'),
-(11, 'Drama');
-
 -- --------------------------------------------------------
 
 --
