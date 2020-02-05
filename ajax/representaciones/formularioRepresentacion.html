@@ -1,0 +1,60 @@
+<!-- Formulario crear representacion -->
+<form id="formularioRepresentacion">
+    <div class="form-group">
+        <label for="teatroSeleccionado">Teatro</label>
+        <div>
+            <select id="teatroSeleccionado" name="teatroSeleccionado" required="required" class="custom-select">
+                <!-- Teatros de la base de datos -->
+            </select>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="fechaInicioRepresentacion" class="col-2 col-form-label">Fecha (Inicio/Fin)</label>
+        <div class="col-5">
+            <input id="fechaInicioRepresentacion" name="fechaInicioRepresentacion" type="date" class="form-control" required="required">
+            <div class="invalid-feedback">Debe introducir una fecha válida</div>
+        </div>
+        <div class="col-5">
+            <input id="fechaFinalRepresentacion" name="fechaFinalRepresentacion" type="date" class="form-control" required="required">
+            <div class="invalid-feedback">Debe introducir una fecha válida</div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-2"></label>
+        <div class="col-10">
+            <div class="custom-control custom-checkbox custom-control-inline">
+                <input name="representacionAdaptada" id="representacionAdaptada" type="checkbox" class="custom-control-input" value="S">
+                <label for="representacionAdaptada" class="custom-control-label">Adaptada</label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="precioBaseRepresentacion" class="col-2 col-form-label">Precio base</label>
+        <div class="col-10">
+            <div class="input-group">
+                <input id="precioBaseRepresentacion" name="precioBaseRepresentacion" type="number" class="form-control" step="any" min="1" max="999" required="required">
+                <div class="input-group-append">
+                    <div class="input-group-text">
+                        <i class="fa fa-euro"></i>
+                    </div>
+                </div>
+                <div class="invalid-feedback">Debe introducir un numero entre 1 y 999</div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+    <div class="form-group row">
+        <label for="espectaculoSeleccionado" class="col-2 col-form-label">Espectáculo</label>
+        <div class="col-10">
+            <select id="espectaculoSeleccionado" name="espectaculoSeleccionado" class="custom-select">
+                <!-- Espectáculos de la base de datos -->
+            </select>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="offset-2 col-10">
+            <button name="submit" type="button" class="btn btn-primary">Añadir</button>
+        </div>
+    </div>
+</form>
