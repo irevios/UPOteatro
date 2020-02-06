@@ -3,6 +3,7 @@
 
 function cargaInicialDatos() {
     Ajax("./xml/usuarios.xml", cargaUsuarios, "GET", "");
+    cargaDatos2();
     Ajax("./xml/allDatos.xml", cargaDatos, "GET", "");
 }
 
@@ -23,50 +24,60 @@ function cargaUsuarios(xml) {
 }
 
 function cargaDatos(xml) {
-    cargaInicialObras(xml.querySelectorAll("obra"));
-    cargaInicialCompanias(xml.querySelectorAll("compania"));
-    cargaInicialEspectaculos(xml.querySelectorAll("espectaculo"));
+    //cargaInicialObras(xml.querySelectorAll("obra"));
+    //cargaInicialCompanias(xml.querySelectorAll("compania"));
+    //cargaInicialEspectaculos(xml.querySelectorAll("espectaculo"));
     cargaInicialTeatros(xml.querySelectorAll("datos > teatros > teatro"));
     cargaInicialRepresentaciones(xml.querySelectorAll("datos > representaciones representacion"));
     cargaInicialButacas(xml.querySelectorAll("butacas"));
     cargaInicialEntradas(xml.querySelectorAll("entrada"));
 }
 
-function cargaInicialObras(obras) {
-    obras.forEach(obra => {
-        let cod = obra.getAttribute("cod");
-        let nombre = obra.querySelector("nombre").textContent;
-        let autor = obra.querySelector("autor").textContent;
+function cargaDatos2() {
+    $.get("./ajax/obras/buscaObras.php", cargaInicialObras, "json");
+    $.get("./ajax/companias/buscaCompanias.php", cargaInicialCompanias, "json");
+    $.get("./ajax/espectaculos/buscaEspectaculos.php", cargaInicialEspectaculos, "json");
+}
+
+function cargaInicialObras(json) {
+    json.forEach(obra => {
+        let cod = obra.CODIGO;
+        let nombre = obra.NOMBRE;
+        let autor = obra.AUTOR;
+
         let nuevaObra = new Obra(cod, nombre, autor);
         upoTeatro.agregaObra(nuevaObra);
     });
+    obras = true;
 }
 
-function cargaInicialCompanias(companias) {
-    companias.forEach(compania => {
-        let cif = compania.getAttribute("cif");
-        let nombre = compania.querySelector("nombre").textContent;
-        let director = compania.querySelector("director").textContent;
+function cargaInicialCompanias(json) {
+    json.forEach(compania => {
+        let cif = compania.CIF;
+        let nombre = compania.NOMBRE;
+        let director = compania.DIRECTOR;
 
         let nuevaCompania = new Compania(cif, nombre, director);
         upoTeatro.agregaCompania(nuevaCompania);
     });
+    companias = true;
 }
 
-function cargaInicialEspectaculos(espectaculos) {
-    espectaculos.forEach(espectaculo => {
-        let codigo = espectaculo.getAttribute("cod");
-        let nombre = espectaculo.querySelector("nombre").textContent;
-        let productor = espectaculo.querySelector("productor").textContent;
-        let categoria = espectaculo.querySelector("categoria").textContent;
-        let gastos = espectaculo.querySelector("gastos").textContent;
-        let obra = upoTeatro.buscaObra(espectaculo.getAttribute("obra"));
-        let compania = upoTeatro.buscaCompania(espectaculo.getAttribute("compania"));
+function cargaInicialEspectaculos(json) {
+    json.forEach(espectaculo => {
+        let codigo = espectaculo.CODIGO;
+        let nombre = espectaculo.NOMBRE;
+        let productor = espectaculo.PRODUCTOR;
+        let categoria = espectaculo.CATEGORIA;
+        let gastos = espectaculo.GASTOS;
+        let obra = espectaculo.CODIGO_OBRA;
+        let compania = espectaculo.CIF_COMPANIA;
 
-        let nuevoEspectaculo = new Espectaculo(codigo, nombre, productor, categoria, gastos, obra, compania);
-        upoTeatro.agregaEspectaculo(nuevoEspectaculo);
+        let nuevaEspectaculo = new Espectaculo(codigo, nombre, productor, categoria, gastos, obra, compania);
+        upoTeatro.agregaEspectaculo(nuevaEspectaculo);
     });
 }
+
 
 function cargaInicialTeatros(teatros) {
     teatros.forEach(teatro => {

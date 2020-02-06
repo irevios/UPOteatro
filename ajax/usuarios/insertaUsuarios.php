@@ -6,11 +6,11 @@ $usuarios = json_decode($datosJSON);
 
 // Creamos la conexión al servidor.
 $conexion = mysqli_connect("localhost", "root", "", "upoteatro") or die(mysqli_error($conexion));
-mysqli_query($conexion, "utf8");
+mysqli_set_charset($conexion,"utf8");
 
 // Insertamos todos los datos en la tabla Usuarios
 foreach ($usuarios as $usuario) {
-    $sql       = "INSERT IGNORE INTO usuarios VALUES ('" . $usuario->nombre . "','" . $usuario->clave . "','" . $usuario->tipo . "')";
+    $sql       = "INSERT IGNORE INTO usuario VALUES ('" . $usuario->nombre . "','" . $usuario->clave . "','" . $usuario->tipo . "')";
     $resultado = mysqli_query($conexion, $sql);
 }
 

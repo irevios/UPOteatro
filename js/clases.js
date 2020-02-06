@@ -143,9 +143,9 @@ class Espectaculo {
         celda = fila.insertCell(-1);
         celda.textContent = this.gastos + "€";
         celda = fila.insertCell(-1);
-        celda.textContent = this.obra.nombre;
+        celda.textContent = upoTeatro.buscaObra(this.obra).nombre;
         celda = fila.insertCell(-1);
-        celda.textContent = this.compania.nombre;
+        celda.textContent = upoTeatro.buscaCompania(this.compania).nombre;
         if (esAdmin()) {
             agregaBoton("editar", fila, this.codigo);
             agregaBoton("borrar", fila, this.codigo);

@@ -263,7 +263,7 @@ DROP TABLE IF EXISTS `compania`;
 CREATE TABLE `compania` (
   `CIF` varchar(9) NOT NULL,
   `NOMBRE` varchar(50) NOT NULL,
-  `DIRECTOR` varchar(20) NOT NULL
+  `DIRECTOR` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
@@ -272,10 +272,10 @@ CREATE TABLE `compania` (
 
 INSERT INTO `compania` (`CIF`, `NOMBRE`, `DIRECTOR`) VALUES
 ('B32212532', 'Producciones Altozano', 'Aitor Pino Mate'),
-('G44106268', 'Entre Nubes', 'Roberto Tamarit Roca'),
-('K64801160', 'Sepaner', 'Carla Pacheco Escala'),
-('P61657821', 'Zamora Y Maqueda', 'Maria Rosa Serra Agu'),
-('S23875537', 'Pelca', 'Francisco Ballesta F'),
+('G44106268', 'Entre Nubes', 'Roberto Tamarit Rocamora'),
+('K64801160', 'Sepaner', 'Carla Pacheco Escalante'),
+('P61657821', 'Zamora Y Maqueda', 'Maria Rosa Serra Aguiar'),
+('S23875537', 'Pelca', 'Francisco Ballesta Farinas'),
 ('V0723490I', 'Pangea Artes Escénicas', 'Fernando Salvador');
 
 -- --------------------------------------------------------
@@ -324,7 +324,7 @@ DROP TABLE IF EXISTS `espectaculo`;
 CREATE TABLE `espectaculo` (
   `CODIGO` int(11) NOT NULL,
   `NOMBRE` varchar(50) NOT NULL,
-  `PRODUCTOR` varchar(20) NOT NULL,
+  `PRODUCTOR` varchar(50) NOT NULL,
   `GASTOS` int(20) NOT NULL,
   `ID_CATEGORIA` int(11) NOT NULL,
   `CODIGO_OBRA` int(11) NOT NULL,
@@ -336,11 +336,11 @@ CREATE TABLE `espectaculo` (
 --
 
 INSERT INTO `espectaculo` (`CODIGO`, `NOMBRE`, `PRODUCTOR`, `GASTOS`, `ID_CATEGORIA`, `CODIGO_OBRA`, `CIF_COMPANIA`) VALUES
-(1, 'La llamada El Musical', 'Mariano Blanes Argue', 15600, 2, 3, 'B32212532'),
-(2, 'La Celestina', 'Guillermo Casanova C', 24100, 6, 2, 'K64801160'),
+(1, 'La llamada El Musical', 'Mariano Blanes Arguelles', 15600, 2, 3, 'B32212532'),
+(2, 'La Celestina', 'Guillermo Casanova Cruces', 24100, 6, 2, 'K64801160'),
 (3, 'Hamlet', 'Paula Blanco Almansa', 47400, 7, 1, 'P61657821'),
-(4, 'Billy Elliot', 'Jose Ignacio Ulloa B', 32300, 2, 4, 'B32212532'),
-(5, 'Billy Elliot La Parodia', 'Rafael Fabregat Folc', 12000, 1, 4, 'G44106268'),
+(4, 'Billy Elliot', 'Jose Ignacio Ulloa Bautista', 32300, 2, 4, 'B32212532'),
+(5, 'Billy Elliot La Parodia', 'Rafael Fabregat Folch', 12000, 1, 4, 'G44106268'),
 (6, 'Lo invisible', 'Fernando Salvador', 3864, 10, 6, 'V0723490I'),
 (7, 'Show de comedia femenina', 'Penny JayG', 5640, 1, 7, 'V0723490I');
 
@@ -497,11 +497,11 @@ INSERT INTO `teatro` (`CODIGO`, `NOMBRE`, `DIRECCION`, `AFORO`) VALUES
 -- Estructura de tabla para la tabla `usuarios`
 --
 
-DROP TABLE IF EXISTS `usuarios`;
-CREATE TABLE `usuarios` (
-  `usuario` varchar(30) NOT NULL,
-  `clave` varchar(30) NOT NULL,
-  `permisos` varchar(20) NOT NULL
+DROP TABLE IF EXISTS `usuario`;
+CREATE TABLE `usuario` (
+  `USUARIO` varchar(30) NOT NULL,
+  `CLAVE` varchar(30) NOT NULL,
+  `PERMISOS` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
@@ -577,9 +577,9 @@ ALTER TABLE `teatro`
   ADD PRIMARY KEY (`CODIGO`);
 
 --
--- Indices de la tabla `usuarios`
+-- Indices de la tabla `usuario`
 --
-ALTER TABLE `usuarios`
+ALTER TABLE `usuario`
   ADD PRIMARY KEY (`usuario`);
 
 --

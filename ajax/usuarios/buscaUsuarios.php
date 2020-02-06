@@ -1,14 +1,14 @@
 <?php
 // Creamos la conexión al servidor.
 $conexion = mysqli_connect("localhost", "root", "", "upoteatro") or die(mysqli_error($conexion));
-mysqli_query($conexion, "utf8");
+mysqli_set_charset($conexion,"utf8");
 
 // Comprobamos si existe el usuario
-$sql = "SELECT * FROM usuarios where usuario = '" . $_GET["usuario"] . "' AND clave = '" . $_GET["clave"] . "'";
+$sql = "SELECT * FROM usuario where usuario = '" . $_GET["USUARIO"] . "' AND clave = '" . $_GET["CLAVE"] . "'";
 $resultado = mysqli_query($conexion, $sql);
 $usuario   = mysqli_fetch_assoc($resultado);
 
-echo $usuario["permisos"]; // Enviamos los permisos del usuario encontrado
+echo $usuario["PERMISOS"]; // Enviamos los permisos del usuario encontrado
 
 mysqli_close($conexion);
 ?>
