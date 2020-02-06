@@ -1,7 +1,8 @@
 // En este documento se define las funcione que se usan varias veces con diferentes usos.
 "use strict";
-// Leer XML/HTML y lo guarda en variables para usarlas después
-function leeArchivoXMLHTML(filename, funcion, tipo, parametros) {
+
+// Ajax javascript
+function Ajax(filename, funcion, tipo, parametros) {
     let xhttp;
     window.XMLHttpRequest ? xhttp = new XMLHttpRequest() : xhttp = new ActiveXObject("Microsoft.XMLHTTP");
     xhttp.addEventListener("readystatechange", () => {

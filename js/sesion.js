@@ -4,7 +4,7 @@
 // En la carga de la página
 function compruebaSesion() {
     if (esAdmin()) {
-        leeArchivoXMLHTML("./ajax/nav/navAdmin.html", agregaNav, "GET", "");
+        Ajax("./ajax/nav/navAdmin.html", agregaNav, "GET", "");
     } else {
         cargarEventos();
     }
@@ -24,10 +24,18 @@ function agregaNav(nav) {
 // Click en Acceder como Administrador
 document.querySelector("#accederAdmin").addEventListener("click", modalIniciaSesion);
 
+function modalIniciaSesion() {
+    document.querySelector(".modal .modal-title").textContent = "Iniciar Sesión";
+    document.querySelector("#inicioSesion").classList.add("show");
+    document.querySelector(".modal .modal-footer").classList.remove("show");
+    document.querySelector("#inicioSesion button").addEventListener("click", compruebaUsuario);
+    muestraModal();
+}
+
 function compruebaUsuario() {
     let usuario = document.querySelector("#usuario").value;
     let clave = document.querySelector("#clave").value;
-    leeArchivoXMLHTML("./ajax/usuarios/buscaUsuarios.php?usuario=" + usuario + "&clave=" + clave, iniciaSesion, "GET", "");
+    Ajax("./ajax/usuarios/buscaUsuarios.php?usuario=" + usuario + "&clave=" + clave, iniciaSesion, "GET", "");
 }
 
 function iniciaSesion(usuario) {
@@ -66,11 +74,3 @@ function cierraSesion() {
     location.reload();
 }
 
-
-function modalIniciaSesion() {
-    document.querySelector(".modal .modal-title").textContent = "Iniciar Sesión";
-    document.querySelector("#inicioSesion").classList.add("show");
-    document.querySelector(".modal .modal-footer").classList.remove("show");
-    document.querySelector("#inicioSesion button").addEventListener("click", compruebaUsuario);
-    muestraModal();
-}

@@ -2,8 +2,8 @@
 
 
 function cargaInicialDatos() {
-    leeArchivoXMLHTML("./xml/usuarios.xml", cargaUsuarios, "GET", "");
-    leeArchivoXMLHTML("./xml/allDatos.xml", cargaDatos, "GET", "");
+    Ajax("./xml/usuarios.xml", cargaUsuarios, "GET", "");
+    Ajax("./xml/allDatos.xml", cargaDatos, "GET", "");
 }
 
 function cargaUsuarios(xml) {
@@ -16,7 +16,7 @@ function cargaUsuarios(xml) {
         usuarios.push(user);
     });
     let parametro = "usuarios=" + JSON.stringify(usuarios);
-    leeArchivoXMLHTML("./ajax/usuarios/insertaUsuarios.php", ()=>{}, "POST", parametro);
+    Ajax("./ajax/usuarios/insertaUsuarios.php", ()=>{}, "POST", parametro);
 }
 
 function cargaDatos(xml) {
