@@ -1,24 +1,5 @@
 // En este documento se define las funciones que cambian el aspecto de la web según que opcion eligamos.
 "use strict";
-/*
-    Guia de enlaces-formularios
---------------------------------------------
-    #navInicio  - Vuelve al inicio de la página.
-
-    -- Entradas -- 
-    #navComprarEntrada - Formulario para crear entrada.
-    #navListaEntradas - Muestra las entradas vendidas con una X para borrar y un lapiz para editar.
-
-    -- Representaciones --
-    #navAgregarRepresentacion - Formulario para crear representación.
-    #navListaRepresentaciones - Muestra las representaciones con una X para borrar y un lapiz para editar.
-
-    -- Espectaculos --
-    #navAgregarEspectaculo - Formulario para crear un espectáculo.
-    #navListaEspectaculos - Muestra los espectáculos con una X para borrar y un lapiz para editar.
-
-*/
-
 
 // Eventos del menú
 function cargarEventos() {
@@ -34,6 +15,13 @@ function cargarEventosAdmin() {
     document.querySelector("#navAgregarEspectaculo").addEventListener("click", () => muestraEnPantalla("formularioEspectaculo"));
 }
 
+// Cambia el titulo y subtítulo de la cabecera
+function cambiaCabecera(titulo, subtitulo) {
+    document.querySelector(".jumbotron strong").textContent = titulo;
+    document.querySelector(".jumbotron p").textContent = subtitulo;
+}
+
+// Deja en activo el apartado del menú correspondiente
 function seleccionaActivo(elem) {
     document.querySelector("#navBar .active").classList.remove("active");
     if (elem.includes("Entrada")) {
@@ -47,6 +35,7 @@ function seleccionaActivo(elem) {
     }
 }
 
+// Muestra u oculta un formulario o listado
 function muestraEnPantalla(elem) {
     seleccionaActivo(elem);
     // La cabecera se reduce
@@ -63,7 +52,7 @@ function muestraEnPantalla(elem) {
     }
     // Si se pide un formulario, busca en el archivo formularios y lo añade a la web, si no añade un listado
     if (elem.includes("formulario")) {
-        Ajax("./html/formularios.html", (formulario) => agregaForm(elem, formulario), "GET", "");
+        agregaFormulario(elem);
     } else {
         Ajax("./html/filtros.html", (filtros) => agregaTabla(elem, filtros), "GET", "");
     }
@@ -74,14 +63,8 @@ function muestraEnPantalla(elem) {
 
 }
 
-
-function cambiaCabecera(titulo, subtitulo) {
-    document.querySelector(".jumbotron strong").textContent = titulo;
-    document.querySelector(".jumbotron p").textContent = subtitulo;
-}
-
-// Añade un formulario a la vista
-function agregaForm(elem, form) {
+// Muestra un formulario
+function agregaFormulario(elem) {
     switch (elem) {
         case "formularioEntrada":
             cambiaCabecera("Entradas", "Comprar entrada");
@@ -120,18 +103,18 @@ function agregaTabla(elem, filtros) {
     let tabla;
     switch (elem) {
         case "listaEntrada":
-            agregaFiltros(filtros, "filtrosEntrada");
             cambiaCabecera("Entradas", "Lista de entradas compradas");
+            agregaFiltros(filtros, "filtrosEntrada");
             tabla = upoTeatro.listadoEntradas();
             break;
         case "listaRepresentacion":
-            agregaFiltros(filtros, "filtrosRepresentacion");
             cambiaCabecera("Representaciones", "Lista de representaciones");
+            agregaFiltros(filtros, "filtrosRepresentacion");
             tabla = upoTeatro.listadoRepresentaciones();
             break;
         case "listaEspectaculo":
-            agregaFiltros(filtros, "filtrosEspectaculo");
             cambiaCabecera("Espectáculos", "Lista de espectáculos");
+            agregaFiltros(filtros, "filtrosEspectaculo");
             tabla = upoTeatro.listadoEspectaculos();
             break;
     }
