@@ -278,40 +278,6 @@ INSERT INTO `compania` (`CIF`, `NOMBRE`, `DIRECTOR`) VALUES
 ('S23875537', 'Pelca', 'Francisco Ballesta Farinas'),
 ('V0723490I', 'Pangea Artes Escénicas', 'Fernando Salvador');
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `entrada`
---
-
-DROP TABLE IF EXISTS `entrada`;
-CREATE TABLE `entrada` (
-  `CODIGO` int(11) NOT NULL,
-  `ADAPTADA` varchar(1) NOT NULL,
-  `COD_BUTACA` int(11) NOT NULL,
-  `COD_REPRESENTACION` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-
---
--- Volcado de datos para la tabla `entrada`
---
-
-INSERT INTO `entrada` (`CODIGO`, `ADAPTADA`, `COD_BUTACA`, `COD_REPRESENTACION`) VALUES
-(1, 'N', 5, 4),
-(2, 'N', 19, 4),
-(3, 'N', 70, 16),
-(4, 'N', 71, 16),
-(5, 'N', 72, 16),
-(6, 'N', 73, 16),
-(7, 'N', 74, 16),
-(8, 'N', 70, 19),
-(9, 'N', 71, 19),
-(10, 'N', 72, 19),
-(11, 'N', 84, 19),
-(12, 'N', 85, 19),
-(13, 'N', 86, 19),
-(14, 'N', 87, 19),
-(15, 'S', 79, 15);
 
 -- --------------------------------------------------------
 
@@ -346,12 +312,36 @@ INSERT INTO `espectaculo` (`CODIGO`, `NOMBRE`, `PRODUCTOR`, `GASTOS`, `COD_CATEG
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `entrada`
+--
+
+DROP TABLE IF EXISTS `entrada`;
+CREATE TABLE `entrada` (
+  `CODIGO` int(11) NOT NULL,
+  `ADAPTADA` varchar(1) NOT NULL,
+  `COD_REPRESENTACION` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `entrada`
+--
+
+INSERT INTO `entrada` (`CODIGO`, `ADAPTADA`, `COD_REPRESENTACION`) VALUES
+(1, 'N', 4),
+(2, 'N', 4),
+(3, 'N', 16),
+(4, 'N', 19),
+(5, 'S', 15);
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `e_grupal`
 --
 
 DROP TABLE IF EXISTS `e_grupal`;
 CREATE TABLE `e_grupal` (
   `CODIGO_ENTRADA` int(11) NOT NULL,
+  `COD_BUTACA` int(11) NOT NULL,
   `NUM_PERSONAS` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
@@ -359,19 +349,19 @@ CREATE TABLE `e_grupal` (
 -- Volcado de datos para la tabla `e_grupal`
 --
 
-INSERT INTO `e_grupal` (`CODIGO_ENTRADA`, `NUM_PERSONAS`) VALUES
-(3, 5),
-(4, 5),
-(5, 5),
-(6, 5),
-(7, 5),
-(8, 7),
-(9, 7),
-(10, 7),
-(11, 7),
-(12, 7),
-(13, 7),
-(14, 7);
+INSERT INTO `e_grupal` (`CODIGO_ENTRADA`, `COD_BUTACA`, `NUM_PERSONAS`) VALUES
+(3, 70, 5),
+(3, 71, 5),
+(3, 72, 5),
+(3, 73, 5),
+(3, 74, 5),
+(4, 70, 7),
+(4, 71, 7),
+(4, 72, 7),
+(4, 84, 7),
+(4, 85, 7),
+(4, 86, 7),
+(4, 87, 7);
 
 -- --------------------------------------------------------
 
@@ -382,6 +372,7 @@ INSERT INTO `e_grupal` (`CODIGO_ENTRADA`, `NUM_PERSONAS`) VALUES
 DROP TABLE IF EXISTS `e_individual`;
 CREATE TABLE `e_individual` (
   `CODIGO_ENTRADA` int(11) NOT NULL,
+  `COD_BUTACA` int(11) NOT NULL,
   `TIPO` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
@@ -389,10 +380,10 @@ CREATE TABLE `e_individual` (
 -- Volcado de datos para la tabla `e_individual`
 --
 
-INSERT INTO `e_individual` (`CODIGO_ENTRADA`, `TIPO`) VALUES
-(1, 'PALCO'),
-(2, 'ANFITEATRO'),
-(15, 'PARAISO');
+INSERT INTO `e_individual` (`CODIGO_ENTRADA`, `COD_BUTACA`, `TIPO`) VALUES
+(1, 5, 'PALCO'),
+(2, 19, 'ANFITEATRO'),
+(5, 79, 'PARAISO');
 
 -- --------------------------------------------------------
 
@@ -527,14 +518,6 @@ ALTER TABLE `compania`
   ADD PRIMARY KEY (`CIF`);
 
 --
--- Indices de la tabla `entrada`
---
-ALTER TABLE `entrada`
-  ADD PRIMARY KEY (`CODIGO`),
-  ADD KEY `COD_BUTACA` (`COD_BUTACA`),
-  ADD KEY `COD_REPRESENTACION` (`COD_REPRESENTACION`);
-
---
 -- Indices de la tabla `espectaculo`
 --
 ALTER TABLE `espectaculo`
@@ -544,16 +527,25 @@ ALTER TABLE `espectaculo`
   ADD KEY `CIF_COMPANIA` (`CIF_COMPANIA`);
 
 --
+-- Indices de la tabla `entrada`
+--
+ALTER TABLE `entrada`
+  ADD PRIMARY KEY (`CODIGO`),
+  ADD KEY `COD_REPRESENTACION` (`COD_REPRESENTACION`);
+
+--
 -- Indices de la tabla `e_grupal`
 --
 ALTER TABLE `e_grupal`
-  ADD PRIMARY KEY (`CODIGO_ENTRADA`);
+  ADD KEY (`CODIGO_ENTRADA`),
+  ADD KEY `COD_BUTACA` (`COD_BUTACA`);
 
 --
 -- Indices de la tabla `e_individual`
 --
 ALTER TABLE `e_individual`
-  ADD PRIMARY KEY (`CODIGO_ENTRADA`);
+  ADD KEY (`CODIGO_ENTRADA`),
+  ADD KEY `COD_BUTACA` (`COD_BUTACA`);
 
 --
 -- Indices de la tabla `obra`
@@ -610,18 +602,6 @@ ALTER TABLE `espectaculo`
   MODIFY `CODIGO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT de la tabla `e_grupal`
---
-ALTER TABLE `e_grupal`
-  MODIFY `CODIGO_ENTRADA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
-
---
--- AUTO_INCREMENT de la tabla `e_individual`
---
-ALTER TABLE `e_individual`
-  MODIFY `CODIGO_ENTRADA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
-
---
 -- AUTO_INCREMENT de la tabla `obra`
 --
 ALTER TABLE `obra`
@@ -650,13 +630,6 @@ ALTER TABLE `butaca`
   ADD CONSTRAINT `butaca_ibfk_1` FOREIGN KEY (`COD_TEATRO`) REFERENCES `teatro` (`CODIGO`);
 
 --
--- Filtros para la tabla `entrada`
---
-ALTER TABLE `entrada`
-  ADD CONSTRAINT `entrada_ibfk_1` FOREIGN KEY (`COD_BUTACA`) REFERENCES `butaca` (`CODIGO`),
-  ADD CONSTRAINT `entrada_ibfk_2` FOREIGN KEY (`COD_REPRESENTACION`) REFERENCES `representacion` (`CODIGO`);
-
---
 -- Filtros para la tabla `espectaculo`
 --
 ALTER TABLE `espectaculo`
@@ -665,16 +638,24 @@ ALTER TABLE `espectaculo`
   ADD CONSTRAINT `espectaculo_ibfk_3` FOREIGN KEY (`CIF_COMPANIA`) REFERENCES `compania` (`CIF`);
 
 --
+-- Filtros para la tabla `entrada`
+--
+ALTER TABLE `entrada`
+  ADD CONSTRAINT `entrada_ibfk_1` FOREIGN KEY (`COD_REPRESENTACION`) REFERENCES `representacion` (`CODIGO`);
+
+--
 -- Filtros para la tabla `e_grupal`
 --
 ALTER TABLE `e_grupal`
-  ADD CONSTRAINT `e_grupal_ibfk_1` FOREIGN KEY (`CODIGO_ENTRADA`) REFERENCES `entrada` (`CODIGO`);
+  ADD CONSTRAINT `e_grupal_ibfk_1` FOREIGN KEY (`CODIGO_ENTRADA`) REFERENCES `entrada` (`CODIGO`),
+  ADD CONSTRAINT `e_grupal_ibfk_2` FOREIGN KEY (`COD_BUTACA`) REFERENCES `butaca` (`CODIGO`);
 
 --
 -- Filtros para la tabla `e_individual`
 --
 ALTER TABLE `e_individual`
-  ADD CONSTRAINT `e_individual_ibfk_1` FOREIGN KEY (`CODIGO_ENTRADA`) REFERENCES `entrada` (`CODIGO`);
+  ADD CONSTRAINT `e_individual_ibfk_1` FOREIGN KEY (`CODIGO_ENTRADA`) REFERENCES `entrada` (`CODIGO`),
+  ADD CONSTRAINT `e_individual_ibfk_2` FOREIGN KEY (`COD_BUTACA`) REFERENCES `butaca` (`CODIGO`);
 
 --
 -- Filtros para la tabla `representacion`

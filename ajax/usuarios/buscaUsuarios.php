@@ -4,7 +4,7 @@ $conexion = mysqli_connect("localhost", "root", "", "upoteatro") or die(mysqli_e
 mysqli_set_charset($conexion,"utf8");
 
 // Comprobamos si existe el usuario
-$sql = "SELECT * FROM usuario where usuario = '" . $_GET["USUARIO"] . "' AND clave = '" . $_GET["CLAVE"] . "'";
+$sql = "SELECT * FROM usuario where usuario = '" . $_GET["usuario"] . "' AND clave = '" . $_GET["clave"] . "'";
 $resultado = mysqli_query($conexion, $sql);
 $usuario   = mysqli_fetch_assoc($resultado);
 

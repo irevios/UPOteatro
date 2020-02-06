@@ -50,9 +50,9 @@ function muestraEnPantalla(elem) {
     }
     // Si se pide un formulario, busca en el archivo formularios y lo añade a la web, si no añade un listado
     if (elem.includes("formulario")) {
-        Ajax("./html/formularios.html", (formulario) => agregaForm(elem, formulario),"GET","");
+        Ajax("./html/formularios.html", (formulario) => agregaForm(elem, formulario), "GET", "");
     } else {
-        Ajax("./html/filtros.html", (filtros) => agregaTabla(elem, filtros),"GET","");
+        Ajax("./html/filtros.html", (filtros) => agregaTabla(elem, filtros), "GET", "");
     }
     // Cierra menú después de elegir
     if (getComputedStyle(document.querySelector(".navbar-toggler")).display != "none") {
@@ -119,8 +119,8 @@ function rellenaFormEntrada() {
         });
     });
     // Select multiple butacas
-    let representacionSeleccionada = document.querySelector("#representacionSeleccionada");
-    representacionSeleccionada.addEventListener("change", cambiaButacasFormEntrada);
+
+    document.querySelector("#representacionSeleccionada").addEventListener("change", cambiaButacasFormEntrada);
     actualizaFormularioEntrada();
 
     // Tipo de entrada cambia el select multiple
@@ -155,16 +155,16 @@ function cambiaButacasFormEntrada() {
                 icoButaca.classList.add("ocupada");
             }
             switch (butaca.zona) {
-                case 'platea':
+                case 'PLATEA':
                     document.querySelector("#butacasRepresentadas .platea .fila" + butaca.fila).append(icoButaca);
                     break;
-                case 'anfiteatro':
+                case 'ANFITEATRO':
                     document.querySelector("#butacasRepresentadas .anfiteatro .fila" + butaca.fila).append(icoButaca);
                     break;
-                case 'paraiso':
+                case 'PARAISO':
                     document.querySelector("#butacasRepresentadas .paraiso .fila" + butaca.fila).append(icoButaca);
                     break;
-                case 'palco':
+                case 'PALCO':
                     document.querySelector("#butacasRepresentadas .palco").append(icoButaca);
                     break;
             }

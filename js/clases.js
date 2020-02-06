@@ -1,7 +1,7 @@
 // En este documento se define todas las clases, menos UpoTeatro, junto a sus métodos.
 "use strict";
 class Teatro {
-    constructor(codigo, nombre, direccion,aforo) {
+    constructor(codigo, nombre, direccion, aforo) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.direccion = direccion;
@@ -160,7 +160,7 @@ class Entrada {
         this.adaptada = adaptada;
         this.precioBase = precioBase;
         this.precio = 0;
-        this.butacas = butacas;
+        this.butacas = [butacas];
     }
     butacasToHTML() {
         let butacas = document.createElement("div");
@@ -174,8 +174,8 @@ class Entrada {
 }
 
 class EntradaIndividual extends Entrada {
-    constructor(codigo, adaptada, butacas, precioBase, tipo) {
-        super(codigo, adaptada, butacas, precioBase);
+    constructor(codigo, adaptada, butaca, precioBase, tipo) {
+        super(codigo, adaptada, butaca, precioBase);
         this.tipo = tipo;
     }
     calculaPrecio() {
@@ -201,13 +201,19 @@ class EntradaIndividual extends Entrada {
 }
 
 class EntradaGrupal extends Entrada {
-    constructor(codigo, adaptada, butacas, precioBase, numPersonas) {
-        super(codigo, adaptada, butacas, precioBase);
+    constructor(codigo, adaptada, butaca, precioBase, numPersonas) {
+        super(codigo, adaptada, butaca, precioBase);
         this.numPersonas = numPersonas;
     }
     calculaPrecio() {
         this.precio = parseFloat(this.precioBase) * parseFloat(this.butacas.length);
         return this.precio.toFixed(2);
+    }
+    agregaButaca(butaca) {
+        if (this.butacas.filter(butacaNuevo => butacaNuevo.codigo == butaca.codigo).length == 0) {
+            this.butacas.push(butaca);
+            return true;
+        } else { return false; }
     }
     toHTMLrow() {
         let fila = document.createElement("tr");

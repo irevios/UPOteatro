@@ -34,7 +34,7 @@ function cargaDatos() {
                 $.get("./ajax/butacas/buscaButacas.php", (json) => {
                     cargaInicialButacas(json);
                     $.get("./ajax/entradas/buscaEntradasIndividuales.php", cargaInicialEntradasIndividuales, "json");
-                    //$.get("./ajax/entradas/buscaEntradasGrupales.php", cargaInicialEntradasGrupales, "json");
+                    $.get("./ajax/entradas/buscaEntradasGrupales.php", cargaInicialEntradasGrupales, "json");
                 }, "json");
             }, "json");
         }, "json");
@@ -133,45 +133,19 @@ function cargaInicialEntradasIndividuales(json) {
     });
 }
 
-// function cargaInicialEntradasGrupales(json) {
-//     json.forEach(entrada => {
-//         let teatro = upoTeatro.buscaTeatroPorRepresentacion(entrada.COD_REPRESENTACION);
-//         let representacion = teatro.buscaRepresentacion(entrada.COD_REPRESENTACION);
-//         let codigo = entrada.CODIGO;
-//         let adaptada = entrada.ADAPTADA;
-//         let butaca = teatro.buscaButacaPorCod(entrada.COD_BUTACA);
-//         let numPersonas = entrada.NUM_PERSONAS;
-
-//         let nuevaentrada = new EntradaGrupal(codigo, adaptada, butaca, representacion.precioBase, numPersonas);
-//         representacion.compraEntrada(nuevaentrada);
-//     });
-// }
-
-// function cargaInicialEntradas(xml) {
-//     xml.forEach(entrada => {
-//         let teatro = upoTeatro.buscaTeatroPorRepresentacion(entrada.querySelector("representacion").textContent);
-//         let representacion = teatro.buscaRepresentacion(entrada.querySelector("representacion").textContent);
-//         let codigo = entrada.getAttribute("cod");
-//         let adaptada = entrada.querySelector("adaptada").textContent == "N" ? false : true;
-//         let butaca;
-//         let nuevaEntrada;
-//         if (entrada.getAttribute("tipo") == "individual") {
-//             let zona = entrada.querySelector("tipo").textContent;
-//             let fila = entrada.querySelector("butaca").getAttribute("fila");
-//             let num = entrada.querySelector("butaca").getAttribute("num");
-//             butaca = [teatro.buscaButaca(zona, fila, num)];
-//             nuevaEntrada = new EntradaIndividual(codigo, adaptada, butaca, representacion.precioBase, zona);
-//         } else {
-//             butaca = [];
-//             let butacas = entrada.querySelectorAll("butaca");
-//             butacas.forEach(cadaButaca => {
-//                 let fila = cadaButaca.getAttribute("fila");
-//                 let num = cadaButaca.getAttribute("num");
-//                 butaca.push(teatro.buscaButaca("platea", fila, num));
-//             });
-//             let numPersonas = entrada.getAttribute("numPersonas");
-//             nuevaEntrada = new EntradaGrupal(codigo, adaptada, butaca, representacion.precioBase, numPersonas);
-//         }
-//         representacion.compraEntrada(nuevaEntrada);
-//     });
-// }
+function cargaInicialEntradasGrupales(json) {
+    json.forEach(entrada => {
+        let teatro = upoTeatro.buscaTeatroPorRepresentacion(entrada.COD_REPRESENTACION);
+        let representacion = teatro.buscaRepresentacion(entrada.COD_REPRESENTACION);
+        let codigo = entrada.CODIGO;
+        let adaptada = entrada.ADAPTADA;
+        let butaca = teatro.buscaButacaPorCod(entrada.COD_BUTACA);
+        let numPersonas = entrada.NUM_PERSONAS;
+        if (representacion.buscaEntrada(codigo) == undefined) {
+            let nuevaEntrada = new EntradaGrupal(codigo, adaptada, butaca, representacion.precioBase, numPersonas);
+            representacion.compraEntrada(nuevaEntrada);
+        } else {
+            representacion.buscaEntrada(codigo).agregaButaca(butaca);
+        }
+    });
+}
