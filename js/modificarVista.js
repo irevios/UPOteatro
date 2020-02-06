@@ -50,9 +50,9 @@ function muestraEnPantalla(elem) {
     }
     // Si se pide un formulario, busca en el archivo formularios y lo añade a la web, si no añade un listado
     if (elem.includes("formulario")) {
-        Ajax("./html/formularios.html", (formulario) => agregaForm(elem, formulario));
+        Ajax("./html/formularios.html", (formulario) => agregaForm(elem, formulario),"GET","");
     } else {
-        Ajax("./html/filtros.html", (filtros) => agregaTabla(elem, filtros));
+        Ajax("./html/filtros.html", (filtros) => agregaTabla(elem, filtros),"GET","");
     }
     // Cierra menú después de elegir
     if (getComputedStyle(document.querySelector(".navbar-toggler")).display != "none") {
