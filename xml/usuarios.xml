@@ -1,0 +1,10 @@
+<usuarios>
+	<usuario tipo="admin">
+		<nombre>Administrador</nombre>
+		<clave>Administrador</clave>
+	</usuario>
+	<usuario tipo="usuario">
+		<nombre>Usuario</nombre>
+		<clave>Usuario</clave>
+	</usuario>
+</usuarios>
