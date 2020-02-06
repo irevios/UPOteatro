@@ -5,14 +5,19 @@
 function Ajax(filename, funcion, tipo, parametros) {
     let xhttp;
     window.XMLHttpRequest ? xhttp = new XMLHttpRequest() : xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+
     xhttp.addEventListener("readystatechange", () => {
-        if (xhttp.readyState == xhttp.DONE) {
-            if (tipo == "POST") { funcion(xhttp.responseText); } else {
-                if (filename.includes("html")) {
+        if (xhttp.readyState == xhttp.DONE) { // Cuando el archivo está listo realiza una función
+            if (tipo == "GET") {
+                if (filename.includes("html")) { // Devuelve un html si el archivo es html
                     funcion(new DOMParser().parseFromString(xhttp.responseText, "text/html"));
-                } else if (filename.includes("xml")) { funcion(xhttp.responseXML); } else {
-                    funcion(xhttp.responseText);
+                } else if (filename.includes("xml")) { // Devuelve un xml si el archivo es xml
+                    funcion(xhttp.responseXML);
+                } else {
+                    funcion(xhttp.responseText); // Devuelve el texto tal cual
                 }
+            } else {
+                funcion(xhttp.responseText); // Devuelve el texto tal cual
             }
         }
     });

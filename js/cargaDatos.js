@@ -16,7 +16,10 @@ function cargaUsuarios(xml) {
         usuarios.push(user);
     });
     let parametro = "usuarios=" + JSON.stringify(usuarios);
-    Ajax("./ajax/usuarios/insertaUsuarios.php", ()=>{}, "POST", parametro);
+    Ajax("./ajax/usuarios/insertaUsuarios.php", (resultado) => {
+        r = JSON.parse(resultado);
+        r.error == 1 ? mensajeModal(r.mensaje) : "";
+    }, "POST", parametro);
 }
 
 function cargaDatos(xml) {

@@ -39,10 +39,11 @@ function compruebaUsuario() {
 }
 
 function iniciaSesion(usuario) {
-    if (usuario == "Administrador") {
+    if (usuario == "Administrador") { // Si el usuario es administrador
         setCookie("Admin", "true", "1");
         location.reload();
-    } else if (usuario == "Usuario") {
+    } else if (usuario == "Usuario") { // Si el usuario no tiene permisos
+        document.querySelector("form#modalMensaje").reset();
         let error;
         if (!elementoExiste("#errorUsuario")) {
             error = document.createElement("div");
@@ -53,7 +54,7 @@ function iniciaSesion(usuario) {
         }
         error.textContent = "No tienes privilegios suficientes";
         document.querySelector("#inicioSesion").append(error);
-    } else {
+    } else { // Si el usuario no existe
         document.querySelector("form#modalMensaje").reset();
         let error;
         if (!elementoExiste("#errorUsuario")) {
@@ -73,4 +74,3 @@ function cierraSesion() {
     borraCookie("Admin");
     location.reload();
 }
-
