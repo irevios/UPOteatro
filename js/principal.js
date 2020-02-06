@@ -13,7 +13,7 @@ function cargaInicial() {
 
     // Añade evento al modal
     document.querySelector(".modal button.close").addEventListener("click", cierraModal);
-    document.querySelector(".modal button.btn-primary").addEventListener("click", cierraModal);
+    document.querySelector(".modal button#cierraModal").addEventListener("click", cierraModal);
 }
 
 // Validar e insertar
@@ -331,12 +331,20 @@ function ordenaTabla(e) {
 
 // Modal para mensajes
 function mensajeModal(texto) {
-    document.querySelector(".modal").classList.add("show");
     document.querySelector(".modal #mensaje").textContent = texto;
+    document.querySelector(".modal #mensaje").classList.add("show");
+    muestraModal();
+}
+
+function muestraModal() {
+    document.querySelector(".modal").classList.add("show");
 }
 
 function cierraModal() {
     document.querySelector(".modal").classList.remove("show");
+    document.querySelector(".modal #mensaje").classList.remove("show");
+    document.querySelector("#inicioSesion").classList.remove("show");
+    document.querySelector(".modal .modal-footer").classList.add("show");
 }
 
 //Añade representacion
@@ -397,7 +405,7 @@ function nuevasCreaciones(apartado) {
                     let p = document.createElement("p");
                     p.textContent = "Las siguientes fechas ya están ocupadas";
 
-                    document.querySelector(".modal").classList.add("show");
+                    muestraModal();
                     document.querySelector(".modal #mensaje").textContent = "";
                     incorrectos.insertBefore(p, incorrectos.firstChild);
                     document.querySelector(".modal #mensaje").append(incorrectos);

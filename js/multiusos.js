@@ -1,26 +1,28 @@
 // En este documento se define las funcione que se usan varias veces con diferentes usos.
 "use strict";
 // Leer XML/HTML y lo guarda en variables para usarlas después
-function leeArchivoXMLHTML(filename, funcion) {
+function leeArchivoXMLHTML(filename, funcion, tipo, parametros) {
     let xhttp;
-    if (window.XMLHttpRequest) {
-        xhttp = new XMLHttpRequest();
-    } else {
-        xhttp = new ActiveXObject("Microsoft.XMLHTTP");
-    }
+    window.XMLHttpRequest ? xhttp = new XMLHttpRequest() : xhttp = new ActiveXObject("Microsoft.XMLHTTP");
     xhttp.addEventListener("readystatechange", () => {
         if (xhttp.readyState == xhttp.DONE) {
-            if (filename.includes('html')) {
-                funcion(new DOMParser().parseFromString(xhttp.responseText, "text/html"));
-            } else if (filename.includes('xml')) {
-                funcion(xhttp.responseXML);
+            if (tipo == "POST") { funcion(xhttp.responseText); } else {
+                if (filename.includes("html")) {
+                    funcion(new DOMParser().parseFromString(xhttp.responseText, "text/html"));
+                } else if (filename.includes("xml")) { funcion(xhttp.responseXML); } else {
+                    funcion(xhttp.responseText);
+                }
             }
         }
     });
-    xhttp.open("GET", filename, true);
-    xhttp.send();
+    xhttp.open(tipo, filename, true);
+    if (tipo == "POST") {
+        xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhttp.send(encodeURI(parametros));
+    } else {
+        xhttp.send();
+    }
 }
-
 // Funciones de cookies
 function setCookie(clave, valor, diasExpira) {
     let d = new Date();

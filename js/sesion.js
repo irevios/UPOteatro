@@ -4,7 +4,7 @@
 // En la carga de la página
 function compruebaSesion() {
     if (esAdmin()) {
-        leeArchivoXMLHTML("./html/navAdmin.html", agregaNav);
+        leeArchivoXMLHTML("./ajax/nav/navAdmin.html", agregaNav, "GET", "");
     } else {
         cargarEventos();
     }
@@ -22,15 +22,55 @@ function agregaNav(nav) {
 }
 
 // Click en Acceder como Administrador
-document.querySelector("#accederAdmin").addEventListener("click", adminAccede);
+document.querySelector("#accederAdmin").addEventListener("click", modalIniciaSesion);
 
-function adminAccede() {
-    setCookie("Admin", "true", "1");
-    location.reload();
+function compruebaUsuario() {
+    let usuario = document.querySelector("#usuario").value;
+    let clave = document.querySelector("#clave").value;
+    leeArchivoXMLHTML("./ajax/usuarios/buscaUsuarios.php?usuario=" + usuario + "&clave=" + clave, iniciaSesion, "GET", "");
+}
+
+function iniciaSesion(usuario) {
+    if (usuario == "Administrador") {
+        setCookie("Admin", "true", "1");
+        location.reload();
+    } else if (usuario == "Usuario") {
+        let error;
+        if (!elementoExiste("#errorUsuario")) {
+            error = document.createElement("div");
+            error.classList.add("errorTexto");
+            error.id = "errorUsuario";
+        } else {
+            error = document.querySelector("#errorUsuario");
+        }
+        error.textContent = "No tienes privilegios suficientes";
+        document.querySelector("#inicioSesion").append(error);
+    } else {
+        document.querySelector("form#modalMensaje").reset();
+        let error;
+        if (!elementoExiste("#errorUsuario")) {
+            error = document.createElement("div");
+            error.classList.add("errorTexto");
+            error.id = "errorUsuario";
+        } else {
+            error = document.querySelector("#errorUsuario");
+        }
+        error.textContent = "Usuario incorrecto.";
+        document.querySelector("#inicioSesion").append(error);
+    }
 }
 
 // Click en Cerrar Sesion
 function cierraSesion() {
     borraCookie("Admin");
     location.reload();
+}
+
+
+function modalIniciaSesion() {
+    document.querySelector(".modal .modal-title").textContent = "Iniciar Sesión";
+    document.querySelector("#inicioSesion").classList.add("show");
+    document.querySelector(".modal .modal-footer").classList.remove("show");
+    document.querySelector("#inicioSesion button").addEventListener("click", compruebaUsuario);
+    muestraModal();
 }

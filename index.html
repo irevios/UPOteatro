@@ -66,10 +66,23 @@
                     </div>
                     <form id="modalMensaje" onsubmit="return false">
                         <div class="modal-body">
+                           <div id="inicioSesion">
+                                <div class="form-group">
+                                    <label for="usuario">Usuario</label>
+                                    <input id="usuario" name="usuario" type="text" autocomplete="username" required="required" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="clave">Contraseña</label>
+                                    <input id="clave" name="clave" type="password" autocomplete="current-password" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <button name="submit" type="button" class="btn btn-primary">Iniciar Sesión</button>
+                                </div>
+                            </div>
                             <p id="mensaje">Ha ocurrido un error.</p>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" name="ok" data-dismiss="modal" aria-label="Close">Aceptar</button>
+                            <button type="button" id="cierraModal" class="btn btn-primary" name="ok" data-dismiss="modal" aria-label="Close">Aceptar</button>
                         </div>
                     </form>
                 </div>

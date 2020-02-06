@@ -500,7 +500,7 @@ INSERT INTO `teatro` (`CODIGO`, `NOMBRE`, `DIRECCION`, `AFORO`) VALUES
 DROP TABLE IF EXISTS `usuarios`;
 CREATE TABLE `usuarios` (
   `usuario` varchar(30) NOT NULL,
-  `contraseña` varchar(30) NOT NULL,
+  `clave` varchar(30) NOT NULL,
   `permisos` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 

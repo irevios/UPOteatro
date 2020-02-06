@@ -2,7 +2,21 @@
 
 
 function cargaInicialDatos() {
-    leeArchivoXMLHTML("./xml/allDatos.xml", cargaDatos);
+    leeArchivoXMLHTML("./xml/usuarios.xml", cargaUsuarios, "GET", "");
+    leeArchivoXMLHTML("./xml/allDatos.xml", cargaDatos, "GET", "");
+}
+
+function cargaUsuarios(xml) {
+    let usuarios = [];
+    xml.querySelectorAll("usuario").forEach(usuario => {
+        let nombre = usuario.querySelector("nombre").textContent;
+        let clave = usuario.querySelector("clave").textContent;
+        let tipo = usuario.getAttribute("tipo");
+        let user = { nombre: nombre, clave: clave, tipo: tipo };
+        usuarios.push(user);
+    });
+    let parametro = "usuarios=" + JSON.stringify(usuarios);
+    leeArchivoXMLHTML("./ajax/usuarios/insertaUsuarios.php", ()=>{}, "POST", parametro);
 }
 
 function cargaDatos(xml) {
