@@ -218,6 +218,9 @@ select:required {
     display: block;
 }
 
+.oculta{
+    display: none;
+}
 .was-validated input:invalid~.fa-close,
 .was-validated .error~.fa-close,
 .was-validated .error~div .fa-close {

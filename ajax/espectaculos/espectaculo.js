@@ -1,8 +1,22 @@
 /// Rellena todos los campos de la base de datos en el formulario de espectaculo
-
+//# sourceURL=espectaculo.js
 function rellenaFormEspectaculo() {
 
     document.querySelector("#formularioEspectaculo button[name='submit']").addEventListener("click", () => validar("#formularioEspectaculo"), false);
+    // Select categorias
+    $.ajax({
+        method: "GET",
+        url: "./ajax/espectaculos/buscaCategorias.php",
+        dataType: "json"
+    }).done((json) => {
+        json.forEach(categorias => {
+            let opcion = document.createElement("option");
+            opcion.value = categorias.CODIGO;
+            opcion.textContent = categorias.NOMBRE;
+            document.querySelector("#categoriaEspectaculo").append(opcion);
+        });
+
+    });
 
     // Select compañias
     upoTeatro.companias.forEach(compania => {
@@ -20,6 +34,7 @@ function rellenaFormEspectaculo() {
         document.querySelector("#obraSeleccionada").append(opcion);
     });
 }
+
 function editaEspectaculo(id) {
     document.querySelector(".jumbotron p").textContent = "Edita espectáculo";
     let espectaculo = upoTeatro.buscaEspectaculo(id);

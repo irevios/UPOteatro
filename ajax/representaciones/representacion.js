@@ -1,4 +1,5 @@
 /// Rellena todos los campos de la base de datos en el formulario de representación
+//# sourceURL=representacion.js
 function rellenaFormRepresentacion() {
     document.querySelector("#formularioRepresentacion button[name='submit']").addEventListener("click", () => validar("#formularioRepresentacion"), false);
     document.querySelector("#formularioRepresentacion #fechaInicioRepresentacion").addEventListener("change", () => compruebaFinFecha(document.querySelector("#formularioRepresentacion #fechaInicioRepresentacion"), document.querySelector("#formularioRepresentacion #fechaFinalRepresentacion")));
