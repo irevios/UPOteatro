@@ -1,11 +1,11 @@
 // En este documento se define todas las clases, menos UpoTeatro, junto a sus métodos.
 "use strict";
 class Teatro {
-    constructor(codigo, nombre, direccion) {
+    constructor(codigo, nombre, direccion,aforo) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.direccion = direccion;
-        this.aforo = 0;
+        this.aforo = aforo;
         this.representaciones = [];
         this.butacas = [];
     }
@@ -36,6 +36,9 @@ class Teatro {
     buscaButaca(zona, fila, num) {
         return this.butacas.filter(butaca => butaca.numero == num && butaca.fila == fila && butaca.zona == zona)[0];
     }
+    buscaButacaPorCod(codigo) {
+        return this.butacas.filter(butaca => butaca.codigo == codigo)[0];
+    }
     buscaRepresentacion(codigo) {
         return this.representaciones.filter(representacion => representacion.codigo == codigo)[0];
     }
@@ -61,9 +64,6 @@ class Teatro {
         });
         representacionIntervalo.sort((repA, repB) => { return repA.fecha - repB.fecha });
         return representacionIntervalo;
-    }
-    calculaAforo() {
-        this.aforo = this.butacas.length;
     }
 }
 
@@ -228,7 +228,8 @@ class EntradaGrupal extends Entrada {
 }
 
 class Butaca {
-    constructor(numero, fila, zona, coefPrecio) {
+    constructor(codigo, numero, fila, zona, coefPrecio) {
+        this.codigo = codigo;
         this.numero = numero;
         this.fila = fila;
         this.zona = zona;

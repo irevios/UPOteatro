@@ -3,8 +3,8 @@
 $conexion = mysqli_connect("localhost", "root", "", "upoteatro") or die(mysqli_error($conexion));
 mysqli_set_charset($conexion, "utf8");
 
-// Recogemos todas las espectaculos
-$sql = "SELECT CODIGO,NOMBRE,PRODUCTOR,GASTOS,(SELECT NOMBRE FROM categoria WHERE CODIGO = e.COD_CATEGORIA) AS CATEGORIA,CODIGO_OBRA,CIF_COMPANIA FROM espectaculo e";
+// Recogemos todas las entradas
+$sql = "SELECT E.CODIGO, E.ADAPTADA,E.COD_BUTACA,E.COD_REPRESENTACION, G.NUM_PERSONAS FROM E_GRUPAL G, ENTRADA E WHERE G.CODIGO_ENTRADA = E.CODIGO";
 $resultados = mysqli_query($conexion, $sql) or die(mysqli_error($conexion));
 
 $companias = [];

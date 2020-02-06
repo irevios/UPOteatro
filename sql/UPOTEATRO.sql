@@ -38,14 +38,14 @@ CREATE TABLE `butaca` (
   `NUMERO` int(2) NOT NULL,
   `COEF_PRECIO` float NOT NULL,
   `ZONA` varchar(20) NOT NULL,
-  `ID_TEATRO` int(11) NOT NULL
+  `COD_TEATRO` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `butaca`
 --
 
-INSERT INTO `butaca` (`CODIGO`, `FILA`, `NUMERO`, `COEF_PRECIO`, `ZONA`, `ID_TEATRO`) VALUES
+INSERT INTO `butaca` (`CODIGO`, `FILA`, `NUMERO`, `COEF_PRECIO`, `ZONA`, `COD_TEATRO`) VALUES
 (1, 1, 1, 2, 'PALCO', 1),
 (2, 1, 2, 2, 'PALCO', 1),
 (3, 1, 3, 2, 'PALCO', 1),
@@ -288,7 +288,6 @@ DROP TABLE IF EXISTS `entrada`;
 CREATE TABLE `entrada` (
   `CODIGO` int(11) NOT NULL,
   `ADAPTADA` varchar(1) NOT NULL,
-  `PRECIO_BASE` float NOT NULL,
   `COD_BUTACA` int(11) NOT NULL,
   `COD_REPRESENTACION` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
@@ -297,22 +296,22 @@ CREATE TABLE `entrada` (
 -- Volcado de datos para la tabla `entrada`
 --
 
-INSERT INTO `entrada` (`CODIGO`, `ADAPTADA`, `PRECIO_BASE`, `COD_BUTACA`, `COD_REPRESENTACION`) VALUES
-(1, 'N', 71, 5, 4),
-(2, 'N', 46.15, 19, 4),
-(3, 'N', 103, 70, 16),
-(4, 'N', 103, 71, 16),
-(5, 'N', 103, 72, 16),
-(6, 'N', 103, 73, 16),
-(7, 'N', 103, 74, 16),
-(8, 'N', 144.2, 70, 19),
-(9, 'N', 144.2, 71, 19),
-(10, 'N', 144.2, 72, 19),
-(11, 'N', 144.2, 84, 19),
-(12, 'N', 144.2, 85, 19),
-(13, 'N', 144.2, 86, 19),
-(14, 'N', 144.2, 87, 19),
-(15, 'S', 37.08, 79, 15);
+INSERT INTO `entrada` (`CODIGO`, `ADAPTADA`, `COD_BUTACA`, `COD_REPRESENTACION`) VALUES
+(1, 'N', 5, 4),
+(2, 'N', 19, 4),
+(3, 'N', 70, 16),
+(4, 'N', 71, 16),
+(5, 'N', 72, 16),
+(6, 'N', 73, 16),
+(7, 'N', 74, 16),
+(8, 'N', 70, 19),
+(9, 'N', 71, 19),
+(10, 'N', 72, 19),
+(11, 'N', 84, 19),
+(12, 'N', 85, 19),
+(13, 'N', 86, 19),
+(14, 'N', 87, 19),
+(15, 'S', 79, 15);
 
 -- --------------------------------------------------------
 
@@ -326,7 +325,7 @@ CREATE TABLE `espectaculo` (
   `NOMBRE` varchar(50) NOT NULL,
   `PRODUCTOR` varchar(50) NOT NULL,
   `GASTOS` int(20) NOT NULL,
-  `ID_CATEGORIA` int(11) NOT NULL,
+  `COD_CATEGORIA` int(11) NOT NULL,
   `CODIGO_OBRA` int(11) NOT NULL,
   `CIF_COMPANIA` varchar(9) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
@@ -335,7 +334,7 @@ CREATE TABLE `espectaculo` (
 -- Volcado de datos para la tabla `espectaculo`
 --
 
-INSERT INTO `espectaculo` (`CODIGO`, `NOMBRE`, `PRODUCTOR`, `GASTOS`, `ID_CATEGORIA`, `CODIGO_OBRA`, `CIF_COMPANIA`) VALUES
+INSERT INTO `espectaculo` (`CODIGO`, `NOMBRE`, `PRODUCTOR`, `GASTOS`, `COD_CATEGORIA`, `CODIGO_OBRA`, `CIF_COMPANIA`) VALUES
 (1, 'La llamada El Musical', 'Mariano Blanes Arguelles', 15600, 2, 3, 'B32212532'),
 (2, 'La Celestina', 'Guillermo Casanova Cruces', 24100, 6, 2, 'K64801160'),
 (3, 'Hamlet', 'Paula Blanco Almansa', 47400, 7, 1, 'P61657821'),
@@ -513,7 +512,7 @@ CREATE TABLE `usuario` (
 --
 ALTER TABLE `butaca`
   ADD PRIMARY KEY (`CODIGO`),
-  ADD KEY `ID_TEATRO` (`ID_TEATRO`);
+  ADD KEY `COD_TEATRO` (`COD_TEATRO`);
 
 --
 -- Indices de la tabla `categoria`
@@ -540,7 +539,7 @@ ALTER TABLE `entrada`
 --
 ALTER TABLE `espectaculo`
   ADD PRIMARY KEY (`CODIGO`),
-  ADD KEY `ID_CATEGORIA` (`ID_CATEGORIA`),
+  ADD KEY `COD_CATEGORIA` (`COD_CATEGORIA`),
   ADD KEY `CODIGO_OBRA` (`CODIGO_OBRA`),
   ADD KEY `CIF_COMPANIA` (`CIF_COMPANIA`);
 
@@ -648,7 +647,7 @@ ALTER TABLE `teatro`
 -- Filtros para la tabla `butaca`
 --
 ALTER TABLE `butaca`
-  ADD CONSTRAINT `butaca_ibfk_1` FOREIGN KEY (`ID_TEATRO`) REFERENCES `teatro` (`CODIGO`);
+  ADD CONSTRAINT `butaca_ibfk_1` FOREIGN KEY (`COD_TEATRO`) REFERENCES `teatro` (`CODIGO`);
 
 --
 -- Filtros para la tabla `entrada`
@@ -661,7 +660,7 @@ ALTER TABLE `entrada`
 -- Filtros para la tabla `espectaculo`
 --
 ALTER TABLE `espectaculo`
-  ADD CONSTRAINT `espectaculo_ibfk_1` FOREIGN KEY (`ID_CATEGORIA`) REFERENCES `categoria` (`CODIGO`),
+  ADD CONSTRAINT `espectaculo_ibfk_1` FOREIGN KEY (`COD_CATEGORIA`) REFERENCES `categoria` (`CODIGO`),
   ADD CONSTRAINT `espectaculo_ibfk_2` FOREIGN KEY (`CODIGO_OBRA`) REFERENCES `obra` (`CODIGO`),
   ADD CONSTRAINT `espectaculo_ibfk_3` FOREIGN KEY (`CIF_COMPANIA`) REFERENCES `compania` (`CIF`);
 
@@ -684,7 +683,7 @@ ALTER TABLE `representacion`
   ADD CONSTRAINT `representacion_ibfk_1` FOREIGN KEY (`COD_ESPECTACULO`) REFERENCES `espectaculo` (`CODIGO`),
   ADD CONSTRAINT `representacion_ibfk_2` FOREIGN KEY (`COD_TEATRO`) REFERENCES `teatro` (`CODIGO`);
 
-UPDATE TEATRO T SET AFORO = (SELECT COUNT(*) FROM BUTACA WHERE ID_TEATRO = T.CODIGO);
+UPDATE TEATRO T SET AFORO = (SELECT COUNT(*) FROM BUTACA WHERE COD_TEATRO = T.CODIGO);
 
 COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
