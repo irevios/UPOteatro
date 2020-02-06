@@ -1,11 +1,12 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-02-2020 a las 22:13:24
--- Versión del servidor: 10.1.35-MariaDB
--- Versión de PHP: 7.2.9
+-- Tiempo de generación: 06-02-2020 a las 09:05:00
+-- Versión del servidor: 10.4.6-MariaDB
+-- Versión de PHP: 7.3.9
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
 START TRANSACTION;
@@ -21,7 +22,7 @@ DROP DATABASE IF EXISTS upoteatro;
 --
 -- Base de datos: `upoteatro`
 --
-CREATE DATABASE IF NOT EXISTS `upoteatro` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+CREATE DATABASE IF NOT EXISTS `upoteatro` DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish_ci;
 USE `upoteatro`;
 
 -- --------------------------------------------------------
@@ -38,7 +39,7 @@ CREATE TABLE `butaca` (
   `COEF_PRECIO` float NOT NULL,
   `ZONA` varchar(20) NOT NULL,
   `ID_TEATRO` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `butaca`
@@ -233,7 +234,24 @@ DROP TABLE IF EXISTS `categoria`;
 CREATE TABLE `categoria` (
   `CODIGO` int(11) NOT NULL,
   `NOMBRE` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `categoria`
+--
+
+INSERT INTO `categoria` (`CODIGO`, `NOMBRE`) VALUES
+(1, 'Comedia'),
+(2, 'Musical'),
+(3, 'Pantomima'),
+(4, 'Marionetas'),
+(5, 'Absurdo'),
+(6, 'Tragicomedia'),
+(7, 'Tragedia'),
+(8, 'Independiente'),
+(9, 'Poético'),
+(10, 'Suspense'),
+(11, 'Drama');
 
 -- --------------------------------------------------------
 
@@ -246,7 +264,7 @@ CREATE TABLE `compania` (
   `CIF` varchar(9) NOT NULL,
   `NOMBRE` varchar(50) NOT NULL,
   `DIRECTOR` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `compania`
@@ -273,7 +291,7 @@ CREATE TABLE `entrada` (
   `PRECIO_BASE` float NOT NULL,
   `COD_BUTACA` int(11) NOT NULL,
   `COD_REPRESENTACION` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `entrada`
@@ -311,7 +329,7 @@ CREATE TABLE `espectaculo` (
   `ID_CATEGORIA` int(11) NOT NULL,
   `CODIGO_OBRA` int(11) NOT NULL,
   `CIF_COMPANIA` varchar(9) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `espectaculo`
@@ -336,7 +354,7 @@ DROP TABLE IF EXISTS `e_grupal`;
 CREATE TABLE `e_grupal` (
   `CODIGO_ENTRADA` int(11) NOT NULL,
   `NUM_PERSONAS` int(3) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `e_grupal`
@@ -366,7 +384,7 @@ DROP TABLE IF EXISTS `e_individual`;
 CREATE TABLE `e_individual` (
   `CODIGO_ENTRADA` int(11) NOT NULL,
   `TIPO` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `e_individual`
@@ -387,8 +405,8 @@ DROP TABLE IF EXISTS `obra`;
 CREATE TABLE `obra` (
   `CODIGO` int(11) NOT NULL,
   `NOMBRE` varchar(50) NOT NULL,
-  `AUTOR` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `AUTOR` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `obra`
@@ -417,7 +435,7 @@ CREATE TABLE `representacion` (
   `PRECIO_BASE` int(6) NOT NULL,
   `COD_ESPECTACULO` int(11) NOT NULL,
   `COD_TEATRO` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `representacion`
@@ -460,8 +478,8 @@ CREATE TABLE `teatro` (
   `CODIGO` int(11) NOT NULL,
   `NOMBRE` varchar(50) NOT NULL,
   `DIRECCION` varchar(150) NOT NULL,
-  `AFORO` int(3) DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `AFORO` int(3) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `teatro`
@@ -472,6 +490,19 @@ INSERT INTO `teatro` (`CODIGO`, `NOMBRE`, `DIRECCION`, `AFORO`) VALUES
 (2, 'La Maestranza', 'Paseo de Cristóbal Colón, 22, 41001 Sevilla', 29),
 (3, 'Quintero', 'Calle Cuna, 15, 41004 Sevilla', 53),
 (4, 'El Teatro de Triana', 'Calle Condes de Bustillo, 17, 41010 Sevilla', 55);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuarios`
+--
+
+DROP TABLE IF EXISTS `usuarios`;
+CREATE TABLE `usuarios` (
+  `usuario` varchar(30) NOT NULL,
+  `contraseña` varchar(30) NOT NULL,
+  `permisos` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Índices para tablas volcadas
@@ -544,6 +575,12 @@ ALTER TABLE `representacion`
 --
 ALTER TABLE `teatro`
   ADD PRIMARY KEY (`CODIGO`);
+
+--
+-- Indices de la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD PRIMARY KEY (`usuario`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -646,11 +683,9 @@ ALTER TABLE `e_individual`
 ALTER TABLE `representacion`
   ADD CONSTRAINT `representacion_ibfk_1` FOREIGN KEY (`COD_ESPECTACULO`) REFERENCES `espectaculo` (`CODIGO`),
   ADD CONSTRAINT `representacion_ibfk_2` FOREIGN KEY (`COD_TEATRO`) REFERENCES `teatro` (`CODIGO`);
-
-
-UPDATE TEATRO T SET AFORO = (SELECT COUNT(*) FROM BUTACA WHERE ID_TEATRO = T.CODIGO);
 COMMIT;
 
+UPDATE TEATRO T SET AFORO = (SELECT COUNT(*) FROM BUTACA WHERE ID_TEATRO = T.CODIGO);
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
