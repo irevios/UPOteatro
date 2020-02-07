@@ -1,6 +1,6 @@
 /// Rellena todos los campos de la base de datos en el formulario de entrada
 //# sourceURL=entrada.js
-function rellenaFormEntrada() {
+function rellenaForm() {
     document.querySelector("#formularioEntrada button[name='submit']").addEventListener("click", () => validar("#formularioEntrada"), false);
 
     // Select representacion

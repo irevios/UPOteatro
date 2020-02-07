@@ -1,6 +1,6 @@
-/// Rellena todos los campos de la base de datos en el formulario de espectaculo
 //# sourceURL=espectaculo.js
-function rellenaFormEspectaculo() {
+/// Rellena todos los campos de la base de datos en el formulario de espectaculo
+function rellenaForm() {
 
     document.querySelector("#formularioEspectaculo button[name='submit']").addEventListener("click", () => validar("#formularioEspectaculo"), false);
     // Select categorias
