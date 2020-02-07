@@ -61,6 +61,13 @@ body.grande {
     color: var(--colorContraste);
     border-radius: 0;
     text-align: center;
+    padding-bottom: 2rem !important;
+    margin-bottom: 2rem !important;
+}
+
+.jumbotron p {
+    padding-bottom: 0;
+    margin-bottom: 1rem;
 }
 
 .jumbotron h2 {
@@ -75,6 +82,11 @@ body.grande {
 
 body.grande .jumbotron {
     height: 100vh;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+bod.grande .jumbotron p{
+    margin-bottom: 0 !important;
 }
 
 body.grande .jumbotron h2 {
@@ -218,9 +230,10 @@ select:required {
     display: block;
 }
 
-.oculta{
+.oculta {
     display: none;
 }
+
 .was-validated input:invalid~.fa-close,
 .was-validated .error~.fa-close,
 .was-validated .error~div .fa-close {
