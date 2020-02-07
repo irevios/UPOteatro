@@ -1,7 +1,7 @@
-//# sourceURL=filtros.js
 // Añade los filtros al listado
 function agregaFiltros(id) {
-    if (id != "filtrosEspectaculo") {
+    console.log(id);
+    if (id != "filtrosEspectaculos") {
         document.querySelector("#filtroFechaInicial").addEventListener("change", () => {
             compruebaFinFecha(document.querySelector("#filtroFechaInicial"), document.querySelector("#filtroFechaFinal"));
             buscaFecha();
