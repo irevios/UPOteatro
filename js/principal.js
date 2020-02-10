@@ -215,6 +215,7 @@ function editaEspectaculo(id) {
 // Modal para mensajes
 function mensajeModal(texto) {
     document.querySelector(".modal #mensaje").textContent = texto;
+    document.querySelector(".modal .modal-footer").classList.add("show");
     document.querySelector(".modal #mensaje").classList.add("show");
     muestraModal();
 }
@@ -227,7 +228,7 @@ function cierraModal() {
     document.querySelector(".modal").classList.remove("show");
     document.querySelector(".modal #mensaje").classList.remove("show");
     document.querySelector("#inicioSesion").classList.remove("show");
-    document.querySelector(".modal .modal-footer").classList.add("show");
+    document.querySelector(".modal .modal-footer").classList.remove("show");
 }
 
 //Añade representacion
@@ -236,139 +237,14 @@ function nuevasCreaciones(apartado) {
     let ultimoCodigo;
 
     switch (apartado) {
-        case "#formularioRepresentacion":
-
-            let oRepresentacion;
-            let adaptada;
-            if (document.querySelector("#representacionAdaptada").checked)
-                adaptada = true;
-            else
-                adaptada = false;
-
-            let precioBase = document.querySelector("#precioBaseRepresentacion").value;
-
-            let oEsp;
-            let codEspectaculo = document.querySelector("#espectaculoSeleccionado").value;
-            for (let i = 0; i < upoTeatro.espectaculos.length; i++) {
-                if (upoTeatro.espectaculos[i].codigo == codEspectaculo)
-                    oEsp = upoTeatro.espectaculos[i];
-            }
-
-            let correcto = true;
-
-            let fechaInicio = fechaToDate(document.querySelector("#fechaInicioRepresentacion").value);
-            let fechaFin = fechaToDate(document.querySelector("#fechaFinalRepresentacion").value);
-            let fechas = fechasIntervalo(fechaInicio, fechaFin);
-            let teatro = upoTeatro.buscaTeatro(document.querySelector("#teatroSeleccionado").value);
-            let repAIntroducir = [];
-            let incorrectos = document.createElement("div");
-            setTimeout(() => {
-                fechas.forEach(fecha => {
-                    let codigoRepresentacion = getSiguienteCodigo(upoTeatro.listaRepresentaciones());
-                    oRepresentacion = new Representacion(codigoRepresentacion, fecha, adaptada, precioBase, oEsp);
-                    if (!teatro.esPosibleAgregarRepresentacion(oRepresentacion)) {
-                        correcto = false;
-                        let p = document.createElement("p");
-                        p.textContent = fechaToString(fecha);
-                        incorrectos.append(p);
-                    } else {
-                        repAIntroducir.push(oRepresentacion);
-                    }
-
-                });
-
-                if (correcto) {
-                    repAIntroducir.forEach(rep => {
-                        teatro.agregaRepresentacion(rep);
-                    })
-
-                    mensajeModal("Representacion creada correctamente.");
-                    document.querySelector(apartado).reset();
-                } else {
-                    let p = document.createElement("p");
-                    p.textContent = "Las siguientes fechas ya están ocupadas";
-
-                    muestraModal();
-                    document.querySelector(".modal #mensaje").textContent = "";
-                    incorrectos.insertBefore(p, incorrectos.firstChild);
-                    document.querySelector(".modal #mensaje").append(incorrectos);
-                }
-            }, 100);
-            break;
-
-
         case "#formularioEspectaculo":
-            let codigoEspectaculo = getSiguienteCodigo(upoTeatro.espectaculos);
-
-            let nombre = document.querySelector("#nombreEspectaculo").value;
-            let productor = document.querySelector("#nombreProductorEspectaculo").value;
-            let categoria = document.querySelector("#categoriaEspectaculo").value;
-            let gastos = document.querySelector("#gastosEspectaculo").value;
-            let compania = upoTeatro.buscaCompania(document.querySelector("#companiaSeleccionada").value);
-            let obra = upoTeatro.buscaObra(document.querySelector("#obraSeleccionada").value);
-
-            let oEspectaculo = new Espectaculo(codigoEspectaculo, nombre, productor, categoria, gastos, obra, compania);
-            setTimeout(() => {
-                if (upoTeatro.agregaEspectaculo(oEspectaculo)) {
-                    mensajeModal("Espectáculo creado correctamente.");
-                    document.querySelector(apartado).reset();
-                } else {
-                    mensajeModal("Ya existe ese espectáculo");
-                }
-            }, 100);
+            insertarEspectaculo();
             break;
-
+        case "#formularioRepresentacion":
+            insertarRepresentacion();
+            break;
         case "#formularioEntrada":
-            let oEntradaAComprar;
-            let representacionSeleccionada = upoTeatro.buscaRepresentacion(document.querySelector("#representacionSeleccionada").value);
-            let teatroSeleccionado = upoTeatro.buscaTeatroPorRepresentacion(document.querySelector("#representacionSeleccionada").value);
-
-            let esAdaptada;
-            if (document.querySelector("#entradaAdaptada_0").checked) {
-                esAdaptada = true;
-            } else {
-                esAdaptada = false;
-            }
-
-            let totalEntrada = document.querySelector("#totalEntrada").value;
-            let tipo;
-
-            let codigoEntrada = getSiguienteCodigo(upoTeatro.listaEntradas());
-            let oButaca;
-
-            let butacasSeleccionadas = formularioEntrada.parentElement.getElementsByClassName("seleccionada");
-            let butacaFragmentacion
-            if (butacasSeleccionadas.length == 1) {
-
-                //INDIVIDUAL
-                butacaFragmentacion = butacasSeleccionadas[0].dataset.butaca.split("-");
-                oButaca = teatroSeleccionado.buscaButaca(butacaFragmentacion[0], butacaFragmentacion[1], butacaFragmentacion[2]);
-                tipo = butacaFragmentacion[0];
-
-                oEntradaAComprar = new EntradaIndividual(codigoEntrada, esAdaptada, [oButaca], representacionSeleccionada.precioBase, tipo);
-            } else {
-                //GRUPAL
-                let numPersonas = document.querySelector("#personasGrupal").value;
-
-                let butacas = []
-                for (let i = 0; i < butacasSeleccionadas.length; i++) {
-                    butacaFragmentacion = butacasSeleccionadas[i].dataset.butaca.split("-");
-                    oButaca = teatroSeleccionado.buscaButaca(butacaFragmentacion[0], butacaFragmentacion[1], butacaFragmentacion[2]);
-                    butacas.push(oButaca);
-                }
-                oEntradaAComprar = new EntradaGrupal(codigoEntrada, esAdaptada, butacas, representacionSeleccionada.precioBase, numPersonas);
-            }
-            setTimeout(() => {
-                if (representacionSeleccionada.compraEntrada(oEntradaAComprar)) {
-                    mensajeModal("Has comprado la entrada correctamente");
-                    //RESET
-                    document.querySelector("#representacionSeleccionada").value = "0";
-                    document.querySelector("#totalEntrada").value = "0";
-                    actualizaFormularioEntrada();
-                } else {
-                    mensajeModal("Ha ocurrido un error, inténtelo más tarde.");
-                }
-            }, 100);
+            insertarEntrada();
             break;
     }
 }
@@ -377,11 +253,10 @@ function getSiguienteCodigo(lista) {
     let ordenada = [];
     lista.forEach(elem => ordenada.push(elem.codigo));
     ordenada.sort((a, b) => {
-        return parseInt(a.substr(2)) - parseInt(b.substr(2));
+        return parseInt(a) - parseInt(b);
     });
     let ultimoCodigo = ordenada[ordenada.length - 1];
-    let letra = ultimoCodigo.substr(0, 2);
-    let n = parseInt(ultimoCodigo.substr(2)) + 1;
+    let n = parseInt(ultimoCodigo) + 1;
 
-    return (letra + (n < 100 ? "0" : "") + n);
+    return n;
 }

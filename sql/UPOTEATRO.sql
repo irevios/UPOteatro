@@ -635,7 +635,8 @@ ALTER TABLE `butaca`
 ALTER TABLE `espectaculo`
   ADD CONSTRAINT `espectaculo_ibfk_1` FOREIGN KEY (`COD_CATEGORIA`) REFERENCES `categoria` (`CODIGO`),
   ADD CONSTRAINT `espectaculo_ibfk_2` FOREIGN KEY (`CODIGO_OBRA`) REFERENCES `obra` (`CODIGO`),
-  ADD CONSTRAINT `espectaculo_ibfk_3` FOREIGN KEY (`CIF_COMPANIA`) REFERENCES `compania` (`CIF`);
+  ADD CONSTRAINT `espectaculo_ibfk_3` FOREIGN KEY (`CIF_COMPANIA`) REFERENCES `compania` (`CIF`),
+  ADD CONSTRAINT `espectaculo_ibfk_3` UNIQUE(`NOMBRE`,`CIF_COMPANIA`);
 
 --
 -- Filtros para la tabla `entrada`
@@ -662,7 +663,8 @@ ALTER TABLE `e_individual`
 --
 ALTER TABLE `representacion`
   ADD CONSTRAINT `representacion_ibfk_1` FOREIGN KEY (`COD_ESPECTACULO`) REFERENCES `espectaculo` (`CODIGO`),
-  ADD CONSTRAINT `representacion_ibfk_2` FOREIGN KEY (`COD_TEATRO`) REFERENCES `teatro` (`CODIGO`);
+  ADD CONSTRAINT `representacion_ibfk_2` FOREIGN KEY (`COD_TEATRO`) REFERENCES `teatro` (`CODIGO`),
+  ADD CONSTRAINT `representacion_ibfk_3` UNIQUE(`COD_TEATRO`,`FECHA`);
 
 UPDATE TEATRO T SET AFORO = (SELECT COUNT(*) FROM BUTACA WHERE COD_TEATRO = T.CODIGO);
 

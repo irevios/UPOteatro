@@ -51,3 +51,63 @@ function editaRepresentacion(id) {
         }, 200);
     });
 }
+
+function insertaRepresentacion() {
+
+    let oRepresentacion;
+    let adaptada;
+    if (document.querySelector("#representacionAdaptada").checked)
+        adaptada = true;
+    else
+        adaptada = false;
+
+    let precioBase = document.querySelector("#precioBaseRepresentacion").value;
+
+    let oEsp;
+    let codEspectaculo = document.querySelector("#espectaculoSeleccionado").value;
+    for (let i = 0; i < upoTeatro.espectaculos.length; i++) {
+        if (upoTeatro.espectaculos[i].codigo == codEspectaculo)
+            oEsp = upoTeatro.espectaculos[i];
+    }
+
+    let correcto = true;
+
+    let fechaInicio = fechaToDate(document.querySelector("#fechaInicioRepresentacion").value);
+    let fechaFin = fechaToDate(document.querySelector("#fechaFinalRepresentacion").value);
+    let fechas = fechasIntervalo(fechaInicio, fechaFin);
+    let teatro = upoTeatro.buscaTeatro(document.querySelector("#teatroSeleccionado").value);
+    let repAIntroducir = [];
+    let incorrectos = document.createElement("div");
+    setTimeout(() => {
+        fechas.forEach(fecha => {
+            let codigoRepresentacion = getSiguienteCodigo(upoTeatro.listaRepresentaciones());
+            oRepresentacion = new Representacion(codigoRepresentacion, fecha, adaptada, precioBase, oEsp);
+            if (!teatro.esPosibleAgregarRepresentacion(oRepresentacion)) {
+                correcto = false;
+                let p = document.createElement("p");
+                p.textContent = fechaToString(fecha);
+                incorrectos.append(p);
+            } else {
+                repAIntroducir.push(oRepresentacion);
+            }
+
+        });
+
+        if (correcto) {
+            repAIntroducir.forEach(rep => {
+                teatro.agregaRepresentacion(rep);
+            })
+
+            mensajeModal("Representacion creada correctamente.");
+            document.querySelector(apartado).reset();
+        } else {
+            let p = document.createElement("p");
+            p.textContent = "Las siguientes fechas ya están ocupadas";
+
+            muestraModal();
+            document.querySelector(".modal #mensaje").textContent = "";
+            incorrectos.insertBefore(p, incorrectos.firstChild);
+            document.querySelector(".modal #mensaje").append(incorrectos);
+        }
+    }, 100);
+}

@@ -153,3 +153,56 @@ function editaEntrada(id) {
         }, 200);
     });
 }
+
+function insertarEntrada() {
+    let oEntradaAComprar;
+    let representacionSeleccionada = upoTeatro.buscaRepresentacion(document.querySelector("#representacionSeleccionada").value);
+    let teatroSeleccionado = upoTeatro.buscaTeatroPorRepresentacion(document.querySelector("#representacionSeleccionada").value);
+
+    let esAdaptada;
+    if (document.querySelector("#entradaAdaptada_0").checked) {
+        esAdaptada = true;
+    } else {
+        esAdaptada = false;
+    }
+
+    let totalEntrada = document.querySelector("#totalEntrada").value;
+    let tipo;
+
+    let codigoEntrada = getSiguienteCodigo(upoTeatro.listaEntradas());
+    let oButaca;
+
+    let butacasSeleccionadas = formularioEntrada.parentElement.getElementsByClassName("seleccionada");
+    let butacaFragmentacion
+    if (butacasSeleccionadas.length == 1) {
+
+        //INDIVIDUAL
+        butacaFragmentacion = butacasSeleccionadas[0].dataset.butaca.split("-");
+        oButaca = teatroSeleccionado.buscaButaca(butacaFragmentacion[0], butacaFragmentacion[1], butacaFragmentacion[2]);
+        tipo = butacaFragmentacion[0];
+
+        oEntradaAComprar = new EntradaIndividual(codigoEntrada, esAdaptada, [oButaca], representacionSeleccionada.precioBase, tipo);
+    } else {
+        //GRUPAL
+        let numPersonas = document.querySelector("#personasGrupal").value;
+
+        let butacas = []
+        for (let i = 0; i < butacasSeleccionadas.length; i++) {
+            butacaFragmentacion = butacasSeleccionadas[i].dataset.butaca.split("-");
+            oButaca = teatroSeleccionado.buscaButaca(butacaFragmentacion[0], butacaFragmentacion[1], butacaFragmentacion[2]);
+            butacas.push(oButaca);
+        }
+        oEntradaAComprar = new EntradaGrupal(codigoEntrada, esAdaptada, butacas, representacionSeleccionada.precioBase, numPersonas);
+    }
+    setTimeout(() => {
+        if (representacionSeleccionada.compraEntrada(oEntradaAComprar)) {
+            mensajeModal("Has comprado la entrada correctamente");
+            //RESET
+            document.querySelector("#representacionSeleccionada").value = "0";
+            document.querySelector("#totalEntrada").value = "0";
+            actualizaFormularioEntrada();
+        } else {
+            mensajeModal("Ha ocurrido un error, inténtelo más tarde.");
+        }
+    }, 100);
+}
