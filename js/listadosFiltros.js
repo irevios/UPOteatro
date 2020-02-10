@@ -1,7 +1,6 @@
 // Añade los filtros al listado
 function agregaFiltros(id) {
-    console.log(id);
-    if (id != "filtrosEspectaculos") {
+    if (elementoExiste("#filtroFechaInicial")) {
         document.querySelector("#filtroFechaInicial").addEventListener("change", () => {
             compruebaFinFecha(document.querySelector("#filtroFechaInicial"), document.querySelector("#filtroFechaFinal"));
             buscaFecha();
@@ -74,6 +73,7 @@ function ocultaFila(fila) {
 }
 
 function ordenaTabla(e) {
+    console.log("ordeno");
     if (e.target.tagName == 'TH') {
         let seleccionado = e.target.textContent;
         let numCelda = e.target.cellIndex;
@@ -82,8 +82,8 @@ function ordenaTabla(e) {
         e.target.dataset.ascendente = !ascendente;
 
         // Según el tipo del campo hacemos diferentes comparadores
-        let campoTexto = ["Representación", "Adaptada", "Teatro", "Espectáculo", "Productor", "Categoría", "Obra", "Compañía"]
-        let campoNumero = ["Precio", "Precio Base", "Gastos"];
+        let campoTexto = ["Representación", "Adaptada", "Teatro", "Espectáculo", "Productor", "Categoría", "Obra", "Compañía", "Nombre", "Dirección"]
+        let campoNumero = ["Precio", "Precio Base", "Gastos", "Aforo"];
         let lineas = Array.from(document.querySelectorAll("tbody tr"));
         //document.querySelectorAll("tbody tr").forEach(linea => lineas.push(linea)); // Pasa los tr a un array
 

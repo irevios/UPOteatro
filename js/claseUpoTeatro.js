@@ -121,6 +121,27 @@ class UpoTeatro {
         });
         return tabla;
     }
+    listadoTeatros() {
+        let tabla = creaTabla(["Nombre", "Dirección", "Aforo", "Representaciones"], "listadoTeatros");
+        this.teatros.forEach(teatro => {
+            tabla.querySelector("table").tBodies[0].append(teatro.toHTMLrow());
+        });
+        return tabla;
+    }
+    listadoObras() {
+        let tabla = creaTabla(["Espectáculo", "Productor", "Categoría", "Gastos", "Obra", "Compañía", "Editar", "Borrar"], "listadoEspectaculos");
+        this.espectaculos.forEach(espectaculo => {
+            tabla.querySelector("table").tBodies[0].append(espectaculo.toHTMLrow());
+        });
+        return tabla;
+    }
+    listadoCompanias() {
+        let tabla = creaTabla(["Espectáculo", "Productor", "Categoría", "Gastos", "Obra", "Compañía", "Editar", "Borrar"], "listadoEspectaculos");
+        this.espectaculos.forEach(espectaculo => {
+            tabla.querySelector("table").tBodies[0].append(espectaculo.toHTMLrow());
+        });
+        return tabla;
+    }
     listaEntradas() {
         let entradas = [];
         this.teatros.forEach(teatro => {

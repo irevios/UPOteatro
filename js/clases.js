@@ -65,6 +65,31 @@ class Teatro {
         representacionIntervalo.sort((repA, repB) => { return repA.fecha - repB.fecha });
         return representacionIntervalo;
     }
+    toHTMLrow() {
+        let fila = document.createElement("tr");
+        let celda = fila.insertCell(-1);
+        celda.textContent = this.nombre;
+        celda = fila.insertCell(-1);
+        celda.textContent = this.direccion;
+        celda = fila.insertCell(-1);
+        celda.textContent = this.aforo;
+        celda = fila.insertCell(-1);
+        celda.append(this.representacionesToHTML());
+        return fila;
+    }
+    representacionesToHTML() {
+        let representaciones = document.createElement("div");
+        let ultimo;
+        this.representaciones.forEach(representacion => {
+            let representacionString = document.createElement("div");
+            representacionString.textContent = representacion.espectaculo.nombre;
+            if (ultimo != representacion.espectaculo.nombre) {
+                representaciones.append(representacionString);
+                ultimo = representacion.espectaculo.nombre;
+            }
+        });
+        return representaciones;
+    }
 }
 
 class Representacion {

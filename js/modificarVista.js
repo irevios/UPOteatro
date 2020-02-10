@@ -6,6 +6,8 @@ function cargarEventos() {
     document.querySelector("#navComprarEntrada").addEventListener("click", () => muestraEnPantalla("formularioEntrada"));
     document.querySelector("#navListaRepresentaciones").addEventListener("click", () => muestraEnPantalla("listadoRepresentaciones"));
     document.querySelector("#navListaEspectaculos").addEventListener("click", () => muestraEnPantalla("listadoEspectaculos"));
+    document.querySelector("#navListaTeatros").addEventListener("click", () => muestraEnPantalla("listadoTeatros"));
+    document.querySelector("#navListaObras").addEventListener("click", () => muestraEnPantalla("listadoObras"));
 }
 
 function cargarEventosAdmin() {
@@ -13,6 +15,7 @@ function cargarEventosAdmin() {
     document.querySelector("#navListaEntradas").addEventListener("click", () => muestraEnPantalla("listadoEntradas"));
     document.querySelector("#navAgregarRepresentacion").addEventListener("click", () => muestraEnPantalla("formularioRepresentacion"));
     document.querySelector("#navAgregarEspectaculo").addEventListener("click", () => muestraEnPantalla("formularioEspectaculo"));
+    document.querySelector("#navListaCompanias").addEventListener("click", () => muestraEnPantalla("listadoCompanias"));
 }
 
 // Cambia el titulo y subtítulo de la cabecera
@@ -33,6 +36,15 @@ function seleccionaActivo(elem) {
     if (elem.includes("Espectaculo")) {
         document.querySelector("#navBar .nav-item:nth-child(4)").classList.add("active");
     }
+    if (elem.includes("Teatro")) {
+        document.querySelector("#navBar .nav-item:nth-child(5)").classList.add("active");
+    }
+    if (elem.includes("Obra")) {
+        document.querySelector("#navBar .nav-item:nth-child(6)").classList.add("active");
+    }
+    if (elem.includes("Compania")) {
+        document.querySelector("#navBar .nav-item:nth-child(7)").classList.add("active");
+    }
 }
 
 // Muestra u oculta un formulario o listado
@@ -45,12 +57,6 @@ function muestraEnPantalla(elem) {
     if (elementoExiste("#formularios > *")) {
         document.querySelectorAll("#formularios > *").forEach(elem => elem.classList.add("oculta"));
     }
-    // // Si ya hay un listado en pantalla, lo oculta
-    // if (elementoExiste("#formularios > .table-responsive")) {
-    //     document.querySelector("#formularios > .table-responsive").classList.add("oculta");
-    //     document.querySelector("#formularios").querySelector(".filtro").classList.add("oculta");
-    // }
-    // Si se pide un formulario, busca en el archivo formularios y lo añade a la web, si no añade un listado
     elem.includes("formulario") ? agregaFormulario(elem) : cargaListadoFiltro(elem);
 
     // Cierra menú después de elegir
@@ -97,6 +103,7 @@ function cargaListadoFiltro(elem) {
         let nuevo = $("<div id='" + elem + "'></div>").load("./ajax/listados/" + elem.replace("listado", "filtros") + ".html", () => {
             agregaFiltros(elem.replace("listado", "filtros"));
             $("#" + elem).append(agregaListado(elem));
+            document.querySelectorAll(".ordenable").forEach(header => header.addEventListener("click", ordenaTabla));
         });
         $("#formularios").append(nuevo);
     }
@@ -118,7 +125,18 @@ function agregaListado(elem) {
             cambiaCabecera("Espectáculos", "Lista de espectáculos");
             tabla = upoTeatro.listadoEspectaculos();
             break;
+        case "listadoTeatros":
+            cambiaCabecera("Teatros", "Lista de teatros");
+            tabla = upoTeatro.listadoTeatros();
+            break;
+        case "listadoObras":
+            cambiaCabecera("Obras", "Lista de obras");
+            tabla = upoTeatro.listadoObras();
+            break;
+        case "listadoCompanias":
+            cambiaCabecera("Compaías", "Lista de compañías");
+            tabla = upoTeatro.listadoCompanias();
+            break;
     }
-    document.querySelectorAll("th").forEach(header => header.addEventListener("click", ordenaTabla));
     return tabla;
 }
