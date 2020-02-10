@@ -129,16 +129,43 @@ class UpoTeatro {
         return tabla;
     }
     listadoObras() {
-        let tabla = creaTabla(["Espectáculo", "Productor", "Categoría", "Gastos", "Obra", "Compañía", "Editar", "Borrar"], "listadoEspectaculos");
-        this.espectaculos.forEach(espectaculo => {
-            tabla.querySelector("table").tBodies[0].append(espectaculo.toHTMLrow());
+        let tabla = creaTabla(["Nombre", "Autor", "Se representa en"], "listadoObras");
+        this.obras.forEach(obra => {
+            let linea = obra.toHTMLrow();
+            let celda = linea.insertCell(-1);
+            let div = document.createElement("div");
+            let ultima;
+            this.teatros.forEach(teatro => {
+                teatro.representaciones.forEach(rep => {
+                    if (rep.espectaculo.obra == obra.codigo && teatro.nombre != ultima) {
+                        let div2 = document.createElement("div");
+                        div2.textContent = teatro.nombre;
+                        div.append(div2);
+                        ultima = teatro.nombre;
+                    }
+                });
+            });
+            celda.append(div);
+            tabla.querySelector("table").tBodies[0].append(linea);
         });
         return tabla;
     }
     listadoCompanias() {
-        let tabla = creaTabla(["Espectáculo", "Productor", "Categoría", "Gastos", "Obra", "Compañía", "Editar", "Borrar"], "listadoEspectaculos");
-        this.espectaculos.forEach(espectaculo => {
-            tabla.querySelector("table").tBodies[0].append(espectaculo.toHTMLrow());
+        let tabla = creaTabla(["Nombre", "Director", "Producciones"], "listadoCompanias");
+        this.companias.forEach(compania => {
+            let linea = compania.toHTMLrow();
+            let celda = linea.insertCell(-1);
+            let div = document.createElement("div");
+            this.espectaculos.forEach(esp => {
+                let nom = esp.nombre;
+                if (esp.compania == compania.cif) {
+                    let div2 = document.createElement("div");
+                    div2.textContent = nom;
+                    div.append(div2);
+                }
+            });
+            celda.append(div);
+            tabla.querySelector("table").tBodies[0].append(linea);
         });
         return tabla;
     }

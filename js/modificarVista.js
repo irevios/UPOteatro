@@ -126,7 +126,7 @@ function agregaListado(elem) {
             tabla = upoTeatro.listadoEspectaculos();
             break;
         case "listadoTeatros":
-            cambiaCabecera("Teatros", "Lista de teatros");
+            cambiaCabecera("Teatros", "Lista de teatros");  
             tabla = upoTeatro.listadoTeatros();
             break;
         case "listadoObras":
@@ -134,7 +134,7 @@ function agregaListado(elem) {
             tabla = upoTeatro.listadoObras();
             break;
         case "listadoCompanias":
-            cambiaCabecera("Compaías", "Lista de compañías");
+            cambiaCabecera("Compañías", "Lista de compañías");
             tabla = upoTeatro.listadoCompanias();
             break;
     }

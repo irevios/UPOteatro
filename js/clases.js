@@ -280,6 +280,14 @@ class Compania {
         this.nombre = nombre;
         this.director = director;
     }
+    toHTMLrow(){
+        let fila = document.createElement("tr");
+        let celda = fila.insertCell(-1);
+        celda.textContent = this.nombre;
+        celda = fila.insertCell(-1);
+        celda.textContent = this.director;
+        return fila;
+    }
 }
 
 class Obra {
@@ -287,5 +295,13 @@ class Obra {
         this.codigo = codigo;
         this.nombre = nombre;
         this.autor = autor;
+    }
+    toHTMLrow(){
+        let fila = document.createElement("tr");
+        let celda = fila.insertCell(-1);
+        celda.textContent = this.nombre;
+        celda = fila.insertCell(-1);
+        celda.textContent = this.autor;
+        return fila;
     }
 }

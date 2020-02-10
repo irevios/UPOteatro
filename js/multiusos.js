@@ -81,7 +81,7 @@ function creaTabla(headers, id) {
         if ((encabezado == "Editar" || encabezado == "Borrar") && esAdmin() ||
             !(encabezado == "Editar" || encabezado == "Borrar")) {
             let celda = document.createElement("th");
-            if (!["Editar", "Borrar", "Tipo de entrada / Nº Personas", "Butacas", "Representaciones"].includes(encabezado)) {
+            if (!["Editar", "Borrar", "Tipo de entrada / Nº Personas", "Butacas", "Representaciones", "Producciones"].includes(encabezado)) {
                 celda.classList = 'ordenable';
                 celda.dataset.ascendente = 'true';
                 let head = document.createElement("div");
