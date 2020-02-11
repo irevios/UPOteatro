@@ -1,7 +1,8 @@
 /// Rellena todos los campos de la base de datos en el formulario de entrada
 //# sourceURL=entrada.js
-function rellenaForm() {
-    document.querySelector("#formularioEntradas button[name='submit']").addEventListener("click", () => validar("#formularioEntradas"), false);
+function rellenaForm(tipo) {
+    let form = document.querySelector("#" + tipo + "Entradas");
+    form.querySelector("button[name='submit']").addEventListener("click", () => validar("#" + tipo + "Entradas"), false);
 
     // Select representacion
     // Opción por defecto
@@ -10,7 +11,7 @@ function rellenaForm() {
     opcion.textContent = "Seleccione una representacion...";
     opcion.selected = true;
     opcion.disabled = true;
-    document.querySelector("#formularioEntradas #representacionSeleccionada").append(opcion);
+    form.querySelector("#representacionSeleccionada").append(opcion);
 
     // Opciones válidas
     upoTeatro.teatros.forEach(teatro => {
@@ -18,44 +19,47 @@ function rellenaForm() {
             opcion = document.createElement("option");
             opcion.value = representacion.codigo;
             opcion.textContent = teatro.nombre + " | " + fechaToString(representacion.fecha) + " | " + representacion.espectaculo.nombre;
-            document.querySelector("#formularioEntradas #representacionSeleccionada").append(opcion);
+            form.querySelector("#representacionSeleccionada").append(opcion);
         });
     });
 
     // Seleccionar butacas
-    document.querySelector("#representacionSeleccionada").addEventListener("change", actualizaButacas);
-    actualizaFormularioEntrada();
+    form.querySelector("#representacionSeleccionada").addEventListener("change", () => actualizaButacas(tipo));
+    actualizaFormularioEntrada(tipo);
 
     // Tipo de entrada cambia el select multiple
-    document.querySelector("#tipoEntrada0").addEventListener("click", actualizaFormularioEntrada);
-    document.querySelector("#tipoEntrada1").addEventListener("click", actualizaFormularioEntrada);
+    form.querySelector("#tipoEntrada0").addEventListener("click", () => actualizaFormularioEntrada(tipo));
+    form.querySelector("#tipoEntrada1").addEventListener("click", () => actualizaFormularioEntrada(tipo));
 }
+
 // Actualiza los datos que se muestra de entrada grupal o individual
-function actualizaFormularioEntrada() {
+function actualizaFormularioEntrada(tipo) {
+    let form = document.querySelector("#" + tipo + "Entradas");
     // Oculta o muestra el número de personas y quita las butacas seleccionadas
-    document.querySelector("#personasGrupal").closest(".col-4").style.display = document.querySelector("#tipoEntrada1").checked ? "block" : "none";
-    document.querySelectorAll(".seleccionada").forEach(sel => sel.classList.remove("seleccionada"));
-    document.querySelector("#totalEntrada").value = 0; // Reinicia a 0 el precio si el usuario no ha selccionado ninguna butaca.
-    document.querySelector("#personasGrupal").value = 0; // Reinicia a 0 el numero de personas si el usuario no ha selccionado ninguna butaca.
+    form.querySelector("#personasGrupal").closest(".col-4").style.display = form.querySelector("#tipoEntrada1").checked ? "block" : "none";
+    form.querySelectorAll(".seleccionada").forEach(sel => sel.classList.remove("seleccionada"));
+    form.querySelector("#totalEntrada").value = 0; // Reinicia a 0 el precio si el usuario no ha selccionado ninguna butaca.
+    form.querySelector("#personasGrupal").value = 0; // Reinicia a 0 el numero de personas si el usuario no ha selccionado ninguna butaca.
 
     // Elimina las butacas o las muestra
-    document.querySelectorAll(".fila1, .fila2, .fila3, .fila4").forEach(ap => { ap.children.length == 0 ? ap.style.display = "none" : ap.style.display = "initial" });
-    document.querySelectorAll(".platea, .anfiteatro, .paraiso, .palco").forEach(ap => { representacionSeleccionada.value == "0" ? ap.style.display = "none" : ap.style.display = "grid" });
+    form.querySelectorAll(".fila1, .fila2, .fila3, .fila4").forEach(ap => { ap.children.length == 0 ? ap.style.display = "none" : ap.style.display = "initial" });
+    form.querySelectorAll(".platea, .anfiteatro, .paraiso, .palco").forEach(ap => { representacionSeleccionada.value == "0" ? ap.style.display = "none" : ap.style.display = "grid" });
 }
 
 // Cambia las butacas a elegir según la representación elegida
-function actualizaButacas() {
+function actualizaButacas(tipo) {
+    let form = document.querySelector("#" + tipo + "Entradas");
     if (representacionSeleccionada.value != "0") {
-        actualizaFormularioEntrada();
-        let teatro = upoTeatro.buscaTeatroPorRepresentacion(document.querySelector("#formularioEntradas #representacionSeleccionada").value);
+        actualizaFormularioEntrada(tipo);
+        let teatro = upoTeatro.buscaTeatroPorRepresentacion(form.querySelector("#representacionSeleccionada").value);
         let butacas = teatro.butacas;
-        let representacion = teatro.buscaRepresentacion(document.querySelector("#formularioEntradas #representacionSeleccionada").value);
+        let representacion = teatro.buscaRepresentacion(form.querySelector("#representacionSeleccionada").value);
         document.querySelectorAll(".platea > *, .anfiteatro > *, .paraiso > *, .palco").forEach(b => b.textContent = "");
         butacas.forEach(butaca => {
             let icoButaca = document.createElement("i");
             icoButaca.classList = "fa butaca-silla";
             icoButaca.dataset.butaca = butaca.idButaca();
-            icoButaca.addEventListener("click", seleccionaButaca);
+            icoButaca.addEventListener("click", (e) => seleccionaButaca(e, tipo));
             if (representacion.butacaOcupada(butaca)) {
                 icoButaca.classList.add("ocupada");
             }
@@ -78,7 +82,7 @@ function actualizaButacas() {
     document.querySelectorAll(".fila1, .fila2, .fila3, .fila4").forEach(ap => { ap.children.length == 0 ? ap.style.display = "none" : ap.style.display = "initial" });
 }
 
-function seleccionaButaca(e) {
+function seleccionaButaca(e, tipo) {
     if (e.target.classList.contains('butaca-silla') && !e.target.classList.contains("ocupada")) {
         if (e.target.classList.contains('seleccionada')) {
             e.target.classList.remove("seleccionada");
@@ -90,30 +94,31 @@ function seleccionaButaca(e) {
                 e.target.classList.add("seleccionada");
             }
         }
-        actualizaPrecioEntrada();
+        actualizaPrecioEntrada(tipo);
     }
 }
 
-function actualizaPrecioEntrada() {
-    document.querySelector("#totalEntrada").value = 0;
-    let teatro = upoTeatro.buscaTeatroPorRepresentacion(document.querySelector("#formularioEntradas #representacionSeleccionada").value);
-    let representacion = teatro.buscaRepresentacion(document.querySelector("#formularioEntradas #representacionSeleccionada").value);
+function actualizaPrecioEntrada(tipo) {
+    let form = document.querySelector("#" + tipo + "Entradas");
+    form.querySelector("#totalEntrada").value = 0;
+    let teatro = upoTeatro.buscaTeatroPorRepresentacion(form.querySelector("#representacionSeleccionada").value);
+    let representacion = teatro.buscaRepresentacion(form.querySelector("#representacionSeleccionada").value);
     let coefButaca;
     if (elementoExiste("#butacasRepresentadas .seleccionada")) {
-        if (document.querySelector("#tipoEntrada1").checked) {
+        if (form.querySelector("#tipoEntrada1").checked) {
             let personas = document.querySelectorAll("#butacasRepresentadas .seleccionada").length;
-            document.querySelector("#personasGrupal").value = personas;
+            form.querySelector("#personasGrupal").value = personas;
             coefButaca = personas;
         } else {
 
             let butacaSeleccionada = document.querySelector("#butacasRepresentadas .seleccionada").dataset.butaca.split("-");
             coefButaca = teatro.buscaButaca(butacaSeleccionada[0], butacaSeleccionada[1], butacaSeleccionada[2]).coefPrecio;
         }
-        document.querySelector("#totalEntrada").value = (parseFloat(representacion.precioBase) * parseFloat(coefButaca)).toFixed(2);
+        form.querySelector("#totalEntrada").value = (parseFloat(representacion.precioBase) * parseFloat(coefButaca)).toFixed(2);
     }
 }
 
-function editaEntrada(id) {
+function editarForm(id) {
     let representacion = upoTeatro.buscaRepresentacionPorEntrada(id);
     let entrada = representacion.buscaEntrada(id);
     let entradaTipo = entrada instanceof EntradaIndividual ? "individual" : "grupal";
@@ -122,9 +127,9 @@ function editaEntrada(id) {
     let precio = entrada.precio;
     let tipo;
     let personas;
-    document.querySelector("#representacionSeleccionada").value = representacion.codigo;
-    actualizaButacas();
-    document.querySelectorAll("#butacasRepresentadas i").forEach(silla => {
+    document.querySelector("#editarEntradas #representacionSeleccionada").value = representacion.codigo;
+    actualizaButacas("editar");
+    document.querySelectorAll("#editarEntradas #butacasRepresentadas i").forEach(silla => {
         butacas.forEach(butaca => {
             if (silla.dataset.butaca == butaca.idButaca()) {
                 silla.classList.add("seleccionada");
@@ -134,28 +139,30 @@ function editaEntrada(id) {
     });
     if (entradaTipo == "individual") {
         let tipo = entrada.tipo;
-        document.querySelector("#tipoEntrada0").setAttribute("checked", "checked");
+        document.querySelector("#editarEntradas #tipoEntrada0").setAttribute("checked", "checked");
     } else {
         let personas = entrada.numPersonas;
-        document.querySelector("#tipoEntrada1").setAttribute("checked", "checked");
+        document.querySelector("#editarEntradas #tipoEntrada1").setAttribute("checked", "checked");
     }
-    document.querySelector("#personasGrupal").closest(".col-4").style.display = document.querySelector("#tipoEntrada1").checked ? "block" : "none";
-    document.querySelector("#entradaAdaptada_0").checked = adaptada;
-    actualizaPrecioEntrada();
-    document.querySelector("#formularios button[name='submit']").textContent = "Editar";
-    document.querySelector("#formularios button[name='submit']").addEventListener("click", () => {
+    document.querySelector("#editarEntradas #personasGrupal").closest(".col-4").style.display = document.querySelector("#editarEntradas #tipoEntrada1").checked ? "block" : "none";
+    document.querySelector("#editarEntradas #entradaAdaptada_0").checked = adaptada;
+    actualizaPrecioEntrada("editar");
+    document.querySelector("#editarEntradas button[name='submit']").textContent = "Editar";
+    document.querySelector("#editarEntradas button[name='submit']").addEventListener("click", () => {
         representacion.borrarEntrada(id);
         setTimeout(() => {
-            if (!document.querySelector("#formularioEntradas").classList.contains("was-validated")) {
+            if (!document.querySelector("#editarEntradas").classList.contains("was-validated")) {
                 document.querySelector(".modal #mensaje").textContent = "Entrada editada correctamente.";
                 muestraEnPantalla("listaEntrada");
             }
         }, 200);
     });
 }
-function eliminarEntradas(cod){
+
+function eliminarEntradas(cod) {
     upoTeatro.buscaRepresentacionPorEntrada(cod).borrarEntrada(cod);
 }
+
 function insertarEntrada() {
     let oEntradaAComprar;
     let representacionSeleccionada = upoTeatro.buscaRepresentacion(document.querySelector("#representacionSeleccionada").value);
@@ -202,7 +209,7 @@ function insertarEntrada() {
             //RESET
             document.querySelector("#representacionSeleccionada").value = "0";
             document.querySelector("#totalEntrada").value = "0";
-            actualizaFormularioEntrada();
+            actualizaFormularioEntrada(tipo);
         } else {
             mensajeModal("Ha ocurrido un error, inténtelo más tarde.");
         }

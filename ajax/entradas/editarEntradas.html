@@ -1,0 +1,76 @@
+<!-- Formulario comprar entrada -->
+<form id="editarEntradas">
+    <div id="butacasRepresentadas" class="grid-container col-6">
+        <div class="platea">
+            <div class="fila1"></div>
+            <div class="fila2"></div>
+            <div class="fila3"></div>
+            <div class="fila4"></div>
+        </div>
+        <div class="palco"></div>
+        <div class="anfiteatro">
+            <div class="fila1"></div>
+            <div class="fila2"></div>
+        </div>
+        <div class="paraiso">
+            <div class="fila1"></div>
+            <div class="fila2"></div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="representacionSeleccionada">Representación</label>
+        <div>
+            <select id="representacionSeleccionada" name="representacionSeleccionada" required="required" class="custom-select">
+                <!-- Representaciones de la base de datos -->
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Tipo de entrada</label>
+        <div>
+            <div class="custom-control custom-radio custom-control-inline">
+                <input name="tipoEntrada" type="radio" id="tipoEntrada0" required="required" class="custom-control-input" value="individual" checked="checked">
+                <label for="tipoEntrada0" class="custom-control-label">Individual</label>
+            </div>
+            <div class="custom-control custom-radio custom-control-inline">
+                <input name="tipoEntrada" type="radio" id="tipoEntrada1" required="required" class="custom-control-input" value="grupal">
+                <label for="tipoEntrada1" class="custom-control-label">Grupal</label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div>
+            <div class="custom-control custom-checkbox custom-control-inline">
+                <input name="entradaAdaptada" id="entradaAdaptada_0" type="checkbox" class="custom-control-input" value="Si">
+                <label for="entradaAdaptada_0" class="custom-control-label">Adaptada</label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-4">
+            <label for="personasGrupal">Personas</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <i class="fa fa-users"></i>
+                    </div>
+                </div>
+                <input id="personasGrupal" name="personasGrupal" type="number" step="any" class="form-control" readonly="readonly">
+            </div>
+        </div>
+        <div class="col">
+            <label for="totalEntrada">Precio Total</label>
+            <div class="input-group">
+                <input id="totalEntrada" name="totalEntrada" type="number" step="any" class="form-control" readonly="readonly">
+                <div class="input-group-append">
+                    <div class="input-group-text">
+                        <i class="fa fa-euro"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <button name="submit" type="button" class="btn btn-primary">Comprar entrada</button>
+    </div>
+</form>

@@ -57,13 +57,12 @@ function muestraEnPantalla(elem) {
     if (elementoExiste("#formularios > *")) {
         document.querySelectorAll("#formularios > *").forEach(elem => elem.classList.add("oculta"));
     }
-    elem.includes("formulario") ? agregaFormulario(elem) : cargaListadoFiltro(elem);
+    elem.includes("formulario") ? agregaFormulario(elem) : elem.includes("listado") ? cargaListadoFiltro(elem) : agregaEditar(elem);
 
     // Cierra menú después de elegir
     if (getComputedStyle(document.querySelector(".navbar-toggler")).display != "none") {
         document.querySelector(".navbar-toggler").click();
     }
-
 }
 
 // Muestra un formulario
@@ -71,15 +70,33 @@ function agregaFormulario(elem) {
     switch (elem) {
         case "formularioEntradas":
             cambiaCabecera("Entradas", "Comprar entrada");
-            cargaFormulario(elem, "entradas");
+            cargaFormulario(elem, "entradas", "formulario");
             break;
         case "formularioRepresentaciones":
             cambiaCabecera("Representaciones", "Añade representación");
-            cargaFormulario(elem, "representaciones");
+            cargaFormulario(elem, "representaciones", "formulario");
             break;
         case "formularioEspectaculos":
             cambiaCabecera("Espectáculos", "Añade espectáculos");
-            cargaFormulario(elem, "espectaculos");
+            cargaFormulario(elem, "espectaculos", "formulario");
+            break;
+    }
+    document.querySelector("#formularios").classList = "col-8";
+}
+
+function agregaEditar(elem) {
+    switch (elem) {
+        case "editarEntradas":
+            cambiaCabecera("Entradas", "Editar entrada");
+            cargaFormulario(elem, "entradas", "editar");
+            break;
+        case "editarRepresentaciones":
+            cambiaCabecera("Representaciones", "Editar representación");
+            cargaFormulario(elem, "representaciones", "editar");
+            break;
+        case "editarEspectaculos":
+            cambiaCabecera("Espectáculos", "Editar espectáculos");
+            cargaFormulario(elem, "espectaculos", "editar");
             break;
     }
     document.querySelector("#formularios").classList = "col-8";
@@ -87,20 +104,24 @@ function agregaFormulario(elem) {
 
 var scriptsCargados = "";
 
-function cargaFormulario(elem, carpeta) {
+function cargaFormulario(elem, carpeta, tipo) {
     if (elementoExiste("#" + elem)) {
         document.querySelector("#" + elem).classList.remove("oculta");
     } else {
         let nuevo = $("<div id='" + elem + "'></div>").load("./ajax/" + carpeta + "/" + elem + ".html", () => {
             let script = "./ajax/" + carpeta + "/" + carpeta + ".js";
             if (!scriptsCargados.includes(script)) {
-                $.getScript(script, () => rellenaForm());
+                $.getScript(script, () => rellenaForm(tipo));
                 scriptsCargados += script;
+            } else {
+                rellenaForm(tipo);
             }
         });
         $("#formularios").append(nuevo);
     }
 }
+
+
 
 function cargaListadoFiltro(elem) {
     if (elementoExiste("#" + elem)) {

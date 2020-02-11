@@ -642,27 +642,27 @@ ALTER TABLE `espectaculo`
 -- Filtros para la tabla `entrada`
 --
 ALTER TABLE `entrada`
-  ADD CONSTRAINT `entrada_ibfk_1` FOREIGN KEY (`COD_REPRESENTACION`) REFERENCES `representacion` (`CODIGO`);
+  ADD CONSTRAINT `entrada_ibfk_1` FOREIGN KEY (`COD_REPRESENTACION`) REFERENCES `representacion` (`CODIGO`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `e_grupal`
 --
 ALTER TABLE `e_grupal`
-  ADD CONSTRAINT `e_grupal_ibfk_1` FOREIGN KEY (`CODIGO_ENTRADA`) REFERENCES `entrada` (`CODIGO`),
+  ADD CONSTRAINT `e_grupal_ibfk_1` FOREIGN KEY (`CODIGO_ENTRADA`) REFERENCES `entrada` (`CODIGO`) ON DELETE CASCADE,
   ADD CONSTRAINT `e_grupal_ibfk_2` FOREIGN KEY (`COD_BUTACA`) REFERENCES `butaca` (`CODIGO`);
 
 --
 -- Filtros para la tabla `e_individual`
 --
 ALTER TABLE `e_individual`
-  ADD CONSTRAINT `e_individual_ibfk_1` FOREIGN KEY (`CODIGO_ENTRADA`) REFERENCES `entrada` (`CODIGO`),
+  ADD CONSTRAINT `e_individual_ibfk_1` FOREIGN KEY (`CODIGO_ENTRADA`) REFERENCES `entrada` (`CODIGO`) ON DELETE CASCADE,
   ADD CONSTRAINT `e_individual_ibfk_2` FOREIGN KEY (`COD_BUTACA`) REFERENCES `butaca` (`CODIGO`);
 
 --
 -- Filtros para la tabla `representacion`
 --
 ALTER TABLE `representacion`
-  ADD CONSTRAINT `representacion_ibfk_1` FOREIGN KEY (`COD_ESPECTACULO`) REFERENCES `espectaculo` (`CODIGO`),
+  ADD CONSTRAINT `representacion_ibfk_1` FOREIGN KEY (`COD_ESPECTACULO`) REFERENCES `espectaculo` (`CODIGO`) ON DELETE CASCADE,
   ADD CONSTRAINT `representacion_ibfk_2` FOREIGN KEY (`COD_TEATRO`) REFERENCES `teatro` (`CODIGO`),
   ADD CONSTRAINT `representacion_ibfk_3` UNIQUE(`COD_TEATRO`,`FECHA`);
 

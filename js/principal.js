@@ -69,9 +69,9 @@ function validar(apartado) { // Llamo validar con el apartado que quiero validar
 // Eliminar Entradas
 function editaElimina(e) {
     if (e.target.tagName == "BUTTON") {
+        let apartado = e.currentTarget.parentElement.parentElement.id;
         if (e.target.dataset.tipo == "borrar") {
-            console.log(e.currentTarget.parentElement.parentElement.id);
-            switch (e.currentTarget.parentElement.parentElement.id) {
+            switch (apartado) {
                 case "listadoEntradas":
                     eliminarEntradas(e.target.dataset.cod);
                     break;
@@ -84,124 +84,10 @@ function editaElimina(e) {
             }
             e.target.closest("tr").remove();
         } else if (e.target.dataset.tipo == "editar") {
-            let apartado = e.currentTarget.querySelector(".table-responsive").id;
-            muestraEnPantalla(apartado.replace("listado", "formulario"));
-            setTimeout(() => {
-                switch (apartado) {
-                    case "listadoEntradas":
-                        editaEntrada(e.target.dataset.cod);
-                        break;
-                    case "listadoRepresentaciones":
-                        editaRepresentacion(e.target.dataset.cod);
-                        break;
-                    case "listadoEspectaculos":
-                        editaEspectaculo(e.target.dataset.cod);
-                        break;
-                }
-            }, 100);
+            muestraEnPantalla(apartado.replace("listado", "editar"));
+            setTimeout(()=>editarForm(e.target.dataset.cod),500);
         }
     }
-}
-
-// Editar
-function editaEntrada(id) {
-    let representacion = upoTeatro.buscaRepresentacionPorEntrada(id);
-    let entrada = representacion.buscaEntrada(id);
-    let entradaTipo = entrada instanceof EntradaIndividual ? "individual" : "grupal";
-    let butacas = entrada.butacas;
-    let adaptada = entrada.adaptada;
-    let precio = entrada.precio;
-    let tipo;
-    let personas;
-    document.querySelector("#representacionSeleccionada").value = representacion.codigo;
-    cambiaButacasFormEntrada();
-    document.querySelectorAll("#butacasRepresentadas i").forEach(silla => {
-        butacas.forEach(butaca => {
-            if (silla.dataset.butaca == butaca.idButaca()) {
-                silla.classList.add("seleccionada");
-                silla.classList.remove("ocupada");
-            }
-        });
-    });
-    if (entradaTipo == "individual") {
-        let tipo = entrada.tipo;
-        document.querySelector("#tipoEntrada0").setAttribute("checked", "checked");
-    } else {
-        let personas = entrada.numPersonas;
-        document.querySelector("#tipoEntrada1").setAttribute("checked", "checked");
-    }
-    document.querySelector("#personasGrupal").closest(".col-4").style.display = document.querySelector("#tipoEntrada1").checked ? "block" : "none";
-    document.querySelector("#entradaAdaptada_0").checked = adaptada;
-    cambiaPrecioEntrada();
-    document.querySelector("#formularios button[name='submit']").textContent = "Editar";
-    document.querySelector("#formularios button[name='submit']").addEventListener("click", () => {
-        representacion.borrarEntrada(id);
-        setTimeout(() => {
-            if (!document.querySelector("#formularioEntradas").classList.contains("was-validated")) {
-                document.querySelector(".modal #mensaje").textContent = "Entrada editada correctamente.";
-                muestraEnPantalla("listaEntrada");
-            }
-        }, 200);
-    });
-}
-
-function editaRepresentacion(id) {
-    document.querySelector(".jumbotron p").textContent = "Edita representación";
-    let teatro = upoTeatro.buscaTeatroPorRepresentacion(id);
-    let representacion = teatro.buscaRepresentacion(id);
-    let todas = teatro.buscaRepresentacionesIntervalo(representacion);
-    let fechaInicial = todas[0].fecha;
-    let fechaFinal = todas[todas.length - 1].fecha;
-    let adaptada = representacion.adaptada;
-    let precioBase = representacion.precioBase;
-    let espectaculo = representacion.espectaculo;
-    document.querySelector("#teatroSeleccionado").value = teatro.codigo;
-    document.querySelector("#teatroSeleccionado").disabled = true;
-    document.querySelector("#fechaInicioRepresentacion").value = fechaToAmericana(fechaInicial);
-    document.querySelector("#fechaFinalRepresentacion").value = fechaToAmericana(fechaFinal);
-    document.querySelector("#representacionAdaptada").checked = adaptada;
-    document.querySelector("#precioBaseRepresentacion").value = precioBase;
-    document.querySelector("#espectaculoSeleccionado").value = espectaculo.codigo;
-    document.querySelector("#espectaculoSeleccionado").disabled = true;
-    document.querySelector("#formularios button[name='submit']").textContent = "Editar";
-    document.querySelector("#formularios button[name='submit']").addEventListener("click", () => {
-        todas.forEach(rep => {
-            teatro.borrarRepresentacion(rep.codigo);
-        });
-        setTimeout(() => {
-            if (!document.querySelector("#formularioRepresentaciones").classList.contains("was-validated")) {
-                document.querySelector(".modal #mensaje").textContent = "Representación editada correctamente.";
-                muestraEnPantalla("listaRepresentacion");
-            }
-        }, 200);
-    });
-}
-
-function editaEspectaculo(id) {
-    document.querySelector(".jumbotron p").textContent = "Edita espectáculo";
-    let espectaculo = upoTeatro.buscaEspectaculo(id);
-    let nombre = espectaculo.nombre;
-    let productor = espectaculo.productor;
-    let categoria = espectaculo.categoria;
-    let gastos = espectaculo.gastos;
-    let obra = espectaculo.obra.codigo;
-    let compania = espectaculo.compania.cif;
-    document.querySelector("#nombreEspectaculo").value = nombre;
-    document.querySelector("#nombreProductorEspectaculo").value = productor;
-    document.querySelector("#categoriaEspectaculo").value = categoria;
-    document.querySelector("#gastosEspectaculo").value = gastos;
-    document.querySelector("#companiaSeleccionada").value = compania;
-    document.querySelector("#obraSeleccionada").value = obra;
-    document.querySelector("#formularios button[name='submit']").textContent = "Editar";
-    document.querySelector("#formularios button[name='submit']").addEventListener("click", () => {
-        upoTeatro.borrarEspectaculo(id);
-        setTimeout(() => {
-            if (!document.querySelector("#formularioEspectaculos").classList.contains("was-validated")) {
-                document.querySelector(".modal #mensaje").textContent = "Espectáculo editado correctamente.";
-                muestraEnPantalla("listaEspectaculo");
-            }
-        }, 200);
-    });
 }
 
 

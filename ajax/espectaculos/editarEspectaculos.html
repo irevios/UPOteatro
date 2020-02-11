@@ -1,0 +1,59 @@
+<!-- Formulario crear espectáculo -->
+<form id="editarEspectaculos">
+    <div class="form-group row">
+        <label for="nombreEspectaculo" class="col-4 col-form-label">Nombre</label>
+        <div class="col-8">
+            <input id="nombreEspectaculo" name="nombreEspectaculo" type="text" class="form-control" pattern="^[a-zA-ZñáéíóúÑÁÉÍÓÚ][a-zA-Z0-9\-_\. ]{1,100}$" required="required">
+            <div class="invalid-feedback">Debe introducir un nombre válido.</div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="nombreProductorEspectaculo" class="col-4 col-form-label">Productor</label>
+        <div class="col-8">
+            <input id="nombreProductorEspectaculo" name="nombreProductorEspectaculo" type="text" class="form-control" pattern="^[a-zA-ZñáéíóúÑÁÉÍÓÚ][a-zA-Z0-9\-_\. ]{1,100}$" required="required">
+            <div class="invalid-feedback">Debe introducir un productor válido.</div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="categoriaEspectaculo" class="col-4 col-form-label">Categoría</label>
+        <div class="col-8">
+            <select id="categoriaEspectaculo" name="categoriaEspectaculo" class="custom-select">
+            </select>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="gastosEspectaculo" class="col-4 col-form-label">Gastos</label>
+        <div class="col-8">
+            <div class="input-group">
+                <input id="gastosEspectaculo" name="gastosEspectaculo" type="number" step="any" class="form-control" min="0" max="300000" required="required">
+                <div class="input-group-append">
+                    <div class="input-group-text">
+                        <i class="fa fa-euro"></i>
+                    </div>
+                </div>
+                <div class="invalid-feedback">Debe introducir un numero entre 0 y 300000</div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="companiaSeleccionada" class="col-4 col-form-label">Compañía</label>
+        <div class="col-8">
+            <select id="companiaSeleccionada" name="companiaSeleccionada" class="custom-select">
+                <!-- Compañias de la base de datos -->
+            </select>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="obraSeleccionada" class="col-4 col-form-label">Obra</label>
+        <div class="col-8">
+            <select id="obraSeleccionada" name="obraSeleccionada" class="custom-select">
+                <!-- Obras de la base de datos -->
+            </select>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="offset-4 col-8">
+            <button name="submit" type="button" class="btn btn-primary">Añadir</button>
+        </div>
+    </div>
+</form>

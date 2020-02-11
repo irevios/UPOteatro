@@ -92,6 +92,14 @@ function completaInsertarEspectaculos(resultado) {
 
 }
 
-function eliminarEspectaculos(id){
-     upoTeatro.borrarEspectaculo(id);
+function eliminarEspectaculos(id) {
+    $.post("./ajax/espectaculos/borrarEspectaculos.php", { "id": id }, completaEliminarEspectaculos);
+}
+
+function completaEliminarEspectaculos(resultado) {
+    let datos = JSON.parse(resultado);
+    if (datos["error"] == 0) { // Si devuelve un json
+        upoTeatro.borrarEspectaculo(datos["id"]);
+    }
+    mensajeModal(datos["mensaje"]);
 }

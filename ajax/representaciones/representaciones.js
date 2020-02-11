@@ -1,26 +1,26 @@
 /// Rellena todos los campos de la base de datos en el formulario de representación
 //# sourceURL=representacion.js
-function rellenaForm() {
-    document.querySelector("#formularioRepresentaciones button[name='submit']").addEventListener("click", () => validar("#formularioRepresentaciones"), false);
-    document.querySelector("#formularioRepresentaciones #fechaInicioRepresentacion").addEventListener("change", () => compruebaFinFecha(document.querySelector("#formularioRepresentaciones #fechaInicioRepresentacion"), document.querySelector("#formularioRepresentaciones #fechaFinalRepresentacion")));
+function rellenaForm(tipo) {
+    document.querySelector("#" + tipo + "Representaciones button[name='submit']").addEventListener("click", () => validar("#" + tipo + "Representaciones"), false);
+    document.querySelector("#" + tipo + "Representaciones #fechaInicioRepresentacion").addEventListener("change", () => compruebaFinFecha(document.querySelector("#" + tipo + "Representaciones #fechaInicioRepresentacion"), document.querySelector("#" + tipo + "Representaciones #fechaFinalRepresentacion")));
 
     // Select teatros
     upoTeatro.teatros.forEach(teatro => {
         let opcion = document.createElement("option");
         opcion.value = teatro.codigo;
         opcion.textContent = teatro.nombre;
-        document.querySelector("#teatroSeleccionado").append(opcion);
+        document.querySelector("#" + tipo + "Representaciones #teatroSeleccionado").append(opcion);
     });
     // Select espectaculos
     upoTeatro.espectaculos.forEach(espectaculo => {
         let opcion = document.createElement("option");
         opcion.value = espectaculo.codigo;
         opcion.textContent = espectaculo.nombre;
-        document.querySelector("#espectaculoSeleccionado").append(opcion);
+        document.querySelector("#" + tipo + "Representaciones #espectaculoSeleccionado").append(opcion);
     });
 }
 
-function editaRepresentacion(id) {
+function editarForm(id) {
     document.querySelector(".jumbotron p").textContent = "Edita representación";
     let teatro = upoTeatro.buscaTeatroPorRepresentacion(id);
     let representacion = teatro.buscaRepresentacion(id);
@@ -30,21 +30,21 @@ function editaRepresentacion(id) {
     let adaptada = representacion.adaptada;
     let precioBase = representacion.precioBase;
     let espectaculo = representacion.espectaculo;
-    document.querySelector("#teatroSeleccionado").value = teatro.codigo;
-    document.querySelector("#teatroSeleccionado").disabled = true;
-    document.querySelector("#fechaInicioRepresentacion").value = fechaToAmericana(fechaInicial);
-    document.querySelector("#fechaFinalRepresentacion").value = fechaToAmericana(fechaFinal);
-    document.querySelector("#representacionAdaptada").checked = adaptada;
-    document.querySelector("#precioBaseRepresentacion").value = precioBase;
-    document.querySelector("#espectaculoSeleccionado").value = espectaculo.codigo;
-    document.querySelector("#espectaculoSeleccionado").disabled = true;
-    document.querySelector("#formularios button[name='submit']").textContent = "Editar";
-    document.querySelector("#formularios button[name='submit']").addEventListener("click", () => {
+    document.querySelector("#editarRepresentaciones #teatroSeleccionado").value = teatro.codigo;
+    document.querySelector("#editarRepresentaciones #teatroSeleccionado").disabled = true;
+    document.querySelector("#editarRepresentaciones #fechaInicioRepresentacion").value = fechaToAmericana(fechaInicial);
+    document.querySelector("#editarRepresentaciones #fechaFinalRepresentacion").value = fechaToAmericana(fechaFinal);
+    document.querySelector("#editarRepresentaciones #representacionAdaptada").checked = adaptada;
+    document.querySelector("#editarRepresentaciones #precioBaseRepresentacion").value = precioBase;
+    document.querySelector("#editarRepresentaciones #espectaculoSeleccionado").value = espectaculo.codigo;
+    document.querySelector("#editarRepresentaciones #espectaculoSeleccionado").disabled = true;
+    document.querySelector("#editarRepresentaciones button[name='submit']").textContent = "Editar";
+    document.querySelector("#editarRepresentaciones button[name='submit']").addEventListener("click", () => {
         todas.forEach(rep => {
             teatro.borrarRepresentacion(rep.codigo);
         });
         setTimeout(() => {
-            if (!document.querySelector("#formularioRepresentaciones").classList.contains("was-validated")) {
+            if (!document.querySelector("#editarRepresentaciones").classList.contains("was-validated")) {
                 document.querySelector(".modal #mensaje").textContent = "Representación editada correctamente.";
                 muestraEnPantalla("listaRepresentacion");
             }
