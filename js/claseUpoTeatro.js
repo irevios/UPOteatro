@@ -73,7 +73,7 @@ class UpoTeatro {
         return this.obras.filter(obra => obra.codigo == codigo)[0];
     }
     listadoEntradas() {
-        let tabla = creaTabla(["Representación", "Fecha", "Adaptada", "Precio", "Butacas", "Tipo de entrada / Nº Personas", "Editar", "Borrar"], "listadoEntradas");
+        let tabla = creaTabla(["Representación", "Fecha", "Adaptada", "Precio", "Butacas", "Tipo de entrada / Nº Personas", "Editar", "Borrar"]);
         this.listaEntradas().forEach(entrada => {
             let linea = entrada.toHTMLrow();
             let celdaRepresentacion = linea.insertCell(0);
@@ -85,7 +85,7 @@ class UpoTeatro {
         return tabla;
     }
     listadoRepresentaciones() {
-        let tabla = creaTabla(["Teatro", "Fecha", "Adaptada", "Precio Base", "Espectáculo", "Editar", "Borrar"], "listadoRepresentaciones");
+        let tabla = creaTabla(["Teatro", "Fecha", "Adaptada", "Precio Base", "Espectáculo", "Editar", "Borrar"]);
         let a = [];
         this.teatros.sort((tA, tB) => { return parseInt(tA.codigo.substring(2)) - parseInt(tB.codigo.substring(2)) });
         a.push(this.listaRepresentaciones()[0]);
@@ -115,21 +115,21 @@ class UpoTeatro {
         return lista.filter(rep => this.buscaTeatroPorRepresentacion(rep.codigo) == this.buscaTeatroPorRepresentacion(busca.codigo) && rep.espectaculo == busca.espectaculo && rep.precioBase == busca.precioBase && rep.adaptada == busca.adaptada).length == 0;
     }
     listadoEspectaculos() {
-        let tabla = creaTabla(["Espectáculo", "Productor", "Categoría", "Gastos", "Obra", "Compañía", "Editar", "Borrar"], "listadoEspectaculos");
+        let tabla = creaTabla(["Espectáculo", "Productor", "Categoría", "Gastos", "Obra", "Compañía", "Editar", "Borrar"]);
         this.espectaculos.forEach(espectaculo => {
             tabla.querySelector("table").tBodies[0].append(espectaculo.toHTMLrow());
         });
         return tabla;
     }
     listadoTeatros() {
-        let tabla = creaTabla(["Nombre", "Dirección", "Aforo", "Representaciones"], "listadoTeatros");
+        let tabla = creaTabla(["Nombre", "Dirección", "Aforo", "Representaciones"]);
         this.teatros.forEach(teatro => {
             tabla.querySelector("table").tBodies[0].append(teatro.toHTMLrow());
         });
         return tabla;
     }
     listadoObras() {
-        let tabla = creaTabla(["Nombre", "Autor", "Se representa en"], "listadoObras");
+        let tabla = creaTabla(["Nombre", "Autor", "Se representa en"]);
         this.obras.forEach(obra => {
             let linea = obra.toHTMLrow();
             let celda = linea.insertCell(-1);

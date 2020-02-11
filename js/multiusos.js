@@ -66,48 +66,7 @@ function elementoExiste(elemento) {
     }
 }
 
-// Crea una tabla con los headers dados como parametros
-function creaTabla(headers, id) {
-    let div = document.createElement("div");
-    div.classList.add("table-responsive");
-    div.id = id;
-    let tabla = document.createElement("table");
-    tabla.classList.add("table");
-    tabla.classList.add("table-striped");
-    tabla.classList.add("table-hover");
-    let header = tabla.createTHead();
-    let encabezados = header.insertRow(-1);
-    headers.forEach(encabezado => {
-        if ((encabezado == "Editar" || encabezado == "Borrar") && esAdmin() ||
-            !(encabezado == "Editar" || encabezado == "Borrar")) {
-            let celda = document.createElement("th");
-            if (!["Editar", "Borrar", "Tipo de entrada / Nº Personas", "Butacas", "Representaciones", "Producciones"].includes(encabezado)) {
-                celda.classList = 'ordenable';
-                celda.dataset.ascendente = 'true';
-                let head = document.createElement("div");
-                head.classList = "row align-items-center justify-content-between";
-                let texto = document.createElement("div");
-                texto.classList = "col";
-                texto.textContent = encabezado;
-                let ico = document.createElement("div");
-                ico.classList = "col-1";
-                let icono = document.createElement("i");
-                icono.classList = "fa fa-sort";
-                ico.append(icono);
-                head.append(texto);
-                head.append(ico);
-                celda.append(head);
-            } else {
-                celda.textContent = encabezado;
-            }
-            encabezados.append(celda);
-        }
-    });
-    let cuerpo = document.createElement("tbody");
-    tabla.append(cuerpo);
-    div.append(tabla);
-    return div;
-}
+
 
 // Convierte fecha Date a formato DD/MM/AAAA
 function fechaToString(fecha) {
@@ -185,12 +144,54 @@ function toTitleCase(palabra) {
     return convertido.substring(0, convertido.length - 1);
 }
 
+// Crea una tabla con los headers dados como parametros
+function creaTabla(headers) {
+    let div = document.createElement("div");
+    div.classList.add("table-responsive");
+    let tabla = document.createElement("table");
+    tabla.classList.add("table");
+    tabla.classList.add("table-striped");
+    tabla.classList.add("table-hover");
+    let header = tabla.createTHead();
+    let encabezados = header.insertRow(-1);
+    headers.forEach(encabezado => {
+        if ((encabezado == "Editar" || encabezado == "Borrar") && esAdmin() ||
+            !(encabezado == "Editar" || encabezado == "Borrar")) {
+            let celda = document.createElement("th");
+            if (!["Editar", "Borrar", "Tipo de entrada / Nº Personas", "Butacas", "Representaciones", "Producciones"].includes(encabezado)) {
+                celda.classList = 'ordenable';
+                celda.dataset.ascendente = 'true';
+                let head = document.createElement("div");
+                head.classList = "row align-items-center justify-content-between";
+                let texto = document.createElement("div");
+                texto.classList = "col";
+                texto.textContent = encabezado;
+                let ico = document.createElement("div");
+                ico.classList = "col-1";
+                let icono = document.createElement("i");
+                icono.classList = "fa fa-sort";
+                ico.append(icono);
+                head.append(texto);
+                head.append(ico);
+                celda.append(head);
+            } else {
+                celda.textContent = encabezado;
+            }
+            encabezados.append(celda);
+        }
+    });
+    let cuerpo = document.createElement("tbody");
+    tabla.append(cuerpo);
+    div.append(tabla);
+    return div;
+}
+
 // Añade un botón borrar o editar
 function agregaBoton(tipo, fila, codigo) {
     let celda = fila.insertCell(-1);
     let boton = document.createElement("button");
     boton.type = "button";
-    boton.dataset.id = codigo;
+    boton.dataset.cod = codigo;
     boton.dataset.tipo = tipo;
     boton.classList = "btn";
     let icono = document.createElement("i");
@@ -204,7 +205,6 @@ function agregaBoton(tipo, fila, codigo) {
 }
 
 // Comprueba si un script fue cargado anteriormente
-function scriptCargado(src)
-{
+function scriptCargado(src) {
     return document.querySelector('script[src="' + src + '"]') ? true : false;
 }

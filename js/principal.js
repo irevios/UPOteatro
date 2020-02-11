@@ -67,38 +67,35 @@ function validar(apartado) { // Llamo validar con el apartado que quiero validar
 
 
 // Eliminar Entradas
-document.querySelector("#formularios").addEventListener("click", editaElimina);
-
 function editaElimina(e) {
     if (e.target.tagName == "BUTTON") {
         if (e.target.dataset.tipo == "borrar") {
-            switch (e.currentTarget.querySelector(".table-responsive").id) {
+            console.log(e.currentTarget.parentElement.parentElement.id);
+            switch (e.currentTarget.parentElement.parentElement.id) {
                 case "listadoEntradas":
-                    eliminaEntradas(e.target.dataset.id);
+                    eliminarEntradas(e.target.dataset.cod);
                     break;
                 case "listadoRepresentaciones":
-                eliminaRepresentaciones(e.target.dataset.id);
-                    
+                    eliminarRepresentaciones(e.target.dataset.cod);
                     break;
                 case "listadoEspectaculos":
-                eliminaEspectaculos(e.target.dataset.id);
-                   
+                    eliminarEspectaculos(e.target.dataset.cod);
                     break;
             }
-            e.target.parentElement.parentElement.remove();
+            e.target.closest("tr").remove();
         } else if (e.target.dataset.tipo == "editar") {
             let apartado = e.currentTarget.querySelector(".table-responsive").id;
             muestraEnPantalla(apartado.replace("listado", "formulario"));
             setTimeout(() => {
                 switch (apartado) {
                     case "listadoEntradas":
-                        editaEntrada(e.target.dataset.id);
+                        editaEntrada(e.target.dataset.cod);
                         break;
                     case "listadoRepresentaciones":
-                        editaRepresentacion(e.target.dataset.id);
+                        editaRepresentacion(e.target.dataset.cod);
                         break;
                     case "listadoEspectaculos":
-                        editaEspectaculo(e.target.dataset.id);
+                        editaEspectaculo(e.target.dataset.cod);
                         break;
                 }
             }, 100);

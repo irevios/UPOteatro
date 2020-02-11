@@ -85,12 +85,18 @@ function agregaFormulario(elem) {
     document.querySelector("#formularios").classList = "col-8";
 }
 
+var scriptsCargados = "";
+
 function cargaFormulario(elem, carpeta) {
     if (elementoExiste("#" + elem)) {
         document.querySelector("#" + elem).classList.remove("oculta");
     } else {
         let nuevo = $("<div id='" + elem + "'></div>").load("./ajax/" + carpeta + "/" + elem + ".html", () => {
-            $.getScript("./ajax/" + carpeta + "/" + carpeta.substring(0, carpeta.length - (carpeta.includes("ones") ? 2 : 1)) + ".js", () => rellenaForm());
+            let script = "./ajax/" + carpeta + "/" + carpeta + ".js";
+            if (!scriptsCargados.includes(script)) {
+                $.getScript(script, () => rellenaForm());
+                scriptsCargados += script;
+            }
         });
         $("#formularios").append(nuevo);
     }
@@ -101,8 +107,16 @@ function cargaListadoFiltro(elem) {
         document.querySelector("#" + elem).classList.remove("oculta");
     } else {
         let nuevo = $("<div id='" + elem + "'></div>").load("./ajax/listados/" + elem.replace("listado", "filtros") + ".html", () => {
+            if (elem.includes("Entrada") || elem.includes("Representacion") || elem.includes("Espectaculo")) {
+                let script = "./ajax/" + elem.toLowerCase().replace("listado", "") + "/" + elem.toLowerCase().replace("listado", "") + ".js";
+                if (!scriptsCargados.includes(script)) {
+                    $.getScript(script);
+                    scriptsCargados += script;
+                }
+            }
             agregaFiltros(elem.replace("listado", "filtros"));
             $("#" + elem).append(agregaListado(elem));
+            document.querySelector("#" + elem + " table").addEventListener("click", editaElimina);
             document.querySelectorAll(".ordenable").forEach(header => header.addEventListener("click", ordenaTabla));
         });
         $("#formularios").append(nuevo);
@@ -126,7 +140,7 @@ function agregaListado(elem) {
             tabla = upoTeatro.listadoEspectaculos();
             break;
         case "listadoTeatros":
-            cambiaCabecera("Teatros", "Lista de teatros");  
+            cambiaCabecera("Teatros", "Lista de teatros");
             tabla = upoTeatro.listadoTeatros();
             break;
         case "listadoObras":

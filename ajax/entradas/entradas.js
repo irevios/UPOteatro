@@ -153,8 +153,8 @@ function editaEntrada(id) {
         }, 200);
     });
 }
-function eliminaEntradas(id){
-    upoTeatro.buscaRepresentacionPorEntrada(id).borrarEntrada(id);
+function eliminarEntradas(cod){
+    upoTeatro.buscaRepresentacionPorEntrada(cod).borrarEntrada(cod);
 }
 function insertarEntrada() {
     let oEntradaAComprar;

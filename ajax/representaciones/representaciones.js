@@ -112,9 +112,9 @@ function insertaRepresentacion() {
     }, 100);
 }
 
-eliminaRepresentaciones(id) {
-    let teatro = upoTeatro.buscaTeatroPorRepresentacion(id);
-    let todas = teatro.buscaRepresentacionesIntervalo(teatro.buscaRepresentacion(id));
+function eliminarRepresentaciones(codigo) {
+    let teatro = upoTeatro.buscaTeatroPorRepresentacion(codigo);
+    let todas = teatro.buscaRepresentacionesIntervalo(teatro.buscaRepresentacion(codigo));
     todas.forEach(rep => {
         teatro.borrarRepresentacion(rep.codigo);
     });
