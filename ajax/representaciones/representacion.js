@@ -1,8 +1,8 @@
 /// Rellena todos los campos de la base de datos en el formulario de representación
 //# sourceURL=representacion.js
 function rellenaForm() {
-    document.querySelector("#formularioRepresentacion button[name='submit']").addEventListener("click", () => validar("#formularioRepresentacion"), false);
-    document.querySelector("#formularioRepresentacion #fechaInicioRepresentacion").addEventListener("change", () => compruebaFinFecha(document.querySelector("#formularioRepresentacion #fechaInicioRepresentacion"), document.querySelector("#formularioRepresentacion #fechaFinalRepresentacion")));
+    document.querySelector("#formularioRepresentaciones button[name='submit']").addEventListener("click", () => validar("#formularioRepresentaciones"), false);
+    document.querySelector("#formularioRepresentaciones #fechaInicioRepresentacion").addEventListener("change", () => compruebaFinFecha(document.querySelector("#formularioRepresentaciones #fechaInicioRepresentacion"), document.querySelector("#formularioRepresentaciones #fechaFinalRepresentacion")));
 
     // Select teatros
     upoTeatro.teatros.forEach(teatro => {
@@ -44,7 +44,7 @@ function editaRepresentacion(id) {
             teatro.borrarRepresentacion(rep.codigo);
         });
         setTimeout(() => {
-            if (!document.querySelector("#formularioRepresentacion").classList.contains("was-validated")) {
+            if (!document.querySelector("#formularioRepresentaciones").classList.contains("was-validated")) {
                 document.querySelector(".modal #mensaje").textContent = "Representación editada correctamente.";
                 muestraEnPantalla("listaRepresentacion");
             }
@@ -110,4 +110,12 @@ function insertaRepresentacion() {
             document.querySelector(".modal #mensaje").append(incorrectos);
         }
     }, 100);
+}
+
+eliminaRepresentaciones(id) {
+    let teatro = upoTeatro.buscaTeatroPorRepresentacion(id);
+    let todas = teatro.buscaRepresentacionesIntervalo(teatro.buscaRepresentacion(id));
+    todas.forEach(rep => {
+        teatro.borrarRepresentacion(rep.codigo);
+    });
 }

@@ -3,7 +3,7 @@
 
 // Eventos del menú
 function cargarEventos() {
-    document.querySelector("#navComprarEntrada").addEventListener("click", () => muestraEnPantalla("formularioEntrada"));
+    document.querySelector("#navComprarEntrada").addEventListener("click", () => muestraEnPantalla("formularioEntradas"));
     document.querySelector("#navListaRepresentaciones").addEventListener("click", () => muestraEnPantalla("listadoRepresentaciones"));
     document.querySelector("#navListaEspectaculos").addEventListener("click", () => muestraEnPantalla("listadoEspectaculos"));
     document.querySelector("#navListaTeatros").addEventListener("click", () => muestraEnPantalla("listadoTeatros"));
@@ -13,8 +13,8 @@ function cargarEventos() {
 function cargarEventosAdmin() {
     cargarEventos();
     document.querySelector("#navListaEntradas").addEventListener("click", () => muestraEnPantalla("listadoEntradas"));
-    document.querySelector("#navAgregarRepresentacion").addEventListener("click", () => muestraEnPantalla("formularioRepresentacion"));
-    document.querySelector("#navAgregarEspectaculo").addEventListener("click", () => muestraEnPantalla("formularioEspectaculo"));
+    document.querySelector("#navAgregarRepresentacion").addEventListener("click", () => muestraEnPantalla("formularioRepresentaciones"));
+    document.querySelector("#navAgregarEspectaculo").addEventListener("click", () => muestraEnPantalla("formularioEspectaculos"));
     document.querySelector("#navListaCompanias").addEventListener("click", () => muestraEnPantalla("listadoCompanias"));
 }
 
@@ -69,15 +69,15 @@ function muestraEnPantalla(elem) {
 // Muestra un formulario
 function agregaFormulario(elem) {
     switch (elem) {
-        case "formularioEntrada":
+        case "formularioEntradas":
             cambiaCabecera("Entradas", "Comprar entrada");
             cargaFormulario(elem, "entradas");
             break;
-        case "formularioRepresentacion":
+        case "formularioRepresentaciones":
             cambiaCabecera("Representaciones", "Añade representación");
             cargaFormulario(elem, "representaciones");
             break;
-        case "formularioEspectaculo":
+        case "formularioEspectaculos":
             cambiaCabecera("Espectáculos", "Añade espectáculos");
             cargaFormulario(elem, "espectaculos");
             break;

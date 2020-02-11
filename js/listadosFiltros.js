@@ -84,7 +84,6 @@ function ordenaTabla(e) {
         let campoTexto = ["Representación", "Adaptada", "Teatro", "Espectáculo", "Productor", "Categoría", "Obra", "Compañía", "Nombre", "Dirección", "Autor", "Director"]
         let campoNumero = ["Precio", "Precio Base", "Gastos", "Aforo"];
         let lineas = Array.from(document.querySelectorAll("tbody tr"));
-        //document.querySelectorAll("tbody tr").forEach(linea => lineas.push(linea)); // Pasa los tr a un array
 
         if (campoTexto.includes(seleccionado)) {
             lineas.sort((lineaA, lineaB) => { // Ordena los tr del array

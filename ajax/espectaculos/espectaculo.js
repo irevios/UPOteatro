@@ -2,7 +2,7 @@
 /// Rellena todos los campos de la base de datos en el formulario de espectaculo
 function rellenaForm() {
 
-    document.querySelector("#formularioEspectaculo button[name='submit']").addEventListener("click", () => validar("#formularioEspectaculo"), false);
+    document.querySelector("#formularioEspectaculos button[name='submit']").addEventListener("click", () => validar("#formularioEspectaculos"), false);
     // Select categorias
     $.ajax({
         method: "GET",
@@ -54,34 +54,13 @@ function editaEspectaculo(id) {
     document.querySelector("#formularios button[name='submit']").addEventListener("click", () => {
         upoTeatro.borrarEspectaculo(id);
         setTimeout(() => {
-            if (!document.querySelector("#formularioEspectaculo").classList.contains("was-validated")) {
+            if (!document.querySelector("#formularioEspectaculos").classList.contains("was-validated")) {
                 document.querySelector(".modal #mensaje").textContent = "Espectáculo editado correctamente.";
                 muestraEnPantalla("listaEspectaculo");
             }
         }, 200);
     });
 }
-
-// function insertarEspectaculo() {
-//     let codigoEspectaculo = getSiguienteCodigo(upoTeatro.espectaculos);
-
-//     let nombre = document.querySelector("#nombreEspectaculo").value;
-//     let productor = document.querySelector("#nombreProductorEspectaculo").value;
-//     let categoria = document.querySelector("#categoriaEspectaculo").value;
-//     let gastos = document.querySelector("#gastosEspectaculo").value;
-//     let compania = upoTeatro.buscaCompania(document.querySelector("#companiaSeleccionada").value);
-//     let obra = upoTeatro.buscaObra(document.querySelector("#obraSeleccionada").value);
-
-//     let oEspectaculo = new Espectaculo(codigoEspectaculo, nombre, productor, categoria, gastos, obra, compania);
-//     setTimeout(() => {
-//         if (upoTeatro.agregaEspectaculo(oEspectaculo)) {
-//             mensajeModal("Espectáculo creado correctamente.");
-//             document.querySelector(apartado).reset();
-//         } else {
-//             mensajeModal("Ya existe ese espectáculo");
-//         }
-//     }, 100);
-// }
 
 function insertarEspectaculo() {
     let nombre = document.querySelector("#nombreEspectaculo").value;
@@ -106,9 +85,13 @@ function completaInsertarEspectaculos(resultado) {
         let nuevoEspectaculo = new Espectaculo(datos["codigo"], datos["nombre"], datos["productor"], datos["categoria"], datos["gastos"], datos["obra"], datos["compania"]);
         upoTeatro.agregaEspectaculo(nuevoEspectaculo);
         mensajeModal("Espectáculo creado correctamente.");
-        document.querySelector("form#formularioEspectaculo").reset();
+        document.querySelector("form#formularioEspectaculos").reset();
     } else {
         mensajeModal("Ya existe ese espectáculo");
     }
 
+}
+
+function eliminarEspectaculos(id){
+     upoTeatro.borrarEspectaculo(id);
 }

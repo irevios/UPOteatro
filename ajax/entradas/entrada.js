@@ -1,7 +1,7 @@
 /// Rellena todos los campos de la base de datos en el formulario de entrada
 //# sourceURL=entrada.js
 function rellenaForm() {
-    document.querySelector("#formularioEntrada button[name='submit']").addEventListener("click", () => validar("#formularioEntrada"), false);
+    document.querySelector("#formularioEntradas button[name='submit']").addEventListener("click", () => validar("#formularioEntradas"), false);
 
     // Select representacion
     // Opción por defecto
@@ -10,7 +10,7 @@ function rellenaForm() {
     opcion.textContent = "Seleccione una representacion...";
     opcion.selected = true;
     opcion.disabled = true;
-    document.querySelector("#formularioEntrada #representacionSeleccionada").append(opcion);
+    document.querySelector("#formularioEntradas #representacionSeleccionada").append(opcion);
 
     // Opciones válidas
     upoTeatro.teatros.forEach(teatro => {
@@ -18,7 +18,7 @@ function rellenaForm() {
             opcion = document.createElement("option");
             opcion.value = representacion.codigo;
             opcion.textContent = teatro.nombre + " | " + fechaToString(representacion.fecha) + " | " + representacion.espectaculo.nombre;
-            document.querySelector("#formularioEntrada #representacionSeleccionada").append(opcion);
+            document.querySelector("#formularioEntradas #representacionSeleccionada").append(opcion);
         });
     });
 
@@ -47,9 +47,9 @@ function actualizaFormularioEntrada() {
 function actualizaButacas() {
     if (representacionSeleccionada.value != "0") {
         actualizaFormularioEntrada();
-        let teatro = upoTeatro.buscaTeatroPorRepresentacion(document.querySelector("#formularioEntrada #representacionSeleccionada").value);
+        let teatro = upoTeatro.buscaTeatroPorRepresentacion(document.querySelector("#formularioEntradas #representacionSeleccionada").value);
         let butacas = teatro.butacas;
-        let representacion = teatro.buscaRepresentacion(document.querySelector("#formularioEntrada #representacionSeleccionada").value);
+        let representacion = teatro.buscaRepresentacion(document.querySelector("#formularioEntradas #representacionSeleccionada").value);
         document.querySelectorAll(".platea > *, .anfiteatro > *, .paraiso > *, .palco").forEach(b => b.textContent = "");
         butacas.forEach(butaca => {
             let icoButaca = document.createElement("i");
@@ -96,8 +96,8 @@ function seleccionaButaca(e) {
 
 function actualizaPrecioEntrada() {
     document.querySelector("#totalEntrada").value = 0;
-    let teatro = upoTeatro.buscaTeatroPorRepresentacion(document.querySelector("#formularioEntrada #representacionSeleccionada").value);
-    let representacion = teatro.buscaRepresentacion(document.querySelector("#formularioEntrada #representacionSeleccionada").value);
+    let teatro = upoTeatro.buscaTeatroPorRepresentacion(document.querySelector("#formularioEntradas #representacionSeleccionada").value);
+    let representacion = teatro.buscaRepresentacion(document.querySelector("#formularioEntradas #representacionSeleccionada").value);
     let coefButaca;
     if (elementoExiste("#butacasRepresentadas .seleccionada")) {
         if (document.querySelector("#tipoEntrada1").checked) {
@@ -146,14 +146,16 @@ function editaEntrada(id) {
     document.querySelector("#formularios button[name='submit']").addEventListener("click", () => {
         representacion.borrarEntrada(id);
         setTimeout(() => {
-            if (!document.querySelector("#formularioEntrada").classList.contains("was-validated")) {
+            if (!document.querySelector("#formularioEntradas").classList.contains("was-validated")) {
                 document.querySelector(".modal #mensaje").textContent = "Entrada editada correctamente.";
                 muestraEnPantalla("listaEntrada");
             }
         }, 200);
     });
 }
-
+function eliminaEntradas(id){
+    upoTeatro.buscaRepresentacionPorEntrada(id).borrarEntrada(id);
+}
 function insertarEntrada() {
     let oEntradaAComprar;
     let representacionSeleccionada = upoTeatro.buscaRepresentacion(document.querySelector("#representacionSeleccionada").value);
@@ -172,8 +174,8 @@ function insertarEntrada() {
     let codigoEntrada = getSiguienteCodigo(upoTeatro.listaEntradas());
     let oButaca;
 
-    let butacasSeleccionadas = formularioEntrada.parentElement.getElementsByClassName("seleccionada");
-    let butacaFragmentacion
+    let butacasSeleccionadas = document.querySelectorAll("#butacasRepresentadas .seleccionada");
+    let butacaFragmentacion;
     if (butacasSeleccionadas.length == 1) {
 
         //INDIVIDUAL

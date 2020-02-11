@@ -169,6 +169,12 @@ function fechasIntervalo(fechaInicio, fechaFin) {
     return fechas;
 }
 
+// Cambia el mínimo de la fecha final
+function compruebaFinFecha(fechaInicio, fechaFin) {
+    fechaFin.value = "";
+    fechaFin.setAttribute("min", fechaInicio.value);
+}
+
 // Convierte un texto a formato titulo
 function toTitleCase(palabra) {
     let palabras = palabra.split(" ");
@@ -195,4 +201,10 @@ function agregaBoton(tipo, fila, codigo) {
     }
     boton.append(icono);
     celda.append(boton);
+}
+
+// Comprueba si un script fue cargado anteriormente
+function scriptCargado(src)
+{
+    return document.querySelector('script[src="' + src + '"]') ? true : false;
 }

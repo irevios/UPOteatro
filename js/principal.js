@@ -22,7 +22,7 @@ function validar(apartado) { // Llamo validar con el apartado que quiero validar
     let error = false;
     let elemento;
 
-    if (apartado == "#formularioEntrada") {
+    if (apartado == "#formularioEntradas") {
 
         let representacion = document.querySelector("#representacionSeleccionada").value;
         if (representacion == "0") {
@@ -65,48 +65,44 @@ function validar(apartado) { // Llamo validar con el apartado que quiero validar
 
 }
 
-function compruebaFinFecha(fechaInicio, fechaFin) {
-    fechaFin.value = "";
-    fechaFin.setAttribute("min", fechaInicio.value);
-}
 
 // Eliminar Entradas
 document.querySelector("#formularios").addEventListener("click", editaElimina);
 
 function editaElimina(e) {
-    if (e.target.tagName == "BUTTON" && e.target.dataset.tipo == "borrar") {
-        switch (e.currentTarget.querySelector(".table-responsive").id) {
-            case "listadoEntradas":
-                upoTeatro.buscaRepresentacionPorEntrada(e.target.dataset.id).borrarEntrada(e.target.dataset.id);
-                break;
-            case "listadoRepresentaciones":
-                let teatro = upoTeatro.buscaTeatroPorRepresentacion(e.target.dataset.id);
-                let todas = teatro.buscaRepresentacionesIntervalo(teatro.buscaRepresentacion(e.target.dataset.id));
-                todas.forEach(rep => {
-                    teatro.borrarRepresentacion(rep.codigo);
-                });
-                break;
-            case "listadoEspectaculos":
-                upoTeatro.borrarEspectaculo(e.target.dataset.id);
-                break;
-        }
-        e.target.parentElement.parentElement.remove();
-    } else if (e.target.tagName == "BUTTON" && e.target.dataset.tipo == "editar") {
-        let apartado = e.currentTarget.querySelector(".table-responsive").id;
-        muestraEnPantalla(apartado.replace("listado", "formulario").replace("das", "da").replace("iones", "ion").replace("ulos", "ulo"));
-        setTimeout(() => {
-            switch (apartado) {
+    if (e.target.tagName == "BUTTON") {
+        if (e.target.dataset.tipo == "borrar") {
+            switch (e.currentTarget.querySelector(".table-responsive").id) {
                 case "listadoEntradas":
-                    editaEntrada(e.target.dataset.id);
+                    eliminaEntradas(e.target.dataset.id);
                     break;
                 case "listadoRepresentaciones":
-                    editaRepresentacion(e.target.dataset.id);
+                eliminaRepresentaciones(e.target.dataset.id);
+                    
                     break;
                 case "listadoEspectaculos":
-                    editaEspectaculo(e.target.dataset.id);
+                eliminaEspectaculos(e.target.dataset.id);
+                   
                     break;
             }
-        }, 100);
+            e.target.parentElement.parentElement.remove();
+        } else if (e.target.dataset.tipo == "editar") {
+            let apartado = e.currentTarget.querySelector(".table-responsive").id;
+            muestraEnPantalla(apartado.replace("listado", "formulario"));
+            setTimeout(() => {
+                switch (apartado) {
+                    case "listadoEntradas":
+                        editaEntrada(e.target.dataset.id);
+                        break;
+                    case "listadoRepresentaciones":
+                        editaRepresentacion(e.target.dataset.id);
+                        break;
+                    case "listadoEspectaculos":
+                        editaEspectaculo(e.target.dataset.id);
+                        break;
+                }
+            }, 100);
+        }
     }
 }
 
@@ -144,7 +140,7 @@ function editaEntrada(id) {
     document.querySelector("#formularios button[name='submit']").addEventListener("click", () => {
         representacion.borrarEntrada(id);
         setTimeout(() => {
-            if (!document.querySelector("#formularioEntrada").classList.contains("was-validated")) {
+            if (!document.querySelector("#formularioEntradas").classList.contains("was-validated")) {
                 document.querySelector(".modal #mensaje").textContent = "Entrada editada correctamente.";
                 muestraEnPantalla("listaEntrada");
             }
@@ -176,7 +172,7 @@ function editaRepresentacion(id) {
             teatro.borrarRepresentacion(rep.codigo);
         });
         setTimeout(() => {
-            if (!document.querySelector("#formularioRepresentacion").classList.contains("was-validated")) {
+            if (!document.querySelector("#formularioRepresentaciones").classList.contains("was-validated")) {
                 document.querySelector(".modal #mensaje").textContent = "Representación editada correctamente.";
                 muestraEnPantalla("listaRepresentacion");
             }
@@ -203,7 +199,7 @@ function editaEspectaculo(id) {
     document.querySelector("#formularios button[name='submit']").addEventListener("click", () => {
         upoTeatro.borrarEspectaculo(id);
         setTimeout(() => {
-            if (!document.querySelector("#formularioEspectaculo").classList.contains("was-validated")) {
+            if (!document.querySelector("#formularioEspectaculos").classList.contains("was-validated")) {
                 document.querySelector(".modal #mensaje").textContent = "Espectáculo editado correctamente.";
                 muestraEnPantalla("listaEspectaculo");
             }
@@ -237,13 +233,13 @@ function nuevasCreaciones(apartado) {
     let ultimoCodigo;
 
     switch (apartado) {
-        case "#formularioEspectaculo":
+        case "#formularioEspectaculos":
             insertarEspectaculo();
             break;
-        case "#formularioRepresentacion":
+        case "#formularioRepresentaciones":
             insertarRepresentacion();
             break;
-        case "#formularioEntrada":
+        case "#formularioEntradas":
             insertarEntrada();
             break;
     }
