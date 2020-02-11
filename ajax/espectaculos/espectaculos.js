@@ -98,7 +98,12 @@ function eliminarEspectaculos(id) {
 
 function completaEliminarEspectaculos(resultado) {
     let datos = JSON.parse(resultado);
-    if (datos["error"] == 0) { // Si devuelve un json
+    if (datos["error"] == 0) {
+        upoTeatro.listaRepresentaciones().forEach(rep => {
+            if (rep.espectaculo.codigo == datos["id"]) {
+                upoTeatro.buscaTeatroPorRepresentacion(rep.codigo).borrarRepresentacion(rep.codigo);
+            }
+        });
         upoTeatro.borrarEspectaculo(datos["id"]);
     }
     mensajeModal(datos["mensaje"]);
