@@ -25,6 +25,12 @@ class UpoTeatro {
             return true;
         } else { return false; }
     }
+    borrarRepresentacion(codigo) {
+        if (this.buscaRepresentacion(codigo) != undefined) {
+            this.representacion = this.representacion.filter(representacion => representacion.codigo != codigo);
+            return true;
+        } else { return false; }
+    }
     agregaCompania(compania) {
         if (this.companias.filter(companiaNuevo => companiaNuevo.cif == compania.cif).length == 0) {
             this.companias.push(compania);
