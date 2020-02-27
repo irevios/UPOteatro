@@ -34,7 +34,7 @@ function rellenaForm(tipo) {
 
 // Actualiza los datos que se muestra de entrada grupal o individual
 function actualizaFormularioEntrada(tipo) {
-    let form = document.querySelector("#" + "formulario" + "Entradas");
+    let form = document.querySelector("#" + tipo + "Entradas");
     // Oculta o muestra el número de personas y quita las butacas seleccionadas
     form.querySelector("#personasGrupal").closest(".col-4").style.display = form.querySelector("#tipoEntrada1").checked ? "block" : "none";
     form.querySelectorAll(".seleccionada").forEach(sel => sel.classList.remove("seleccionada"));
@@ -193,7 +193,7 @@ function insertarEntrada() {
             "cod_butaca": cod_butaca,
             "tipo": tipo
         });
-        $.post("./ajax/entradas/insertaEntradas.php", "datos=" + e_individual, (resultado) => completaInsertarEntrada(resultado, tipo));
+        $.post("./ajax/entradas/insertaEntradas.php", "datos=" + e_individual, (resultado) => completaInsertarEntrada(resultado));
     } else {
         //GRUPAL
         let numPersonas = document.querySelector("#personasGrupal").value;
@@ -213,7 +213,7 @@ function insertarEntrada() {
             "num_personas": butacas.length,
             "cod_butaca": butacas
         });
-        $.post("./ajax/entradas/insertaEntradas.php", "datos=" + e_grupal, (resultado) => completaInsertarEntrada(resultado, tipo));
+        $.post("./ajax/entradas/insertaEntradas.php", "datos=" + e_grupal, (resultado) => completaInsertarEntrada(resultado));
     }
     
 }
@@ -223,7 +223,7 @@ function completaInsertarEntrada(resultado, tipo) {
        mensajeModal("Entrada comprada correctamente.");
        document.querySelector("#representacionSeleccionada").value = "0";
        document.querySelector("#totalEntrada").value = "0";   
-       actualizaFormularioEntrada(tipo);
+       actualizaFormularioEntrada("formulario");
    }
    else
    {
@@ -242,15 +242,3 @@ function completaEliminarEntradas(resultado) {
     let datos = JSON.parse(resultado);
     mensajeModal(datos["mensaje"]);
 }
-
-/*setTimeout(() => {
-        if (representacionSeleccionada.compraEntrada(oEntradaAComprar)) {
-            mensajeModal("Has comprado la entrada correctamente");
-            //RESET
-            document.querySelector("#representacionSeleccionada").value = "0";
-            document.querySelector("#totalEntrada").value = "0";
-            actualizaFormularioEntrada(tipo);
-        } else {
-            mensajeModal("Ha ocurrido un error, inténtelo más tarde.");
-        }
-    }, 100);*/
