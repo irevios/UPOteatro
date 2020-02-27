@@ -160,7 +160,6 @@ function editarForm(id) {
 }
 
 function insertarEntrada() {
-    let oEntradaAComprar;
     let representacionSeleccionada = upoTeatro.buscaRepresentacion(document.querySelector("#representacionSeleccionada").value);
     let teatroSeleccionado = upoTeatro.buscaTeatroPorRepresentacion(document.querySelector("#representacionSeleccionada").value);
 
@@ -186,7 +185,8 @@ function insertarEntrada() {
         oButaca = teatroSeleccionado.buscaButaca(butacaFragmentacion[0], butacaFragmentacion[1], butacaFragmentacion[2]);
         tipo = butacaFragmentacion[0];
 
-        oEntradaAComprar = new EntradaIndividual(codigoEntrada, esAdaptada, [oButaca], representacionSeleccionada.precioBase, tipo);
+        //oEntradaAComprar = new EntradaIndividual(codigoEntrada, esAdaptada, [oButaca], representacionSeleccionada.precioBase, tipo);
+        $.post("insertarEntradas.php", parametros, funcionAlTerminar)
     } else {
         //GRUPAL
         let numPersonas = document.querySelector("#personasGrupal").value;
