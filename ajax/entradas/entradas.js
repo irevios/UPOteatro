@@ -185,8 +185,13 @@ function insertarEntrada() {
         oButaca = teatroSeleccionado.buscaButaca(butacaFragmentacion[0], butacaFragmentacion[1], butacaFragmentacion[2]);
         tipo = butacaFragmentacion[0];
 
-        //oEntradaAComprar = new EntradaIndividual(codigoEntrada, esAdaptada, [oButaca], representacionSeleccionada.precioBase, tipo);
-        $.post("insertarEntradas.php", parametros, funcionAlTerminar)
+        let e_individual = JSON.stringify({
+            "adaptada": esAdaptada,
+            "cod_representacion": representacionSeleccionada,
+            "cod_butaca": butacasSeleccionadas,
+            "tipo": tipo,
+            });
+        $.post("./ajax/entradas/insertaEntradas.php", "datos=" + JSON.stringify(e_individual), (resultado) => completaInsertarEntrada(resultado));
     } else {
         //GRUPAL
         let numPersonas = document.querySelector("#personasGrupal").value;
