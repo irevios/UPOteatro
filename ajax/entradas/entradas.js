@@ -65,17 +65,17 @@ function actualizaButacas(tipo) {
             }
             switch (butaca.zona) {
                 case 'PLATEA':
-                    document.querySelector("#butacasRepresentadas .platea .fila" + butaca.fila).append(icoButaca);
-                    break;
+                document.querySelector("#butacasRepresentadas .platea .fila" + butaca.fila).append(icoButaca);
+                break;
                 case 'ANFITEATRO':
-                    document.querySelector("#butacasRepresentadas .anfiteatro .fila" + butaca.fila).append(icoButaca);
-                    break;
+                document.querySelector("#butacasRepresentadas .anfiteatro .fila" + butaca.fila).append(icoButaca);
+                break;
                 case 'PARAISO':
-                    document.querySelector("#butacasRepresentadas .paraiso .fila" + butaca.fila).append(icoButaca);
-                    break;
+                document.querySelector("#butacasRepresentadas .paraiso .fila" + butaca.fila).append(icoButaca);
+                break;
                 case 'PALCO':
-                    document.querySelector("#butacasRepresentadas .palco").append(icoButaca);
-                    break;
+                document.querySelector("#butacasRepresentadas .palco").append(icoButaca);
+                break;
             }
         });
     }
@@ -186,11 +186,12 @@ function insertarEntrada() {
         tipo = butacaFragmentacion[0];
 
         let e_individual = JSON.stringify({
+            "entrada": "INDIVIDUAL",
             "adaptada": esAdaptada,
             "cod_representacion": representacionSeleccionada,
             "cod_butaca": butacasSeleccionadas,
             "tipo": tipo,
-            });
+        });
         $.post("./ajax/entradas/insertaEntradas.php", "datos=" + JSON.stringify(e_individual), (resultado) => completaInsertarEntrada(resultado));
     } else {
         //GRUPAL
@@ -202,19 +203,28 @@ function insertarEntrada() {
             oButaca = teatroSeleccionado.buscaButaca(butacaFragmentacion[0], butacaFragmentacion[1], butacaFragmentacion[2]);
             butacas.push(oButaca);
         }
-        oEntradaAComprar = new EntradaGrupal(codigoEntrada, esAdaptada, butacas, representacionSeleccionada.precioBase, numPersonas);
+        let e_grupal = JSON.stringify({
+            "entrada": "GRUPAL",
+            "adaptada": esAdaptada,
+            "cod_representacion": representacionSeleccionada,
+            "cod_butaca": oButaca,
+            "num_personas": oButaca.length,
+        });
+        $.post("./ajax/entradas/insertaEntradas.php", "datos=" + JSON.stringify(e_grupal), (resultado) => completaInsertarEntrada(resultado));
     }
-    setTimeout(() => {
-        if (representacionSeleccionada.compraEntrada(oEntradaAComprar)) {
-            mensajeModal("Has comprado la entrada correctamente");
-            //RESET
-            document.querySelector("#representacionSeleccionada").value = "0";
-            document.querySelector("#totalEntrada").value = "0";
-            actualizaFormularioEntrada(tipo);
-        } else {
-            mensajeModal("Ha ocurrido un error, inténtelo más tarde.");
-        }
-    }, 100);
+}
+
+function completaInsertarEntrada(resultado) {
+    if (resultado == 0) {
+       mensajeModal("Entrada comprada correctamente.");
+       document.querySelector("form#formularioEntradas").reset();   
+   }
+   else
+   {
+    mensajeModal("Error en la compra.");
+}
+
+
 }
 
 function borrarEntrada(cod) {
@@ -226,3 +236,15 @@ function completaEliminarEntradas(resultado) {
     let datos = JSON.parse(resultado);
     mensajeModal(datos["mensaje"]);
 }
+
+/*setTimeout(() => {
+        if (representacionSeleccionada.compraEntrada(oEntradaAComprar)) {
+            mensajeModal("Has comprado la entrada correctamente");
+            //RESET
+            document.querySelector("#representacionSeleccionada").value = "0";
+            document.querySelector("#totalEntrada").value = "0";
+            actualizaFormularioEntrada(tipo);
+        } else {
+            mensajeModal("Ha ocurrido un error, inténtelo más tarde.");
+        }
+    }, 100);*/
