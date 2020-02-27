@@ -99,8 +99,8 @@ function cargaInicialRepresentaciones(json) {
         let adaptada = representacion.ADAPTADA == "N" ? false : true;
         let precioBase = representacion.PRECIO_BASE;
         let espectaculo = upoTeatro.buscaEspectaculo(representacion.COD_ESPECTACULO);
-
-        let nuevaRepresentacion = new Representacion(codigo, fecha, adaptada, precioBase, espectaculo);
+        let intervalo = representacion.COD_INTERVALO;
+        let nuevaRepresentacion = new Representacion(codigo, fecha, adaptada, precioBase, espectaculo, intervalo);
         teatro.agregaRepresentacion(nuevaRepresentacion);
     });
 }

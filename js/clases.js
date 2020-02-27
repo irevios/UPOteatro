@@ -93,8 +93,9 @@ class Teatro {
 }
 
 class Representacion {
-    constructor(codigo, fecha, adaptada, precioBase, espectaculo) {
+    constructor(codigo, fecha, adaptada, precioBase, espectaculo,intervalo) {
         this.codigo = codigo;
+        this.intervalo = intervalo;
         this.fecha = fecha;
         this.adaptada = adaptada;
         this.precioBase = precioBase;

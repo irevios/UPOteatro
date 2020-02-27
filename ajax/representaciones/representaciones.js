@@ -95,7 +95,7 @@ function insertaRepresentacion() {
 
         if (correcto) {
             repAIntroducir.forEach(rep => {
-                teatro.agregaRepresentacion(rep);
+                teatro.agregaRepresentacion(rep);   
             })
 
             mensajeModal("Representacion creada correctamente.");
@@ -112,10 +112,18 @@ function insertaRepresentacion() {
     }, 100);
 }
 
-function eliminarRepresentaciones(codigo) {
-    let teatro = upoTeatro.buscaTeatroPorRepresentacion(codigo);
-    let todas = teatro.buscaRepresentacionesIntervalo(teatro.buscaRepresentacion(codigo));
-    todas.forEach(rep => {
-        teatro.borrarRepresentacion(rep.codigo);
-    });
+function eliminarRepresentaciones(id) {
+    $.post("./ajax/representaciones/borrarRepresentaciones.php", "cod_intervalo="+ upoTeatro.buscaRepresentacion(id).intervalo, completaEliminarRepresentaciones);
+}
+
+function completaEliminarRepresentaciones(resultado) {
+    let datos = JSON.parse(resultado);
+    if (datos["error"] == 0) {
+        upoTeatro.listaRepresentaciones().forEach(rep => {
+            if (rep.intervalo == datos["cod_intervalo"]) {
+                upoTeatro.buscaTeatroPorRepresentacion(rep.codigo).borrarRepresentacion(rep.codigo);
+            }
+        });
+    }
+    mensajeModal(datos["mensaje"]);
 }
