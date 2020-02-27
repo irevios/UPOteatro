@@ -128,9 +128,9 @@ function nuevasCreaciones(apartado) {
     }
 }
 
-function getSiguienteCodigo(lista) {
+function getSiguienteCodigo(lista,campo) {
     let ordenada = [];
-    lista.forEach(elem => ordenada.push(elem.codigo));
+    lista.forEach(elem => ordenada.push(elem[campo]));
     ordenada.sort((a, b) => {
         return parseInt(a) - parseInt(b);
     });

@@ -52,68 +52,71 @@ function editarForm(id) {
     });
 }
 
-function insertaRepresentacion() {
-
-    let oRepresentacion;
-    let adaptada;
-    if (document.querySelector("#representacionAdaptada").checked)
-        adaptada = true;
-    else
-        adaptada = false;
-
-    let precioBase = document.querySelector("#precioBaseRepresentacion").value;
-
-    let oEsp;
-    let codEspectaculo = document.querySelector("#espectaculoSeleccionado").value;
-    for (let i = 0; i < upoTeatro.espectaculos.length; i++) {
-        if (upoTeatro.espectaculos[i].codigo == codEspectaculo)
-            oEsp = upoTeatro.espectaculos[i];
-    }
-
-    let correcto = true;
-
+function insertarRepresentacion() {
+    // Datos
+    let codigo = getSiguienteCodigo(upoTeatro.listaRepresentaciones(), "codigo");
     let fechaInicio = fechaToDate(document.querySelector("#fechaInicioRepresentacion").value);
     let fechaFin = fechaToDate(document.querySelector("#fechaFinalRepresentacion").value);
     let fechas = fechasIntervalo(fechaInicio, fechaFin);
+    let adaptada = document.querySelector("#representacionAdaptada").checked;
     let teatro = upoTeatro.buscaTeatro(document.querySelector("#teatroSeleccionado").value);
+    let espectaculo = document.querySelector("#espectaculoSeleccionado").value;
+    let precioBase = document.querySelector("#precioBaseRepresentacion").value;
+    let intervalo = getSiguienteCodigo(upoTeatro.listaRepresentaciones(), "intervalo");
+    // Control de solapamientos de fechas
+    let representaciones = [];
     let repAIntroducir = [];
+    let correcto = true;
     let incorrectos = document.createElement("div");
-    setTimeout(() => {
-        fechas.forEach(fecha => {
-            let codigoRepresentacion = getSiguienteCodigo(upoTeatro.listaRepresentaciones());
-            oRepresentacion = new Representacion(codigoRepresentacion, fecha, adaptada, precioBase, oEsp);
-            if (!teatro.esPosibleAgregarRepresentacion(oRepresentacion)) {
-                correcto = false;
-                let p = document.createElement("p");
-                p.textContent = fechaToString(fecha);
-                incorrectos.append(p);
-            } else {
-                repAIntroducir.push(oRepresentacion);
-            }
-
-        });
-
-        if (correcto) {
-            repAIntroducir.forEach(rep => {
-                teatro.agregaRepresentacion(rep);   
-            })
-
-            mensajeModal("Representacion creada correctamente.");
-            document.querySelector(apartado).reset();
-        } else {
+    fechas.forEach((f, i) => {
+        nuevaRepresentacion = new Representacion(codigo + i, f, adaptada, precioBase, upoTeatro.buscaEspectaculo(espectaculo), intervalo);
+        if (!teatro.esPosibleAgregarRepresentacion(nuevaRepresentacion)) {
+            correcto = false;
             let p = document.createElement("p");
-            p.textContent = "Las siguientes fechas ya están ocupadas";
-
-            muestraModal();
-            document.querySelector(".modal #mensaje").textContent = "";
-            incorrectos.insertBefore(p, incorrectos.firstChild);
-            document.querySelector(".modal #mensaje").append(incorrectos);
+            p.textContent = fechaToString(f);
+            incorrectos.append(p);
+        } else {
+            repAIntroducir.push(nuevaRepresentacion);
+            representaciones.push(JSON.stringify({
+                "codigo": codigo + i,
+                "teatro": teatro.codigo,
+                "fecha": fechaToAmericana(f),
+                "adaptada": adaptada ? "S" : "N",
+                "precioBase": precioBase,
+                "espectaculo": espectaculo,
+                "intervalo": intervalo
+            }));
         }
-    }, 100);
+    });
+
+    if (correcto) {
+        $.post("./ajax/representaciones/insertaRepresentaciones.php", "datos=" + JSON.stringify(representaciones), (resultado) => completaInsertarRepresentaciones(resultado, teatro, repAIntroducir));
+
+    } else {
+        let p = document.createElement("p");
+        p.textContent = "Las siguientes fechas ya están ocupadas";
+        document.querySelector(".modal #mensaje").textContent = "";
+        incorrectos.insertBefore(p, incorrectos.firstChild);
+        document.querySelector(".modal #mensaje").append(incorrectos);
+        document.querySelector(".modal #mensaje").classList.add("show");
+        muestraModal();
+    }
+}
+
+function completaInsertarRepresentaciones(resultado, teatro, array) {
+    if (resultado == 0) {
+        array.forEach(rep => {
+            teatro.agregaRepresentacion(rep);
+        })
+
+        mensajeModal("Representacion creada correctamente.");
+        document.querySelector("form#formularioRepresentaciones").reset();
+    }
+
 }
 
 function eliminarRepresentaciones(id) {
-    $.post("./ajax/representaciones/borrarRepresentaciones.php", "cod_intervalo="+ upoTeatro.buscaRepresentacion(id).intervalo, completaEliminarRepresentaciones);
+    $.post("./ajax/representaciones/borrarRepresentaciones.php", "cod_intervalo=" + upoTeatro.buscaRepresentacion(id).intervalo, completaEliminarRepresentaciones);
 }
 
 function completaEliminarRepresentaciones(resultado) {

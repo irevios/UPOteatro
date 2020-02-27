@@ -1,7 +1,6 @@
 //# sourceURL=espectaculo.js
 /// Rellena todos los campos de la base de datos en el formulario de espectaculo
 function rellenaForm() {
-
     document.querySelector("#formularioEspectaculos button[name='submit']").addEventListener("click", () => validar("#formularioEspectaculos"), false);
     // Select categorias
     $.ajax({
@@ -107,4 +106,4 @@ function completaEliminarEspectaculos(resultado) {
         upoTeatro.borrarEspectaculo(datos["id"]);
     }
     mensajeModal(datos["mensaje"]);
-}
+}   
