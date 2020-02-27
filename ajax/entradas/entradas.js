@@ -199,13 +199,13 @@ function insertarEntrada() {
         //GRUPAL
         let numPersonas = document.querySelector("#personasGrupal").value;
 
-        let butacas = []
+        let butacas = [];
         for (let i = 0; i < butacasSeleccionadas.length; i++) {
             butacaFragmentacion = butacasSeleccionadas[i].dataset.butaca.split("-");
             oButaca = teatroSeleccionado.buscaButaca(butacaFragmentacion[0], butacaFragmentacion[1], butacaFragmentacion[2]);
             butacas.push(oButaca.codigo);
         }
-        console.log(butacas.length);
+        console.log(butacas);
         let e_grupal = JSON.stringify({
             "entrada": "GRUPAL",
             "adaptada": esAdaptada,
@@ -214,7 +214,7 @@ function insertarEntrada() {
             "cod_butaca": butacas
         });
         console.log(e_grupal);
-        $.post("./ajax/entradas/insertaEntradas.php", "datos=" + JSON.stringify(e_grupal), (resultado) => completaInsertarEntrada(resultado));
+        $.post("./ajax/entradas/insertaEntradas.php", "datos=" + e_grupal, (resultado) => completaInsertarEntrada(resultado));
     }
 }
 
