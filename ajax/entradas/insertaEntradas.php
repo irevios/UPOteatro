@@ -4,18 +4,19 @@ $conexion = mysqli_connect("localhost", "root", "", "upoteatro") or die(mysqli_e
 mysqli_set_charset($conexion, "utf8");
 
 // Recogemos los datos en la sentencia sql
-extract($_POST);
-$sql = "INSERT INTO entrada VALUES (null,'$adaptada','$cod_representacion')";
+
+$datos = json_decode($_POST["datos"]);
+$sql = "INSERT INTO entrada VALUES (null,'$datos->adaptada','$datos->cod_representacion')";
 $resultado = mysqli_query($conexion, $sql) or die(mysqli_error($conexion));
 // Enviamos los datos si es correcto.
 if ($resultado) {
 
-	if($entrada == "INDIVIDUAL")
+	if($datos->entrada == "INDIVIDUAL")
 	{	
 		//$sql = "SELECT @@IDENTITY";
-		$cod_entrada = mysql_insert_id(); //mysqli_query($conexion, $sql) or die(mysqli_error($conexion));
+		$datos->cod_entrada = $conexion->insert_id; //mysqli_query($conexion, $sql) or die(mysqli_error($conexion));
 		//if($cod_entrada)
-		$sql = "INSERT INTO e_individual VALUES ('$cod_entrada','$cod_butaca','$tipo')";
+		$sql = "INSERT INTO e_individual VALUES ('$datos->cod_entrada','$datos->cod_butaca','$datos->tipo')";
 		$resultado = mysqli_query($conexion, $sql) or die(mysqli_error($conexion));
 		if ($resultado) {
 			echo 0;
@@ -30,7 +31,7 @@ if ($resultado) {
 		if($cod_entrada)
 		{
 			foreach ($cod_butaca as $key) {
-				$sql = "INSERT INTO e_grupal VALUES ('$cod_entrada','$cod_butaca.codigo','$num_personas')";
+				$sql = "INSERT INTO e_grupal VALUES ('$datos->cod_entrada','$datos->cod_butaca.codigo','$datos->num_personas')";
 				$resultado = mysqli_query($conexion, $sql) or die(mysqli_error($conexion));
 				if (!$resultado) {
 					echo 1;

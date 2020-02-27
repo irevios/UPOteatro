@@ -194,7 +194,7 @@ function insertarEntrada() {
             "tipo": tipo
         });
         console.log(e_individual);
-        $.post("./ajax/entradas/insertaEntradas.php", "datos=" + JSON.stringify(e_individual), (resultado) => completaInsertarEntrada(resultado));
+        $.post("./ajax/entradas/insertaEntradas.php", "datos=" + e_individual, (resultado) => completaInsertarEntrada(resultado));
     } else {
         //GRUPAL
         let numPersonas = document.querySelector("#personasGrupal").value;
