@@ -205,11 +205,12 @@ function insertarEntrada() {
             oButaca = teatroSeleccionado.buscaButaca(butacaFragmentacion[0], butacaFragmentacion[1], butacaFragmentacion[2]);
             butacas.push(oButaca.codigo);
         }
+        console.log(butacas.length);
         let e_grupal = JSON.stringify({
             "entrada": "GRUPAL",
             "adaptada": esAdaptada,
             "cod_representacion": cod_repre,
-            "num_personas": oButaca.length,
+            "num_personas": butacas.length,
             "cod_butaca": butacas
         });
         console.log(e_grupal);

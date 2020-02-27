@@ -10,12 +10,9 @@ $sql = "INSERT INTO entrada VALUES (null,'$datos->adaptada','$datos->cod_represe
 $resultado = mysqli_query($conexion, $sql) or die(mysqli_error($conexion));
 // Enviamos los datos si es correcto.
 if ($resultado) {
-
 	if($datos->entrada == "INDIVIDUAL")
 	{	
-		//$sql = "SELECT @@IDENTITY";
-		$datos->cod_entrada = $conexion->insert_id; //mysqli_query($conexion, $sql) or die(mysqli_error($conexion));
-		//if($cod_entrada)
+		$datos->cod_entrada = $conexion->insert_id;
 		$sql = "INSERT INTO e_individual VALUES ('$datos->cod_entrada','$datos->cod_butaca','$datos->tipo')";
 		$resultado = mysqli_query($conexion, $sql) or die(mysqli_error($conexion));
 		if ($resultado) {
@@ -26,18 +23,14 @@ if ($resultado) {
 	}
 	else
 	{
-		$sql = "SELECT @@IDENTITY as identity";
-		$cod_entrada = mysqli_query($conexion, $sql) or die(mysqli_error($conexion));
-		if($cod_entrada)
-		{
-			foreach ($cod_butaca as $key) {
-				$sql = "INSERT INTO e_grupal VALUES ('$datos->cod_entrada','$datos->cod_butaca.codigo','$datos->num_personas')";
+		$datos->cod_entrada = $conexion->insert_id;
+			foreach ($datos->$cod_butaca as $key) {
+				$sql = "INSERT INTO e_grupal VALUES ('$datos->cod_entrada','$key','$datos->num_personas')";
 				$resultado = mysqli_query($conexion, $sql) or die(mysqli_error($conexion));
 				if (!$resultado) {
 					echo 1;
 				}
 			}
-		}
 	}
 }
 
