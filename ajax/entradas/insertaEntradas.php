@@ -1,5 +1,4 @@
 <?php
-echo 'console.log("Entra en php")';
 // Creamos la conexión al servidor.
 $conexion = mysqli_connect("localhost", "root", "", "upoteatro") or die(mysqli_error($conexion));
 mysqli_set_charset($conexion, "utf8");
@@ -9,7 +8,6 @@ extract($_POST);
 $sql = "INSERT INTO entrada VALUES (null,'$adaptada','$cod_representacion')";
 $resultado = mysqli_query($conexion, $sql) or die(mysqli_error($conexion));
 // Enviamos los datos si es correcto.
-echo 'console.log('. $sql .')';
 if ($resultado) {
 
 	if($entrada == "INDIVIDUAL")
