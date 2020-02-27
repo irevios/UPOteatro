@@ -134,11 +134,11 @@ function cargaListadoFiltro(elem) {
                 $.getScript(script);
                 scriptsCargados += script;
             }
+        }
             agregaFiltros(elem.replace("listado", "filtros"));
             $("#" + elem).append(agregaListado(elem));
             document.querySelector("#" + elem + " table").addEventListener("click", editaElimina);
             document.querySelectorAll(".ordenable").forEach(header => header.addEventListener("click", ordenaTabla));
-        }
     });
     $("#formularios").append(nuevo);
 

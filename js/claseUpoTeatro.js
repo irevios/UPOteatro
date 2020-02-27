@@ -67,7 +67,7 @@ class UpoTeatro {
         return representacionConEntrada;
     }
     buscaRepresentacion(codigo) {
-        return this.buscaTeatroPorRepresentacion(codigo).representaciones.filter(rep => rep.codigo == codigo)[0];
+        return this.listaRepresentaciones().filter(rep => rep.codigo == codigo)[0];
     }
     buscaEspectaculo(codigo) {
         return this.espectaculos.filter(espectaculo => espectaculo.codigo == codigo)[0];
