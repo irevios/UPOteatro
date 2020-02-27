@@ -15,7 +15,7 @@ if ($resultado) {
 		//$sql = "SELECT @@IDENTITY";
 		$cod_entrada = mysql_insert_id(); //mysqli_query($conexion, $sql) or die(mysqli_error($conexion));
 		//if($cod_entrada)
-			$sql = "INSERT INTO e_individual VALUES ('$cod_entrada','$cod_butaca','$tipo')";
+		$sql = "INSERT INTO e_individual VALUES ('$cod_entrada','$cod_butaca','$tipo')";
 		$resultado = mysqli_query($conexion, $sql) or die(mysqli_error($conexion));
 		if ($resultado) {
 			echo 0;
