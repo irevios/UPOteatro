@@ -11,7 +11,7 @@ function compruebaSesion() {
 }
 
 function esAdmin() {
-    if (getCookie("Admin")) { return true; } else { return false; }
+    if (/*getCookie("Admin")*/localStorage["Admin"]) { return true; } else { return false; }
 }
 
 function agregaNav(nav) {
@@ -40,7 +40,8 @@ function compruebaUsuario() {
 
 function iniciaSesion(usuario) {
     if (usuario == "Administrador") { // Si el usuario es administrador
-        setCookie("Admin", "true", "1");
+        localStorage["Admin"] = true;
+        //setCookie("Admin", "true", "1");
         location.reload();
     } else if (usuario == "Usuario") { // Si el usuario no tiene permisos
         document.querySelector("form#modalMensaje").reset();
@@ -71,6 +72,7 @@ function iniciaSesion(usuario) {
 
 // Click en Cerrar Sesion
 function cierraSesion() {
-    borraCookie("Admin");
+    localStorage["Admin"] = false;
+    //borraCookie("Admin");
     location.reload();
 }
