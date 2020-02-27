@@ -13,10 +13,10 @@ $resultado = mysqli_query($conexion, $sql) or die(mysqli_error($conexion));
 if ($resultado) {
     $respuesta["error"]   = 0;
     $respuesta["id"]   = $id;
-    $respuesta["mensaje"] = "Espectáculo eliminado";
+    $respuesta["mensaje"] = "Entrada eliminada";
 } else {
     $respuesta["error"]   = 1;
-    $respuesta["mensaje"] = "Error en el proceso de alta: " . mysqli_error($conexion);
+    $respuesta["mensaje"] = "Error en el proceso: " . mysqli_error($conexion);
 }
 echo json_encode($respuesta);
 mysqli_close($conexion);

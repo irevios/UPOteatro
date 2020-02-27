@@ -214,7 +214,7 @@ function insertarEntrada() {
 
 function borrarEntrada(cod) {
     //upoTeatro.buscaRepresentacionPorEntrada(cod).borrarEntrada(cod);
-    $.post("./ajax/espectaculos/borrarEntradas.php", { "id": cod }, completaEliminarEntradas);
+    $.post("./ajax/entradas/borrarEntradas.php", { "id": cod }, completaEliminarEntradas);
 }
 
 function completaEliminarEntradas(resultado) {
