@@ -34,7 +34,7 @@ function rellenaForm(tipo) {
 
 // Actualiza los datos que se muestra de entrada grupal o individual
 function actualizaFormularioEntrada(tipo) {
-    let form = document.querySelector("#" + tipo + "Entradas");
+    let form = document.querySelector("#" + "formulario" + "Entradas");
     // Oculta o muestra el número de personas y quita las butacas seleccionadas
     form.querySelector("#personasGrupal").closest(".col-4").style.display = form.querySelector("#tipoEntrada1").checked ? "block" : "none";
     form.querySelectorAll(".seleccionada").forEach(sel => sel.classList.remove("seleccionada"));
@@ -185,7 +185,7 @@ function insertarEntrada() {
         oButaca = teatroSeleccionado.buscaButaca(butacaFragmentacion[0], butacaFragmentacion[1], butacaFragmentacion[2]);
         let cod_butaca = oButaca.codigo;
         tipo = butacaFragmentacion[0];
-
+        oEntradaAComprar = new EntradaIndividual(codigoEntrada, esAdaptada, [oButaca], representacionSeleccionada.precioBase, tipo);
         let e_individual = JSON.stringify({
             "entrada": "INDIVIDUAL",
             "adaptada": esAdaptada,
@@ -193,8 +193,7 @@ function insertarEntrada() {
             "cod_butaca": cod_butaca,
             "tipo": tipo
         });
-        console.log(e_individual);
-        $.post("./ajax/entradas/insertaEntradas.php", "datos=" + e_individual, (resultado) => completaInsertarEntrada(resultado));
+        $.post("./ajax/entradas/insertaEntradas.php", "datos=" + e_individual, (resultado) => completaInsertarEntrada(resultado, tipo));
     } else {
         //GRUPAL
         let numPersonas = document.querySelector("#personasGrupal").value;
@@ -203,6 +202,7 @@ function insertarEntrada() {
         for (let i = 0; i < butacasSeleccionadas.length; i++) {
             butacaFragmentacion = butacasSeleccionadas[i].dataset.butaca.split("-");
             oButaca = teatroSeleccionado.buscaButaca(butacaFragmentacion[0], butacaFragmentacion[1], butacaFragmentacion[2]);
+            oEntradaAComprar = new EntradaGrupal(codigoEntrada, esAdaptada, butacas, representacionSeleccionada.precioBase, numPersonas);
             butacas.push(oButaca.codigo);
         }
         console.log(butacas);
@@ -213,15 +213,17 @@ function insertarEntrada() {
             "num_personas": butacas.length,
             "cod_butaca": butacas
         });
-        console.log(e_grupal);
-        $.post("./ajax/entradas/insertaEntradas.php", "datos=" + e_grupal, (resultado) => completaInsertarEntrada(resultado));
+        $.post("./ajax/entradas/insertaEntradas.php", "datos=" + e_grupal, (resultado) => completaInsertarEntrada(resultado, tipo));
     }
+    
 }
 
-function completaInsertarEntrada(resultado) {
+function completaInsertarEntrada(resultado, tipo) {
     if (resultado == 0) {
        mensajeModal("Entrada comprada correctamente.");
-       document.querySelector("form#formularioEntradas").reset();   
+       document.querySelector("#representacionSeleccionada").value = "0";
+       document.querySelector("#totalEntrada").value = "0";   
+       actualizaFormularioEntrada(tipo);
    }
    else
    {
