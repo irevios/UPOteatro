@@ -161,8 +161,8 @@ function editarForm(id) {
 
 function insertarEntrada() {
     let representacionSeleccionada = upoTeatro.buscaRepresentacion(document.querySelector("#representacionSeleccionada").value);
+    let cod_repre = representacionSeleccionada.codigo;
     let teatroSeleccionado = upoTeatro.buscaTeatroPorRepresentacion(document.querySelector("#representacionSeleccionada").value);
-
     let esAdaptada;
     if (document.querySelector("#entradaAdaptada_0").checked) {
         esAdaptada = "S";
@@ -183,15 +183,17 @@ function insertarEntrada() {
         //INDIVIDUAL
         butacaFragmentacion = butacasSeleccionadas[0].dataset.butaca.split("-");
         oButaca = teatroSeleccionado.buscaButaca(butacaFragmentacion[0], butacaFragmentacion[1], butacaFragmentacion[2]);
+        let cod_butaca = oButaca.codigo;
         tipo = butacaFragmentacion[0];
 
         let e_individual = JSON.stringify({
             "entrada": "INDIVIDUAL",
             "adaptada": esAdaptada,
-            "cod_representacion": representacionSeleccionada,
-            "cod_butaca": butacasSeleccionadas,
-            "tipo": tipo,
+            "cod_representacion": cod_repre,
+            "cod_butaca": cod_butaca,
+            "tipo": tipo
         });
+        console.log(e_individual);
         $.post("./ajax/entradas/insertaEntradas.php", "datos=" + JSON.stringify(e_individual), (resultado) => completaInsertarEntrada(resultado));
     } else {
         //GRUPAL
@@ -201,15 +203,16 @@ function insertarEntrada() {
         for (let i = 0; i < butacasSeleccionadas.length; i++) {
             butacaFragmentacion = butacasSeleccionadas[i].dataset.butaca.split("-");
             oButaca = teatroSeleccionado.buscaButaca(butacaFragmentacion[0], butacaFragmentacion[1], butacaFragmentacion[2]);
-            butacas.push(oButaca);
+            butacas.push(oButaca.codigo);
         }
         let e_grupal = JSON.stringify({
             "entrada": "GRUPAL",
             "adaptada": esAdaptada,
-            "cod_representacion": representacionSeleccionada,
-            "cod_butaca": oButaca,
+            "cod_representacion": cod_repre,
             "num_personas": oButaca.length,
+            "cod_butaca": butacas
         });
+        console.log(e_grupal);
         $.post("./ajax/entradas/insertaEntradas.php", "datos=" + JSON.stringify(e_grupal), (resultado) => completaInsertarEntrada(resultado));
     }
 }
