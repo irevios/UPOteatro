@@ -165,9 +165,9 @@ function insertarEntrada() {
 
     let esAdaptada;
     if (document.querySelector("#entradaAdaptada_0").checked) {
-        esAdaptada = true;
+        esAdaptada = "S";
     } else {
-        esAdaptada = false;
+        esAdaptada = "N";
     }
 
     let totalEntrada = document.querySelector("#totalEntrada").value;
