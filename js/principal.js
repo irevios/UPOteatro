@@ -73,7 +73,7 @@ function editaElimina(e) {
         if (e.target.dataset.tipo == "borrar") {
             switch (apartado) {
                 case "listadoEntradas":
-                    eliminarEntradas(e.target.dataset.cod);
+                    borrarEntrada(e.target.dataset.cod);
                     break;
                 case "listadoRepresentaciones":
                     eliminarRepresentaciones(e.target.dataset.cod);

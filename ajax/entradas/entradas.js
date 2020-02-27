@@ -159,10 +159,6 @@ function editarForm(id) {
     });
 }
 
-function eliminarEntradas(cod) {
-    upoTeatro.buscaRepresentacionPorEntrada(cod).borrarEntrada(cod);
-}
-
 function insertarEntrada() {
     let oEntradaAComprar;
     let representacionSeleccionada = upoTeatro.buscaRepresentacion(document.querySelector("#representacionSeleccionada").value);
@@ -214,4 +210,14 @@ function insertarEntrada() {
             mensajeModal("Ha ocurrido un error, inténtelo más tarde.");
         }
     }, 100);
+}
+
+function borrarEntrada(cod) {
+    //upoTeatro.buscaRepresentacionPorEntrada(cod).borrarEntrada(cod);
+    $.post("./ajax/espectaculos/borrarEntradas.php", { "id": cod }, completaEliminarEntradas);
+}
+
+function completaEliminarEntradas(resultado) {
+    let datos = JSON.parse(resultado);
+    mensajeModal(datos["mensaje"]);
 }
