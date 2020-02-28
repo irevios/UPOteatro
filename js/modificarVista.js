@@ -57,7 +57,7 @@ function muestraEnPantalla(elem) {
     if (elementoExiste("#formularios > *")) {
         document.querySelectorAll("#formularios > *").forEach(elem => elem.classList.add("oculta"));
     }
-    elem.includes("formulario") ? agregaFormulario(elem) : elem.includes("listado") ? cargaListadoFiltro(elem) : agregaEditar(elem);
+    elem.includes("formulario") ? agregaFormulario(elem) : cargaListadoFiltro(elem);
 
     // Cierra menú después de elegir
     if (getComputedStyle(document.querySelector(".navbar-toggler")).display != "none") {
@@ -79,24 +79,6 @@ function agregaFormulario(elem) {
         case "formularioEspectaculos":
             cambiaCabecera("Espectáculos", "Añade espectáculos");
             cargaFormulario(elem, "espectaculos", "formulario");
-            break;
-    }
-    document.querySelector("#formularios").classList = "col-8";
-}
-
-function agregaEditar(elem) {
-    switch (elem) {
-        case "editarEntradas":
-            cambiaCabecera("Entradas", "Editar entrada");
-            cargaFormulario(elem, "entradas", "editar");
-            break;
-        case "editarRepresentaciones":
-            cambiaCabecera("Representaciones", "Editar representación");
-            cargaFormulario(elem, "representaciones", "editar");
-            break;
-        case "editarEspectaculos":
-            cambiaCabecera("Espectáculos", "Editar espectáculos");
-            cargaFormulario(elem, "espectaculos", "editar");
             break;
     }
     document.querySelector("#formularios").classList = "col-8";

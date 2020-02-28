@@ -141,7 +141,6 @@ class Representacion {
         celda = fila.insertCell(-1);
         celda.textContent = this.espectaculo.nombre;
         if (esAdmin()) {
-            agregaBoton("editar", fila, this.codigo);
             agregaBoton("borrar", fila, this.codigo);
         }
         return fila;
@@ -173,7 +172,6 @@ class Espectaculo {
         celda = fila.insertCell(-1);
         celda.textContent = upoTeatro.buscaCompania(this.compania).nombre;
         if (esAdmin()) {
-            agregaBoton("editar", fila, this.codigo);
             agregaBoton("borrar", fila, this.codigo);
         }
         return fila;
@@ -219,7 +217,6 @@ class EntradaIndividual extends Entrada {
         celda = fila.insertCell(-1);
         celda.textContent = toTitleCase(this.tipo);
         if (esAdmin()) {
-            agregaBoton("editar", fila, this.codigo);
             agregaBoton("borrar", fila, this.codigo);
         }
         return fila;
@@ -252,7 +249,6 @@ class EntradaGrupal extends Entrada {
         celda = fila.insertCell(-1);
         celda.textContent = this.butacas.length + " personas";
         if (esAdmin()) {
-            agregaBoton("editar", fila, this.codigo);
             agregaBoton("borrar", fila, this.codigo);
         }
         return fila;

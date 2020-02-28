@@ -155,10 +155,10 @@ function creaTabla(headers) {
     let header = tabla.createTHead();
     let encabezados = header.insertRow(-1);
     headers.forEach(encabezado => {
-        if ((encabezado == "Editar" || encabezado == "Borrar") && esAdmin() ||
-            !(encabezado == "Editar" || encabezado == "Borrar")) {
+        if (encabezado == "Borrar" && esAdmin() ||
+            encabezado != "Borrar") {
             let celda = document.createElement("th");
-            if (!["Editar", "Borrar", "Tipo de entrada / Nº Personas", "Butacas", "Representaciones", "Producciones"].includes(encabezado)) {
+            if (!["Borrar", "Tipo de entrada / Nº Personas", "Butacas", "Representaciones", "Producciones"].includes(encabezado)) {
                 celda.classList = 'ordenable';
                 celda.dataset.ascendente = 'true';
                 let head = document.createElement("div");
@@ -186,7 +186,7 @@ function creaTabla(headers) {
     return div;
 }
 
-// Añade un botón borrar o editar
+// Añade un botón borra
 function agregaBoton(tipo, fila, codigo) {
     let celda = fila.insertCell(-1);
     let boton = document.createElement("button");
@@ -197,8 +197,6 @@ function agregaBoton(tipo, fila, codigo) {
     let icono = document.createElement("i");
     if (tipo == "borrar") {
         icono.classList = "fa fa-times";
-    } else {
-        icono.classList = "fa fa-pencil";
     }
     boton.append(icono);
     celda.append(boton);

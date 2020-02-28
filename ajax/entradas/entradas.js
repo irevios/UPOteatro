@@ -65,17 +65,17 @@ function actualizaButacas(tipo) {
             }
             switch (butaca.zona) {
                 case 'PLATEA':
-                document.querySelector("#butacasRepresentadas .platea .fila" + butaca.fila).append(icoButaca);
-                break;
+                    document.querySelector("#butacasRepresentadas .platea .fila" + butaca.fila).append(icoButaca);
+                    break;
                 case 'ANFITEATRO':
-                document.querySelector("#butacasRepresentadas .anfiteatro .fila" + butaca.fila).append(icoButaca);
-                break;
+                    document.querySelector("#butacasRepresentadas .anfiteatro .fila" + butaca.fila).append(icoButaca);
+                    break;
                 case 'PARAISO':
-                document.querySelector("#butacasRepresentadas .paraiso .fila" + butaca.fila).append(icoButaca);
-                break;
+                    document.querySelector("#butacasRepresentadas .paraiso .fila" + butaca.fila).append(icoButaca);
+                    break;
                 case 'PALCO':
-                document.querySelector("#butacasRepresentadas .palco").append(icoButaca);
-                break;
+                    document.querySelector("#butacasRepresentadas .palco").append(icoButaca);
+                    break;
             }
         });
     }
@@ -116,47 +116,6 @@ function actualizaPrecioEntrada(tipo) {
         }
         form.querySelector("#totalEntrada").value = (parseFloat(representacion.precioBase) * parseFloat(coefButaca)).toFixed(2);
     }
-}
-
-function editarForm(id) {
-    let representacion = upoTeatro.buscaRepresentacionPorEntrada(id);
-    let entrada = representacion.buscaEntrada(id);
-    let entradaTipo = entrada instanceof EntradaIndividual ? "individual" : "grupal";
-    let butacas = entrada.butacas;
-    let adaptada = entrada.adaptada;
-    let precio = entrada.precio;
-    let tipo;
-    let personas;
-    document.querySelector("#editarEntradas #representacionSeleccionada").value = representacion.codigo;
-    actualizaButacas("editar");
-    document.querySelectorAll("#editarEntradas #butacasRepresentadas i").forEach(silla => {
-        butacas.forEach(butaca => {
-            if (silla.dataset.butaca == butaca.idButaca()) {
-                silla.classList.add("seleccionada");
-                silla.classList.remove("ocupada");
-            }
-        });
-    });
-    if (entradaTipo == "individual") {
-        let tipo = entrada.tipo;
-        document.querySelector("#editarEntradas #tipoEntrada0").setAttribute("checked", "checked");
-    } else {
-        let personas = entrada.numPersonas;
-        document.querySelector("#editarEntradas #tipoEntrada1").setAttribute("checked", "checked");
-    }
-    document.querySelector("#editarEntradas #personasGrupal").closest(".col-4").style.display = document.querySelector("#editarEntradas #tipoEntrada1").checked ? "block" : "none";
-    document.querySelector("#editarEntradas #entradaAdaptada_0").checked = adaptada;
-    actualizaPrecioEntrada("editar");
-    document.querySelector("#editarEntradas button[name='submit']").textContent = "Editar";
-    document.querySelector("#editarEntradas button[name='submit']").addEventListener("click", () => {
-        representacion.borrarEntrada(id);
-        setTimeout(() => {
-            if (!document.querySelector("#editarEntradas").classList.contains("was-validated")) {
-                document.querySelector(".modal #mensaje").textContent = "Entrada editada correctamente.";
-                muestraEnPantalla("listaEntrada");
-            }
-        }, 200);
-    });
 }
 
 function insertarEntrada() {
@@ -205,7 +164,6 @@ function insertarEntrada() {
             oEntradaAComprar = new EntradaGrupal(codigoEntrada, esAdaptada, butacas, representacionSeleccionada.precioBase, numPersonas);
             butacas.push(oButaca.codigo);
         }
-        console.log(butacas);
         let e_grupal = JSON.stringify({
             "entrada": "GRUPAL",
             "adaptada": esAdaptada,
@@ -215,27 +173,24 @@ function insertarEntrada() {
         });
         $.post("./ajax/entradas/insertaEntradas.php", "datos=" + e_grupal, (resultado) => completaInsertarEntrada(resultado));
     }
-    
+
 }
 
 function completaInsertarEntrada(resultado, tipo) {
     if (resultado == 0) {
-       mensajeModal("Entrada comprada correctamente.");
-       document.querySelector("#representacionSeleccionada").value = "0";
-       document.querySelector("#totalEntrada").value = "0";   
-       actualizaFormularioEntrada("formulario");
-   }
-   else
-   {
-    mensajeModal("Error en la compra.");
-}
-
+        mensajeModal("Entrada comprada correctamente.");
+        document.querySelector("#representacionSeleccionada").value = "0";
+        document.querySelector("#totalEntrada").value = "0";
+        actualizaFormularioEntrada("formulario");
+    } else {
+        mensajeModal("Error en la compra.");
+    }
 
 }
 
 function borrarEntrada(cod) {
-    //upoTeatro.buscaRepresentacionPorEntrada(cod).borrarEntrada(cod);
     $.post("./ajax/entradas/borrarEntradas.php", { "id": cod }, completaEliminarEntradas);
+    upoTeatro.buscaRepresentacionPorEntrada(cod).borrarEntrada(cod);
 }
 
 function completaEliminarEntradas(resultado) {

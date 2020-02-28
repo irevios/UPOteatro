@@ -34,33 +34,6 @@ function rellenaForm() {
     });
 }
 
-function editaEspectaculo(id) {
-    document.querySelector(".jumbotron p").textContent = "Edita espectáculo";
-    let espectaculo = upoTeatro.buscaEspectaculo(id);
-    let nombre = espectaculo.nombre;
-    let productor = espectaculo.productor;
-    let categoria = espectaculo.categoria;
-    let gastos = espectaculo.gastos;
-    let obra = espectaculo.obra.codigo;
-    let compania = espectaculo.compania.cif;
-    document.querySelector("#nombreEspectaculo").value = nombre;
-    document.querySelector("#nombreProductorEspectaculo").value = productor;
-    document.querySelector("#categoriaEspectaculo").value = categoria;
-    document.querySelector("#gastosEspectaculo").value = gastos;
-    document.querySelector("#companiaSeleccionada").value = compania;
-    document.querySelector("#obraSeleccionada").value = obra;
-    document.querySelector("#formularios button[name='submit']").textContent = "Editar";
-    document.querySelector("#formularios button[name='submit']").addEventListener("click", () => {
-        upoTeatro.borrarEspectaculo(id);
-        setTimeout(() => {
-            if (!document.querySelector("#formularioEspectaculos").classList.contains("was-validated")) {
-                document.querySelector(".modal #mensaje").textContent = "Espectáculo editado correctamente.";
-                muestraEnPantalla("listaEspectaculo");
-            }
-        }, 200);
-    });
-}
-
 function insertarEspectaculo() {
     let nombre = document.querySelector("#nombreEspectaculo").value;
     let productor = document.querySelector("#nombreProductorEspectaculo").value;

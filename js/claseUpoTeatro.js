@@ -79,7 +79,7 @@ class UpoTeatro {
         return this.obras.filter(obra => obra.codigo == codigo)[0];
     }
     listadoEntradas() {
-        let tabla = creaTabla(["Representación", "Fecha", "Adaptada", "Precio", "Butacas", "Tipo de entrada / Nº Personas", "Editar", "Borrar"]);
+        let tabla = creaTabla(["Representación", "Fecha", "Adaptada", "Precio", "Butacas", "Tipo de entrada / Nº Personas", "Borrar"]);
         this.listaEntradas().forEach(entrada => {
             let linea = entrada.toHTMLrow();
             let celdaRepresentacion = linea.insertCell(0);
@@ -91,7 +91,7 @@ class UpoTeatro {
         return tabla;
     }
     listadoRepresentaciones() {
-        let tabla = creaTabla(["Teatro", "Fecha", "Adaptada", "Precio Base", "Espectáculo", "Editar", "Borrar"]);
+        let tabla = creaTabla(["Teatro", "Fecha", "Adaptada", "Precio Base", "Espectáculo", "Borrar"]);
         let a = [];
         this.teatros.sort((tA, tB) => { return parseInt(tA.codigo.substring(2)) - parseInt(tB.codigo.substring(2)) });
         a.push(this.listaRepresentaciones()[0]);
@@ -121,7 +121,7 @@ class UpoTeatro {
         return lista.filter(rep => this.buscaTeatroPorRepresentacion(rep.codigo) == this.buscaTeatroPorRepresentacion(busca.codigo) && rep.espectaculo == busca.espectaculo && rep.precioBase == busca.precioBase && rep.adaptada == busca.adaptada).length == 0;
     }
     listadoEspectaculos() {
-        let tabla = creaTabla(["Espectáculo", "Productor", "Categoría", "Gastos", "Obra", "Compañía", "Editar", "Borrar"]);
+        let tabla = creaTabla(["Espectáculo", "Productor", "Categoría", "Gastos", "Obra", "Compañía", "Borrar"]);
         this.espectaculos.forEach(espectaculo => {
             tabla.querySelector("table").tBodies[0].append(espectaculo.toHTMLrow());
         });
