@@ -20,38 +20,6 @@ function rellenaForm(tipo) {
     });
 }
 
-function editarForm(id) {
-    document.querySelector(".jumbotron p").textContent = "Edita representación";
-    let teatro = upoTeatro.buscaTeatroPorRepresentacion(id);
-    let representacion = teatro.buscaRepresentacion(id);
-    let todas = teatro.buscaRepresentacionesIntervalo(representacion);
-    let fechaInicial = todas[0].fecha;
-    let fechaFinal = todas[todas.length - 1].fecha;
-    let adaptada = representacion.adaptada;
-    let precioBase = representacion.precioBase;
-    let espectaculo = representacion.espectaculo;
-    document.querySelector("#editarRepresentaciones #teatroSeleccionado").value = teatro.codigo;
-    document.querySelector("#editarRepresentaciones #teatroSeleccionado").disabled = true;
-    document.querySelector("#editarRepresentaciones #fechaInicioRepresentacion").value = fechaToAmericana(fechaInicial);
-    document.querySelector("#editarRepresentaciones #fechaFinalRepresentacion").value = fechaToAmericana(fechaFinal);
-    document.querySelector("#editarRepresentaciones #representacionAdaptada").checked = adaptada;
-    document.querySelector("#editarRepresentaciones #precioBaseRepresentacion").value = precioBase;
-    document.querySelector("#editarRepresentaciones #espectaculoSeleccionado").value = espectaculo.codigo;
-    document.querySelector("#editarRepresentaciones #espectaculoSeleccionado").disabled = true;
-    document.querySelector("#editarRepresentaciones button[name='submit']").textContent = "Editar";
-    document.querySelector("#editarRepresentaciones button[name='submit']").addEventListener("click", () => {
-        todas.forEach(rep => {
-            teatro.borrarRepresentacion(rep.codigo);
-        });
-        setTimeout(() => {
-            if (!document.querySelector("#editarRepresentaciones").classList.contains("was-validated")) {
-                document.querySelector(".modal #mensaje").textContent = "Representación editada correctamente.";
-                muestraEnPantalla("listaRepresentacion");
-            }
-        }, 200);
-    });
-}
-
 function insertarRepresentacion() {
     // Datos
     let codigo = getSiguienteCodigo(upoTeatro.listaRepresentaciones(), "codigo");
@@ -63,6 +31,7 @@ function insertarRepresentacion() {
     let espectaculo = document.querySelector("#espectaculoSeleccionado").value;
     let precioBase = document.querySelector("#precioBaseRepresentacion").value;
     let intervalo = getSiguienteCodigo(upoTeatro.listaRepresentaciones(), "intervalo");
+
     // Control de solapamientos de fechas
     let representaciones = [];
     let repAIntroducir = [];
@@ -70,6 +39,7 @@ function insertarRepresentacion() {
     let incorrectos = document.createElement("div");
     fechas.forEach((f, i) => {
         nuevaRepresentacion = new Representacion(codigo + i, f, adaptada, precioBase, upoTeatro.buscaEspectaculo(espectaculo), intervalo);
+        console.log(teatro.esPosibleAgregarRepresentacion(nuevaRepresentacion));
         if (!teatro.esPosibleAgregarRepresentacion(nuevaRepresentacion)) {
             correcto = false;
             let p = document.createElement("p");
@@ -77,7 +47,7 @@ function insertarRepresentacion() {
             incorrectos.append(p);
         } else {
             repAIntroducir.push(nuevaRepresentacion);
-            representaciones.push(JSON.stringify({
+            representaciones.push({
                 "codigo": codigo + i,
                 "teatro": teatro.codigo,
                 "fecha": fechaToAmericana(f),
@@ -85,10 +55,11 @@ function insertarRepresentacion() {
                 "precioBase": precioBase,
                 "espectaculo": espectaculo,
                 "intervalo": intervalo
-            }));
+            });
         }
     });
 
+    console.log(representaciones);
     if (correcto) {
         $.post("./ajax/representaciones/insertaRepresentaciones.php", "datos=" + JSON.stringify(representaciones), (resultado) => completaInsertarRepresentaciones(resultado, teatro, repAIntroducir));
 
@@ -107,11 +78,13 @@ function completaInsertarRepresentaciones(resultado, teatro, array) {
     if (resultado == 0) {
         array.forEach(rep => {
             teatro.agregaRepresentacion(rep);
-        })
-
+        });
         mensajeModal("Representacion creada correctamente.");
-        document.querySelector("form#formularioRepresentaciones").reset();
+        document.querySelector("form").reset();
+    } else {
+        console.log("here2");
     }
+
 
 }
 

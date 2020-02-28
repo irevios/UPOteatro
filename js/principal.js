@@ -62,7 +62,6 @@ function validar(apartado) { // Llamo validar con el apartado que quiero validar
         document.querySelector(apartado).classList.remove("was-validated");
         nuevasCreaciones(apartado);
     }
-
 }
 
 
@@ -70,23 +69,18 @@ function validar(apartado) { // Llamo validar con el apartado que quiero validar
 function editaElimina(e) {
     if (e.target.tagName == "BUTTON") {
         let apartado = e.currentTarget.parentElement.parentElement.id;
-        if (e.target.dataset.tipo == "borrar") {
-            switch (apartado) {
-                case "listadoEntradas":
-                    borrarEntrada(e.target.dataset.cod);
-                    break;
-                case "listadoRepresentaciones":
-                    eliminarRepresentaciones(e.target.dataset.cod);
-                    break;
-                case "listadoEspectaculos":
-                    eliminarEspectaculos(e.target.dataset.cod);
-                    break;
-            }
-            e.target.closest("tr").remove();
-        } else if (e.target.dataset.tipo == "editar") {
-            muestraEnPantalla(apartado.replace("listado", "editar"));
-            setTimeout(()=>editarForm(e.target.dataset.cod),500);
+        switch (apartado) {
+            case "listadoEntradas":
+                borrarEntrada(e.target.dataset.cod);
+                break;
+            case "listadoRepresentaciones":
+                eliminarRepresentaciones(e.target.dataset.cod);
+                break;
+            case "listadoEspectaculos":
+                eliminarEspectaculos(e.target.dataset.cod);
+                break;
         }
+        e.target.closest("tr").remove();
     }
 }
 
@@ -112,9 +106,7 @@ function cierraModal() {
 
 //Añade representacion
 function nuevasCreaciones(apartado) {
-
     let ultimoCodigo;
-
     switch (apartado) {
         case "#formularioEspectaculos":
             insertarEspectaculo();
@@ -128,7 +120,7 @@ function nuevasCreaciones(apartado) {
     }
 }
 
-function getSiguienteCodigo(lista,campo) {
+function getSiguienteCodigo(lista, campo) {
     let ordenada = [];
     lista.forEach(elem => ordenada.push(elem[campo]));
     ordenada.sort((a, b) => {
