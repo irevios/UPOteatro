@@ -1,49 +1,91 @@
-# UpoTeatro
-### Proyecto de Entorno Cliente basado en Javascript
+# UpoTeatro  
+### A Client-Side Development Project in JavaScript  
 
-UpoTeatro es una aplicacion web para gestionar diferentes teatros con sus entradas y representaciones.
+**UpoTeatro** is a web application designed to manage multiple theaters, including their shows and ticketing systems.  
 
-La idea fue producida por un equipo de estudiantes de la Universidad de Pablo Olavide: [Documentación](Documentación/UPOTEATRO.pdf)
+This project was developed by a team of students from the **Universidad de Pablo Olavide**.  
+You can find the project documentation here: [Documentation](Documentación/UPOTEATRO.pdf)  
 
-Puedes ver el diagrama de clases [en este link](Documentación/Diagrama.pdf).
+View the class diagram: [Class Diagram](Documentación/Diagrama.pdf)  
 
-### Clases
-* **Upoteatro**: contiene la información de todo el sistema
-* **Teatro**: define cada teatro con su nombre, dirección, representaciones que se realiza en el teatro y las butacas.
-* **Butaca**: define cada butaca de un teatro por su fila, zona y número.
-* **Representaciones**: define una representación por la fecha en la que se realiza y por el espectáculo.
-* **Espectaculo**: define diferentes espectáculos por la obra en la que esta basada y la compñía.
-* **Compania**: base de datos de diferentes compañías con su nif, nombre y director.
-* **Obra**: base de datos de diferentes obras con su nombre y autor.
-* **Entrada**: define cada entrada de una representación en un teatro. Su precio se calcula según en la zona que está la butaca y el precio base de la representación. En el caso de caso grupales, se calcula según el precio base y el número de personas.
+![Preview](img/preview.gif)
 
-### Esquema
-La aplicación se compone de lo siguiente:
+## Classes  
 
-* **index.html**: La página inicial de la aplicación. Tiene una parte dinámica donde aparecen los formularios o listados.
-* **formularios.html**: Diferentes formularios que serán cargados a la página principal.
-* **navAdmin.html**: Barra de navegación que reemplaza a la habitual si se ha iniciado sesión como administrador.
+- **UpoTeatro:**  
+  Manages all system-wide information.  
 
-### Datos iniciales
-La aplicación contiene ficheros XML donde aparecen datos iniciales para ser cargados al comienzo.
+- **Teatro:**  
+  Represents a theater with its name, address, shows, and seating.  
 
-* **teatros.xml**: Datos de teatros.
-* **representaciones.xml**: Datos de representaciones.
-* **espectaculos.xml**: Datos de espectáculos.
-* **entradas.xml**: Datos de entradas.
-* **butacas.xml**: Datos de butacas.
-* **compañias.xml**: Datos de compañías.
-* **obras.xml**: Datos de obras.
+- **Butaca (Seat):**  
+  Represents a specific seat in a theater, defined by its row, zone, and number.  
 
-### Código
-El código de esta aplicación se divide en diferentes ficheros para mejorar la legibilidad del código:
+- **Representaciones (Shows):**  
+  Represents a show with its scheduled date and related spectacle.  
 
-* **claseUpoTeatro.js**: En este fichero se define la clase UpoTeatro junto a sus métodos.
-* **clases.js**: En este fichero se define el resto de clases.
-* **cargaDatos.js**: En este fichero se lee los ficheros XML de los datos iniciales y se cargan en el modelo de clases.
-* **modificarVista.js**: En este fichero se cambia la web según en que apartadose encuentre.
-* **sesion.js**: En este fichero se realiza el inicio y cierre de sesión.
-* **principal.js**: En este fichero se realiza la validación de formularios así como la integración de nuevos datos.
-* **multiusos.js**: En este fichero se definen diferentes funciones que pueden servir para cualquier proyecto.
+- **Espectaculo (Spectacle):**  
+  Represents performances defined by the play and the performing company.  
 
-I.E.S. Hermanos Machado | Entorno Cliente | Isabel Fernández e Irene Viñas | Enero 2020
+- **Compania (Company):**  
+  A database of companies, including their NIF, name, and director.  
+
+- **Obra (Play):**  
+  A database of plays, including their titles and authors.  
+
+- **Entrada (Ticket):**  
+  Defines a ticket for a specific show in a theater. The ticket price is determined by the seat's zone and the base price of the show. For group tickets, pricing is calculated based on the number of people and the base price.  
+
+---
+
+## Application Structure  
+
+### Core Pages:  
+- **index.html:**  
+  The main page of the application, featuring a dynamic section for forms and listings.  
+
+- **formularios.html:**  
+  Contains various forms, dynamically loaded into the main page.  
+
+- **navAdmin.html:**  
+  A special navigation bar replacing the default one for administrators after login.  
+
+---
+
+## Initial Data  
+
+The application includes XML files with initial data to be loaded at startup:  
+- **teatros.xml:** Theater data.  
+- **representaciones.xml:** Show data.  
+- **espectaculos.xml:** Spectacle data.  
+- **entradas.xml:** Ticket data.  
+- **butacas.xml:** Seat data.  
+- **compañias.xml:** Company data.  
+- **obras.xml:** Play data.  
+
+---
+
+## Code Organization  
+
+The codebase is divided into multiple files to improve readability:  
+
+- **claseUpoTeatro.js:**  
+  Defines the `UpoTeatro` class and its methods.  
+
+- **clases.js:**  
+  Defines other classes in the application.  
+
+- **cargaDatos.js:**  
+  Reads the initial XML files and loads the data into the class model.  
+
+- **modificarVista.js:**  
+  Handles dynamic web updates depending on the current section.  
+
+- **sesion.js:**  
+  Manages user login and logout.  
+
+- **principal.js:**  
+  Validates forms and integrates new data into the system.  
+
+- **multiusos.js:**  
+  Contains utility functions applicable to various projects.  
